@@ -1,0 +1,46 @@
+# ═══════════════════════════════════════════════════════════════
+# projects.yml — portfolio project data
+# format: game cartridge / album cover style metadata
+# ═══════════════════════════════════════════════════════════════
+
+- id: "alpha"
+  title: "project alpha"
+  tagline: "experimental interface"
+  description: "a modular dashboard system with real-time data visualization and gesture controls."
+  tech:
+    - "react"
+    - "three.js"
+    - "websockets"
+  year: 2024
+  version: "v2.1"
+  status: "live"
+  live_url: "#"
+  repo_url: "#"
+
+- id: "signal"
+  title: "signal processor"
+  tagline: "audio visualization engine"
+  description: "web-based audio analyzer with frequency spectrum display and custom shader effects."
+  tech:
+    - "typescript"
+    - "web audio api"
+    - "glsl"
+  year: 2024
+  version: "v1.4"
+  status: "live"
+  live_url: "#"
+  repo_url: "#"
+
+- id: "archival"
+  title: "archival system"
+  tagline: "document management"
+  description: "searchable archive platform with ocr processing and semantic tagging capabilities."
+  tech:
+    - "python"
+    - "fastapi"
+    - "postgresql"
+  year: 2023
+  version: "v3.0"
+  status: "maintained"
+  live_url: "#"
+  repo_url: "#"

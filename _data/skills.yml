@@ -1,0 +1,37 @@
+# ═══════════════════════════════════════════════════════════════
+# skills.yml — skill categories and items
+# format: spec-sheet style with categories
+# ═══════════════════════════════════════════════════════════════
+
+- category: "development"
+  code: "DEV"
+  items:
+    - "javascript"
+    - "typescript"
+    - "react"
+    - "node.js"
+    - "python"
+    - "html/css"
+
+- category: "design"
+  code: "DSN"
+  items:
+    - "figma"
+    - "ui/ux"
+    - "prototyping"
+    - "motion design"
+
+- category: "tools"
+  code: "SYS"
+  items:
+    - "git"
+    - "docker"
+    - "aws"
+    - "linux"
+
+- category: "creative"
+  code: "CRE"
+  items:
+    - "animation"
+    - "3d graphics"
+    - "shader programming"
