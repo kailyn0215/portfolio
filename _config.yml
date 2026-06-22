@@ -1,0 +1,19 @@
+title: Kailyn Brown | Portfolio
+description: Creative Developer & Designer crafting digital experiences
+author: Kailyn Brown
+email: your.email@example.com
+baseurl: "/portfolio"
+url: "https://kailyn0215.github.io"
+
+# Build settings
+markdown: kramdown
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - LICENSE
