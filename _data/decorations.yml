@@ -55,7 +55,7 @@ orbs:
 
 pills:
   # Glass pill stickers
-  - text: "vibe: aero ✨"
+  - text: "version: 1.0.0"
     variant: "sky"
     tilt: 1
     top: "6%"

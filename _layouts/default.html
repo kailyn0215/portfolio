@@ -9,10 +9,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  {% feed_meta %}
+  {% if jekyll.environment == 'production' %}{% feed_meta %}{% endif %}
   {% seo %}
 </head>
-<body>
+<body style="--sky1-url: url('{{ '/assets/images/sky1.jpg' | relative_url }}'); --sky2-url: url('{{ '/assets/images/sky2.jpg' | relative_url }}');">
   <!-- ═══════════════════════════════════════════════════════════════
        FRUTIGER AERO BACKGROUND SYSTEM
        ═══════════════════════════════════════════════════════════════ -->
@@ -39,15 +39,31 @@
   </div>
 
   <!-- ═══════════════════════════════════════════════════════════════
-       CRISP GLASS ORBS — Rendered from _data/decorations.yml
-       Outer thirds only, center cleared for wordmark
+       DRIFTING ORBS — Rendered from _data/orbs.yml
        ═══════════════════════════════════════════════════════════════ -->
   <div class="orbs-layer">
-    {% for orb in site.data.decorations.orbs %}
-    <div class="orb orb--{{ orb.size }} orb--{{ orb.variant }}{% if orb.variant == 'glass' %} orb--glass{% endif %}" 
-         style="top: {{ orb.top }};{% if orb.left %} left: {{ orb.left }};{% endif %}{% if orb.right %} right: {{ orb.right }};{% endif %}"
-         data-parallax-rate="{{ orb.parallax | default: '0.02' }}"></div>
+    {% assign sky_imgs = "sky1.jpg,sky2.jpg,sky3.jpg,sky4.jpg,sky5.jpg,sky6.jpg,sky7.jpg" | split: "," %}
+    {% for orb in site.data.orbs.orbs %}
+    {% assign img_idx = forloop.index | modulo: 7 %}
+    {% assign rotation = forloop.index | times: 47 | modulo: 360 %}
+    <span
+      class="orb orb--{{ orb.size }} orb--{{ orb.color }} {% if orb.variant == 'glass' %}orb--glass{% endif %} orb--z-{{ orb.z }} orb--drift-{{ orb.drift }}"
+      style="top: {{ orb.top }}; left: {{ orb.left }}; animation-duration: {{ orb.duration }}s; animation-delay: {{ orb.delay }}s; --env-img: url('{{ '/assets/images/' | append: sky_imgs[img_idx] | relative_url }}'); --env-rotate: {{ rotation }}deg; --env-opacity: 0.3;"
+      aria-hidden="true"
+    ></span>
     {% endfor %}
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       FOREGROUND ORBS — Parallax scroll-responsive
+       ═══════════════════════════════════════════════════════════════ -->
+  <div class="orbs-foreground" id="fg-orbs">
+    <span class="orb orb--sm orb--sky orb--z-front fg-orb" style="--fg-x: 15%; --fg-y: 120vh; --fg-speed: 0.3;" aria-hidden="true"></span>
+    <span class="orb orb--xs orb--peach orb--z-front fg-orb" style="--fg-x: 85%; --fg-y: 150vh; --fg-speed: 0.5;" aria-hidden="true"></span>
+    <span class="orb orb--sm orb--leaf orb--z-front fg-orb" style="--fg-x: 8%; --fg-y: 200vh; --fg-speed: 0.4;" aria-hidden="true"></span>
+    <span class="orb orb--xs orb--lavender orb--z-front fg-orb" style="--fg-x: 92%; --fg-y: 250vh; --fg-speed: 0.35;" aria-hidden="true"></span>
+    <span class="orb orb--sm orb--sky orb--z-front fg-orb" style="--fg-x: 20%; --fg-y: 300vh; --fg-speed: 0.45;" aria-hidden="true"></span>
+    <span class="orb orb--xs orb--rose orb--z-front fg-orb" style="--fg-x: 78%; --fg-y: 350vh; --fg-speed: 0.3;" aria-hidden="true"></span>
   </div>
 
   <!-- ═══════════════════════════════════════════════════════════════
@@ -62,25 +78,19 @@
   </div>
 
   <!-- ═══════════════════════════════════════════════════════════════
-       GLASS PILL STICKERS — Rendered from _data/decorations.yml
+       GLASS PILL STICKERS — Rendered from _data/pills.yml
        ═══════════════════════════════════════════════════════════════ -->
   <div class="decorations">
-    <!-- Glass Pill Stickers -->
-    {% for pill in site.data.decorations.pills %}
-    <span class="glass-pill glass-pill--{{ pill.variant }}" 
-          data-tilt="{{ pill.tilt }}"
-          style="position: absolute; top: {{ pill.top }};{% if pill.left %} left: {{ pill.left }};{% endif %}{% if pill.right %} right: {{ pill.right }};{% endif %}">{{ pill.text }}</span>
-    {% endfor %}
-    
-    <!-- Sparkles -->
-    {% for sparkle in site.data.decorations.sparkles %}
-    <span class="deco-sparkle deco-sparkle--{{ sparkle.color }}" 
-          style="top: {{ sparkle.top }};{% if sparkle.left %} left: {{ sparkle.left }};{% endif %}{% if sparkle.right %} right: {{ sparkle.right }};{% endif %}">{{ sparkle.symbol }}</span>
-    {% endfor %}
-    
-    <!-- Annotations -->
-    {% for note in site.data.decorations.annotations %}
-    <span class="annotation" style="top: {{ note.top }};{% if note.left %} left: {{ note.left }};{% endif %}{% if note.right %} right: {{ note.right }};{% endif %}">{{ note.text }}</span>
+    {% for pill in site.data.pills.pills %}
+    <span
+      class="glass-pill glass-pill--{{ pill.tint }}{% if pill.drift %} glass-pill--drift-{{ pill.drift }}{% endif %}"
+      style="position: absolute;
+             --pill-tilt: {{ pill.tilt }}deg;
+             {% if pill.top    %}top: {{ pill.top }};{% endif %}
+             {% if pill.right  %}right: {{ pill.right }};{% endif %}
+             {% if pill.bottom %}bottom: {{ pill.bottom }};{% endif %}
+             {% if pill.left   %}left: {{ pill.left }};{% endif %}"
+    >{{ pill.label }}</span>
     {% endfor %}
     
     <!-- Retro UI Elements -->
@@ -156,60 +166,6 @@
       document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
 
       // ─────────────────────────────────────────────────────────────
-      // Multi-Layer Parallax (respects reduced motion)
-      // ─────────────────────────────────────────────────────────────
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      
-      if (!prefersReducedMotion) {
-        const orbs = document.querySelectorAll('.orb');
-        const motifs = document.querySelectorAll('.motif');
-        const pills = document.querySelectorAll('.glass-pill');
-        
-        let ticking = false;
-        
-        function updateParallax() {
-          const scrollY = window.scrollY;
-          
-          // Orbs — use data-parallax-rate or fallback
-          orbs.forEach((orb) => {
-            const rate = parseFloat(orb.dataset.parallaxRate) || 0.02;
-            const yOffset = scrollY * rate;
-            orb.style.transform = `translateY(${-yOffset}px)`;
-          });
-          
-          // Motifs — medium speed
-          motifs.forEach((motif, i) => {
-            const rate = 0.025 + (i % 3) * 0.01;
-            const yOffset = scrollY * rate;
-            motif.style.transform = `translateY(${-yOffset}px)`;
-          });
-          
-          // Pills — fastest (foreground)
-          pills.forEach((pill, i) => {
-            const rate = 0.04 + (i % 4) * 0.012;
-            const yOffset = scrollY * rate;
-            // Preserve tilt rotation
-            const tilt = pill.dataset.tilt;
-            let rotateVal = 0;
-            if (tilt === '1') rotateVal = -3;
-            else if (tilt === '2') rotateVal = 2;
-            else if (tilt === '3') rotateVal = -1.5;
-            else if (tilt === '4') rotateVal = 4;
-            pill.style.transform = `translateY(${-yOffset}px) rotate(${rotateVal}deg)`;
-          });
-          
-          ticking = false;
-        }
-        
-        window.addEventListener('scroll', () => {
-          if (!ticking) {
-            requestAnimationFrame(updateParallax);
-            ticking = true;
-          }
-        }, { passive: true });
-      }
-
-      // ─────────────────────────────────────────────────────────────
       // Mobile Nav Toggle
       // ─────────────────────────────────────────────────────────────
       const navToggle = document.querySelector('.nav-toggle');
@@ -220,6 +176,124 @@
           navLinks.classList.toggle('active');
           navToggle.classList.toggle('active');
         });
+      }
+
+      // ─────────────────────────────────────────────────────────────
+      // Orb System — All orbs move with scroll (parallax effect)
+      // ─────────────────────────────────────────────────────────────
+      const bgOrbsLayer = document.querySelector('.orbs-layer');
+      const fgContainer = document.getElementById('fg-orbs');
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      
+      if (!prefersReducedMotion) {
+        // Clear existing static orbs
+        if (fgContainer) fgContainer.innerHTML = '';
+        
+        // Frutiger Aero colors — vivid, saturated, nature-tech
+        const colors = ['sky', 'peach', 'leaf', 'lavender', 'rose', 'teal', 'aqua', 'lime', 'gold', 'magenta'];
+        const drifts = ['a', 'b', 'c', 'd'];
+        const allOrbs = []; // Track ALL orbs for scroll animation
+        
+        // ─── BACKGROUND ORBS (lg, xl — fewer, evenly distributed) ───
+        const bgSizes = ['lg', 'lg', 'xl', 'xl'];
+        const bgOrbCount = 10 + Math.floor(Math.random() * 5); // 10-15 orbs
+        
+        for (let i = 0; i < bgOrbCount; i++) {
+          const el = document.createElement('span');
+          el.setAttribute('aria-hidden', 'true');
+          
+          const size = bgSizes[Math.floor(Math.random() * bgSizes.length)];
+          const color = colors[Math.floor(Math.random() * colors.length)];
+          const drift = drifts[Math.floor(Math.random() * drifts.length)];
+          const rotation = Math.floor(Math.random() * 360);
+          const skyNum = Math.floor(Math.random() * 7) + 1; // sky1-sky7
+          const bgPosX = Math.floor(Math.random() * 100);
+          const bgPosY = Math.floor(Math.random() * 100);
+          const animDuration = 16 + Math.random() * 14;
+          const animDelay = Math.random() * -25;
+          
+          // Sidebar positions — alternate left/right
+          const onLeft = i % 2 === 0;
+          const x = onLeft 
+            ? Math.random() * 20 + 3      // 3-23%
+            : Math.random() * 20 + 77;    // 77-97%
+          
+          // EVENLY DISTRIBUTED: spread across 0-100vh based on index
+          const baseY = (i / bgOrbCount) * 100 + Math.random() * 10 - 5; // staggered with small random offset
+          // Parallax speed — slower for background
+          const parallaxSpeed = 0.08 + Math.random() * 0.1; // 0.08-0.18 (slower)
+          
+          el.className = `orb orb--${size} orb--${color} orb--z-back orb--drift-${drift}`;
+          
+          // Use document height to spread orbs across ENTIRE page (including below viewport)
+          const docHeight = Math.max(document.body.scrollHeight, window.innerHeight * 3);
+          const yPos = (i / bgOrbCount) * docHeight * 0.9; // Spread across 90% of doc height
+          
+          el.style.cssText = `
+            position: absolute;
+            left: ${x}%;
+            top: ${yPos}px;
+            --env-rotate: ${rotation}deg;
+            --env-img: url('{{ "/assets/images/" | relative_url }}sky${skyNum}.jpg');
+            --env-bg-pos: ${bgPosX}% ${bgPosY}%;
+            --env-opacity: 0.25;
+            animation-duration: ${animDuration}s;
+            animation-delay: ${animDelay}s;
+            z-index: 1;
+            opacity: 0.8;
+          `;
+          
+          if (bgOrbsLayer) bgOrbsLayer.appendChild(el);
+          allOrbs.push({ el, baseY, parallaxSpeed });
+        }
+        
+        // ─── FOREGROUND ORBS (xs, sm — very few, spread across page) ───
+        const fgSizes = ['xs', 'sm'];
+        const fgOrbCount = 3 + Math.floor(Math.random() * 2); // 3-5 orbs only
+        
+        for (let i = 0; i < fgOrbCount; i++) {
+          const el = document.createElement('span');
+          el.setAttribute('aria-hidden', 'true');
+          
+          const size = fgSizes[Math.floor(Math.random() * fgSizes.length)];
+          const color = colors[Math.floor(Math.random() * colors.length)];
+          const drift = drifts[Math.floor(Math.random() * drifts.length)];
+          const rotation = Math.floor(Math.random() * 360);
+          const fgSkyNum = Math.floor(Math.random() * 7) + 1; // sky1-sky7
+          const fgBgPosX = Math.floor(Math.random() * 100);
+          const fgBgPosY = Math.floor(Math.random() * 100);
+          const animDuration = 10 + Math.random() * 10;
+          const animDelay = Math.random() * -15;
+          
+          // Alternate left/right
+          const onLeft = i % 2 === 0;
+          const x = onLeft 
+            ? Math.random() * 12 + 5      // 5-17%
+            : Math.random() * 12 + 83;    // 83-95%
+          
+          // Spread across entire document height
+          const docHeight = Math.max(document.body.scrollHeight, window.innerHeight * 3);
+          const yPos = (i / fgOrbCount) * docHeight * 0.85 + window.innerHeight * 0.2;
+          
+          el.className = `orb orb--${size} orb--${color} orb--z-front orb--drift-${drift} fg-orb`;
+          
+          el.style.cssText = `
+            position: absolute;
+            left: ${x}%;
+            top: ${yPos}px;
+            --env-rotate: ${rotation}deg;
+            --env-img: url('{{ "/assets/images/" | relative_url }}sky${fgSkyNum}.jpg');
+            --env-bg-pos: ${fgBgPosX}% ${fgBgPosY}%;
+            --env-opacity: 0.4;
+            animation-duration: ${animDuration}s;
+            animation-delay: ${animDelay}s;
+            z-index: 5;
+          `;
+          
+          if (fgContainer) fgContainer.appendChild(el);
+        }
+        
+        // No scroll handler needed — orbs are position:absolute and scroll with page naturally
       }
 
     })();

@@ -1,0 +1,17 @@
+# ═══════════════════════════════════════════════════════════════
+# PILLS — Data-driven glass pill stickers
+# Edit positions, colors, tilts, and labels here
+# ═══════════════════════════════════════════════════════════════
+# tint:  sky | peach | leaf | lavender | orange | white
+# tilt:  integer degrees (negative ok)
+# drift: a | b | c (animation variant)
+# position: top/right/bottom/left as CSS values
+# label: text content (emoji allowed)
+
+pills:
+  - { label: "vibe: aero ✨",   tint: sky,      tilt: -3, drift: a, top: "14%", left:  "6%" }
+  - { label: "← hi! ♥",         tint: peach,    tilt:  4, drift: b, top: "30%", left:  "4%" }
+  - { label: "v5.0",            tint: white,    tilt: -1, drift: c, top: "10%", right: "8%" }
+  - { label: "loading...",      tint: lavender, tilt:  3, drift: a, top: "58%", right: "5%" }
+  - { label: "wip ☺",           tint: leaf,     tilt: -4, drift: b, top: "78%", right:"12%" }
+  - { label: "build 0451",      tint: white,    tilt:  2, drift: c, top: "88%", left: "10%" }

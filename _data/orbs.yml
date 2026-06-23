@@ -1,0 +1,22 @@
+# ═══════════════════════════════════════════════════════════════
+# ORBS — Data-driven glass marble composition
+# Edit positions, sizes, colors, and animations here
+# ═══════════════════════════════════════════════════════════════
+# size:    xs | sm | md | lg | xl
+# color:   sky | teal | leaf | peach | lavender | rose
+# variant: solid | glass
+# drift:   a | b | c | d (animation keyframe variant)
+# duration: seconds for drift loop
+# delay:   negative seconds to desync timing
+# z:       back | mid | front (stacking layer)
+
+orbs:
+  - { id: anchor-r, size: xl, color: sky,      variant: solid, drift: a, duration: 22, delay:  -2, top: "42%", left: "78%", z: mid }
+  - { id: top-left, size: lg, color: lavender, variant: glass, drift: b, duration: 18, delay:  -5, top: "12%", left:  "8%", z: back }
+  - { id: drop-1,   size: xs, color: sky,      variant: glass, drift: c, duration: 11, delay:  -1, top: "28%", left: "22%", z: front }
+  - { id: peach-1,  size: sm, color: peach,    variant: solid, drift: a, duration: 16, delay:  -7, top: "70%", left: "14%", z: mid }
+  - { id: leaf-1,   size: sm, color: leaf,     variant: solid, drift: d, duration: 14, delay:  -3, top: "82%", left: "30%", z: back }
+  - { id: rose-1,   size: xs, color: rose,     variant: glass, drift: b, duration:  9, delay:  -4, top: "18%", left: "62%", z: front }
+  - { id: teal-1,   size: md, color: teal,     variant: solid, drift: c, duration: 20, delay:  -8, top: "78%", left: "88%", z: back }
+  - { id: lav-2,    size: xs, color: lavender, variant: glass, drift: a, duration: 12, delay:  -6, top: "55%", left:  "4%", z: front }
+  - { id: peach-2,  size: xs, color: peach,    variant: glass, drift: d, duration: 10, delay:  -2, top:  "8%", left: "88%", z: front }
