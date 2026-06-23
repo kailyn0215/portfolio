@@ -103,7 +103,13 @@ html { scroll-behavior: smooth; font-size: 16px; }
 
 body {
   font-family: var(--font-body);
-  background: linear-gradient(180deg, var(--color-bg-top) 0%, var(--color-bg-mid) 40%, var(--color-bg-bot) 100%);
+  /* Calmer background — gentle sky → warm off-white → soft peach */
+  background:
+    /* Subtle aurora — barely perceptible */
+    radial-gradient(ellipse at 20% 10%, rgba(185,138,255,0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(255,165,97,0.07) 0%, transparent 50%),
+    /* Main soft wash */
+    linear-gradient(180deg, #DCEEF7 0%, #F3F5EE 45%, #FCE6D4 100%);
   background-attachment: fixed;
   color: var(--color-main);
   line-height: 1.6;
@@ -127,52 +133,37 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   z-index: -2;
 }
 
-/* Fat colorful bokeh */
+/* Restrained bokeh — atmospheric, not foggy */
 .bg-aero::before {
   content: '';
   position: absolute;
   inset: 0;
   background: 
-    /* Large vivid bokeh */
-    radial-gradient(circle 180px at 12% 15%, rgba(91,192,248,0.55) 0%, transparent 70%),
-    radial-gradient(circle 150px at 85% 10%, rgba(111,212,111,0.5) 0%, transparent 70%),
-    radial-gradient(circle 200px at 75% 55%, rgba(255,165,97,0.45) 0%, transparent 70%),
-    radial-gradient(circle 160px at 20% 75%, rgba(91,192,248,0.5) 0%, transparent 70%),
-    radial-gradient(circle 220px at 50% 30%, rgba(255,255,255,0.6) 0%, transparent 60%),
-    /* Medium bokeh */
-    radial-gradient(circle 100px at 90% 80%, rgba(216,180,240,0.5) 0%, transparent 70%),
-    radial-gradient(circle 120px at 8% 45%, rgba(255,107,157,0.35) 0%, transparent 70%),
-    radial-gradient(circle 90px at 65% 85%, rgba(168,240,220,0.45) 0%, transparent 70%),
-    radial-gradient(circle 110px at 35% 50%, rgba(255,217,61,0.35) 0%, transparent 70%),
-    /* Small bright spots */
-    radial-gradient(circle 40px at 25% 25%, rgba(255,255,255,0.9) 0%, transparent 70%),
-    radial-gradient(circle 30px at 70% 20%, rgba(255,255,255,0.85) 0%, transparent 70%),
-    radial-gradient(circle 35px at 55% 70%, rgba(255,255,255,0.8) 0%, transparent 70%);
-  filter: blur(2px);
+    /* Reduced count, size ~50%, opacity ~50% */
+    radial-gradient(circle 100px at 10% 12%, rgba(91,192,248,0.28) 0%, transparent 70%),
+    radial-gradient(circle 80px at 88% 8%, rgba(111,212,111,0.25) 0%, transparent 70%),
+    radial-gradient(circle 120px at 78% 60%, rgba(255,165,97,0.22) 0%, transparent 70%),
+    radial-gradient(circle 90px at 15% 78%, rgba(91,192,248,0.25) 0%, transparent 70%),
+    /* Small bright spots only */
+    radial-gradient(circle 30px at 22% 22%, rgba(255,255,255,0.6) 0%, transparent 70%),
+    radial-gradient(circle 25px at 72% 18%, rgba(255,255,255,0.55) 0%, transparent 70%);
+  /* NO filter: blur — keep crisp */
 }
 
-/* Iridescent aurora overlay */
+/* Subtle aurora overlay — barely perceptible */
 .bg-aero::after {
   content: '';
   position: absolute;
   inset: 0;
   background:
     conic-gradient(from 180deg at 5% 5%, 
-      rgba(255,107,157,0.2) 0deg, 
-      rgba(255,217,61,0.15) 60deg, 
-      rgba(111,212,111,0.15) 120deg, 
-      transparent 180deg),
+      rgba(255,107,157,0.08) 0deg, 
+      rgba(255,217,61,0.06) 60deg, 
+      transparent 120deg),
     conic-gradient(from 0deg at 95% 95%, 
-      rgba(91,192,248,0.2) 0deg, 
-      rgba(216,180,240,0.18) 60deg, 
-      rgba(255,165,97,0.15) 120deg, 
-      transparent 180deg),
-    conic-gradient(from 90deg at 50% 50%,
-      transparent 0deg,
-      rgba(91,192,248,0.08) 90deg,
-      rgba(111,212,111,0.06) 180deg,
-      rgba(255,165,97,0.08) 270deg,
-      transparent 360deg);
+      rgba(91,192,248,0.08) 0deg, 
+      rgba(216,180,240,0.07) 60deg, 
+      transparent 120deg);
 }
 
 /* Wispy clouds */
@@ -219,153 +210,103 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 
 /* ─────────────────────────────────────────────────────────────────
-   REAL GLASS BUBBLES — Marbles with Specular + Edge Rim
+   CRISP GLASS ORB SYSTEM — Sharp Marbles, Not Fog
    ───────────────────────────────────────────────────────────────── */
-.bubbles-layer {
+.orbs-layer {
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 2;
 }
 
-.bubble {
+/* Base orb — crisp silhouette, small bright specular, defined edge */
+.orb {
   position: absolute;
   border-radius: 50%;
-  animation: float-bubble 8s ease-in-out infinite;
-}
-
-/* Sharp specular highlight */
-.bubble::before {
-  content: '';
-  position: absolute;
-  top: 12%;
-  left: 18%;
-  width: 35%;
-  height: 25%;
-  background: radial-gradient(ellipse, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.5) 40%, transparent 70%);
-  border-radius: 50%;
-  filter: blur(2px);
-}
-
-/* Edge rim glow */
-.bubble::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  border: 2px solid rgba(255,255,255,0.4);
-  box-shadow: inset 0 0 15px rgba(255,255,255,0.3);
-}
-
-/* Glass bubble — refractive */
-.bubble--glass {
-  background: var(--gradient-glass-bubble);
-  backdrop-filter: blur(10px) saturate(150%);
-  -webkit-backdrop-filter: blur(10px) saturate(150%);
-  box-shadow: 
-    inset -8px -8px 25px rgba(30,58,82,0.12),
-    inset 4px 4px 15px rgba(255,255,255,0.8),
-    0 12px 40px rgba(91,192,248,0.25);
-}
-
-/* Chrome bubble */
-.bubble--chrome {
-  background: var(--gradient-orb);
+  /* Base color set via --orb-color custom property */
+  background:
+    /* Top-left specular highlight (small, bright, slightly soft) */
+    radial-gradient(
+      circle at 30% 25%,
+      rgba(255, 255, 255, 0.95) 0%,
+      rgba(255, 255, 255, 0.4) 8%,
+      transparent 22%
+    ),
+    /* Secondary softer highlight for dimension */
+    radial-gradient(
+      circle at 35% 30%,
+      rgba(255, 255, 255, 0.3) 0%,
+      transparent 40%
+    ),
+    /* Main orb body — darker edges, lighter center */
+    radial-gradient(
+      circle at 50% 55%,
+      var(--orb-color, #6BA8C9) 0%,
+      color-mix(in srgb, var(--orb-color, #6BA8C9) 70%, #1E3A52) 75%,
+      color-mix(in srgb, var(--orb-color, #6BA8C9) 50%, #0A1A26) 100%
+    );
+  /* Crisp rim — thin bright edge ring, small grounded shadow */
   box-shadow:
-    inset -12px -12px 30px rgba(30,58,82,0.35),
-    inset 8px 8px 25px rgba(255,255,255,0.85),
-    0 15px 50px rgba(30,58,82,0.2);
+    inset 0 0 0 1px rgba(255, 255, 255, 0.5),
+    inset 0 -8px 16px rgba(0, 0, 0, 0.15),
+    inset 0 4px 8px rgba(255, 255, 255, 0.25),
+    0 6px 14px rgba(30, 58, 82, 0.18);
+  filter: saturate(1.1);
+  animation: float-orb 10s ease-in-out infinite;
 }
 
-/* Teal bubble */
-.bubble--teal {
-  background: var(--gradient-orb-teal);
-  box-shadow:
-    inset -10px -10px 25px rgba(30,58,82,0.3),
-    inset 6px 6px 20px rgba(255,255,255,0.8),
-    0 12px 40px rgba(78,205,196,0.3);
+/* Glass variant — translucent, refracts background */
+.orb--glass {
+  background:
+    radial-gradient(
+      circle at 30% 25%,
+      rgba(255, 255, 255, 0.9) 0%,
+      rgba(255, 255, 255, 0.35) 10%,
+      transparent 25%
+    ),
+    radial-gradient(
+      circle at 50% 55%,
+      color-mix(in srgb, var(--orb-color, #BEE3F7) 40%, transparent) 0%,
+      color-mix(in srgb, var(--orb-color, #BEE3F7) 60%, transparent) 100%
+    );
+  backdrop-filter: blur(8px) saturate(1.3);
+  -webkit-backdrop-filter: blur(8px) saturate(1.3);
 }
 
-/* Peach bubble */
-.bubble--peach {
-  background: var(--gradient-orb-peach);
-  box-shadow:
-    inset -10px -10px 25px rgba(80,40,10,0.25),
-    inset 6px 6px 20px rgba(255,255,255,0.85),
-    0 12px 40px rgba(255,165,97,0.3);
-}
+/* Size utilities — strict hierarchy */
+.orb--xs  { width: 12px;  height: 12px; }
+.orb--sm  { width: 45px;  height: 45px; }
+.orb--md  { width: 110px; height: 110px; }
+.orb--lg  { width: 180px; height: 180px; }
+.orb--xl  { width: 220px; height: 220px; } /* MAX — use sparingly */
 
-/* Lime bubble */
-.bubble--lime {
-  background: var(--gradient-orb-lime);
-  box-shadow:
-    inset -10px -10px 25px rgba(30,60,20,0.25),
-    inset 6px 6px 20px rgba(255,255,255,0.85),
-    0 12px 40px rgba(111,212,111,0.3);
-}
+/* Color variants */
+.orb--sky      { --orb-color: #5BC0F8; }
+.orb--teal     { --orb-color: #4FD1C5; }
+.orb--leaf     { --orb-color: #6FD46F; }
+.orb--peach    { --orb-color: #FFA561; }
+.orb--lavender { --orb-color: #B98AFF; }
+.orb--rose     { --orb-color: #FF7BA8; }
 
-/* Lavender bubble */
-.bubble--lavender {
-  background: var(--gradient-orb-lavender);
-  box-shadow:
-    inset -10px -10px 25px rgba(60,30,80,0.25),
-    inset 6px 6px 20px rgba(255,255,255,0.85),
-    0 12px 40px rgba(216,180,240,0.3);
-}
+/* Positions — outer thirds only, center cleared */
+.orb-1 { top: 8%;  left: 4%;  animation-delay: 0s; }
+.orb-2 { top: 18%; right: 6%; animation-delay: -2s; }
+.orb-3 { top: 35%; left: 3%;  animation-delay: -4s; }
+.orb-4 { top: 55%; right: 5%; animation-delay: -1s; }
+.orb-5 { top: 70%; left: 5%;  animation-delay: -3s; }
+.orb-6 { top: 12%; right: 3%; animation-delay: -5s; }
+.orb-7 { top: 42%; right: 8%; animation-delay: -2.5s; }
+.orb-8 { top: 65%; right: 6%; animation-delay: -4.5s; }
+.orb-9 { top: 5%;  right: 12%; animation-delay: -1.5s; }
+.orb-10 { top: 48%; left: 2%; animation-delay: -3.5s; }
+.orb-11 { top: 78%; right: 10%; animation-delay: -0.5s; }
+.orb-12 { top: 85%; left: 8%;  animation-delay: -6s; }
 
-/* Iridescent bubble */
-.bubble--iris {
-  background: radial-gradient(ellipse at 30% 25%, rgba(255,255,255,0.95) 0%, rgba(200,238,255,0.5) 40%, transparent 100%);
-  box-shadow: 
-    inset 0 0 30px rgba(255,107,157,0.2),
-    inset 0 0 50px rgba(91,192,248,0.15),
-    0 12px 40px rgba(111,212,111,0.2);
-}
-.bubble--iris::after {
-  background: var(--gradient-iris);
-  opacity: 0.25;
-  filter: blur(8px);
-  border: none;
-  box-shadow: none;
-}
-
-/* Sparkle bubble */
-.bubble--sparkle {
-  background: radial-gradient(circle at 35% 35%, #FFFFFF 0%, rgba(255,255,255,0.7) 30%, transparent 60%);
-  box-shadow: 0 0 20px rgba(255,255,255,0.9);
-}
-.bubble--sparkle::before, .bubble--sparkle::after { display: none; }
-
-/* Sizes — more dramatic range */
-.bubble--xs { width: 10px; height: 10px; }
-.bubble--sm { width: 28px; height: 28px; }
-.bubble--md { width: 55px; height: 55px; }
-.bubble--lg { width: 95px; height: 95px; }
-.bubble--xl { width: 150px; height: 150px; }
-.bubble--xxl { width: 220px; height: 220px; }
-
-/* Positions */
-.bubble-1 { top: 10%; left: 6%; animation-delay: 0s; animation-duration: 7s; }
-.bubble-2 { top: 22%; right: 10%; animation-delay: -2s; animation-duration: 9s; }
-.bubble-3 { top: 38%; left: 12%; animation-delay: -4s; animation-duration: 8s; }
-.bubble-4 { top: 52%; right: 18%; animation-delay: -1s; animation-duration: 10s; }
-.bubble-5 { top: 68%; left: 4%; animation-delay: -3s; animation-duration: 7s; }
-.bubble-6 { top: 15%; left: 28%; animation-delay: -5s; animation-duration: 11s; }
-.bubble-7 { top: 32%; right: 6%; animation-delay: -2.5s; animation-duration: 8s; }
-.bubble-8 { top: 60%; right: 4%; animation-delay: -4.5s; animation-duration: 9s; }
-.bubble-9 { top: 6%; right: 22%; animation-delay: -1.5s; animation-duration: 6s; }
-.bubble-10 { top: 45%; left: 2%; animation-delay: -3.5s; animation-duration: 10s; }
-.bubble-11 { top: 76%; right: 12%; animation-delay: -0.5s; animation-duration: 8s; }
-.bubble-12 { top: 20%; left: 48%; animation-delay: -6s; animation-duration: 12s; }
-.bubble-13 { top: 82%; left: 22%; animation-delay: -2s; animation-duration: 7s; }
-.bubble-14 { top: 4%; left: 65%; animation-delay: -4s; animation-duration: 9s; }
-.bubble-15 { top: 62%; left: 32%; animation-delay: -1s; animation-duration: 11s; }
-
-@keyframes float-bubble {
-  0%, 100% { transform: translateY(0) translateX(0) scale(1); }
-  25% { transform: translateY(-18px) translateX(10px) scale(1.03); }
-  50% { transform: translateY(-10px) translateX(-7px) scale(0.97); }
-  75% { transform: translateY(-25px) translateX(12px) scale(1.02); }
+@keyframes float-orb {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  25% { transform: translateY(-12px) translateX(6px); }
+  50% { transform: translateY(-6px) translateX(-4px); }
+  75% { transform: translateY(-15px) translateX(8px); }
 }
 
 /* ─────────────────────────────────────────────────────────────────
@@ -446,7 +387,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 
 /* ─────────────────────────────────────────────────────────────────
-   GLOSSY STICKERS — Large Liquid Glass Pills
+   GLASS PILLS — Crisp Stickers with Tilt Variants
    ───────────────────────────────────────────────────────────────── */
 .decorations {
   position: fixed;
@@ -455,7 +396,58 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   z-index: 50;
 }
 
-/* Sticker base — Large glossy glass pill */
+/* Glass pill base */
+.glass-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  padding: 0.45em 0.9em;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--color-main);
+  background: linear-gradient(180deg,
+    rgba(255, 255, 255, 0.6) 0%,
+    rgba(255, 255, 255, 0.25) 50%,
+    rgba(255, 255, 255, 0.4) 100%
+  );
+  backdrop-filter: blur(12px) saturate(1.4);
+  -webkit-backdrop-filter: blur(12px) saturate(1.4);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -1px 0 rgba(30, 58, 82, 0.1),
+    0 0 0 1px rgba(255, 255, 255, 0.5),
+    0 4px 10px rgba(30, 58, 82, 0.12);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.3s ease;
+  text-transform: lowercase;
+  letter-spacing: 0.04em;
+}
+
+.glass-pill:hover {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 1),
+    inset 0 -1px 0 rgba(30, 58, 82, 0.15),
+    0 0 0 1px rgba(255, 255, 255, 0.7),
+    0 6px 16px rgba(30, 58, 82, 0.2);
+}
+
+/* Tinted variants */
+.glass-pill--sky { background-color: rgba(91, 192, 248, 0.25); }
+.glass-pill--peach { background-color: rgba(255, 165, 97, 0.28); }
+.glass-pill--leaf { background-color: rgba(111, 212, 111, 0.25); }
+.glass-pill--lavender { background-color: rgba(185, 138, 255, 0.25); }
+.glass-pill--orange { background-color: rgba(255, 107, 43, 0.3); color: #4A1F0A; }
+
+/* Tilt rotation variants */
+.glass-pill[data-tilt="1"] { transform: rotate(-3deg); }
+.glass-pill[data-tilt="2"] { transform: rotate(2deg); }
+.glass-pill[data-tilt="3"] { transform: rotate(-1.5deg); }
+.glass-pill[data-tilt="4"] { transform: rotate(4deg); }
+
+/* Legacy sticker base for compatibility */
 .sticker {
   position: absolute;
   padding: 10px 22px;

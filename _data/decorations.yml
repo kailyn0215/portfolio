@@ -1,0 +1,116 @@
+# ═══════════════════════════════════════════════════════════════
+# DECORATIONS — Editable Orb & Sticker Positions
+# Modify these values to adjust hero composition
+# ═══════════════════════════════════════════════════════════════
+
+orbs:
+  # Large anchor orbs — outer thirds only
+  - id: "orb-1"
+    variant: "sky"
+    size: "lg"
+    top: "8%"
+    left: "4%"
+    
+  - id: "orb-2"
+    variant: "teal"
+    size: "md"
+    top: "18%"
+    right: "6%"
+    
+  - id: "orb-3"
+    variant: "glass"
+    size: "lg"
+    top: "35%"
+    left: "3%"
+    
+  - id: "orb-4"
+    variant: "peach"
+    size: "md"
+    top: "55%"
+    right: "5%"
+    
+  - id: "orb-5"
+    variant: "lavender"
+    size: "sm"
+    top: "70%"
+    left: "5%"
+    
+  - id: "orb-6"
+    variant: "leaf"
+    size: "sm"
+    top: "12%"
+    right: "3%"
+    
+  - id: "orb-7"
+    variant: "sky"
+    size: "xs"
+    top: "42%"
+    right: "8%"
+    
+  - id: "orb-8"
+    variant: "rose"
+    size: "sm"
+    top: "65%"
+    right: "6%"
+
+pills:
+  # Glass pill stickers
+  - text: "vibe: aero ✨"
+    variant: "sky"
+    tilt: 1
+    top: "6%"
+    left: "2%"
+    
+  - text: "v5.0"
+    variant: "leaf"
+    tilt: 2
+    top: "14%"
+    right: "3%"
+    
+  - text: "loading..."
+    variant: "peach"
+    tilt: 3
+    top: "48%"
+    right: "2%"
+    
+  - text: "build 0451"
+    variant: "lavender"
+    tilt: 4
+    top: "84%"
+    right: "4%"
+    
+  - text: "♥"
+    variant: "orange"
+    tilt: 2
+    top: "92%"
+    left: "45%"
+
+sparkles:
+  - symbol: "✦"
+    color: "sky"
+    top: "32%"
+    left: "1.5%"
+    
+  - symbol: "✧"
+    color: "leaf"
+    top: "68%"
+    left: "3%"
+    
+  - symbol: "★"
+    color: "accent"
+    top: "6%"
+    right: "35%"
+    
+  - symbol: "✦"
+    color: "sunset"
+    top: "22%"
+    left: "5%"
+
+annotations:
+  - text: "← hi! ♥"
+    top: "28%"
+    left: "2%"
+    
+  - text: "wip ◡̈"
+    top: "58%"
+    right: "2%"

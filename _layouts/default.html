@@ -39,38 +39,15 @@
   </div>
 
   <!-- ═══════════════════════════════════════════════════════════════
-       FLOATING BUBBLES — Vivid Glass Marbles
+       CRISP GLASS ORBS — Rendered from _data/decorations.yml
+       Outer thirds only, center cleared for wordmark
        ═══════════════════════════════════════════════════════════════ -->
-  <div class="bubbles-layer" data-parallax="slow">
-    <!-- Large Chrome/Glass Anchors -->
-    <div class="bubble bubble--chrome bubble--xxl bubble-1" data-parallax-rate="0.01"></div>
-    <div class="bubble bubble--glass bubble--xl bubble-5" data-parallax-rate="0.015"></div>
-    
-    <!-- Vivid Colored Marbles — Mid Layer -->
-    <div class="bubble bubble--teal bubble--lg bubble-2" data-parallax-rate="0.025"></div>
-    <div class="bubble bubble--peach bubble--lg bubble-4" data-parallax-rate="0.03"></div>
-    <div class="bubble bubble--lime bubble--md bubble-7" data-parallax-rate="0.028"></div>
-    <div class="bubble bubble--lavender bubble--lg bubble-8" data-parallax-rate="0.022"></div>
-    <div class="bubble bubble--teal bubble--md bubble-15" data-parallax-rate="0.032"></div>
-    
-    <!-- Glass Refractive -->
-    <div class="bubble bubble--glass bubble--lg bubble-3" data-parallax-rate="0.02"></div>
-    <div class="bubble bubble--glass bubble--md bubble-12" data-parallax-rate="0.035"></div>
-    
-    <!-- Iridescent -->
-    <div class="bubble bubble--iris bubble--xl bubble-6" data-parallax-rate="0.018"></div>
-    <div class="bubble bubble--iris bubble--md bubble-10" data-parallax-rate="0.04"></div>
-    
-    <!-- Small Sparkle Droplets — Foreground -->
-    <div class="bubble bubble--sparkle bubble--sm bubble-9" data-parallax-rate="0.05"></div>
-    <div class="bubble bubble--sparkle bubble--xs bubble-11" data-parallax-rate="0.055"></div>
-    <div class="bubble bubble--sparkle bubble--sm bubble-13" data-parallax-rate="0.06"></div>
-    <div class="bubble bubble--sparkle bubble--xs bubble-14" data-parallax-rate="0.048"></div>
-    
-    <!-- Extra Chrome Accents -->
-    <div class="bubble bubble--chrome bubble--md" style="top:75%;left:8%;" data-parallax-rate="0.038"></div>
-    <div class="bubble bubble--peach bubble--sm" style="top:85%;right:15%;" data-parallax-rate="0.045"></div>
-    <div class="bubble bubble--lime bubble--sm" style="top:35%;left:42%;" data-parallax-rate="0.042"></div>
+  <div class="orbs-layer">
+    {% for orb in site.data.decorations.orbs %}
+    <div class="orb orb--{{ orb.size }} orb--{{ orb.variant }}{% if orb.variant == 'glass' %} orb--glass{% endif %}" 
+         style="top: {{ orb.top }};{% if orb.left %} left: {{ orb.left }};{% endif %}{% if orb.right %} right: {{ orb.right }};{% endif %}"
+         data-parallax-rate="{{ orb.parallax | default: '0.02' }}"></div>
+    {% endfor %}
   </div>
 
   <!-- ═══════════════════════════════════════════════════════════════
@@ -85,42 +62,32 @@
   </div>
 
   <!-- ═══════════════════════════════════════════════════════════════
-       QUIRKY DECORATIONS — Stickers, Annotations, Sparkles
+       GLASS PILL STICKERS — Rendered from _data/decorations.yml
        ═══════════════════════════════════════════════════════════════ -->
   <div class="decorations">
-    <!-- Colored Stickers -->
-    <span class="sticker sticker--sky deco-1">vibe: aero ✨</span>
-    <span class="sticker sticker--leaf deco-2">v4.0</span>
-    <span class="sticker sticker--sunset deco-4">loading...</span>
-    <span class="sticker sticker--iris deco-6">build 0451</span>
-    <span class="sticker deco-8">now playing: future funk</span>
+    <!-- Glass Pill Stickers -->
+    {% for pill in site.data.decorations.pills %}
+    <span class="glass-pill glass-pill--{{ pill.variant }}" 
+          data-tilt="{{ pill.tilt }}"
+          style="position: absolute; top: {{ pill.top }};{% if pill.left %} left: {{ pill.left }};{% endif %}{% if pill.right %} right: {{ pill.right }};{% endif %}">{{ pill.text }}</span>
+    {% endfor %}
     
     <!-- Sparkles -->
-    <span class="deco-sparkle deco-sparkle--sky deco-3">✦</span>
-    <span class="deco-sparkle deco-sparkle--leaf deco-5">✦</span>
-    <span class="deco-sparkle deco-sparkle--sunset deco-7">✦</span>
-    <span class="deco-sparkle deco-sparkle--accent deco-9">✦</span>
-    <span class="deco-sparkle deco-sparkle--sky deco-10">✧</span>
+    {% for sparkle in site.data.decorations.sparkles %}
+    <span class="deco-sparkle deco-sparkle--{{ sparkle.color }}" 
+          style="top: {{ sparkle.top }};{% if sparkle.left %} left: {{ sparkle.left }};{% endif %}{% if sparkle.right %} right: {{ sparkle.right }};{% endif %}">{{ sparkle.symbol }}</span>
+    {% endfor %}
     
-    <!-- Handwritten Annotations -->
-    <span class="annotation deco-1" style="top: 28%; left: 2%;">← hi! ♥</span>
-    <span class="annotation deco-4" style="top: 58%; right: 2%;">wip ◡̈</span>
-    <span class="annotation deco-6" style="top: 82%; left: 3%;">ʕ•ᴥ•ʔ</span>
+    <!-- Annotations -->
+    {% for note in site.data.decorations.annotations %}
+    <span class="annotation" style="top: {{ note.top }};{% if note.left %} left: {{ note.left }};{% endif %}{% if note.right %} right: {{ note.right }};{% endif %}">{{ note.text }}</span>
+    {% endfor %}
     
     <!-- Retro UI Elements -->
-    <div class="retro-progress deco-2" style="top: 42%; left: 2%;"></div>
-    <div class="loading-dots deco-5" style="top: 72%; right: 3%;">
+    <div class="retro-progress" style="top: 42%; left: 2%;"></div>
+    <div class="loading-dots" style="top: 72%; right: 3%;">
       <span></span><span></span><span></span><span></span>
     </div>
-    
-    <!-- Extra Decorative Symbols -->
-    <span class="sticker sticker--sky" style="top: 38%; right: 2%; transform: rotate(-4deg);">☮</span>
-    <span class="sticker sticker--leaf" style="top: 92%; left: 45%; transform: rotate(3deg);">♥</span>
-    <span class="deco-sparkle deco-sparkle--accent" style="top: 6%; right: 35%;">★</span>
-    <span class="deco-sparkle deco-sparkle--leaf" style="top: 52%; left: 1%;">✦</span>
-    
-    <!-- Rainbow Arc -->
-    <span class="sticker sticker--iris" style="top: 18%; left: 1%; transform: rotate(-8deg);">🌈</span>
   </div>
 
   <!-- Subtle Grid & Grain -->
@@ -189,27 +156,25 @@
       document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
 
       // ─────────────────────────────────────────────────────────────
-      // Multi-Layer Parallax (3 speeds — respects reduced motion)
+      // Multi-Layer Parallax (respects reduced motion)
       // ─────────────────────────────────────────────────────────────
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       
       if (!prefersReducedMotion) {
-        const bubbles = document.querySelectorAll('.bubble');
+        const orbs = document.querySelectorAll('.orb');
         const motifs = document.querySelectorAll('.motif');
-        const stickers = document.querySelectorAll('.sticker, .deco-sparkle');
+        const pills = document.querySelectorAll('.glass-pill');
         
         let ticking = false;
         
         function updateParallax() {
           const scrollY = window.scrollY;
           
-          // Bubbles — use data-parallax-rate or fallback
-          bubbles.forEach((bubble) => {
-            const rate = parseFloat(bubble.dataset.parallaxRate) || 0.02;
+          // Orbs — use data-parallax-rate or fallback
+          orbs.forEach((orb) => {
+            const rate = parseFloat(orb.dataset.parallaxRate) || 0.02;
             const yOffset = scrollY * rate;
-            // Preserve existing animations by only adjusting translateY
-            bubble.style.setProperty('--parallax-y', `${-yOffset}px`);
-            bubble.style.transform = `translateY(var(--parallax-y, 0))`;
+            orb.style.transform = `translateY(${-yOffset}px)`;
           });
           
           // Motifs — medium speed
@@ -219,14 +184,18 @@
             motif.style.transform = `translateY(${-yOffset}px)`;
           });
           
-          // Stickers/Sparkles — fastest (foreground)
-          stickers.forEach((el, i) => {
-            const rate = 0.04 + (i % 4) * 0.015;
+          // Pills — fastest (foreground)
+          pills.forEach((pill, i) => {
+            const rate = 0.04 + (i % 4) * 0.012;
             const yOffset = scrollY * rate;
-            // Preserve rotation
-            const currentRotate = el.style.transform.match(/rotate\([^)]+\)/);
-            const rotateStr = currentRotate ? currentRotate[0] : '';
-            el.style.transform = `translateY(${-yOffset}px) ${rotateStr}`;
+            // Preserve tilt rotation
+            const tilt = pill.dataset.tilt;
+            let rotateVal = 0;
+            if (tilt === '1') rotateVal = -3;
+            else if (tilt === '2') rotateVal = 2;
+            else if (tilt === '3') rotateVal = -1.5;
+            else if (tilt === '4') rotateVal = 4;
+            pill.style.transform = `translateY(${-yOffset}px) rotate(${rotateVal}deg)`;
           });
           
           ticking = false;
@@ -241,7 +210,7 @@
       }
 
       // ─────────────────────────────────────────────────────────────
-      // Mobile Nav Toggle (if needed)
+      // Mobile Nav Toggle
       // ─────────────────────────────────────────────────────────────
       const navToggle = document.querySelector('.nav-toggle');
       const navLinks = document.querySelector('.nav-links');
