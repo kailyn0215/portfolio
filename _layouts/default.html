@@ -39,31 +39,38 @@
   </div>
 
   <!-- ═══════════════════════════════════════════════════════════════
-       FLOATING BUBBLES — 15+ Scattered Throughout
+       FLOATING BUBBLES — Vivid Glass Marbles
        ═══════════════════════════════════════════════════════════════ -->
-  <div class="bubbles-layer">
-    <!-- Glass Bubbles -->
-    <div class="bubble bubble--glass bubble--xl bubble-1"></div>
-    <div class="bubble bubble--glass bubble--lg bubble-2"></div>
-    <div class="bubble bubble--glass bubble--md bubble-3"></div>
-    <div class="bubble bubble--glass bubble--sm bubble-6"></div>
-    <div class="bubble bubble--glass bubble--md bubble-12"></div>
+  <div class="bubbles-layer" data-parallax="slow">
+    <!-- Large Chrome/Glass Anchors -->
+    <div class="bubble bubble--chrome bubble--xxl bubble-1" data-parallax-rate="0.01"></div>
+    <div class="bubble bubble--glass bubble--xl bubble-5" data-parallax-rate="0.015"></div>
     
-    <!-- Chrome Bubbles -->
-    <div class="bubble bubble--chrome bubble--lg bubble-4"></div>
-    <div class="bubble bubble--chrome bubble--md bubble-7"></div>
-    <div class="bubble bubble--chrome bubble--sm bubble-10"></div>
+    <!-- Vivid Colored Marbles — Mid Layer -->
+    <div class="bubble bubble--teal bubble--lg bubble-2" data-parallax-rate="0.025"></div>
+    <div class="bubble bubble--peach bubble--lg bubble-4" data-parallax-rate="0.03"></div>
+    <div class="bubble bubble--lime bubble--md bubble-7" data-parallax-rate="0.028"></div>
+    <div class="bubble bubble--lavender bubble--lg bubble-8" data-parallax-rate="0.022"></div>
+    <div class="bubble bubble--teal bubble--md bubble-15" data-parallax-rate="0.032"></div>
     
-    <!-- Iridescent Bubbles -->
-    <div class="bubble bubble--iris bubble--xl bubble-5"></div>
-    <div class="bubble bubble--iris bubble--lg bubble-8"></div>
-    <div class="bubble bubble--iris bubble--md bubble-15"></div>
+    <!-- Glass Refractive -->
+    <div class="bubble bubble--glass bubble--lg bubble-3" data-parallax-rate="0.02"></div>
+    <div class="bubble bubble--glass bubble--md bubble-12" data-parallax-rate="0.035"></div>
     
-    <!-- Sparkle Bubbles -->
-    <div class="bubble bubble--sparkle bubble--xs bubble-9"></div>
-    <div class="bubble bubble--sparkle bubble--sm bubble-11"></div>
-    <div class="bubble bubble--sparkle bubble--xs bubble-13"></div>
-    <div class="bubble bubble--sparkle bubble--sm bubble-14"></div>
+    <!-- Iridescent -->
+    <div class="bubble bubble--iris bubble--xl bubble-6" data-parallax-rate="0.018"></div>
+    <div class="bubble bubble--iris bubble--md bubble-10" data-parallax-rate="0.04"></div>
+    
+    <!-- Small Sparkle Droplets — Foreground -->
+    <div class="bubble bubble--sparkle bubble--sm bubble-9" data-parallax-rate="0.05"></div>
+    <div class="bubble bubble--sparkle bubble--xs bubble-11" data-parallax-rate="0.055"></div>
+    <div class="bubble bubble--sparkle bubble--sm bubble-13" data-parallax-rate="0.06"></div>
+    <div class="bubble bubble--sparkle bubble--xs bubble-14" data-parallax-rate="0.048"></div>
+    
+    <!-- Extra Chrome Accents -->
+    <div class="bubble bubble--chrome bubble--md" style="top:75%;left:8%;" data-parallax-rate="0.038"></div>
+    <div class="bubble bubble--peach bubble--sm" style="top:85%;right:15%;" data-parallax-rate="0.045"></div>
+    <div class="bubble bubble--lime bubble--sm" style="top:35%;left:42%;" data-parallax-rate="0.042"></div>
   </div>
 
   <!-- ═══════════════════════════════════════════════════════════════
@@ -182,30 +189,44 @@
       document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
 
       // ─────────────────────────────────────────────────────────────
-      // Parallax Effect on Bubbles (respects reduced motion)
+      // Multi-Layer Parallax (3 speeds — respects reduced motion)
       // ─────────────────────────────────────────────────────────────
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       
       if (!prefersReducedMotion) {
         const bubbles = document.querySelectorAll('.bubble');
         const motifs = document.querySelectorAll('.motif');
+        const stickers = document.querySelectorAll('.sticker, .deco-sparkle');
         
         let ticking = false;
         
         function updateParallax() {
           const scrollY = window.scrollY;
-          const viewportHeight = window.innerHeight;
           
-          bubbles.forEach((bubble, i) => {
-            const rate = 0.02 + (i % 5) * 0.01;
+          // Bubbles — use data-parallax-rate or fallback
+          bubbles.forEach((bubble) => {
+            const rate = parseFloat(bubble.dataset.parallaxRate) || 0.02;
             const yOffset = scrollY * rate;
-            bubble.style.transform = `translateY(${-yOffset}px)`;
+            // Preserve existing animations by only adjusting translateY
+            bubble.style.setProperty('--parallax-y', `${-yOffset}px`);
+            bubble.style.transform = `translateY(var(--parallax-y, 0))`;
           });
           
+          // Motifs — medium speed
           motifs.forEach((motif, i) => {
-            const rate = 0.015 + (i % 3) * 0.008;
+            const rate = 0.025 + (i % 3) * 0.01;
             const yOffset = scrollY * rate;
             motif.style.transform = `translateY(${-yOffset}px)`;
+          });
+          
+          // Stickers/Sparkles — fastest (foreground)
+          stickers.forEach((el, i) => {
+            const rate = 0.04 + (i % 4) * 0.015;
+            const yOffset = scrollY * rate;
+            // Preserve rotation
+            const currentRotate = el.style.transform.match(/rotate\([^)]+\)/);
+            const rotateStr = currentRotate ? currentRotate[0] : '';
+            el.style.transform = `translateY(${-yOffset}px) ${rotateStr}`;
           });
           
           ticking = false;
