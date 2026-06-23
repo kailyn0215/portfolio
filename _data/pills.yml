@@ -5,13 +5,39 @@
 # tint:  sky | peach | leaf | lavender | orange | white
 # tilt:  integer degrees (negative ok)
 # drift: a | b | c (animation variant)
-# position: top/right/bottom/left as CSS values
+# position: top/right/bottom/left as CSS values (use vh for full page)
 # label: text content (emoji allowed)
 
 pills:
-  - { label: "vibe: aero ✨",   tint: sky,      tilt: -3, drift: a, top: "14%", left:  "6%" }
-  - { label: "← hi! ♥",         tint: peach,    tilt:  4, drift: b, top: "30%", left:  "4%" }
-  - { label: "v5.0",            tint: white,    tilt: -1, drift: c, top: "10%", right: "8%" }
-  - { label: "loading...",      tint: lavender, tilt:  3, drift: a, top: "58%", right: "5%" }
-  - { label: "wip ☺",           tint: leaf,     tilt: -4, drift: b, top: "78%", right:"12%" }
-  - { label: "build 0451",      tint: white,    tilt:  2, drift: c, top: "88%", left: "10%" }
+  # ─── HERO SECTION (0-100vh) ───
+  - { label: "vibe: aero ✨",   tint: sky,      tilt: -3, drift: a, top: "14vh", left:  "6%" }
+  - { label: "← hi! ♥",         tint: peach,    tilt:  4, drift: b, top: "30vh", left:  "4%" }
+  - { label: "v5.0",            tint: white,    tilt: -1, drift: c, top: "10vh", right: "8%" }
+  - { label: "loading...",      tint: lavender, tilt:  3, drift: a, top: "58vh", right: "5%" }
+  - { label: "wip ☺",           tint: leaf,     tilt: -4, drift: b, top: "78vh", right:"12%" }
+  - { label: "build 0451",      tint: white,    tilt:  2, drift: c, top: "88vh", left: "10%" }
+  
+  # ─── ABOUT SECTION (100-200vh) ───
+  - { label: "✦ nice",          tint: sky,      tilt:  2, drift: b, top: "115vh", left: "5%" }
+  - { label: "→ more",          tint: peach,    tilt: -3, drift: a, top: "135vh", right: "6%" }
+  - { label: "◇ kb",            tint: lavender, tilt:  4, drift: c, top: "165vh", left: "8%" }
+  - { label: "♡",               tint: leaf,     tilt: -2, drift: b, top: "180vh", right: "4%" }
+  
+  # ─── SKILLS SECTION (200-300vh) ───
+  - { label: "skills ✨",       tint: sky,      tilt: -1, drift: a, top: "210vh", right: "7%" }
+  - { label: "☆ cool",          tint: white,    tilt:  3, drift: c, top: "235vh", left: "5%" }
+  - { label: "yay",             tint: peach,    tilt: -4, drift: b, top: "260vh", right: "9%" }
+  - { label: "⌘ dev",           tint: lavender, tilt:  2, drift: a, top: "285vh", left: "6%" }
+  
+  # ─── PROJECTS SECTION (300-450vh) ───
+  - { label: "✿ projects",      tint: leaf,     tilt: -3, drift: c, top: "315vh", right: "5%" }
+  - { label: "built w/ ♥",      tint: peach,    tilt:  4, drift: b, top: "345vh", left: "4%" }
+  - { label: "⟡ view",          tint: sky,      tilt: -2, drift: a, top: "375vh", right: "8%" }
+  - { label: "◌ yes",           tint: white,    tilt:  3, drift: c, top: "400vh", left: "7%" }
+  - { label: "▸ click",         tint: lavender, tilt: -1, drift: b, top: "430vh", right: "6%" }
+  
+  # ─── CONTACT SECTION (450-550vh) ───
+  - { label: "say hi! 👋",      tint: sky,      tilt:  2, drift: a, top: "470vh", left: "5%" }
+  - { label: "✉ msg",           tint: peach,    tilt: -3, drift: c, top: "500vh", right: "7%" }
+  - { label: "♥ thanks",        tint: leaf,     tilt:  4, drift: b, top: "530vh", left: "6%" }
+  - { label: "→ send",          tint: lavender, tilt: -2, drift: a, top: "550vh", right: "5%" }
