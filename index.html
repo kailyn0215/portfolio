@@ -3,195 +3,243 @@ layout: default
 title: Home
 ---
 
-<!-- HERO SECTION -->
+<!-- HERO -->
 <section id="home" class="hero">
-  <!-- Hero Centerpiece Orb -->
-  <div class="hero-orb"></div>
-  
   <div class="hero-content">
-    <div class="hero-badge">STATUS: ONLINE</div>
-    <h1 class="hero-title">Kailyn Brown</h1>
-    
-    <div class="hero-specs">
+    <div class="hero-badge">Status: Online</div>
+
+    <div class="hero-title-wrap">
+      <span class="hero-title-blur" aria-hidden="true">Kailyn Brown</span>
+      <span class="hero-title-ghost" aria-hidden="true">Kailyn Brown</span>
+      <h1 class="hero-title">Kailyn Brown</h1>
+    </div>
+
+    <div class="hero-specs panel">
       <div class="hero-spec">
         <span class="hero-spec-label">role</span>
-        <span class="hero-spec-dots">........</span>
+        <span class="hero-spec-dots" aria-hidden="true">................</span>
         <span class="hero-spec-value">creative developer</span>
       </div>
       <div class="hero-spec">
         <span class="hero-spec-label">status</span>
-        <span class="hero-spec-dots">........</span>
+        <span class="hero-spec-dots" aria-hidden="true">................</span>
         <span class="hero-spec-value">available</span>
       </div>
       <div class="hero-spec">
         <span class="hero-spec-label">location</span>
-        <span class="hero-spec-dots">........</span>
+        <span class="hero-spec-dots" aria-hidden="true">................</span>
         <span class="hero-spec-value">remote / anywhere</span>
       </div>
+      <div class="hero-spec">
+        <span class="hero-spec-label">focus</span>
+        <span class="hero-spec-dots" aria-hidden="true">................</span>
+        <span class="hero-spec-value">design + code</span>
+      </div>
     </div>
-    
-    <div class="hero-buttons">
+
+    <div class="hero-actions">
       <a href="#projects" class="btn btn-primary">view work →</a>
       <a href="#contact" class="btn btn-secondary">get in touch</a>
     </div>
   </div>
+
+  <div class="hero-visual">
+    <div class="hero-orbit hero-orbit--2" aria-hidden="true"></div>
+    <div class="hero-orbit hero-orbit--1" aria-hidden="true"></div>
+    <div class="hero-sphere" aria-hidden="true"></div>
+    <span class="hero-marker hero-marker--1" aria-hidden="true">REF: 03.7</span>
+    <span class="hero-marker hero-marker--2" aria-hidden="true">VOL: 84%</span>
+    <span class="hero-marker hero-marker--3" aria-hidden="true">●</span>
+    <span class="hero-coords" aria-hidden="true">X:000  Y:000</span>
+  </div>
 </section>
 
-<!-- ABOUT SECTION -->
+<div class="divider" aria-hidden="true"></div>
+
+<!-- ABOUT -->
 <section id="about" class="about">
-  <div class="section-header">
-    <span class="section-tag">about</span>
-    <h2 class="section-title">System Overview</h2>
-    <p class="section-subtitle">background process running since [year]</p>
-  </div>
-  
-  <div class="about-grid">
-    <div class="about-image-wrapper fade-in">
-      <div class="about-image">
-        👩‍💻
+  <div class="section-shell">
+    <header class="section-header section-header--left section-header--offset reveal">
+      <span class="section-index">002 — PROFILE</span>
+      <span class="section-tag">about</span>
+      <h2 class="section-title">System Overview</h2>
+      <p class="section-subtitle">background process running since [year]</p>
+      <span class="section-rule" aria-hidden="true">READ ONLY</span>
+    </header>
+
+    <div class="about-grid">
+      <div class="about-visual reveal">
+        <div class="about-ruler" aria-hidden="true"></div>
+        <div class="about-frame">
+          👩‍💻
+        </div>
+        <span class="about-frame-label">available ✓</span>
       </div>
-      <div class="about-image-badge">available ✓</div>
-    </div>
-    
-    <div class="about-content fade-in">
-      <h3>hello, i'm kb</h3>
-      <p>
-        a [your profession] based in [your location]. i build interfaces that feel good to use — functional, accessible, and a little bit weird in the best way.
-      </p>
-      <p>
-        when i'm not pushing pixels or writing code, you'll find me [your interests]. i believe in [your values] and making things that matter.
-      </p>
-      
-      <div class="about-stats">
-        <div class="stat">
-          <div class="stat-number">X+</div>
-          <div class="stat-label">years</div>
-        </div>
-        <div class="stat">
-          <div class="stat-number">XX+</div>
-          <div class="stat-label">projects</div>
-        </div>
-        <div class="stat">
-          <div class="stat-number">XX+</div>
-          <div class="stat-label">clients</div>
+
+      <div class="about-content reveal">
+        <h3>hello, i'm kb</h3>
+        <p>
+          a [your profession] based in [your location]. i build interfaces that feel good to use — functional, accessible, and a little bit weird in the best way.
+        </p>
+        <p>
+          when i'm not pushing pixels or writing code, you'll find me [your interests]. i believe in [your values] and making things that matter.
+        </p>
+
+        <div class="about-stats">
+          <div class="stat">
+            <div class="stat-number">X+</div>
+            <div class="stat-label">years</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">XX+</div>
+            <div class="stat-label">projects</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">XX+</div>
+            <div class="stat-label">clients</div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- SKILLS SECTION -->
+<div class="divider" aria-hidden="true"></div>
+
+<!-- SKILLS / LAB -->
 <section id="skills" class="skills">
-  <div class="section-header">
-    <span class="section-tag">capabilities</span>
-    <h2 class="section-title">Tech Stack</h2>
-    <p class="section-subtitle">system requirements met</p>
-  </div>
-  
-  <div class="skills-grid">
-    {% for skill in site.data.skills %}
-    <div class="skill-card glass-card fade-in">
-      <div class="skill-header">
-        <span class="skill-code">{{ skill.code }}</span>
-        <h3>{{ skill.category }}</h3>
-      </div>
-      <div class="skill-items">
-        {% for item in skill.items %}
-        <span class="skill-item">{{ item }}</span>
-        {% endfor %}
-      </div>
-    </div>
-    {% endfor %}
-  </div>
-</section>
+  <div class="section-shell">
+    <header class="section-header section-header--left reveal">
+      <span class="section-index">003 — LAB</span>
+      <span class="section-tag">capabilities</span>
+      <h2 class="section-title">Tech Stack</h2>
+      <p class="section-subtitle">system requirements met</p>
+    </header>
 
-<!-- PROJECTS SECTION -->
-<section id="projects" class="projects">
-  <div class="section-header">
-    <span class="section-tag">output</span>
-    <h2 class="section-title">Selected Works</h2>
-    <p class="section-subtitle">recent builds and experiments</p>
-  </div>
-  
-  <div class="projects-grid">
-    {% for project in site.data.projects %}
-    <div class="project-card glass-card fade-in">
-      <div class="project-image">
-        <div class="project-meta">
-          <span>{{ project.version }}</span>
-          <span>{{ project.year }}</span>
+    <div class="skills-grid">
+      {% for skill in site.data.skills %}
+      <article class="skill-card reveal">
+        <div class="skill-header">
+          <h3>{{ skill.category }}</h3>
+          <span class="skill-code">{{ skill.code }}</span>
         </div>
-        ◈
-      </div>
-      <div class="project-content">
-        <h3>{{ project.title }}</h3>
-        <p class="project-tagline">{{ project.tagline }}</p>
-        <p>{{ project.description }}</p>
-        <div class="project-tech">
-          {% for tech in project.tech %}
-          <span>{{ tech }}</span>
+        <div class="skill-items">
+          {% for item in skill.items %}
+          <span class="skill-item">{{ item }}</span>
           {% endfor %}
         </div>
-        <div class="project-links">
-          {% if project.live_url and project.live_url != "#" %}
-          <a href="{{ project.live_url }}">live →</a>
-          {% endif %}
-          {% if project.repo_url and project.repo_url != "#" %}
-          <a href="{{ project.repo_url }}">source</a>
-          {% endif %}
-        </div>
-      </div>
+      </article>
+      {% endfor %}
     </div>
-    {% endfor %}
   </div>
 </section>
 
-<!-- CONTACT SECTION -->
-<section id="contact" class="contact">
-  <div class="section-header">
-    <span class="section-tag">connection</span>
-    <h2 class="section-title">Establish Link</h2>
-    <p class="section-subtitle">open for opportunities and collaboration</p>
-  </div>
-  
-  <div class="contact-wrapper">
-    <div class="contact-info glass-panel fade-in">
-      <h3>contact info</h3>
-      
-      <div class="contact-item">
-        <span>→</span>
-        <span>your.email@example.com</span>
-      </div>
-      
-      <div class="contact-item">
-        <span>◎</span>
-        <span>your city, country</span>
-      </div>
-      
-      <div class="social-links">
-        <a href="#" class="social-link" aria-label="GitHub">gh</a>
-        <a href="#" class="social-link" aria-label="LinkedIn">li</a>
-        <a href="#" class="social-link" aria-label="Twitter">tw</a>
-      </div>
+<div class="divider" aria-hidden="true"></div>
+
+<!-- PROJECTS -->
+<section id="projects" class="projects">
+  <div class="section-shell">
+    <header class="section-header section-header--left section-header--offset reveal">
+      <span class="section-index">004 — ARCHIVE</span>
+      <span class="section-tag">output</span>
+      <h2 class="section-title">Selected Works</h2>
+      <p class="section-subtitle">recent builds and experiments</p>
+    </header>
+
+    <div class="projects-list">
+      {% for project in site.data.projects %}
+      <article class="project-entry reveal">
+        <div class="project-index" aria-hidden="true">
+          {% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}
+        </div>
+        <div class="project-body">
+          <div class="project-meta-row">
+            <span class="project-archive-id">archive entry {% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</span>
+            <span class="project-status">{{ project.status }}</span>
+            <span class="project-year">{{ project.version }} · {{ project.year }}</span>
+          </div>
+          <h3>{{ project.title }}</h3>
+          <p class="project-tagline">{{ project.tagline }}</p>
+          <p class="project-desc">{{ project.description }}</p>
+          <div class="project-tech">
+            {% for tech in project.tech %}
+            <span>{{ tech }}</span>
+            {% endfor %}
+          </div>
+          <div class="project-links">
+            {% if project.live_url and project.live_url != "#" %}
+            <a href="{{ project.live_url }}" class="link-primary">view →</a>
+            {% endif %}
+            {% if project.repo_url and project.repo_url != "#" %}
+            <a href="{{ project.repo_url }}">source</a>
+            {% endif %}
+          </div>
+        </div>
+      </article>
+      {% endfor %}
     </div>
-    
-    <form class="contact-form glass-panel fade-in" action="#" method="POST">
-      <div class="form-group">
-        <label for="name">name</label>
-        <input type="text" id="name" name="name" placeholder="your name" required>
+  </div>
+</section>
+
+<div class="divider" aria-hidden="true"></div>
+
+<!-- CONTACT -->
+<section id="contact" class="contact">
+  <div class="section-shell">
+    <header class="section-header section-header--left reveal">
+      <span class="section-index">005 — LINK</span>
+      <span class="section-tag">connection</span>
+      <h2 class="section-title">Establish Link</h2>
+      <p class="section-subtitle">open for opportunities and collaboration</p>
+    </header>
+
+    <div class="contact-grid">
+      <div class="contact-panel reveal">
+        <h3>contact info</h3>
+
+        <div class="contact-item">
+          <span class="contact-item-icon" aria-hidden="true">→</span>
+          <div>
+            <div class="contact-item-label">email</div>
+            <div class="contact-item-value">your.email@example.com</div>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <span class="contact-item-icon" aria-hidden="true">◎</span>
+          <div>
+            <div class="contact-item-label">location</div>
+            <div class="contact-item-value">your city, country</div>
+          </div>
+        </div>
+
+        <div class="social-links">
+          <a href="#" class="social-link" aria-label="GitHub">gh</a>
+          <a href="#" class="social-link" aria-label="LinkedIn">li</a>
+          <a href="#" class="social-link" aria-label="Twitter">tw</a>
+        </div>
       </div>
-      
-      <div class="form-group">
-        <label for="email">email</label>
-        <input type="email" id="email" name="email" placeholder="your email" required>
-      </div>
-      
-      <div class="form-group">
-        <label for="message">message</label>
-        <textarea id="message" name="message" placeholder="tell me about your project..." required></textarea>
-      </div>
-      
-      <button type="submit" class="btn btn-primary">transmit →</button>
-    </form>
+
+      <form class="contact-panel reveal" action="#" method="POST">
+        <h3>transmit message</h3>
+
+        <div class="form-group">
+          <label for="name">name</label>
+          <input type="text" id="name" name="name" placeholder="your name" required autocomplete="name">
+        </div>
+
+        <div class="form-group">
+          <label for="email">email</label>
+          <input type="email" id="email" name="email" placeholder="your email" required autocomplete="email">
+        </div>
+
+        <div class="form-group">
+          <label for="message">message</label>
+          <textarea id="message" name="message" placeholder="tell me about your project..." required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">transmit →</button>
+      </form>
+    </div>
   </div>
 </section>

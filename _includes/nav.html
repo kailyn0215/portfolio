@@ -1,13 +1,18 @@
-<nav class="main-nav glass-panel">
-  <a href="#home" class="nav-logo">KB</a>
+<nav class="main-nav panel panel--strong" aria-label="Primary navigation">
+  <div class="nav-brand">
+    <a href="#home" class="nav-logo" aria-label="Home">KB_SYS</a>
+    <span class="nav-status" aria-hidden="true">SYS ACTIVE</span>
+  </div>
+
   <ul class="nav-links">
-    <li><a href="#home">home</a></li>
-    <li><a href="#about">about</a></li>
-    <li><a href="#skills">skills</a></li>
-    <li><a href="#projects">projects</a></li>
-    <li><a href="#contact">contact</a></li>
+    <li><a href="#home" data-section="home">home</a></li>
+    <li><a href="#projects" data-section="projects">work</a></li>
+    <li><a href="#skills" data-section="skills">lab</a></li>
+    <li><a href="#about" data-section="about">about</a></li>
+    <li><a href="#contact" data-section="contact">contact</a></li>
   </ul>
-  <button class="nav-toggle" aria-label="Toggle navigation">
+
+  <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
     <span></span>
     <span></span>
     <span></span>
