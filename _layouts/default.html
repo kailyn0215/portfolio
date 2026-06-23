@@ -13,46 +13,132 @@
   {% seo %}
 </head>
 <body>
-  <!-- Background Orbs -->
-  <div class="bg-orbs">
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
-    <div class="orb orb-4"></div>
-    <div class="orb orb-5"></div>
+  <!-- ═══════════════════════════════════════════════════════════════
+       FRUTIGER AERO BACKGROUND SYSTEM
+       ═══════════════════════════════════════════════════════════════ -->
+  
+  <!-- Bokeh & Prismatic Layer -->
+  <div class="bg-aero"></div>
+  
+  <!-- Wispy Clouds -->
+  <div class="bg-clouds">
+    <div class="cloud cloud-1"></div>
+    <div class="cloud cloud-2"></div>
+    <div class="cloud cloud-3"></div>
+    <div class="cloud cloud-4"></div>
   </div>
 
-  <!-- Decorations -->
+  <!-- Light Effects — Flares & Streaks -->
+  <div class="light-effects">
+    <div class="lens-flare flare-1"></div>
+    <div class="lens-flare flare-2"></div>
+    <div class="lens-flare flare-3"></div>
+    <div class="light-streak streak-1"></div>
+    <div class="light-streak streak-2"></div>
+    <div class="light-streak streak-3"></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       FLOATING BUBBLES — 15+ Scattered Throughout
+       ═══════════════════════════════════════════════════════════════ -->
+  <div class="bubbles-layer">
+    <!-- Glass Bubbles -->
+    <div class="bubble bubble--glass bubble--xl bubble-1"></div>
+    <div class="bubble bubble--glass bubble--lg bubble-2"></div>
+    <div class="bubble bubble--glass bubble--md bubble-3"></div>
+    <div class="bubble bubble--glass bubble--sm bubble-6"></div>
+    <div class="bubble bubble--glass bubble--md bubble-12"></div>
+    
+    <!-- Chrome Bubbles -->
+    <div class="bubble bubble--chrome bubble--lg bubble-4"></div>
+    <div class="bubble bubble--chrome bubble--md bubble-7"></div>
+    <div class="bubble bubble--chrome bubble--sm bubble-10"></div>
+    
+    <!-- Iridescent Bubbles -->
+    <div class="bubble bubble--iris bubble--xl bubble-5"></div>
+    <div class="bubble bubble--iris bubble--lg bubble-8"></div>
+    <div class="bubble bubble--iris bubble--md bubble-15"></div>
+    
+    <!-- Sparkle Bubbles -->
+    <div class="bubble bubble--sparkle bubble--xs bubble-9"></div>
+    <div class="bubble bubble--sparkle bubble--sm bubble-11"></div>
+    <div class="bubble bubble--sparkle bubble--xs bubble-13"></div>
+    <div class="bubble bubble--sparkle bubble--sm bubble-14"></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       ORGANIC MOTIFS — Nature Elements
+       ═══════════════════════════════════════════════════════════════ -->
+  <div class="motifs-layer">
+    <span class="motif motif--leaf motif-1">🍃</span>
+    <span class="motif motif--droplet motif-2">💧</span>
+    <span class="motif motif--butterfly motif-3">🦋</span>
+    <span class="motif motif--leaf motif-4">🌿</span>
+    <span class="motif motif--droplet motif-5">💧</span>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       QUIRKY DECORATIONS — Stickers, Annotations, Sparkles
+       ═══════════════════════════════════════════════════════════════ -->
   <div class="decorations">
-    <span class="deco deco--reg-tl">⊕</span>
-    <span class="deco deco--version">v3.0</span>
-    <span class="deco deco--coords">47.6062°N</span>
-    <span class="deco deco--bracket">[ ]</span>
-    <span class="deco deco--reg-br">⊕</span>
-    <span class="deco deco--accent">✦</span>
+    <!-- Colored Stickers -->
+    <span class="sticker sticker--sky deco-1">vibe: aero ✨</span>
+    <span class="sticker sticker--leaf deco-2">v4.0</span>
+    <span class="sticker sticker--sunset deco-4">loading...</span>
+    <span class="sticker sticker--iris deco-6">build 0451</span>
+    <span class="sticker deco-8">now playing: future funk</span>
+    
+    <!-- Sparkles -->
+    <span class="deco-sparkle deco-sparkle--sky deco-3">✦</span>
+    <span class="deco-sparkle deco-sparkle--leaf deco-5">✦</span>
+    <span class="deco-sparkle deco-sparkle--sunset deco-7">✦</span>
+    <span class="deco-sparkle deco-sparkle--accent deco-9">✦</span>
+    <span class="deco-sparkle deco-sparkle--sky deco-10">✧</span>
+    
+    <!-- Handwritten Annotations -->
+    <span class="annotation deco-1" style="top: 28%; left: 2%;">← hi! ♥</span>
+    <span class="annotation deco-4" style="top: 58%; right: 2%;">wip ◡̈</span>
+    <span class="annotation deco-6" style="top: 82%; left: 3%;">ʕ•ᴥ•ʔ</span>
+    
+    <!-- Retro UI Elements -->
+    <div class="retro-progress deco-2" style="top: 42%; left: 2%;"></div>
+    <div class="loading-dots deco-5" style="top: 72%; right: 3%;">
+      <span></span><span></span><span></span><span></span>
+    </div>
+    
+    <!-- Extra Decorative Symbols -->
+    <span class="sticker sticker--sky" style="top: 38%; right: 2%; transform: rotate(-4deg);">☮</span>
+    <span class="sticker sticker--leaf" style="top: 92%; left: 45%; transform: rotate(3deg);">♥</span>
+    <span class="deco-sparkle deco-sparkle--accent" style="top: 6%; right: 35%;">★</span>
+    <span class="deco-sparkle deco-sparkle--leaf" style="top: 52%; left: 1%;">✦</span>
+    
+    <!-- Rainbow Arc -->
+    <span class="sticker sticker--iris" style="top: 18%; left: 1%; transform: rotate(-8deg);">🌈</span>
   </div>
 
-  <!-- Crop Marks -->
-  <div class="crop-mark crop-mark--tl"></div>
-  <div class="crop-mark crop-mark--tr"></div>
-  <div class="crop-mark crop-mark--bl"></div>
-  <div class="crop-mark crop-mark--br"></div>
+  <!-- Subtle Grid & Grain -->
+  <div class="bg-grid"></div>
+  <div class="bg-grain"></div>
 
-  <!-- Chrome Orbs -->
-  <div class="chrome-orb chrome-orb--1"></div>
-  <div class="chrome-orb chrome-orb--2"></div>
-  <div class="chrome-orb chrome-orb--3"></div>
-
+  <!-- ═══════════════════════════════════════════════════════════════
+       NAVIGATION
+       ═══════════════════════════════════════════════════════════════ -->
   {% include nav.html %}
 
+  <!-- ═══════════════════════════════════════════════════════════════
+       MAIN CONTENT
+       ═══════════════════════════════════════════════════════════════ -->
   <main>
     {{ content }}
   </main>
 
+  <!-- ═══════════════════════════════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════════════════════════════ -->
   <footer class="glass-panel">
     <div class="footer-content">
       <p class="footer-logo">KB</p>
-      <p>&copy; {{ 'now' | date: '%Y' }} kailyn brown — built with intent</p>
+      <p>&copy; {{ 'now' | date: '%Y' }} kailyn brown — built with ✦ and optimism</p>
       <div class="footer-links">
         <a href="#home">home</a>
         <a href="#about">about</a>
@@ -62,21 +148,91 @@
     </div>
   </footer>
 
+  <!-- ═══════════════════════════════════════════════════════════════
+       SCRIPTS — Vanilla JS Only
+       ═══════════════════════════════════════════════════════════════ -->
   <script>
-    // Smooth scroll
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      });
-    });
+    (function() {
+      'use strict';
 
-    // Fade-in observer
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+      // ─────────────────────────────────────────────────────────────
+      // Smooth Scroll
+      // ─────────────────────────────────────────────────────────────
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+
+      // ─────────────────────────────────────────────────────────────
+      // Fade-In Observer
+      // ─────────────────────────────────────────────────────────────
+      const fadeObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+      document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
+
+      // ─────────────────────────────────────────────────────────────
+      // Parallax Effect on Bubbles (respects reduced motion)
+      // ─────────────────────────────────────────────────────────────
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      
+      if (!prefersReducedMotion) {
+        const bubbles = document.querySelectorAll('.bubble');
+        const motifs = document.querySelectorAll('.motif');
+        
+        let ticking = false;
+        
+        function updateParallax() {
+          const scrollY = window.scrollY;
+          const viewportHeight = window.innerHeight;
+          
+          bubbles.forEach((bubble, i) => {
+            const rate = 0.02 + (i % 5) * 0.01;
+            const yOffset = scrollY * rate;
+            bubble.style.transform = `translateY(${-yOffset}px)`;
+          });
+          
+          motifs.forEach((motif, i) => {
+            const rate = 0.015 + (i % 3) * 0.008;
+            const yOffset = scrollY * rate;
+            motif.style.transform = `translateY(${-yOffset}px)`;
+          });
+          
+          ticking = false;
+        }
+        
+        window.addEventListener('scroll', () => {
+          if (!ticking) {
+            requestAnimationFrame(updateParallax);
+            ticking = true;
+          }
+        }, { passive: true });
+      }
+
+      // ─────────────────────────────────────────────────────────────
+      // Mobile Nav Toggle (if needed)
+      // ─────────────────────────────────────────────────────────────
+      const navToggle = document.querySelector('.nav-toggle');
+      const navLinks = document.querySelector('.nav-links');
+      
+      if (navToggle && navLinks) {
+        navToggle.addEventListener('click', () => {
+          navLinks.classList.toggle('active');
+          navToggle.classList.toggle('active');
+        });
+      }
+
+    })();
   </script>
 </body>
 </html>
