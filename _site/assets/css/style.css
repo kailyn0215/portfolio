@@ -263,15 +263,28 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   /* Glass blur effect */
   backdrop-filter: blur(8px) saturate(1.3);
   -webkit-backdrop-filter: blur(8px) saturate(1.3);
-  /* Soft glass rim */
+  /* Consolidated shadow — single layer for performance */
   box-shadow:
     inset 0 0 0 1px rgba(255, 255, 255, 0.6),
-    inset 0 -6px 12px rgba(0, 0, 0, 0.08),
-    inset 0 3px 6px rgba(255, 255, 255, 0.3),
-    0 4px 12px rgba(30, 58, 82, 0.12);
+    0 4px 16px rgba(30, 58, 82, 0.15);
   filter: saturate(1.1);
   animation: float-orb 10s ease-in-out infinite;
   overflow: hidden;
+  /* GPU acceleration — promote to compositor layer */
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Pause animations when off-screen (toggled via JS IntersectionObserver) */
+.orb--paused {
+  animation-play-state: paused !important;
+}
+
+/* Disable backdrop-filter when off-screen (huge perf win) */
+.orb--paused {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
 }
 
 /* Reflection layer — warped fisheye via pseudo-element */
@@ -429,6 +442,11 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   0%, 100% { transform: translateY(0) rotate(0deg); }
   33% { transform: translateY(-15px) rotate(6deg); }
   66% { transform: translateY(-8px) rotate(-4deg); }
+}
+
+/* Pause motif animations when off-screen */
+.motif.orb--paused {
+  animation-play-state: paused !important;
 }
 
 /* ─────────────────────────────────────────────────────────────────
@@ -966,11 +984,21 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 
 /* ─────────────────────────────────────────────────────────────────
-   SECTIONS
+   SECTIONS — Performance Optimized
    ───────────────────────────────────────────────────────────────── */
 section {
   padding: var(--space-xl) var(--space-md);
   position: relative;
+  /* Performance: Skip rendering off-screen content */
+  content-visibility: auto;
+  contain-intrinsic-size: auto 100vh;
+  /* Performance: Isolate repaints to this section */
+  contain: layout paint;
+}
+
+/* Hero section needs full initial visibility */
+.hero {
+  content-visibility: visible;
 }
 
 .section-header {
@@ -1725,6 +1753,28 @@ section {
 
 .contact-info {
   padding: var(--space-md);
+  /* Liquid glass styling - matches skill cards */
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid var(--glass-border-bright);
+  border-radius: var(--radius-lg);
+  box-shadow: 
+    var(--glass-shadow),
+    inset 0 1px 0 rgba(255,255,255,0.85);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Top specular highlight */
+.contact-info::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 5%;
+  right: 5%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.9), transparent);
 }
 
 .contact-info h3 {
@@ -1798,6 +1848,29 @@ section {
 
 .contact-form {
   padding: var(--space-md);
+  /* Liquid glass styling - matches skill cards */
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid var(--glass-border-bright);
+  border-radius: var(--radius-lg);
+  box-shadow: 
+    var(--glass-shadow),
+    inset 0 1px 0 rgba(255,255,255,0.85);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Top specular highlight */
+.contact-form::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 5%;
+  right: 5%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.9), transparent);
+  pointer-events: none;
 }
 
 .form-group {
@@ -1930,6 +2003,51 @@ main {
 
 @media (max-width: 768px) {
   .footer-content { flex-direction: column; text-align: center; }
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   MOUSE SPARKLES — Cursor Trail Effect
+   ───────────────────────────────────────────────────────────────── */
+.sparkle-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.sparkle {
+  position: absolute;
+  font-size: 1rem;
+  pointer-events: none;
+  animation: sparkle-fade 0.8s ease-out forwards;
+  text-shadow: 0 0 10px currentColor;
+}
+
+.sparkle--sky { color: var(--color-sky); }
+.sparkle--leaf { color: var(--color-leaf); }
+.sparkle--sunset { color: var(--color-sunset); }
+.sparkle--lavender { color: var(--color-lavender); }
+.sparkle--accent { color: var(--color-accent); }
+.sparkle--gold { color: var(--color-gold); }
+
+@keyframes sparkle-fade {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, calc(-50% + 30px)) scale(0.5) rotate(180deg);
+  }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .sparkle-container { display: none; }
 }
 
 /* ─────────────────────────────────────────────────────────────────

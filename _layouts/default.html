@@ -150,6 +150,9 @@
 
   </div><!-- /.page-wrapper -->
 
+  <!-- Sparkle Container for Mouse Trail -->
+  <div class="sparkle-container" id="sparkle-container" aria-hidden="true"></div>
+
   <!-- ═══════════════════════════════════════════════════════════════
        SCRIPTS — Vanilla JS Only
        ═══════════════════════════════════════════════════════════════ -->
@@ -249,6 +252,84 @@
           
           orbsLayer.appendChild(el);
         }
+      }
+
+      // ─────────────────────────────────────────────────────────────
+      // Performance: Pause off-screen animations via IntersectionObserver
+      // ─────────────────────────────────────────────────────────────
+      if (!prefersReducedMotion && 'IntersectionObserver' in window) {
+        const orbObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.remove('orb--paused');
+            } else {
+              entry.target.classList.add('orb--paused');
+            }
+          });
+        }, {
+          rootMargin: '100px 0px', // Start animating 100px before entering viewport
+          threshold: 0
+        });
+
+        // Observe all orbs
+        document.querySelectorAll('.orb').forEach(orb => {
+          orbObserver.observe(orb);
+        });
+
+        // Observe motifs too
+        document.querySelectorAll('.motif').forEach(motif => {
+          orbObserver.observe(motif);
+        });
+      }
+
+      // ─────────────────────────────────────────────────────────────
+      // Performance: Passive scroll listeners
+      // ─────────────────────────────────────────────────────────────
+      document.addEventListener('scroll', () => {}, { passive: true });
+
+      // ─────────────────────────────────────────────────────────────
+      // Mouse Sparkles — Cursor Trail Effect
+      // ─────────────────────────────────────────────────────────────
+      if (!prefersReducedMotion) {
+        const sparkleContainer = document.getElementById('sparkle-container');
+        const sparkleChars = ['✦', '✧', '⋆', '✶', '❋', '✴'];
+        const sparkleColors = ['sky', 'leaf', 'sunset', 'lavender', 'accent', 'gold'];
+        let lastSparkleTime = 0;
+        const sparkleThrottle = 50; // ms between sparkles
+        const maxSparkles = 30; // Limit active sparkles for performance
+
+        function createSparkle(x, y) {
+          if (!sparkleContainer) return;
+          
+          // Enforce max sparkles
+          while (sparkleContainer.children.length >= maxSparkles) {
+            sparkleContainer.removeChild(sparkleContainer.firstChild);
+          }
+          
+          const sparkle = document.createElement('span');
+          sparkle.className = 'sparkle sparkle--' + sparkleColors[Math.floor(Math.random() * sparkleColors.length)];
+          sparkle.textContent = sparkleChars[Math.floor(Math.random() * sparkleChars.length)];
+          sparkle.style.left = x + 'px';
+          sparkle.style.top = y + 'px';
+          sparkle.style.fontSize = (0.7 + Math.random() * 0.6) + 'rem';
+          
+          sparkleContainer.appendChild(sparkle);
+          
+          // Remove after animation completes
+          setTimeout(() => {
+            if (sparkle.parentNode) {
+              sparkle.parentNode.removeChild(sparkle);
+            }
+          }, 800);
+        }
+
+        document.addEventListener('mousemove', (e) => {
+          const now = Date.now();
+          if (now - lastSparkleTime > sparkleThrottle) {
+            lastSparkleTime = now;
+            createSparkle(e.clientX, e.clientY);
+          }
+        }, { passive: true });
       }
 
     })();

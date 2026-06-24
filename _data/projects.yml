@@ -3,8 +3,8 @@
 # format: game cartridge / album cover style metadata
 # ═══════════════════════════════════════════════════════════════
 
-- id: "alpha"
-  title: "project alpha"
+- id: "mia"
+  title: "Managing the Issue of Aphasia (MIA)"
   tagline: "experimental interface"
   description: "a modular dashboard system with real-time data visualization and gesture controls."
   tech:
