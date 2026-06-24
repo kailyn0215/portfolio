@@ -1,43 +1,61 @@
 # ═══════════════════════════════════════════════════════════════
 # PILLS — Data-driven glass pill stickers
-# Edit positions, colors, tilts, and labels here
+# Old-school emoticons only (no owo/uwu)
 # ═══════════════════════════════════════════════════════════════
 # tint:  sky | peach | leaf | lavender | orange | white
 # tilt:  integer degrees (negative ok)
 # drift: a | b | c (animation variant)
 # position: top/right/bottom/left as CSS values (use vh for full page)
-# label: text content (emoji allowed)
+# label: old-school emoticons
 
 pills:
   # ─── HERO SECTION (0-100vh) ───
-  - { label: "vibe: aero ✨",   tint: sky,      tilt: -3, drift: a, top: "14vh", left:  "6%" }
-  - { label: "← hi! ♥",         tint: peach,    tilt:  4, drift: b, top: "30vh", left:  "4%" }
-  - { label: "v5.0",            tint: white,    tilt: -1, drift: c, top: "10vh", right: "8%" }
-  - { label: "loading...",      tint: lavender, tilt:  3, drift: a, top: "58vh", right: "5%" }
-  - { label: "wip ☺",           tint: leaf,     tilt: -4, drift: b, top: "78vh", right:"12%" }
-  - { label: "build 0451",      tint: white,    tilt:  2, drift: c, top: "88vh", left: "10%" }
+  - { label: ":D",              tint: sky,      tilt: -3, drift: a, top: "14vh", left:  "6%" }
+  - { label: "^_^",             tint: peach,    tilt:  4, drift: b, top: "30vh", left:  "4%" }
+  - { label: ";P",              tint: white,    tilt: -1, drift: c, top: "10vh", right: "8%" }
+  - { label: ":3",              tint: lavender, tilt:  3, drift: a, top: "58vh", right: "5%" }
+  - { label: "(˶ᵔ ᵕ ᵔ˶)",       tint: leaf,     tilt: -4, drift: b, top: "78vh", right:"12%" }
+  - { label: ">_<",             tint: white,    tilt:  2, drift: c, top: "88vh", left: "10%" }
+  # Center-ish pills for hero
+  - { label: "✧ ^o^",           tint: sky,      tilt:  2, drift: a, top: "22vh", left: "35%" }
+  - { label: "♪ :)",            tint: orange,   tilt: -2, drift: c, top: "65vh", right: "21%" }
   
   # ─── ABOUT SECTION (100-200vh) ───
-  - { label: "✦ nice",          tint: sky,      tilt:  2, drift: b, top: "115vh", left: "5%" }
-  - { label: "→ more",          tint: peach,    tilt: -3, drift: a, top: "135vh", right: "6%" }
-  - { label: "◇ kb",            tint: lavender, tilt:  4, drift: c, top: "165vh", left: "8%" }
+  - { label: "✧ :)",            tint: sky,      tilt:  2, drift: b, top: "115vh", left: "5%" }
+  - { label: "→ ♪",             tint: peach,    tilt: -3, drift: a, top: "135vh", right: "6%" }
+  - { label: "★ ^o^",           tint: lavender, tilt:  4, drift: c, top: "165vh", left: "3%" }
   - { label: "♡",               tint: leaf,     tilt: -2, drift: b, top: "180vh", right: "4%" }
+  # Center-ish pills for about
+  - { label: "=D",              tint: peach,    tilt:  3, drift: a, top: "125vh", left: "28%" }
+  - { label: "☆ ;D",            tint: white,    tilt: -1, drift: b, top: "168vh", right: "28%" }
   
   # ─── SKILLS SECTION (200-300vh) ───
-  - { label: "skills ✨",       tint: sky,      tilt: -1, drift: a, top: "210vh", right: "7%" }
-  - { label: "☆ cool",          tint: white,    tilt:  3, drift: c, top: "235vh", left: "5%" }
-  - { label: "yay",             tint: peach,    tilt: -4, drift: b, top: "260vh", right: "9%" }
-  - { label: "⌘ dev",           tint: lavender, tilt:  2, drift: a, top: "285vh", left: "6%" }
+  - { label: "~( ˘▾˘)~",        tint: sky,      tilt:  4, drift: a, top: "187vh", right: "32%" }
+  - { label: "☆ :D",            tint: white,    tilt:  3, drift: c, top: "213vh", left: "7%" }
+  - { label: "(づ ᴗ _ᴗ)づ",      tint: peach,    tilt: -4, drift: b, top: "260vh", right: "9%" }
+  - { label: "✦ ;)",            tint: lavender, tilt:  2, drift: a, top: "285vh", left: "6%" }
+  # Center-ish pills for skills
+  - { label: "^3^",             tint: leaf,     tilt:  1, drift: c, top: "198vh", left: "33%" }
+  - { label: "♫ :P",            tint: orange,   tilt: -3, drift: a, top: "250vh", right: "28%" }
+  - { label: "◕‿◕",             tint: lavender, tilt:  2, drift: b, top: "275vh", left: "45%" }
   
   # ─── PROJECTS SECTION (300-450vh) ───
-  - { label: "✿ projects",      tint: leaf,     tilt: -3, drift: c, top: "315vh", right: "5%" }
-  - { label: "built w/ ♥",      tint: peach,    tilt:  4, drift: b, top: "345vh", left: "4%" }
-  - { label: "⟡ view",          tint: sky,      tilt: -2, drift: a, top: "375vh", right: "8%" }
-  - { label: "◌ yes",           tint: white,    tilt:  3, drift: c, top: "400vh", left: "7%" }
-  - { label: "▸ click",         tint: lavender, tilt: -1, drift: b, top: "430vh", right: "6%" }
+  - { label: "^_~ ♪",           tint: leaf,     tilt: -3, drift: c, top: "315vh", right: "5%" }
+  - { label: "♥ :3",            tint: peach,    tilt:  4, drift: b, top: "345vh", left: "4%" }
+  - { label: "→ ★",             tint: sky,      tilt: -2, drift: a, top: "375vh", right: "8%" }
+  - { label: ":)",              tint: white,    tilt:  3, drift: c, top: "400vh", left: "7%" }
+  - { label: "◇ ;P",            tint: lavender, tilt: -1, drift: b, top: "430vh", right: "6%" }
+  # Center-ish pills for projects
+  - { label: "(ノ◕ヮ◕)ノ",       tint: sky,      tilt:  3, drift: a, top: "325vh", left: "40%" }
+  - { label: "★ =)",            tint: peach,    tilt: -2, drift: c, top: "360vh", right: "32%" }
+  - { label: "♬ ^_^",           tint: leaf,     tilt:  1, drift: b, top: "390vh", left: "36%" }
+  - { label: "✿ :D",            tint: orange,   tilt: -4, drift: a, top: "420vh", right: "25%" }
   
   # ─── CONTACT SECTION (450-550vh) ───
-  - { label: "say hi! 👋",      tint: sky,      tilt:  2, drift: a, top: "470vh", left: "5%" }
-  - { label: "✉ msg",           tint: peach,    tilt: -3, drift: c, top: "500vh", right: "7%" }
-  - { label: "♥ thanks",        tint: leaf,     tilt:  4, drift: b, top: "530vh", left: "6%" }
-  - { label: "→ send",          tint: lavender, tilt: -2, drift: a, top: "550vh", right: "5%" }
+  - { label: "^_^ ♪",           tint: sky,      tilt:  2, drift: a, top: "470vh", left: "5%" }
+  - { label: "✉ :D",            tint: peach,    tilt: -3, drift: c, top: "500vh", right: "7%" }
+  - { label: "♥ (˶ᵔ ᵕ ᵔ˶)",     tint: leaf,     tilt:  4, drift: b, top: "530vh", left: "6%" }
+  - { label: "→ :)",            tint: lavender, tilt: -2, drift: a, top: "550vh", right: "5%" }
+  # Center-ish pills for contact
+  - { label: "◠‿◠",             tint: white,    tilt:  1, drift: c, top: "485vh", left: "42%" }
+  - { label: "☀ ;)",            tint: orange,   tilt: -1, drift: b, top: "520vh", right: "38%" }

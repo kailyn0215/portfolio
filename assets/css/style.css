@@ -350,6 +350,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .orb--yellow     { --orb-color: #FFFF66; } /* neon yellow */
 .orb--tangerine  { --orb-color: #FFCC66; } /* light orange */
 .orb--orange     { --orb-color: #FF9955; } /* light orange */
+.orb--peach      { --orb-color: #FFE4D6; } /* soft peach */
 .orb--navy       { --orb-color: #4477CC; } /* brightened */
 .orb--cobalt     { --orb-color: #5599FF; } /* brightened */
 .orb--azure      { --orb-color: #66AAFF; } /* brightened */
@@ -450,45 +451,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 
 /* ─────────────────────────────────────────────────────────────────
-   LIGHT EFFECTS — Flares & Rays
-   ───────────────────────────────────────────────────────────────── */
-.light-effects {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.lens-flare {
-  position: absolute;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.4) 35%, transparent 65%);
-  filter: blur(3px);
-  animation: pulse-flare 4s ease-in-out infinite;
-}
-
-.flare-1 { width: 100px; height: 100px; top: 8%; left: 18%; animation-delay: 0s; }
-.flare-2 { width: 65px; height: 65px; top: 22%; right: 28%; animation-delay: -1.5s; }
-.flare-3 { width: 45px; height: 45px; top: 48%; left: 38%; animation-delay: -3s; }
-
-/* Light streaks — HIDDEN to eliminate visible lines */
-.light-streak {
-  display: none;
-}
-
-.streak-1, .streak-2, .streak-3 { display: none; }
-
-@keyframes pulse-flare {
-  0%, 100% { opacity: 0.7; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.15); }
-}
-
-@keyframes shimmer-streak {
-  0%, 100% { opacity: 0.4; transform: rotate(-20deg) translateX(0); }
-  50% { opacity: 0.85; transform: rotate(-20deg) translateX(25px); }
-}
-
-/* ─────────────────────────────────────────────────────────────────
    GLASS PILLS — Crisp Stickers with Tilt Variants
    ───────────────────────────────────────────────────────────────── */
 .decorations {
@@ -499,6 +461,12 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   bottom: 0;
   pointer-events: none;
   z-index: 50;
+}
+
+/* Enable pointer events on pills themselves */
+.decorations .glass-pill {
+  pointer-events: auto;
+  cursor: pointer;
 }
 
 /* Glass pill base */
@@ -555,12 +523,59 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 
 .glass-pill:hover {
-  transform: translateY(-2px) scale(1.04);
+  transform: translateY(-3px) scale(1.04);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 1),
     inset 0 -1px 0 rgba(30, 58, 82, 0.15),
-    0 0 0 1px rgba(255, 255, 255, 0.7),
-    0 6px 16px rgba(30, 58, 82, 0.2);
+    0 0 0 1px rgba(255, 255, 255, 0.9),
+    0 8px 20px rgba(30, 58, 82, 0.2),
+    0 0 12px rgba(91, 192, 248, 0.25);
+}
+
+.glass-pill:active {
+  transform: translateY(-1px) scale(1.01);
+}
+
+/* Sparkle burst explosion container */
+.sparkle-burst {
+  position: fixed;
+  pointer-events: none;
+  z-index: 10000;
+}
+
+.sparkle-burst .burst-particle {
+  position: absolute;
+  font-size: 1rem;
+  pointer-events: none;
+  animation: sparkle-burst-out 0.6s ease-out forwards;
+  text-shadow: 0 0 12px currentColor;
+}
+
+.burst-particle--sky { color: var(--color-sky); }
+.burst-particle--leaf { color: var(--color-leaf); }
+.burst-particle--sunset { color: var(--color-sunset); }
+.burst-particle--lavender { color: var(--color-lavender); }
+.burst-particle--accent { color: var(--color-accent); }
+.burst-particle--gold { color: var(--color-gold); }
+
+@keyframes sparkle-burst-out {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(calc(-50% + var(--burst-x, 0px)), calc(-50% + var(--burst-y, 0px))) scale(1.2);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--burst-x, 0px) * 1.5), calc(-50% + var(--burst-y, 0px) * 1.5)) scale(0.3);
+  }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .sparkle-burst { display: none; }
 }
 
 /* Pill drift animations — gentle floating */
@@ -989,6 +1004,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 section {
   padding: var(--space-xl) var(--space-md);
   position: relative;
+  z-index: 1; /* Relative to main's stacking context */
   /* Performance: Skip rendering off-screen content */
   content-visibility: auto;
   contain-intrinsic-size: auto 100vh;
@@ -1943,7 +1959,28 @@ footer.glass-panel::before {
 /* Ensure main content area has no background */
 main {
   background: transparent;
+  position: relative;
+  z-index: 60; /* Above decorations (50) and motifs (3) */
   border: none;
+  pointer-events: none; /* Allow clicks to pass through to pills */
+}
+
+/* Re-enable pointer events on interactive content */
+main a,
+main button,
+main input,
+main textarea,
+main .glass-card,
+main .skill-card,
+main .project-card,
+main .contact-item,
+main .social-link,
+main .btn-primary,
+main .btn-secondary,
+main .hero-content,
+main .contact-form,
+main .contact-info {
+  pointer-events: auto;
 }
 
 .footer-content {

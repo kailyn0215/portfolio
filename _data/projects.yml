@@ -4,32 +4,32 @@
 # ═══════════════════════════════════════════════════════════════
 
 - id: "mia"
-  title: "Managing the Issue of Aphasia (MIA)"
-  tagline: "experimental interface"
-  description: "a modular dashboard system with real-time data visualization and gesture controls."
+  title: "managing-the-issue-of-aphasia"
+  tagline: "an iOS aphasia speech therapy app"
+  description: "need to add description."
   tech:
-    - "react"
-    - "three.js"
-    - "websockets"
+    - "x code"
+    - "swift"
+    - "storyboard"
   year: 2024
-  version: "v2.1"
+  version: "v1.1.3"
   status: "live"
   live_url: "#"
   repo_url: "#"
 
-- id: "signal"
-  title: "signal processor"
-  tagline: "audio visualization engine"
-  description: "web-based audio analyzer with frequency spectrum display and custom shader effects."
+- id: "groovy proxy"
+  title: "groovy-proxy"
+  tagline: "locally hosted node.js proxy server for llm chat models"
+  description: "a local proxy server that allows users to interact with large language models (llms) through a chat interface, enabling seamless communication with AI models."
   tech:
-    - "typescript"
-    - "web audio api"
-    - "glsl"
-  year: 2024
-  version: "v1.4"
+    - "node.js"
+    - "javascript"
+    - "openai api"
+  year: 2026
+  version: "v1.1"
   status: "live"
   live_url: "#"
-  repo_url: "#"
+  repo_url: "https://github.com/kailyn0215/groovy-proxy"
 
 - id: "archival"
   title: "archival system"
