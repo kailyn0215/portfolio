@@ -1,22 +1,199 @@
 # ═══════════════════════════════════════════════════════════════
-# ORBS — Data-driven glass marble composition
-# Edit positions, sizes, colors, and animations here
+# ORBS — Data-driven glass marble composition (MAXIMALIST)
+# Orbs distributed across all sections using vh positioning
 # ═══════════════════════════════════════════════════════════════
-# size:    xs | sm | md | lg | xl
-# color:   sky | teal | leaf | peach | lavender | rose
-# variant: solid | glass
-# drift:   a | b | c | d (animation keyframe variant)
-# duration: seconds for drift loop
-# delay:   negative seconds to desync timing
-# z:       back | mid | front (stacking layer)
 
 orbs:
-  - { id: anchor-r, size: xl, color: sky,      variant: solid, drift: a, duration: 22, delay:  -2, top: "42%", left: "78%", z: mid }
-  - { id: top-left, size: lg, color: lavender, variant: glass, drift: b, duration: 18, delay:  -5, top: "12%", left:  "8%", z: back }
-  - { id: drop-1,   size: xs, color: sky,      variant: glass, drift: c, duration: 11, delay:  -1, top: "28%", left: "22%", z: front }
-  - { id: peach-1,  size: sm, color: peach,    variant: solid, drift: a, duration: 16, delay:  -7, top: "70%", left: "14%", z: mid }
-  - { id: leaf-1,   size: sm, color: leaf,     variant: solid, drift: d, duration: 14, delay:  -3, top: "82%", left: "30%", z: back }
-  - { id: rose-1,   size: xs, color: rose,     variant: glass, drift: b, duration:  9, delay:  -4, top: "18%", left: "62%", z: front }
-  - { id: teal-1,   size: md, color: teal,     variant: solid, drift: c, duration: 20, delay:  -8, top: "78%", left: "88%", z: back }
-  - { id: lav-2,    size: xs, color: lavender, variant: glass, drift: a, duration: 12, delay:  -6, top: "55%", left:  "4%", z: front }
-  - { id: peach-2,  size: xs, color: peach,    variant: glass, drift: d, duration: 10, delay:  -2, top:  "8%", left: "88%", z: front }
+  # ═══════════════════════════════════════════════════════════════
+  # HERO SECTION (0-100vh) — 36 orbs
+  # ═══════════════════════════════════════════════════════════════
+  - { section: hero, size: xl, color: sky, variant: glass, drift: a, duration: 24, delay: -2, top: "8vh", left: "8%", z: back }
+  - { section: hero, size: sm, color: lime, variant: glass, drift: b, duration: 14, delay: -5, top: "12vh", left: "25%", z: front }
+  - { section: hero, size: lg, color: electric, variant: glass, drift: c, duration: 20, delay: -3, top: "6vh", left: "42%", z: mid }
+  - { section: hero, size: md, color: peach, variant: glass, drift: d, duration: 17, delay: -7, top: "15vh", left: "58%", z: back }
+  - { section: hero, size: xl, color: chartreuse, variant: glass, drift: a, duration: 22, delay: -1, top: "10vh", left: "75%", z: mid }
+  - { section: hero, size: sm, color: lavender, variant: glass, drift: b, duration: 13, delay: -4, top: "5vh", left: "92%", z: front }
+  - { section: hero, size: lg, color: tangerine, variant: glass, drift: c, duration: 21, delay: -6, top: "22vh", left: "5%", z: mid }
+  - { section: hero, size: xl, color: grass, variant: glass, drift: d, duration: 25, delay: -2, top: "28vh", left: "18%", z: back }
+  - { section: hero, size: sm, color: cerulean, variant: glass, drift: a, duration: 15, delay: -8, top: "32vh", left: "35%", z: front }
+  - { section: hero, size: lg, color: lime, variant: glass, drift: b, duration: 19, delay: -4, top: "25vh", left: "52%", z: mid }
+  - { section: hero, size: md, color: cobalt, variant: glass, drift: c, duration: 18, delay: -1, top: "30vh", left: "68%", z: back }
+  - { section: hero, size: xl, color: electric, variant: glass, drift: d, duration: 23, delay: -5, top: "22vh", left: "85%", z: mid }
+  - { section: hero, size: md, color: lavender, variant: glass, drift: a, duration: 16, delay: -3, top: "38vh", left: "3%", z: front }
+  - { section: hero, size: sm, color: sky, variant: glass, drift: b, duration: 12, delay: -7, top: "45vh", left: "15%", z: mid }
+  - { section: hero, size: xl, color: peach, variant: glass, drift: c, duration: 26, delay: -1, top: "42vh", left: "32%", z: back }
+  - { section: hero, size: lg, color: chartreuse, variant: glass, drift: d, duration: 20, delay: -6, top: "48vh", left: "50%", z: mid }
+  - { section: hero, size: md, color: tangerine, variant: glass, drift: a, duration: 17, delay: -4, top: "40vh", left: "65%", z: front }
+  - { section: hero, size: xl, color: grass, variant: glass, drift: b, duration: 24, delay: -2, top: "46vh", left: "82%", z: back }
+  - { section: hero, size: sm, color: lime, variant: glass, drift: c, duration: 14, delay: -8, top: "38vh", left: "95%", z: mid }
+  - { section: hero, size: lg, color: cerulean, variant: glass, drift: d, duration: 21, delay: -5, top: "55vh", left: "8%", z: mid }
+  - { section: hero, size: xl, color: electric, variant: glass, drift: a, duration: 25, delay: -1, top: "60vh", left: "25%", z: back }
+  - { section: hero, size: md, color: lavender, variant: glass, drift: b, duration: 18, delay: -7, top: "52vh", left: "40%", z: front }
+  - { section: hero, size: sm, color: cobalt, variant: glass, drift: c, duration: 13, delay: -3, top: "58vh", left: "55%", z: mid }
+  - { section: hero, size: lg, color: peach, variant: glass, drift: d, duration: 20, delay: -6, top: "62vh", left: "72%", z: back }
+  - { section: hero, size: xl, color: sky, variant: glass, drift: a, duration: 23, delay: -2, top: "56vh", left: "88%", z: mid }
+  - { section: hero, size: md, color: chartreuse, variant: glass, drift: b, duration: 17, delay: -4, top: "68vh", left: "5%", z: front }
+  - { section: hero, size: sm, color: tangerine, variant: glass, drift: c, duration: 11, delay: -8, top: "75vh", left: "18%", z: mid }
+  - { section: hero, size: xl, color: lime, variant: glass, drift: d, duration: 26, delay: -1, top: "72vh", left: "35%", z: back }
+  - { section: hero, size: lg, color: grass, variant: glass, drift: a, duration: 22, delay: -5, top: "78vh", left: "52%", z: mid }
+  - { section: hero, size: md, color: cerulean, variant: glass, drift: b, duration: 19, delay: -3, top: "70vh", left: "68%", z: front }
+  - { section: hero, size: xl, color: electric, variant: glass, drift: c, duration: 24, delay: -7, top: "76vh", left: "85%", z: back }
+  - { section: hero, size: lg, color: lavender, variant: glass, drift: d, duration: 21, delay: -2, top: "85vh", left: "10%", z: mid }
+  - { section: hero, size: sm, color: peach, variant: glass, drift: a, duration: 14, delay: -6, top: "92vh", left: "28%", z: front }
+  - { section: hero, size: xl, color: cobalt, variant: glass, drift: b, duration: 25, delay: -4, top: "88vh", left: "45%", z: back }
+  - { section: hero, size: md, color: sky, variant: glass, drift: c, duration: 18, delay: -1, top: "95vh", left: "62%", z: mid }
+  - { section: hero, size: lg, color: chartreuse, variant: glass, drift: d, duration: 20, delay: -8, top: "82vh", left: "78%", z: back }
+
+  # ═══════════════════════════════════════════════════════════════
+  # ABOUT SECTION (100vh-200vh) — 30 orbs
+  # ═══════════════════════════════════════════════════════════════
+  - { section: about, size: xl, color: lime, variant: glass, drift: a, duration: 24, delay: -2, top: "102vh", left: "6%", z: back }
+  - { section: about, size: sm, color: electric, variant: glass, drift: b, duration: 14, delay: -5, top: "108vh", left: "22%", z: front }
+  - { section: about, size: lg, color: sky, variant: glass, drift: c, duration: 20, delay: -3, top: "105vh", left: "38%", z: mid }
+  - { section: about, size: md, color: peach, variant: glass, drift: d, duration: 17, delay: -7, top: "110vh", left: "55%", z: back }
+  - { section: about, size: xl, color: chartreuse, variant: glass, drift: a, duration: 22, delay: -1, top: "104vh", left: "72%", z: mid }
+  - { section: about, size: lg, color: tangerine, variant: glass, drift: b, duration: 21, delay: -6, top: "112vh", left: "88%", z: back }
+  - { section: about, size: md, color: lavender, variant: glass, drift: c, duration: 18, delay: -4, top: "118vh", left: "5%", z: front }
+  - { section: about, size: xl, color: grass, variant: glass, drift: d, duration: 25, delay: -2, top: "122vh", left: "20%", z: back }
+  - { section: about, size: sm, color: cerulean, variant: glass, drift: a, duration: 13, delay: -8, top: "126vh", left: "35%", z: mid }
+  - { section: about, size: lg, color: cobalt, variant: glass, drift: b, duration: 19, delay: -1, top: "120vh", left: "52%", z: front }
+  - { section: about, size: xl, color: lime, variant: glass, drift: c, duration: 23, delay: -5, top: "124vh", left: "68%", z: back }
+  - { section: about, size: md, color: electric, variant: glass, drift: d, duration: 16, delay: -3, top: "128vh", left: "85%", z: mid }
+  - { section: about, size: lg, color: peach, variant: glass, drift: a, duration: 22, delay: -6, top: "132vh", left: "8%", z: mid }
+  - { section: about, size: sm, color: sky, variant: glass, drift: b, duration: 12, delay: -2, top: "138vh", left: "25%", z: front }
+  - { section: about, size: xl, color: chartreuse, variant: glass, drift: c, duration: 26, delay: -7, top: "135vh", left: "42%", z: back }
+  - { section: about, size: md, color: tangerine, variant: glass, drift: d, duration: 17, delay: -4, top: "140vh", left: "58%", z: mid }
+  - { section: about, size: lg, color: lavender, variant: glass, drift: a, duration: 20, delay: -1, top: "136vh", left: "75%", z: front }
+  - { section: about, size: xl, color: grass, variant: glass, drift: b, duration: 24, delay: -8, top: "142vh", left: "92%", z: back }
+  - { section: about, size: sm, color: cerulean, variant: glass, drift: c, duration: 14, delay: -3, top: "148vh", left: "5%", z: mid }
+  - { section: about, size: xl, color: cobalt, variant: glass, drift: d, duration: 25, delay: -6, top: "152vh", left: "22%", z: back }
+  - { section: about, size: md, color: lime, variant: glass, drift: a, duration: 18, delay: -2, top: "156vh", left: "38%", z: front }
+  - { section: about, size: lg, color: electric, variant: glass, drift: b, duration: 21, delay: -7, top: "150vh", left: "55%", z: mid }
+  - { section: about, size: xl, color: peach, variant: glass, drift: c, duration: 23, delay: -4, top: "154vh", left: "72%", z: back }
+  - { section: about, size: sm, color: sky, variant: glass, drift: d, duration: 13, delay: -1, top: "158vh", left: "88%", z: front }
+  - { section: about, size: lg, color: chartreuse, variant: glass, drift: a, duration: 20, delay: -5, top: "162vh", left: "12%", z: mid }
+  - { section: about, size: xl, color: tangerine, variant: glass, drift: b, duration: 24, delay: -3, top: "168vh", left: "32%", z: back }
+  - { section: about, size: md, color: lavender, variant: glass, drift: c, duration: 17, delay: -8, top: "172vh", left: "52%", z: front }
+  - { section: about, size: sm, color: grass, variant: glass, drift: d, duration: 15, delay: -2, top: "165vh", left: "72%", z: mid }
+  - { section: about, size: lg, color: cerulean, variant: glass, drift: a, duration: 21, delay: -6, top: "175vh", left: "88%", z: back }
+  - { section: about, size: xl, color: cobalt, variant: glass, drift: b, duration: 25, delay: -4, top: "178vh", left: "5%", z: mid }
+
+  # ═══════════════════════════════════════════════════════════════
+  # SKILLS SECTION (200vh-300vh) — 36 orbs
+  # ═══════════════════════════════════════════════════════════════
+  - { section: skills, size: xl, color: electric, variant: glass, drift: a, duration: 26, delay: -3, top: "202vh", left: "5%", z: back }
+  - { section: skills, size: lg, color: lime, variant: glass, drift: b, duration: 20, delay: -7, top: "208vh", left: "22%", z: mid }
+  - { section: skills, size: md, color: peach, variant: glass, drift: c, duration: 18, delay: -1, top: "212vh", left: "38%", z: front }
+  - { section: skills, size: sm, color: sky, variant: glass, drift: d, duration: 15, delay: -5, top: "205vh", left: "55%", z: mid }
+  - { section: skills, size: xl, color: chartreuse, variant: glass, drift: a, duration: 24, delay: -2, top: "210vh", left: "72%", z: back }
+  - { section: skills, size: lg, color: tangerine, variant: glass, drift: b, duration: 21, delay: -6, top: "215vh", left: "88%", z: mid }
+  - { section: skills, size: md, color: lavender, variant: glass, drift: c, duration: 17, delay: -4, top: "220vh", left: "8%", z: front }
+  - { section: skills, size: xl, color: grass, variant: glass, drift: d, duration: 25, delay: -8, top: "225vh", left: "25%", z: back }
+  - { section: skills, size: sm, color: cerulean, variant: glass, drift: a, duration: 12, delay: -1, top: "228vh", left: "42%", z: mid }
+  - { section: skills, size: lg, color: cobalt, variant: glass, drift: b, duration: 19, delay: -3, top: "222vh", left: "58%", z: front }
+  - { section: skills, size: xl, color: lime, variant: glass, drift: c, duration: 23, delay: -6, top: "230vh", left: "75%", z: back }
+  - { section: skills, size: md, color: electric, variant: glass, drift: d, duration: 16, delay: -2, top: "232vh", left: "92%", z: mid }
+  - { section: skills, size: lg, color: peach, variant: glass, drift: a, duration: 22, delay: -5, top: "238vh", left: "5%", z: mid }
+  - { section: skills, size: sm, color: sky, variant: glass, drift: b, duration: 14, delay: -7, top: "242vh", left: "22%", z: front }
+  - { section: skills, size: xl, color: chartreuse, variant: glass, drift: c, duration: 26, delay: -1, top: "245vh", left: "38%", z: back }
+  - { section: skills, size: md, color: tangerine, variant: glass, drift: d, duration: 17, delay: -4, top: "248vh", left: "55%", z: mid }
+  - { section: skills, size: lg, color: lavender, variant: glass, drift: a, duration: 20, delay: -8, top: "240vh", left: "72%", z: front }
+  - { section: skills, size: xl, color: grass, variant: glass, drift: b, duration: 24, delay: -3, top: "250vh", left: "88%", z: back }
+  - { section: skills, size: sm, color: cerulean, variant: glass, drift: c, duration: 13, delay: -6, top: "255vh", left: "8%", z: mid }
+  - { section: skills, size: xl, color: cobalt, variant: glass, drift: d, duration: 25, delay: -2, top: "258vh", left: "25%", z: back }
+  - { section: skills, size: md, color: lime, variant: glass, drift: a, duration: 18, delay: -5, top: "262vh", left: "42%", z: front }
+  - { section: skills, size: lg, color: electric, variant: glass, drift: b, duration: 21, delay: -1, top: "265vh", left: "58%", z: mid }
+  - { section: skills, size: xl, color: peach, variant: glass, drift: c, duration: 23, delay: -7, top: "260vh", left: "75%", z: back }
+  - { section: skills, size: sm, color: sky, variant: glass, drift: d, duration: 14, delay: -4, top: "268vh", left: "92%", z: front }
+  - { section: skills, size: lg, color: chartreuse, variant: glass, drift: a, duration: 22, delay: -3, top: "272vh", left: "5%", z: mid }
+  - { section: skills, size: xl, color: tangerine, variant: glass, drift: b, duration: 26, delay: -8, top: "278vh", left: "22%", z: back }
+  - { section: skills, size: md, color: lavender, variant: glass, drift: c, duration: 17, delay: -2, top: "282vh", left: "42%", z: front }
+  - { section: skills, size: sm, color: grass, variant: glass, drift: d, duration: 15, delay: -6, top: "275vh", left: "58%", z: mid }
+  - { section: skills, size: lg, color: cerulean, variant: glass, drift: a, duration: 20, delay: -1, top: "280vh", left: "75%", z: back }
+  - { section: skills, size: xl, color: cobalt, variant: glass, drift: b, duration: 24, delay: -5, top: "285vh", left: "92%", z: mid }
+  - { section: skills, size: md, color: lime, variant: glass, drift: c, duration: 18, delay: -3, top: "288vh", left: "12%", z: front }
+  - { section: skills, size: xl, color: electric, variant: glass, drift: d, duration: 25, delay: -7, top: "292vh", left: "32%", z: back }
+  - { section: skills, size: sm, color: peach, variant: glass, drift: a, duration: 13, delay: -2, top: "295vh", left: "52%", z: mid }
+  - { section: skills, size: lg, color: sky, variant: glass, drift: b, duration: 21, delay: -6, top: "290vh", left: "72%", z: front }
+  - { section: skills, size: xl, color: chartreuse, variant: glass, drift: c, duration: 23, delay: -4, top: "298vh", left: "88%", z: back }
+  - { section: skills, size: md, color: tangerine, variant: glass, drift: d, duration: 16, delay: -1, top: "285vh", left: "5%", z: mid }
+
+  # ═══════════════════════════════════════════════════════════════
+  # PROJECTS SECTION (300vh-450vh) — 42 orbs
+  # ═══════════════════════════════════════════════════════════════
+  - { section: projects, size: xl, color: sky, variant: glass, drift: a, duration: 24, delay: -4, top: "302vh", left: "6%", z: back }
+  - { section: projects, size: lg, color: lime, variant: glass, drift: b, duration: 21, delay: -2, top: "308vh", left: "22%", z: mid }
+  - { section: projects, size: md, color: electric, variant: glass, drift: c, duration: 17, delay: -6, top: "312vh", left: "38%", z: front }
+  - { section: projects, size: sm, color: peach, variant: glass, drift: d, duration: 13, delay: -1, top: "305vh", left: "55%", z: mid }
+  - { section: projects, size: xl, color: chartreuse, variant: glass, drift: a, duration: 25, delay: -5, top: "310vh", left: "72%", z: back }
+  - { section: projects, size: lg, color: tangerine, variant: glass, drift: b, duration: 20, delay: -3, top: "318vh", left: "88%", z: mid }
+  - { section: projects, size: md, color: lavender, variant: glass, drift: c, duration: 18, delay: -7, top: "322vh", left: "5%", z: front }
+  - { section: projects, size: xl, color: grass, variant: glass, drift: d, duration: 23, delay: -2, top: "328vh", left: "22%", z: back }
+  - { section: projects, size: sm, color: cerulean, variant: glass, drift: a, duration: 14, delay: -4, top: "332vh", left: "38%", z: mid }
+  - { section: projects, size: lg, color: cobalt, variant: glass, drift: b, duration: 19, delay: -8, top: "325vh", left: "55%", z: front }
+  - { section: projects, size: xl, color: lime, variant: glass, drift: c, duration: 24, delay: -1, top: "330vh", left: "72%", z: back }
+  - { section: projects, size: md, color: electric, variant: glass, drift: d, duration: 16, delay: -5, top: "335vh", left: "88%", z: mid }
+  - { section: projects, size: lg, color: peach, variant: glass, drift: a, duration: 22, delay: -3, top: "342vh", left: "8%", z: mid }
+  - { section: projects, size: sm, color: sky, variant: glass, drift: b, duration: 12, delay: -6, top: "348vh", left: "25%", z: front }
+  - { section: projects, size: xl, color: chartreuse, variant: glass, drift: c, duration: 26, delay: -2, top: "345vh", left: "42%", z: back }
+  - { section: projects, size: md, color: tangerine, variant: glass, drift: d, duration: 17, delay: -7, top: "352vh", left: "58%", z: mid }
+  - { section: projects, size: lg, color: lavender, variant: glass, drift: a, duration: 20, delay: -4, top: "350vh", left: "75%", z: front }
+  - { section: projects, size: xl, color: grass, variant: glass, drift: b, duration: 24, delay: -1, top: "355vh", left: "92%", z: back }
+  - { section: projects, size: sm, color: cerulean, variant: glass, drift: c, duration: 13, delay: -5, top: "362vh", left: "5%", z: mid }
+  - { section: projects, size: xl, color: cobalt, variant: glass, drift: d, duration: 25, delay: -8, top: "368vh", left: "22%", z: back }
+  - { section: projects, size: md, color: lime, variant: glass, drift: a, duration: 18, delay: -2, top: "372vh", left: "38%", z: front }
+  - { section: projects, size: lg, color: electric, variant: glass, drift: b, duration: 21, delay: -6, top: "365vh", left: "55%", z: mid }
+  - { section: projects, size: xl, color: peach, variant: glass, drift: c, duration: 23, delay: -3, top: "370vh", left: "72%", z: back }
+  - { section: projects, size: sm, color: sky, variant: glass, drift: d, duration: 14, delay: -7, top: "378vh", left: "88%", z: front }
+  - { section: projects, size: lg, color: chartreuse, variant: glass, drift: a, duration: 22, delay: -1, top: "382vh", left: "8%", z: mid }
+  - { section: projects, size: xl, color: tangerine, variant: glass, drift: b, duration: 26, delay: -4, top: "388vh", left: "25%", z: back }
+  - { section: projects, size: md, color: lavender, variant: glass, drift: c, duration: 17, delay: -8, top: "392vh", left: "42%", z: front }
+  - { section: projects, size: sm, color: grass, variant: glass, drift: d, duration: 15, delay: -2, top: "385vh", left: "58%", z: mid }
+  - { section: projects, size: lg, color: cerulean, variant: glass, drift: a, duration: 20, delay: -5, top: "390vh", left: "75%", z: back }
+  - { section: projects, size: xl, color: cobalt, variant: glass, drift: b, duration: 24, delay: -3, top: "395vh", left: "92%", z: mid }
+  - { section: projects, size: md, color: lime, variant: glass, drift: c, duration: 18, delay: -6, top: "402vh", left: "5%", z: front }
+  - { section: projects, size: xl, color: electric, variant: glass, drift: d, duration: 25, delay: -1, top: "408vh", left: "22%", z: back }
+  - { section: projects, size: sm, color: peach, variant: glass, drift: a, duration: 13, delay: -7, top: "412vh", left: "38%", z: mid }
+  - { section: projects, size: lg, color: sky, variant: glass, drift: b, duration: 21, delay: -4, top: "405vh", left: "55%", z: front }
+  - { section: projects, size: xl, color: chartreuse, variant: glass, drift: c, duration: 23, delay: -2, top: "415vh", left: "72%", z: back }
+  - { section: projects, size: md, color: tangerine, variant: glass, drift: d, duration: 17, delay: -8, top: "418vh", left: "88%", z: mid }
+  - { section: projects, size: lg, color: lavender, variant: glass, drift: a, duration: 20, delay: -3, top: "422vh", left: "8%", z: front }
+  - { section: projects, size: sm, color: grass, variant: glass, drift: b, duration: 14, delay: -5, top: "428vh", left: "25%", z: mid }
+  - { section: projects, size: xl, color: cerulean, variant: glass, drift: c, duration: 26, delay: -1, top: "425vh", left: "42%", z: back }
+  - { section: projects, size: md, color: cobalt, variant: glass, drift: d, duration: 18, delay: -6, top: "432vh", left: "58%", z: front }
+  - { section: projects, size: lg, color: lime, variant: glass, drift: a, duration: 22, delay: -2, top: "430vh", left: "75%", z: mid }
+  - { section: projects, size: xl, color: electric, variant: glass, drift: b, duration: 24, delay: -7, top: "438vh", left: "92%", z: back }
+
+  # ═══════════════════════════════════════════════════════════════
+  # CONTACT SECTION (450vh-550vh) — 30 orbs
+  # ═══════════════════════════════════════════════════════════════
+  - { section: contact, size: xl, color: lime, variant: glass, drift: a, duration: 26, delay: -1, top: "452vh", left: "5%", z: back }
+  - { section: contact, size: lg, color: electric, variant: glass, drift: b, duration: 22, delay: -5, top: "458vh", left: "22%", z: mid }
+  - { section: contact, size: md, color: peach, variant: glass, drift: c, duration: 18, delay: -3, top: "462vh", left: "38%", z: front }
+  - { section: contact, size: sm, color: sky, variant: glass, drift: d, duration: 15, delay: -7, top: "455vh", left: "55%", z: mid }
+  - { section: contact, size: xl, color: chartreuse, variant: glass, drift: a, duration: 24, delay: -2, top: "460vh", left: "72%", z: back }
+  - { section: contact, size: lg, color: tangerine, variant: glass, drift: b, duration: 20, delay: -6, top: "468vh", left: "88%", z: mid }
+  - { section: contact, size: md, color: lavender, variant: glass, drift: c, duration: 17, delay: -4, top: "472vh", left: "8%", z: front }
+  - { section: contact, size: xl, color: grass, variant: glass, drift: d, duration: 25, delay: -1, top: "478vh", left: "25%", z: back }
+  - { section: contact, size: sm, color: cerulean, variant: glass, drift: a, duration: 13, delay: -8, top: "482vh", left: "42%", z: mid }
+  - { section: contact, size: lg, color: cobalt, variant: glass, drift: b, duration: 21, delay: -3, top: "475vh", left: "58%", z: front }
+  - { section: contact, size: xl, color: lime, variant: glass, drift: c, duration: 23, delay: -5, top: "480vh", left: "75%", z: back }
+  - { section: contact, size: md, color: electric, variant: glass, drift: d, duration: 16, delay: -2, top: "485vh", left: "92%", z: mid }
+  - { section: contact, size: lg, color: peach, variant: glass, drift: a, duration: 22, delay: -6, top: "492vh", left: "5%", z: mid }
+  - { section: contact, size: sm, color: sky, variant: glass, drift: b, duration: 14, delay: -1, top: "498vh", left: "22%", z: front }
+  - { section: contact, size: xl, color: chartreuse, variant: glass, drift: c, duration: 26, delay: -7, top: "495vh", left: "38%", z: back }
+  - { section: contact, size: md, color: tangerine, variant: glass, drift: d, duration: 17, delay: -4, top: "502vh", left: "55%", z: mid }
+  - { section: contact, size: lg, color: lavender, variant: glass, drift: a, duration: 20, delay: -2, top: "500vh", left: "72%", z: front }
+  - { section: contact, size: xl, color: grass, variant: glass, drift: b, duration: 24, delay: -8, top: "508vh", left: "88%", z: back }
+  - { section: contact, size: sm, color: cerulean, variant: glass, drift: c, duration: 13, delay: -3, top: "512vh", left: "8%", z: mid }
+  - { section: contact, size: xl, color: cobalt, variant: glass, drift: d, duration: 25, delay: -5, top: "518vh", left: "25%", z: back }
+  - { section: contact, size: md, color: lime, variant: glass, drift: a, duration: 18, delay: -1, top: "522vh", left: "42%", z: front }
+  - { section: contact, size: lg, color: electric, variant: glass, drift: b, duration: 21, delay: -6, top: "515vh", left: "58%", z: mid }
+  - { section: contact, size: xl, color: peach, variant: glass, drift: c, duration: 23, delay: -2, top: "525vh", left: "75%", z: back }
+  - { section: contact, size: sm, color: sky, variant: glass, drift: d, duration: 14, delay: -7, top: "528vh", left: "92%", z: front }
+  - { section: contact, size: lg, color: chartreuse, variant: glass, drift: a, duration: 22, delay: -4, top: "532vh", left: "12%", z: mid }
+  - { section: contact, size: xl, color: tangerine, variant: glass, drift: b, duration: 26, delay: -1, top: "538vh", left: "32%", z: back }
+  - { section: contact, size: md, color: lavender, variant: glass, drift: c, duration: 17, delay: -8, top: "542vh", left: "52%", z: front }
+  - { section: contact, size: sm, color: grass, variant: glass, drift: d, duration: 15, delay: -3, top: "535vh", left: "72%", z: mid }
+  - { section: contact, size: lg, color: cerulean, variant: glass, drift: a, duration: 20, delay: -5, top: "545vh", left: "88%", z: back }
+  - { section: contact, size: xl, color: cobalt, variant: glass, drift: b, duration: 24, delay: -2, top: "548vh", left: "5%", z: mid }

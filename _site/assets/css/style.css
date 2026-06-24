@@ -120,6 +120,13 @@ body {
   padding: 0;
 }
 
+/* Page wrapper contains all content and clips decorative overflow */
+.page-wrapper {
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+}
+
 /* Ensure html matches exactly */
 html {
   background: linear-gradient(180deg, #DCEEF7 0%, #F3F5EE 45%, #FCE6D4 100%);
@@ -206,24 +213,21 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   top: 0;
   left: 0;
   right: 0;
-  height: 100%;
-  min-height: 100vh;
+  bottom: 0;
   pointer-events: none;
-  z-index: 2;
-  overflow: visible;
+  z-index: 0; /* BEHIND all content */
+  /* height based on actual content, not vh positioning */
 }
 
-/* Foreground orbs — ABSOLUTE position, scroll with page */
+/* Foreground orbs — absolute position, scroll with page */
 .orbs-foreground {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: 100%;
-  min-height: 100vh;
+  bottom: 0;
   pointer-events: none;
-  z-index: 5;
-  overflow: visible;
+  z-index: 1; /* Still behind content but above main orbs layer */
 }
 
 /* Orbs use position:absolute to scroll naturally with page */
@@ -232,7 +236,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   position: absolute !important;
 }
 
-/* Base orb — crisp silhouette with fisheye reflection */
+/* Base orb — NOW TRANSPARENT BY DEFAULT (glass effect) */
 .orb {
   position: absolute;
   border-radius: 50%;
@@ -241,33 +245,30 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   margin-top: var(--scroll-y);
   /* Base color set via --orb-color custom property */
   /* --env-rotate is set inline for variety (default 0deg) */
+  /* ALL ORBS ARE NOW TRANSPARENT/GLASS BY DEFAULT */
   background:
     /* Top-left specular highlight */
     radial-gradient(
       circle at 30% 25%,
-      rgba(255, 255, 255, 0.95) 0%,
-      rgba(255, 255, 255, 0.4) 8%,
-      transparent 22%
+      rgba(255, 255, 255, 0.9) 0%,
+      rgba(255, 255, 255, 0.35) 10%,
+      transparent 25%
     ),
-    /* Secondary softer highlight */
-    radial-gradient(
-      circle at 35% 30%,
-      rgba(255, 255, 255, 0.3) 0%,
-      transparent 40%
-    ),
-    /* Main orb body — darker edges, lighter center */
+    /* Main orb body — TRANSPARENT with color tint */
     radial-gradient(
       circle at 50% 55%,
-      var(--orb-color, #6BA8C9) 0%,
-      color-mix(in srgb, var(--orb-color, #6BA8C9) 70%, #1E3A52) 75%,
-      color-mix(in srgb, var(--orb-color, #6BA8C9) 50%, #0A1A26) 100%
+      color-mix(in srgb, var(--orb-color, #BEE3F7) 35%, transparent) 0%,
+      color-mix(in srgb, var(--orb-color, #BEE3F7) 55%, transparent) 100%
     );
-  /* Crisp rim */
+  /* Glass blur effect */
+  backdrop-filter: blur(8px) saturate(1.3);
+  -webkit-backdrop-filter: blur(8px) saturate(1.3);
+  /* Soft glass rim */
   box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.5),
-    inset 0 -8px 16px rgba(0, 0, 0, 0.15),
-    inset 0 4px 8px rgba(255, 255, 255, 0.25),
-    0 6px 14px rgba(30, 58, 82, 0.18);
+    inset 0 0 0 1px rgba(255, 255, 255, 0.6),
+    inset 0 -6px 12px rgba(0, 0, 0, 0.08),
+    inset 0 3px 6px rgba(255, 255, 255, 0.3),
+    0 4px 12px rgba(30, 58, 82, 0.12);
   filter: saturate(1.1);
   animation: float-orb 10s ease-in-out infinite;
   overflow: hidden;
@@ -285,7 +286,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   background-position: var(--env-bg-pos, center);
   /* Fisheye warp via non-uniform scale */
   transform: rotate(var(--env-rotate, 0deg)) scale(1.4, 1.2);
-  opacity: var(--env-opacity, 0.35);
+  opacity: var(--env-opacity, 0.7);
   mix-blend-mode: soft-light;
   pointer-events: none;
 }
@@ -295,26 +296,26 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   --env-img: var(--sky2-url);
 }
 
-/* Glass variant — translucent */
+/* Glass variant — even more translucent (optional modifier) */
 .orb--glass {
   background:
     radial-gradient(
       circle at 30% 25%,
-      rgba(255, 255, 255, 0.9) 0%,
-      rgba(255, 255, 255, 0.35) 10%,
-      transparent 25%
+      rgba(255, 255, 255, 0.85) 0%,
+      rgba(255, 255, 255, 0.3) 12%,
+      transparent 28%
     ),
     radial-gradient(
       circle at 50% 55%,
-      color-mix(in srgb, var(--orb-color, #BEE3F7) 40%, transparent) 0%,
-      color-mix(in srgb, var(--orb-color, #BEE3F7) 60%, transparent) 100%
+      color-mix(in srgb, var(--orb-color, #BEE3F7) 30%, transparent) 0%,
+      color-mix(in srgb, var(--orb-color, #BEE3F7) 50%, transparent) 100%
     );
-  backdrop-filter: blur(8px) saturate(1.3);
-  -webkit-backdrop-filter: blur(8px) saturate(1.3);
+  backdrop-filter: blur(10px) saturate(1.4);
+  -webkit-backdrop-filter: blur(10px) saturate(1.4);
 }
 
 .orb--glass::before {
-  opacity: 0.25;
+  opacity: 0.2;
 }
 
 /* Size utilities */
@@ -325,17 +326,24 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .orb--lg  { width: 180px; height: 180px; }
 .orb--xl  { width: 220px; height: 220px; }
 
-/* Color variants — Frutiger Aero palette */
-.orb--sky      { --orb-color: #5BC0F8; }
-.orb--teal     { --orb-color: #4FD1C5; }
-.orb--leaf     { --orb-color: #6FD46F; }
-.orb--peach    { --orb-color: #FFA561; }
-.orb--lavender { --orb-color: #B98AFF; }
-.orb--rose     { --orb-color: #FF7BA8; }
-.orb--aqua     { --orb-color: #00D4FF; }
-.orb--lime     { --orb-color: #AAFF00; }
-.orb--gold     { --orb-color: #FFD93D; }
-.orb--magenta  { --orb-color: #FF00AA; }
+/* Color variants — Neon Bright Lime/Electric Blue palette */
+.orb--lime       { --orb-color: #AAFF33; } /* neon lime green */
+.orb--electric   { --orb-color: #33CCFF; } /* neon electric blue */
+.orb--paleblue   { --orb-color: #E6F8FF; }
+.orb--forest     { --orb-color: #66CC33; } /* brightened */
+.orb--grass      { --orb-color: #88DD44; } /* brightened */
+.orb--chartreuse { --orb-color: #BBFF33; } /* neon */
+.orb--olive      { --orb-color: #DDFF44; } /* brightened */
+.orb--yellow     { --orb-color: #FFFF66; } /* neon yellow */
+.orb--tangerine  { --orb-color: #FFCC66; } /* light orange */
+.orb--orange     { --orb-color: #FF9955; } /* light orange */
+.orb--navy       { --orb-color: #4477CC; } /* brightened */
+.orb--cobalt     { --orb-color: #5599FF; } /* brightened */
+.orb--azure      { --orb-color: #66AAFF; } /* brightened */
+.orb--sky        { --orb-color: #66BBFF; } /* neon sky */
+.orb--cerulean   { --orb-color: #77CCFF; } /* brightened */
+.orb--skylight   { --orb-color: #99DDFF; } /* brightened */
+.orb--ice        { --orb-color: #BBEEFF; } /* brightened */
 
 /* Foreground orbs spawned by JS */
 .fg-orb {
@@ -344,10 +352,10 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   animation: none; /* controlled by JS */
 }
 
-/* Z-index stacking layers */
-.orb--z-back  { z-index: 1; }
-.orb--z-mid   { z-index: 2; }
-.orb--z-front { z-index: 4; }
+/* Z-index stacking layers — relative within orbs-layer (which is z-index: 0) */
+.orb--z-back  { z-index: 0; }
+.orb--z-mid   { z-index: 1; }
+.orb--z-front { z-index: 2; }
 
 /* Drift animation variants */
 @keyframes drift-a {
@@ -393,11 +401,11 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   top: 0;
   left: 0;
   right: 0;
-  height: 100%;
-  min-height: 100vh;
+  bottom: 0;
   pointer-events: none;
   z-index: 3;
-  overflow: visible;
+  /* Ensure motifs don't extend past page wrapper */
+  overflow: hidden;
 }
 
 .motif {
@@ -470,11 +478,9 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   top: 0;
   left: 0;
   right: 0;
-  height: 100%;
-  min-height: 100vh;
+  bottom: 0;
   pointer-events: none;
   z-index: 50;
-  overflow: visible;
 }
 
 /* Glass pill base */
@@ -1955,6 +1961,28 @@ main {
 /* ─────────────────────────────────────────────────────────────────
    RESPONSIVE
    ───────────────────────────────────────────────────────────────── */
+
+/* Tablet — reduce orb count */
+@media (max-width: 1024px) {
+  /* Hide every third orb */
+  .orbs-layer .orb:nth-child(3n) { display: none; }
+  /* Smaller xl orbs on tablet */
+  .orb--xl { width: 180px; height: 180px; }
+}
+
+/* Mobile — aggressive orb thinning */
+@media (max-width: 768px) {
+  /* Hide all xl and lg orbs on mobile */
+  .orbs-layer .orb--xl,
+  .orbs-layer .orb--lg { display: none; }
+  /* Hide every other remaining orb */
+  .orbs-layer .orb:nth-child(2n) { display: none; }
+  /* Shrink medium orbs */
+  .orb--md { width: 70px; height: 70px; }
+  /* Reduce motifs */
+  .motifs-layer .motif:nth-child(2n) { display: none; }
+}
+
 @media (max-width: 480px) {
   :root {
     --space-xl: 5rem;
@@ -1965,6 +1993,13 @@ main {
   .section-title { font-size: clamp(1.5rem, 6vw, 2rem); }
   
   .decorations { display: none; }
-  .bubbles-layer .bubble--xl, .bubbles-layer .bubble--xxl { display: none; }
-  .bubbles-layer .bubble--lg { width: 55px; height: 55px; }
+  
+  /* Keep only xs/sm orbs on very small screens */
+  .orbs-layer .orb--md { display: none; }
+  .orbs-layer .orb:nth-child(3n+1) { display: none; }
+  
+  /* Hide most motifs */
+  .motifs-layer .motif { display: none; }
+  .motifs-layer .motif:first-child,
+  .motifs-layer .motif:nth-child(5) { display: block; }
 }
