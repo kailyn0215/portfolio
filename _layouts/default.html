@@ -176,6 +176,15 @@
       'use strict';
 
       // ─────────────────────────────────────────────────────────────
+      // Page Visibility — change title when user leaves tab
+      // ─────────────────────────────────────────────────────────────
+      const originalTitle = "KB's Portfolio";
+      document.title = originalTitle;
+      document.addEventListener('visibilitychange', () => {
+        document.title = document.hidden ? 'miss u :(' : originalTitle;
+      });
+
+      // ─────────────────────────────────────────────────────────────
       // Smooth Scroll
       // ─────────────────────────────────────────────────────────────
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -213,6 +222,16 @@
           navToggle.classList.toggle('active');
         });
       }
+
+      // ─────────────────────────────────────────────────────────────
+      // Open External Links in New Tab
+      // ─────────────────────────────────────────────────────────────
+      document.querySelectorAll('a[href^="http"]').forEach(link => {
+        if (!link.href.includes(window.location.hostname)) {
+          link.setAttribute('target', '_blank');
+          link.setAttribute('rel', 'noopener noreferrer');
+        }
+      });
 
       // ─────────────────────────────────────────────────────────────
       // Per-Section Accent Orbs — 3-6 per section (1-2 of each color)
