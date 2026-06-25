@@ -8,6 +8,17 @@
    ───────────────────────────────────────────────────────────────── */
 :root {
   /* ═══════════════════════════════════════════════════════════════
+     MOBILE ORB TUNING — Adjust these after testing on device
+     These control orb sizing on smaller screens via clamp()
+     ═══════════════════════════════════════════════════════════════ */
+  --mobile-orb-min-xl: 88px;       /* smallest xl orb on mobile         */
+  --mobile-orb-min-lg: 70px;       /* smallest lg orb on mobile         */
+  --mobile-orb-min-md: 50px;       /* smallest md orb on mobile         */
+  --mobile-orb-min-sm: 28px;       /* smallest sm orb on mobile         */
+  --mobile-orb-min-xs: 12px;       /* smallest xs orb on mobile         */
+  --mobile-orb-edge-inset: 5%;     /* how much edge orbs pull inward    */
+  
+  /* ═══════════════════════════════════════════════════════════════
      VIBRANCY KNOBS — Tune these to dial in the exact vibrancy
      ═══════════════════════════════════════════════════════════════ */
   --vibrancy-boost: 1.15;          /* master saturation multiplier      */
@@ -373,13 +384,15 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   opacity: 0.2;
 }
 
-/* Size utilities */
+/* Size utilities — responsive via clamp() for mobile scaling
+   Desktop gets full size, mobile scales down smoothly.
+   Tune --mobile-orb-min-* vars at top of :root to adjust mobile sizes. */
 .orb--xxs { width: 8px;   height: 8px; }
-.orb--xs  { width: 16px;  height: 16px; }
-.orb--sm  { width: 45px;  height: 45px; }
-.orb--md  { width: 110px; height: 110px; }
-.orb--lg  { width: 180px; height: 180px; }
-.orb--xl  { width: 220px; height: 220px; }
+.orb--xs  { width: clamp(var(--mobile-orb-min-xs), 1.5vw, 16px);  height: clamp(var(--mobile-orb-min-xs), 1.5vw, 16px); }
+.orb--sm  { width: clamp(var(--mobile-orb-min-sm), 5vw, 45px);   height: clamp(var(--mobile-orb-min-sm), 5vw, 45px); }
+.orb--md  { width: clamp(var(--mobile-orb-min-md), 12vw, 110px); height: clamp(var(--mobile-orb-min-md), 12vw, 110px); }
+.orb--lg  { width: clamp(var(--mobile-orb-min-lg), 18vw, 180px); height: clamp(var(--mobile-orb-min-lg), 18vw, 180px); }
+.orb--xl  { width: clamp(var(--mobile-orb-min-xl), 22vw, 220px); height: clamp(var(--mobile-orb-min-xl), 22vw, 220px); }
 
 /* ─────────────────────────────────────────────────────────────
    ORB COLOR PALETTE (VIVID) — Candy-glossy, high-saturation
@@ -2367,47 +2380,257 @@ main .contact-info {
 ::selection { background: var(--color-accent); color: #FFFFFF; }
 
 /* ─────────────────────────────────────────────────────────────────
-   RESPONSIVE
+   RESPONSIVE — Mobile Orb Scaling & Layout Polish
+   Desktop unchanged; all mobile changes via media queries.
    ───────────────────────────────────────────────────────────────── */
 
-/* Tablet — reduce orb count */
+/* Tablet (768-1024px) — gentle scaling, full orb field */
 @media (max-width: 1024px) {
-  /* Hide every third orb */
-  .orbs-layer .orb:nth-child(3n) { display: none; }
-  /* Smaller xl orbs on tablet */
-  .orb--xl { width: 180px; height: 180px; }
+  /* Orb edge clamping — pull edge orbs inward via margin offset
+     This works with percentage-based left positions without conflicting with JS */
+  .orbs-layer .orb,
+  .orbs-foreground .orb {
+    /* Shift orbs that are near edges slightly inward */
+    margin-left: calc(var(--mobile-orb-edge-inset) * 0.5);
+    margin-right: calc(var(--mobile-orb-edge-inset) * 0.5);
+  }
 }
 
-/* Mobile — aggressive orb thinning */
+/* Mobile (≤768px) — scaled orbs, mobile nav, layout polish */
 @media (max-width: 768px) {
-  /* Hide all xl and lg orbs on mobile */
-  .orbs-layer .orb--xl,
-  .orbs-layer .orb--lg { display: none; }
-  /* Hide every other remaining orb */
-  .orbs-layer .orb:nth-child(2n) { display: none; }
-  /* Shrink medium orbs */
-  .orb--md { width: 70px; height: 70px; }
-  /* Reduce motifs */
-  .motifs-layer .motif:nth-child(2n) { display: none; }
-}
-
-@media (max-width: 480px) {
-  :root {
-    --space-xl: 5rem;
-    --space-lg: 2.5rem;
+  /* KEEP ALL ORBS VISIBLE — just scaled down via clamp() */
+  /* No display:none on orb sizes! The clamp() handles sizing. */
+  
+  /* Stronger edge inset for narrow viewports */
+  .orbs-layer .orb,
+  .orbs-foreground .orb {
+    margin-left: var(--mobile-orb-edge-inset);
+    margin-right: var(--mobile-orb-edge-inset);
   }
   
-  .hero-title { font-size: clamp(2.5rem, 15vw, 4rem); }
-  .section-title { font-size: clamp(1.5rem, 6vw, 2rem); }
+  /* Reduce motif count slightly for performance */
+  .motifs-layer .motif:nth-child(3n) { 
+    opacity: 0.3; 
+  }
   
-  .decorations { display: none; }
+  /* ─── MOBILE NAV MENU ─── */
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: calc(100% + var(--space-xs));
+    left: var(--space-xs);
+    right: var(--space-xs);
+    flex-direction: column;
+    gap: var(--space-xs);
+    padding: var(--space-sm);
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(24px) saturate(140%);
+    -webkit-backdrop-filter: blur(24px) saturate(140%);
+    border: 1px solid var(--glass-border-bright);
+    border-radius: var(--radius-lg);
+    box-shadow: 
+      0 12px 40px rgba(30,58,82,0.2),
+      inset 0 1px 0 rgba(255,255,255,0.9);
+  }
   
-  /* Keep only xs/sm orbs on very small screens */
-  .orbs-layer .orb--md { display: none; }
-  .orbs-layer .orb:nth-child(3n+1) { display: none; }
+  .nav-links.active {
+    display: flex;
+  }
   
-  /* Hide most motifs */
-  .motifs-layer .motif { display: none; }
-  .motifs-layer .motif:first-child,
-  .motifs-layer .motif:nth-child(5) { display: block; }
+  .nav-links li a {
+    padding: 12px 16px;
+    text-align: center;
+    border-radius: var(--radius-md);
+  }
+  
+  .nav-links li a:hover,
+  .nav-links li a.active {
+    background: rgba(254,119,67,0.12);
+  }
+  
+  /* Hamburger active state */
+  .nav-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+  .nav-toggle.active span:nth-child(2) {
+    opacity: 0;
+  }
+  .nav-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+  }
+  
+  /* ─── HERO POLISH ─── */
+  .hero {
+    min-height: 100dvh; /* Use dvh for mobile address bar */
+    padding-top: 100px;
+    padding-left: var(--space-sm);
+    padding-right: var(--space-sm);
+  }
+  
+  .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+  
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+    max-width: 280px;
+    justify-content: center;
+  }
+  
+  .hero-specs {
+    font-size: 0.75rem;
+  }
+  
+  .hero-spec {
+    flex-direction: column;
+    gap: 2px;
+  }
+  
+  .hero-spec-label,
+  .hero-spec-value {
+    text-align: center;
+    min-width: unset;
+  }
+  
+  .hero-spec-dots {
+    display: none;
+  }
+  
+  /* ─── SECTION LAYOUT ─── */
+  section {
+    padding: var(--space-lg) var(--space-sm);
+  }
+  
+  .section-title {
+    font-size: clamp(1.75rem, 7vw, 2.5rem);
+  }
+  
+  /* ─── CARDS STACK ─── */
+  .skills-grid,
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+  }
+  
+  /* ─── DECORATIONS: hide pills that would clip ─── */
+  .glass-pill {
+    font-size: 0.68rem;
+    padding: 0.35em 0.7em;
+  }
+  
+  /* Hide edge-positioned pills that would clip */
+  .decorations .glass-pill[style*="left: 2%"],
+  .decorations .glass-pill[style*="left: 3%"],
+  .decorations .glass-pill[style*="right: 2%"],
+  .decorations .glass-pill[style*="right: 3%"] {
+    display: none;
+  }
+  
+  .retro-progress,
+  .loading-dots {
+    display: none;
+  }
+  
+  /* ─── FOOTER ─── */
+  footer,
+  footer.footer-bar {
+    margin: var(--space-md) var(--space-sm) 0;
+    padding: var(--space-sm);
+  }
+  
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+    gap: var(--space-sm);
+  }
+  
+  .footer-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-xs);
+  }
+}
+
+/* Small phones (≤480px) — tighter spacing, minimal decorations */
+@media (max-width: 480px) {
+  :root {
+    --space-xl: 4rem;
+    --space-lg: 2rem;
+    --mobile-orb-edge-inset: 8%; /* Pull edge orbs in more */
+  }
+  
+  .hero-title { 
+    font-size: clamp(2.2rem, 13vw, 3.5rem); 
+  }
+  
+  .hero-badge {
+    font-size: 0.65rem;
+    padding: 8px 16px;
+  }
+  
+  .section-title { 
+    font-size: clamp(1.5rem, 6vw, 2rem); 
+  }
+  
+  /* Hide decorations layer on very small screens */
+  .decorations {
+    display: none;
+  }
+  
+  /* Reduce motif visibility further */
+  .motifs-layer .motif {
+    opacity: 0.2;
+    font-size: 1.5rem;
+  }
+  
+  /* Tighter card padding */
+  .skill-card,
+  .project-card,
+  .contact-info,
+  .contact-form {
+    padding: var(--space-sm);
+  }
+  
+  .project-image {
+    height: 160px;
+    font-size: 3rem;
+  }
+  
+  /* About section mobile */
+  .about-image {
+    width: 150px;
+    height: 150px;
+  }
+  
+  .about-stats {
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
+  
+  .stat {
+    flex: 1;
+    min-width: 80px;
+  }
+}
+
+/* Extra small phones (≤360px) */
+@media (max-width: 360px) {
+  :root {
+    --mobile-orb-edge-inset: 10%;
+  }
+  
+  .hero-title {
+    font-size: clamp(1.8rem, 12vw, 2.8rem);
+  }
+  
+  .main-nav {
+    padding: var(--space-xs);
+  }
+  
+  .nav-logo {
+    font-size: 1rem;
+  }
 }
