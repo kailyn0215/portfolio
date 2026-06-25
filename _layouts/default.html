@@ -47,66 +47,66 @@
   </div>
 
   <!-- ═══════════════════════════════════════════════════════════════
-       FOREGROUND ORBS — Percentage-based positioning
+       FOREGROUND ORBS — Percentage-based positioning (clamped to prevent overflow)
        ═══════════════════════════════════════════════════════════════ -->
   <div class="orbs-foreground" id="fg-orbs">
     <span class="orb orb--sm orb--sky orb--z-front fg-orb" style="left: 15%; top: 25%;" aria-hidden="true"></span>
-    <span class="orb orb--xs orb--peach orb--z-front fg-orb" style="left: 85%; top: 35%;" aria-hidden="true"></span>
+    <span class="orb orb--xs orb--peach orb--z-front fg-orb" style="left: 75%; top: 35%;" aria-hidden="true"></span>
     <span class="orb orb--sm orb--cobalt orb--z-front fg-orb" style="left: 8%; top: 55%;" aria-hidden="true"></span>
-    <span class="orb orb--xs orb--lavender orb--z-front fg-orb" style="left: 92%; top: 70%;" aria-hidden="true"></span>
+    <span class="orb orb--xs orb--lavender orb--z-front fg-orb" style="left: 72%; top: 70%;" aria-hidden="true"></span>
   </div>
 
   <!-- ═══════════════════════════════════════════════════════════════
        THEMED MOTIFS — Frutiger Aero Tech/Nature Elements
-       ═══════════════════════════════════════════════════════════════ -->
+       ═══════════════════════════════════════════════════════════════
   <div class="motifs-layer">
-    <!-- Hero Section -->
+    <!-- Hero Section
     <span class="motif motif--leaf" style="top: 8%; right: 16%; font-size: 3.5rem; animation-delay: -2s;">🌐</span>
     <span class="motif motif--droplet" style="top: 12%; left: 6%; font-size: 2.9rem; animation-delay: -5s; animation-duration: 14s;">🫧</span>
     <span class="motif motif--butterfly" style="top: 16%; right: 8%; font-size: 3.1rem; animation-delay: -8s; animation-duration: 10s;">🐬</span>
-    <!-- Hero center motifs -->
+    <!-- Hero center motifs
     <span class="motif motif--leaf" style="top: 6%; left: 40%; font-size: 3.5rem; animation-delay: -1s; animation-duration: 15s;">🫧</span>
     <span class="motif motif--droplet" style="top: 18%; left: 62%; font-size: 3.4rem; animation-delay: -3s; animation-duration: 13s;">🍏</span>
     
-    <!-- About Section -->
+    <!-- About Section
     <span class="motif motif--butterfly" style="top: 25%; left: 8%; font-size: 3.2rem; animation-delay: -1s; animation-duration: 13s;">🪼</span>
     <span class="motif motif--leaf" style="top: 37%; right: 10%; font-size: 2.9rem; animation-delay: -4s; animation-duration: 12s;">🌱</span>
-    <!-- About center motifs -->
+    <!-- About center motifs
     <span class="motif motif--droplet" style="top: 21%; left: 38%; font-size: 2.7rem; animation-delay: -6s; animation-duration: 14s;">🌀</span>
     <span class="motif motif--leaf" style="top: 28%; right: 14%; font-size: 3.5rem; animation-delay: -2s; animation-duration: 12s;">🫧</span>
     
-    <!-- Skills Section -->
+    <!-- Skills Section
     <span class="motif motif--leaf" style="top: 42%; right: 17%; font-size: 2.9rem; animation-delay: -2s; animation-duration: 11s;">🖥️</span>
     <span class="motif motif--droplet" style="top: 50%; left: 7%; font-size: 2.8rem; animation-delay: -5s; animation-duration: 15s;">🥏</span>
-    <!-- Skills center motifs -->
+    <!-- Skills center motifs
     <span class="motif motif--butterfly" style="top: 38%; left: 38%; font-size: 3.6rem; animation-delay: -4s; animation-duration: 13s;">🍏</span>
     <span class="motif motif--droplet" style="top: 44.5%; right: 32%; font-size: 3.2rem; animation-delay: -7s; animation-duration: 11s;">🌐</span>
     <span class="motif motif--leaf" style="top: 53.5%; left: 50%; font-size: 3.4rem; animation-delay: -1s; animation-duration: 14s;">🧃</span>
     
-    <!-- Projects Section -->
+    <!-- Projects Section
     <span class="motif motif--leaf" style="top: 64%; left: 9%; font-size: 3.3rem; animation-delay: -3s; animation-duration: 12s;">🐬</span>
     <span class="motif motif--butterfly" style="top: 68%; right: 6%; font-size: 3rem; animation-delay: -6s; animation-duration: 14s;">🍏</span>
     <span class="motif motif--droplet" style="top: 75%; left: 14%; font-size: 2.7rem; animation-delay: -1s; animation-duration: 13s;">🌀</span>
-    <!-- Projects center motifs -->
+    <!-- Projects center motifs
     <span class="motif motif--butterfly" style="top: 58%; left: 32%; font-size: 3.6rem; animation-delay: -5s; animation-duration: 12s;">🐠</span>
     <span class="motif motif--leaf" style="top: 60.5%; right: 32%; font-size: 3.5rem; animation-delay: -2s; animation-duration: 15s;">🌱</span>
     <span class="motif motif--droplet" style="top: 74%; left: 35%; font-size: 2.8rem; animation-delay: -8s; animation-duration: 13s;">📀</span>
     <span class="motif motif--butterfly" style="top: 78%; right: 28%; font-size: 2.9rem; animation-delay: -3s; animation-duration: 11s;">🥏</span>
     
-    <!-- Contact Section -->
+    <!-- Contact Section
     <span class="motif motif--butterfly" style="top: 85%; right: 8%; font-size: 2.9rem; animation-delay: -7s; animation-duration: 14s;">🎶</span>
     <span class="motif motif--leaf" style="top: 92%; left: 10%; font-size: 2.8rem; animation-delay: -2s; animation-duration: 15s;">🌍</span>
-    <!-- Contact center motifs -->
+    <!-- Contact center motifs
     <span class="motif motif--droplet" style="top: 81.5%; left: 39%; font-size: 3.6rem; animation-delay: -4s; animation-duration: 12s;">🖥️</span>
     <span class="motif motif--leaf" style="top: 89%; right: 21%; font-size: 3.5rem; animation-delay: -6s; animation-duration: 14s;">🐠</span>
     <span class="motif motif--butterfly" style="top: 95%; left: 40%; font-size: 3.4rem; animation-delay: -1s; animation-duration: 13s;">🪼</span>
     
-    <!-- Extra scattered motifs for more visual richness -->
+    <!-- Extra scattered motifs for more visual richness
     <span class="motif motif--droplet" style="top: 5%; left: 25%; font-size: 3.7rem; animation-delay: -3s; animation-duration: 16s;">📀</span>
     <span class="motif motif--leaf" style="top: 34.5%; left: 12%; font-size: 2.9rem; animation-delay: -7s; animation-duration: 13s;">🧃</span>
     <span class="motif motif--butterfly" style="top: 55%; right: 4%; font-size: 2.9rem; animation-delay: -4s; animation-duration: 12s;">🍎</span>
     <span class="motif motif--droplet" style="top: 80%; left: 20%; font-size: 3.5rem; animation-delay: -6s; animation-duration: 14s;">🍋‍🟩</span>
-  </div>
+  </div> -->
 
   <!-- ═══════════════════════════════════════════════════════════════
        GLASS PILL STICKERS — Rendered from _data/pills.yml
@@ -217,59 +217,68 @@
       // ─────────────────────────────────────────────────────────────
       // Per-Section Accent Orbs — 3-6 per section (1-2 of each color)
       // Colors: tangerine, peach, lavender only
+      // Uses percentage-based positioning to prevent overflow
       // ─────────────────────────────────────────────────────────────
       const orbsLayer = document.querySelector('.orbs-layer');
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       
       if (!prefersReducedMotion && orbsLayer) {
-        const colors = ['tangerine', 'peach', 'lavender'];
-        const sizes = ['xs', 'sm', 'md'];
-        const drifts = ['a', 'b', 'c', 'd'];
-        const sections = document.querySelectorAll('section');
-        
-        sections.forEach((section, sectionIndex) => {
-          const sectionRect = section.getBoundingClientRect();
-          const sectionTop = section.offsetTop;
-          const sectionHeight = section.offsetHeight;
+        // Wrap in requestAnimationFrame to ensure layout is ready
+        requestAnimationFrame(() => {
+          const colors = ['tangerine', 'peach', 'lavender'];
+          const sizes = ['xs', 'sm', 'md'];
+          const drifts = ['a', 'b', 'c', 'd'];
+          const sections = document.querySelectorAll('section');
+          const pageWrapper = document.querySelector('.page-wrapper');
+          const totalHeight = pageWrapper ? pageWrapper.scrollHeight : document.body.scrollHeight;
           
-          // For each color, spawn 1-2 orbs (total 3-6 per section)
-          colors.forEach(color => {
-            const count = 1 + Math.floor(Math.random() * 2); // 1 or 2
+          sections.forEach((section, sectionIndex) => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.offsetHeight;
             
-            for (let i = 0; i < count; i++) {
-              const el = document.createElement('span');
-              el.setAttribute('aria-hidden', 'true');
+            // For each color, spawn 1-2 orbs (total 3-6 per section)
+            colors.forEach(color => {
+              const count = 1 + Math.floor(Math.random() * 2); // 1 or 2
               
-              const size = sizes[Math.floor(Math.random() * sizes.length)];
-              const drift = drifts[Math.floor(Math.random() * drifts.length)];
-              const rotation = Math.floor(Math.random() * 360);
-              const skyNum = Math.floor(Math.random() * 6) + 1;
-              const bgPosX = Math.floor(Math.random() * 100);
-              const bgPosY = Math.floor(Math.random() * 100);
-              const animDuration = 12 + Math.random() * 12;
-              const animDelay = Math.random() * -20;
-              
-              // Position within section bounds
-              const x = Math.random() * 85 + 7.5; // 7.5-92.5% width
-              const yWithinSection = sectionTop + (Math.random() * 0.8 + 0.1) * sectionHeight;
-              
-              el.className = `orb orb--${size} orb--${color} orb--glass orb--z-mid orb--drift-${drift} accent-orb`;
-              
-              el.style.cssText = `
-                position: absolute;
-                left: ${x}%;
-                top: ${yWithinSection}px;
-                --env-rotate: ${rotation}deg;
-                --env-img: url('{{ "/assets/images/" | relative_url }}sky${skyNum}.jpg');
-                --env-bg-pos: ${bgPosX}% ${bgPosY}%;
-                --env-opacity: 0.5;
-                animation-duration: ${animDuration}s;
-                animation-delay: ${animDelay}s;
-                z-index: 3;
-              `;
-              
-              orbsLayer.appendChild(el);
-            }
+              for (let i = 0; i < count; i++) {
+                const el = document.createElement('span');
+                el.setAttribute('aria-hidden', 'true');
+                
+                const size = sizes[Math.floor(Math.random() * sizes.length)];
+                const drift = drifts[Math.floor(Math.random() * drifts.length)];
+                const rotation = Math.floor(Math.random() * 360);
+                const skyNum = Math.floor(Math.random() * 6) + 1;
+                const bgPosX = Math.floor(Math.random() * 100);
+                const bgPosY = Math.floor(Math.random() * 100);
+                const animDuration = 12 + Math.random() * 12;
+                const animDelay = Math.random() * -20;
+                
+                // Clamp X to 5-75% to prevent horizontal overflow (leaves room for orb width + blur + drift)
+                const x = Math.random() * 70 + 5; // 5-75% width
+                
+                // Calculate Y as percentage of total page height
+                const yWithinSection = sectionTop + (Math.random() * 0.8 + 0.1) * sectionHeight;
+                const yPercent = (yWithinSection / totalHeight) * 100;
+                // No need to clamp - orbs-layer has overflow:hidden to clip any overflow
+                
+                el.className = `orb orb--${size} orb--${color} orb--glass orb--z-mid orb--drift-${drift} accent-orb`;
+                
+                el.style.cssText = `
+                  position: absolute;
+                  left: ${x}%;
+                  top: ${yPercent}%;
+                  --env-rotate: ${rotation}deg;
+                  --env-img: url('{{ "/assets/images/" | relative_url }}sky${skyNum}.jpg');
+                  --env-bg-pos: ${bgPosX}% ${bgPosY}%;
+                  --env-opacity: 0.5;
+                  animation-duration: ${animDuration}s;
+                  animation-delay: ${animDelay}s;
+                  z-index: 3;
+                `;
+                
+                orbsLayer.appendChild(el);
+              }
+            });
           });
         });
       }

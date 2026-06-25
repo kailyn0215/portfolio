@@ -53,9 +53,9 @@ pills:
   
   # ─── CONTACT SECTION (450-550vh) ───
   - { label: "^_^ ♪",           tint: sky,      tilt:  2, drift: a, top: "470vh", left: "5%" }
-  - { label: "✉ :D",            tint: peach,    tilt: -3, drift: c, top: "500vh", right: "7%" }
-  - { label: "♥ (˶ᵔ ᵕ ᵔ˶)",     tint: leaf,     tilt:  4, drift: b, top: "530vh", left: "6%" }
-  - { label: "→ :)",            tint: lavender, tilt: -2, drift: a, top: "550vh", right: "5%" }
+  - { label: "✉ :D",            tint: peach,    tilt: -3, drift: c, top: "476vh", right: "7%" }
+  - { label: "♥ (˶ᵔ ᵕ ᵔ˶)",     tint: leaf,     tilt:  4, drift: b, top: "449vh", left: "13%" }
+  - { label: "→ :)",            tint: lavender, tilt: -2, drift: a, top: "453vh", right: "5%" }
   # Center-ish pills for contact
-  - { label: "◠‿◠",             tint: white,    tilt:  1, drift: c, top: "485vh", left: "42%" }
-  - { label: "☀ ;)",            tint: orange,   tilt: -1, drift: b, top: "520vh", right: "38%" }
+  - { label: "◠‿◠",             tint: white,    tilt:  1, drift: c, top: "468vh", left: "42%" }
+  - { label: "☀ ;)",            tint: orange,   tilt: -1, drift: b, top: "474vh", right: "38%" }
