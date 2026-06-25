@@ -267,16 +267,19 @@
       // Per-Section Accent Orbs — 3-6 per section (1-2 of each color)
       // Colors: tangerine, peach, lavender only
       // Uses percentage-based positioning to prevent overflow
+      // MOBILE: Reduced orb count for performance
       // ─────────────────────────────────────────────────────────────
       const orbsLayer = document.querySelector('.orbs-layer');
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const isMobile = window.innerWidth <= 768;
       
       if (!prefersReducedMotion && orbsLayer) {
         // Wrap in requestAnimationFrame to ensure layout is ready
         requestAnimationFrame(() => {
           const colors = ['tangerine', 'peach', 'lavender'];
-          const sizes = ['xs', 'sm', 'md'];
-          const drifts = ['a', 'b', 'c', 'd'];
+          // On mobile: only xs/sm orbs, fewer of them
+          const sizes = isMobile ? ['xs', 'sm'] : ['xs', 'sm', 'md'];
+          const drifts = isMobile ? ['a', 'b'] : ['a', 'b', 'c', 'd']; // Fewer animation variants on mobile
           const sections = document.querySelectorAll('section');
           const pageWrapper = document.querySelector('.page-wrapper');
           const totalHeight = pageWrapper ? pageWrapper.scrollHeight : document.body.scrollHeight;
@@ -285,9 +288,16 @@
             const sectionTop = section.offsetTop;
             const sectionHeight = section.offsetHeight;
             
+            // MOBILE: Only spawn orbs in every other section, fewer colors
+            if (isMobile && sectionIndex % 2 === 1) return;
+            
             // For each color, spawn 1-2 orbs (total 3-6 per section)
-            colors.forEach(color => {
-              const count = 1 + Math.floor(Math.random() * 2); // 1 or 2
+            // MOBILE: Only 1 orb per color max (total 1-3 per section)
+            colors.forEach((color, colorIndex) => {
+              // Mobile: skip every other color too
+              if (isMobile && colorIndex % 2 === 1) return;
+              
+              const count = isMobile ? 1 : (1 + Math.floor(Math.random() * 2)); // 1 on mobile, 1-2 on desktop
               
               for (let i = 0; i < count; i++) {
                 const el = document.createElement('span');
@@ -299,7 +309,8 @@
                 const skyNum = Math.floor(Math.random() * 6) + 1;
                 const bgPosX = Math.floor(Math.random() * 100);
                 const bgPosY = Math.floor(Math.random() * 100);
-                const animDuration = 12 + Math.random() * 12;
+                // Mobile: slower animations use less CPU
+                const animDuration = isMobile ? (18 + Math.random() * 8) : (12 + Math.random() * 12);
                 const animDelay = Math.random() * -20;
                 
                 // Clamp X to 5-75% to prevent horizontal overflow (leaves room for orb width + blur + drift)
@@ -334,8 +345,13 @@
 
       // ─────────────────────────────────────────────────────────────
       // Performance: Pause off-screen animations via IntersectionObserver
+      // MOBILE: More aggressive pausing (0px margin vs 100px on desktop)
       // ─────────────────────────────────────────────────────────────
       if (!prefersReducedMotion && 'IntersectionObserver' in window) {
+        // Mobile: only animate orbs actually in view (0px margin)
+        // Desktop: start animating 100px before entering viewport
+        const orbRootMargin = isMobile ? '0px 0px' : '100px 0px';
+        
         const orbObserver = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -345,7 +361,7 @@
             }
           });
         }, {
-          rootMargin: '100px 0px', // Start animating 100px before entering viewport
+          rootMargin: orbRootMargin,
           threshold: 0
         });
 
@@ -366,9 +382,9 @@
       document.addEventListener('scroll', () => {}, { passive: true });
 
       // ─────────────────────────────────────────────────────────────
-      // Mouse Sparkles — Cursor Trail Effect
+      // Mouse Sparkles — Cursor Trail Effect (DESKTOP ONLY)
       // ─────────────────────────────────────────────────────────────
-      if (!prefersReducedMotion) {
+      if (!prefersReducedMotion && !isMobile) {
         const sparkleContainer = document.getElementById('sparkle-container');
         const sparkleChars = ['✦', '✧', '⋆', '✶', '❋', '✴'];
         const sparkleColors = ['sky', 'leaf', 'sunset', 'lavender', 'accent', 'gold'];
