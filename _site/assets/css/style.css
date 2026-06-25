@@ -7,30 +7,39 @@
    PALETTE — Saturated Vivid Aero + Liquid Glass
    ───────────────────────────────────────────────────────────────── */
 :root {
+  /* ═══════════════════════════════════════════════════════════════
+     VIBRANCY KNOBS — Tune these to dial in the exact vibrancy
+     ═══════════════════════════════════════════════════════════════ */
+  --vibrancy-boost: 1.15;          /* master saturation multiplier      */
+  --accent-intensity: 1.1;         /* orange punch (1.0=normal, 1.2=hot)*/
+  --gloss-strength: 0.75;          /* specular highlight intensity      */
+  
   /* Background Gradient Stops */
   --color-bg-top: #BEE3F7;
   --color-bg-mid: #E8F5E9;
   --color-bg-bot: #FFD9B8;
   
-  /* Core — High Contrast */
-  --color-main: #1E3A52;
-  --color-tint: #4A7A9F;
-  --color-ink: #0A1A26;
-  --color-accent: #FF6B2B;
+  /* Core — High Contrast (VIVID: deepened slate-blue, punchy orange) */
+  --color-main: #0F2436;           /* deeper, richer slate              */
+  --color-tint: #2D5A7A;           /* more saturated tint               */
+  --color-ink: #081018;            /* near-black for headings           */
+  --color-accent: #FF6B2C;         /* VIVID orange pop — more saturated */
+  --color-accent-hover: #FF4500;   /* hot orange for hover states       */
+  --color-accent-glow: rgba(255,107,44,0.5); /* orange glow color       */
   
-  /* Vivid Aero Colors */
-  --color-sky: #5BC0F8;
-  --color-sky-light: #A8E0FF;
-  --color-leaf: #6FD46F;
-  --color-leaf-light: #A8F0A8;
-  --color-sunset: #FFA561;
-  --color-sunset-light: #FFD0A8;
-  --color-bubble: #C9EEFF;
-  --color-peach: #FFE4D6;
-  --color-lavender: #D8B4F0;
-  --color-mint: #A8F0DC;
-  --color-magenta: #FF6B9D;
-  --color-gold: #FFD93D;
+  /* Vivid Aero Colors — BOOSTED SATURATION */
+  --color-sky: #00AAFF;            /* vivid cyan-blue                   */
+  --color-sky-light: #66CCFF;
+  --color-leaf: #44DD44;           /* vivid green                       */
+  --color-leaf-light: #88FF88;
+  --color-sunset: #FF8833;         /* vivid orange-sunset               */
+  --color-sunset-light: #FFAA66;
+  --color-bubble: #99EEFF;
+  --color-peach: #FFCCAA;
+  --color-lavender: #CC88FF;       /* vivid lavender                    */
+  --color-mint: #66FFCC;           /* vivid mint                        */
+  --color-magenta: #FF4488;        /* vivid magenta                     */
+  --color-gold: #FFCC00;           /* vivid gold                        */
   
   /* Liquid Glass System */
   --glass-bg: rgba(255,255,255,0.35);
@@ -84,6 +93,35 @@
   --transition-fast: 0.15s ease;
   --transition-smooth: 0.3s ease;
   --transition-bounce: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.4);
+
+  /* ─────────────────────────────────────────────────────────────
+     ORB DEPTH SYSTEM — tunable atmosphere tiers (VIVID BOOST)
+     Most orbs are "back" → soft, blurred but COLORFUL (not milky).
+     A handful are "front" → crisp, glossy, FULLY saturated.
+     Tweak these to fine-tune vibrancy vs dreaminess.
+     ───────────────────────────────────────────────────────────── */
+  --orb-back-blur: 5px;       /* slightly reduced blur for more color    */
+  --orb-back-opacity: 0.55;   /* boosted so colors show through          */
+  --orb-back-saturate: 1.0;   /* NO desaturation — keep colorful         */
+
+  --orb-mid-blur: 1px;        /* light focus                             */
+  --orb-mid-opacity: 0.85;    /* boosted presence                        */
+  --orb-mid-saturate: 1.15;   /* slight saturation boost                 */
+
+  --orb-front-blur: 0px;      /* crisp showpiece                         */
+  --orb-front-opacity: 1;     /* fully present                           */
+  --orb-front-saturate: 1.5;  /* VIVID glossy punch                      */
+
+  /* ─────────────────────────────────────────────────────────────
+     QUIET ZONES — calm space behind content (Phase 2)
+     A soft central fade in the orb field + a faint frosted veil
+     behind content modules so headlines/cards read instantly.
+     Subtle by design — no hard boxes.
+     ───────────────────────────────────────────────────────────── */
+  --quiet-strength: 0.55;     /* how much the central column dims orbs (0–1) */
+  --quiet-width: 760px;       /* width of the calm central column            */
+  --quiet-veil: 0.22;         /* opacity of the frosted backing behind modules */
+  --quiet-veil-blur: 6px;     /* softness of that frosted backing            */
 }
 
 /* ─────────────────────────────────────────────────────────────────
@@ -288,20 +326,23 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   -webkit-backdrop-filter: none !important;
 }
 
-/* Reflection layer — warped fisheye via pseudo-element */
+/* Reflection layer — NEUTRALIZED for clean glass look (Phase 3)
+   The sky-photo reflection is now minimal/disabled to give orbs a
+   clean glossy-glass marble finish rather than a cloudy/planet look. */
 .orb::before {
   content: '';
   position: absolute;
   inset: -20%;
   border-radius: 50%;
-  /* Default to sky1-url if --env-img not set */
-  background-image: var(--env-img, var(--sky1-url));
-  background-size: 280% 280%;
-  background-position: var(--env-bg-pos, center);
-  /* Fisheye warp via non-uniform scale */
+  /* Minimal reflection — mostly transparent with a subtle sheen */
+  background: radial-gradient(
+    ellipse at 30% 25%,
+    rgba(255,255,255,0.12) 0%,
+    transparent 50%
+  );
   transform: rotate(var(--env-rotate, 0deg)) scale(1.4, 1.2);
-  opacity: var(--env-opacity, 0.7);
-  mix-blend-mode: soft-light;
+  opacity: 0.5;
+  mix-blend-mode: normal;
   pointer-events: none;
 }
 
@@ -340,25 +381,45 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .orb--lg  { width: 180px; height: 180px; }
 .orb--xl  { width: 220px; height: 220px; }
 
-/* Color variants — Neon Bright Lime/Electric Blue palette */
-.orb--lime       { --orb-color: #AAFF33; } /* neon lime green */
-.orb--electric   { --orb-color: #33CCFF; } /* neon electric blue */
-.orb--paleblue   { --orb-color: #E6F8FF; }
-.orb--forest     { --orb-color: #66CC33; } /* brightened */
-.orb--grass      { --orb-color: #88DD44; } /* brightened */
-.orb--chartreuse { --orb-color: #BBFF33; } /* neon */
-.orb--olive      { --orb-color: #DDFF44; } /* brightened */
-.orb--yellow     { --orb-color: #FFFF66; } /* neon yellow */
-.orb--tangerine  { --orb-color: #FFCC66; } /* light orange */
-.orb--orange     { --orb-color: #FF9955; } /* light orange */
-.orb--peach      { --orb-color: #FFE4D6; } /* soft peach */
-.orb--navy       { --orb-color: #4477CC; } /* brightened */
-.orb--cobalt     { --orb-color: #5599FF; } /* brightened */
-.orb--azure      { --orb-color: #66AAFF; } /* brightened */
-.orb--sky        { --orb-color: #66BBFF; } /* neon sky */
-.orb--cerulean   { --orb-color: #77CCFF; } /* brightened */
-.orb--skylight   { --orb-color: #99DDFF; } /* brightened */
-.orb--ice        { --orb-color: #BBEEFF; } /* brightened */
+/* ─────────────────────────────────────────────────────────────
+   ORB COLOR PALETTE (VIVID) — Candy-glossy, high-saturation
+   Lead: rich blues (electric, cobalt, cerulean)
+   Support: vivid greens (lime, grass)
+   Pop: BOLD ORANGE (primary energy accent)
+   All colors pushed toward glossy, saturated candy tones.
+   ───────────────────────────────────────────────────────────── */
+/* Blues — rich, saturated, candy-glossy */
+.orb--slate      { --orb-color: #2266AA; } /* rich saturated slate */
+.orb--navy       { --orb-color: #1144AA; } /* deep vivid navy */
+.orb--cobalt     { --orb-color: #0066DD; } /* vivid cobalt */
+.orb--azure      { --orb-color: #0088EE; } /* vivid azure */
+.orb--sky        { --orb-color: #00AAFF; } /* electric sky */
+.orb--cerulean   { --orb-color: #22BBFF; } /* bright cerulean */
+.orb--skylight   { --orb-color: #55CCFF; } /* vivid light sky */
+.orb--ice        { --orb-color: #88DDFF; } /* vivid ice */
+.orb--paleblue   { --orb-color: #AAEEFF; } /* light vivid blue */
+.orb--electric   { --orb-color: #00CCFF; } /* SUPER electric blue */
+
+/* Greens — vivid, candy-like (not muted) */
+.orb--lime       { --orb-color: #66EE44; } /* vivid lime */
+.orb--forest     { --orb-color: #22AA44; } /* rich forest */
+.orb--grass      { --orb-color: #44CC55; } /* vivid grass */
+.orb--chartreuse { --orb-color: #88EE33; } /* electric chartreuse */
+.orb--olive      { --orb-color: #88CC44; } /* vivid olive-lime */
+
+/* ORANGE — Bold energy accent (PRIMARY POP COLOR) */
+.orb--orange     { --orb-color: #FF6600; } /* VIVID orange */
+.orb--tangerine  { --orb-color: #FF8822; } /* vivid tangerine */
+.orb--coral      { --orb-color: #FF5544; } /* coral-orange */
+.orb--amber      { --orb-color: #FFAA00; } /* amber-gold */
+
+/* Lavender/Purple — vivid accent */
+.orb--lavender   { --orb-color: #AA66FF; } /* vivid lavender */
+.orb--violet     { --orb-color: #8833FF; } /* vivid violet */
+
+/* Warm tones — pushed toward orange/coral family */
+.orb--peach      { --orb-color: #FFAA77; } /* warm peach-orange */
+.orb--yellow     { --orb-color: #FFDD22; } /* vivid yellow-gold */
 
 /* Foreground orbs spawned by JS */
 .fg-orb {
@@ -367,10 +428,34 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   animation: none; /* controlled by JS */
 }
 
-/* Z-index stacking layers — relative within orbs-layer (which is z-index: 0) */
-.orb--z-back  { z-index: 0; }
-.orb--z-mid   { z-index: 1; }
-.orb--z-front { z-index: 2; }
+/* ─────────────────────────────────────────────────────────────
+   ORB DEPTH TIERS (Phase 1)
+   z-index stacking + atmospheric blur/opacity/saturation so that
+   most orbs (back) recede into soft background and a few (front)
+   stay crisp showpieces. Driven by the orb data's `z` field.
+   Tunable via the --orb-*-blur/opacity/saturate vars in :root.
+   ───────────────────────────────────────────────────────────── */
+.orb--z-back {
+  z-index: 0;
+  opacity: var(--orb-back-opacity);
+  filter: blur(var(--orb-back-blur)) saturate(var(--orb-back-saturate));
+}
+.orb--z-mid {
+  z-index: 1;
+  opacity: var(--orb-mid-opacity);
+  filter: blur(var(--orb-mid-blur)) saturate(var(--orb-mid-saturate));
+}
+.orb--z-front {
+  z-index: 2;
+  opacity: var(--orb-front-opacity);
+  filter: blur(var(--orb-front-blur)) saturate(var(--orb-front-saturate));
+}
+
+/* Performance: drop the heavy tier blur when the orb is off-screen
+   (works alongside the existing .orb--paused backdrop-filter strip). */
+.orb--paused {
+  filter: none !important;
+}
 
 /* Drift animation variants */
 @keyframes drift-a {
@@ -406,6 +491,59 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 /* Legacy reflect-2 class compatibility */
 .orb--reflect-2::before {
   --env-img: var(--sky2-url);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   QUIET ZONE OVERLAY (Phase 2)
+   A soft vertical fade in the center of the orb field so content
+   reads instantly without orbs crowding it. No hard edges — just
+   a gentle dimming of the center column via a pseudo-element
+   overlay placed above the orbs but below the content.
+   ───────────────────────────────────────────────────────────── */
+.quiet-zone-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 4; /* above orbs (0-2), motifs (3), below decorations (50) and content (60) */
+  /* Soft radial/vertical fade — dims the center */
+  background: radial-gradient(
+    ellipse 50% 100% at 50% 50%,
+    rgba(255,255,255, var(--quiet-strength)) 0%,
+    rgba(255,255,255, calc(var(--quiet-strength) * 0.4)) 60%,
+    transparent 100%
+  );
+  /* Respect tunable width */
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black calc(50% - var(--quiet-width) / 2 - 100px),
+    black calc(50% + var(--quiet-width) / 2 + 100px),
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black calc(50% - var(--quiet-width) / 2 - 100px),
+    black calc(50% + var(--quiet-width) / 2 + 100px),
+    transparent 100%
+  );
+}
+
+/* Frosted veil backing — apply to content modules for lift off the orb field.
+   Very subtle; no hard box edges. Apply via class or as section pseudo-element. */
+.quiet-veil {
+  position: relative;
+}
+.quiet-veil::before {
+  content: '';
+  position: absolute;
+  inset: -20px -30px;
+  background: rgba(255,255,255, var(--quiet-veil));
+  backdrop-filter: blur(var(--quiet-veil-blur));
+  -webkit-backdrop-filter: blur(var(--quiet-veil-blur));
+  border-radius: var(--radius-xl);
+  z-index: -1;
+  pointer-events: none;
 }
 
 /* ─────────────────────────────────────────────────────────────────
@@ -885,10 +1023,12 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 
 .nav-links li a:hover {
-  background: rgba(91,192,248,0.25);
+  background: rgba(254,119,67,0.12);
+  color: var(--color-accent);
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
 }
 
+/* Nav link underline — orange accent (Phase 5) */
 .nav-links li a::after {
   content: '';
   position: absolute;
@@ -896,13 +1036,24 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   left: 16px;
   right: 16px;
   height: 2px;
-  background: var(--gradient-iris);
+  background: var(--color-accent);
   transform: scaleX(0);
   transition: var(--transition-fast);
   border-radius: 1px;
 }
 
 .nav-links li a:hover::after { transform: scaleX(1); }
+
+/* Nav active state — orange indicator (Phase 5) */
+.nav-links li a.active,
+.nav-links li a[aria-current="page"] {
+  color: var(--color-accent);
+  background: rgba(254,119,67,0.15);
+}
+.nav-links li a.active::after,
+.nav-links li a[aria-current="page"]::after {
+  transform: scaleX(1);
+}
 
 .nav-toggle { display: none; flex-direction: column; gap: 5px; padding: 10px; }
 .nav-toggle span { width: 20px; height: 2px; background: var(--color-main); border-radius: 2px; }
@@ -992,10 +1143,10 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 .glass-card:hover {
   transform: translateY(-6px) scale(1.02);
-  border-color: rgba(91,192,248,0.6);
+  border-color: rgba(254,119,67,0.5);
   box-shadow: 
     0 12px 36px rgba(30,58,82,0.22),
-    0 4px 12px rgba(91,192,248,0.2),
+    0 4px 12px rgba(254,119,67,0.2),
     inset 0 1px 0 rgba(255,255,255,1);
 }
 
@@ -1015,28 +1166,23 @@ section {
 
 .section-header {
   text-align: center;
-  margin-bottom: var(--space-lg);
+  margin-bottom: var(--space-md);
 }
 
-/* Section tag — 3D glossy with sky reflection */
+/* Section tag — CLEAN glossy (no sky reflection) */
 .section-tag {
   display: inline-flex;
   align-items: center;
   gap: var(--space-xs);
   padding: 8px 20px;
-  /* 3D Glossy with sky reflection */
-  background:
-    var(--sky1-url),
-    linear-gradient(180deg,
-      rgba(255,255,255,0.9) 0%,
-      rgba(200,220,235,0.7) 30%,
-      rgba(150,180,200,0.5) 70%,
-      rgba(120,150,180,0.6) 100%
-    );
-  background-size: 300% 300%, 100% 100%;
-  background-position: center, center;
-  background-blend-mode: soft-light, normal;
-  border: 1px solid rgba(255,255,255,0.8);
+  /* Clean glossy gradient */
+  background: linear-gradient(180deg,
+    rgba(255,255,255,0.95) 0%,
+    rgba(240,248,255,0.85) 30%,
+    rgba(220,235,250,0.75) 70%,
+    rgba(200,220,240,0.8) 100%
+  );
+  border: 1px solid rgba(255,255,255,0.9);
   color: var(--color-main);
   font-family: var(--font-mono);
   font-size: 0.7rem;
@@ -1151,64 +1297,73 @@ section {
   box-shadow: none;
 }
 
-/* Hero badge — 3D glossy with sky reflection */
+/* Hero badge — GLOSSY with crisp finish (STATUS: ONLINE badge) */
 .hero-badge {
   display: inline-flex;
   align-items: center;
   gap: var(--space-xs);
   padding: 10px 22px;
-  /* 3D Glossy with sky reflection */
-  background:
-    var(--sky1-url),
-    linear-gradient(180deg,
-      rgba(255,255,255,0.9) 0%,
-      rgba(200,220,235,0.7) 30%,
-      rgba(150,180,200,0.5) 70%,
-      rgba(120,150,180,0.6) 100%
-    );
-  background-size: 300% 300%, 100% 100%;
-  background-position: center, center;
-  background-blend-mode: soft-light, normal;
-  border: 1px solid rgba(255,255,255,0.8);
+  /* Clean glossy gradient — NO muddy sky reflection */
+  background: linear-gradient(180deg,
+    rgba(255,255,255,0.95) 0%,
+    rgba(240,248,255,0.85) 30%,
+    rgba(220,235,250,0.75) 70%,
+    rgba(200,220,240,0.8) 100%
+  );
+  border: 1px solid rgba(255,255,255,0.9);
   border-radius: var(--radius-full);
   font-family: var(--font-mono);
   font-size: 0.75rem;
   font-weight: 600;
   color: var(--color-main);
-  margin-bottom: var(--space-md);
+  margin-bottom: 1.5rem;  /* TIGHTENED from --space-md (2rem) */
   letter-spacing: 0.06em;
   text-transform: uppercase;
   box-shadow: 
     0 8px 24px rgba(30,58,82,0.2),
     0 2px 6px rgba(30,58,82,0.15),
-    inset 0 1px 0 rgba(255,255,255,0.95),
-    inset 0 -1px 0 rgba(30,58,82,0.1);
+    inset 0 2px 0 rgba(255,255,255,1),
+    inset 0 -1px 0 rgba(30,58,82,0.08);
   position: relative;
   overflow: hidden;
 }
 
-/* Top specular highlight */
+/* Top specular highlight — crisp glossy sheen */
 .hero-badge::after {
   content: '';
   position: absolute;
   top: 0;
-  left: 15%;
-  right: 15%;
-  height: 50%;
-  background: linear-gradient(180deg, rgba(255,255,255,0.8) 0%, transparent 100%);
+  left: 10%;
+  right: 10%;
+  height: 55%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.3) 50%, transparent 100%);
   border-radius: 999px 999px 50% 50%;
   pointer-events: none;
 }
 
-/* Glowing green dot */
+/* ORANGE blinking dot with glow — the energy indicator */
 .hero-badge::before {
   content: '';
   width: 10px;
   height: 10px;
-  background: radial-gradient(circle at 35% 35%, #FFFFFF 0%, #4ADE80 40%, #22C55E 100%);
+  background: radial-gradient(circle at 35% 35%, #FFFFFF 0%, var(--color-accent) 45%, #CC4400 100%);
   border-radius: 50%;
-  animation: pulse-dot 2s ease-in-out infinite;
-  box-shadow: 0 0 12px rgba(74,222,128,0.7), 0 0 20px rgba(74,222,128,0.4);
+  animation: blink-glow 1.5s ease-in-out infinite;
+  box-shadow: 0 0 12px var(--color-accent-glow), 0 0 20px var(--color-accent-glow);
+}
+
+/* Blinking + glowing animation for the orange dot */
+@keyframes blink-glow {
+  0%, 100% { 
+    opacity: 1; 
+    transform: scale(1); 
+    box-shadow: 0 0 12px var(--color-accent-glow), 0 0 20px var(--color-accent-glow);
+  }
+  50% { 
+    opacity: 0.7; 
+    transform: scale(0.9); 
+    box-shadow: 0 0 18px var(--color-accent-glow), 0 0 30px var(--color-accent-glow);
+  }
 }
 
 /* Hero title — plain solid color text */
@@ -1217,8 +1372,8 @@ section {
   font-size: clamp(3.5rem, 14vw, 7rem);
   font-weight: 700;
   line-height: 1.15;
-  padding-bottom: 0.15em;
-  margin-bottom: var(--space-md);
+  padding-bottom: 0.1em;
+  margin-bottom: 1.25rem;  /* TIGHTENED from --space-md (2rem) */
   letter-spacing: -0.04em;
   /* Plain solid color — no glass/chrome effects */
   color: var(--color-main);
@@ -1230,12 +1385,12 @@ section {
   display: none;
 }
 
-/* Hero specs */
+/* Hero specs — TIGHTENED vertical rhythm */
 .hero-specs {
   display: flex;
   flex-direction: column;
   gap: 5px;
-  margin-bottom: var(--space-lg);
+  margin-bottom: 2rem;  /* TIGHTENED from --space-lg (4rem) */
   font-family: var(--font-mono);
   font-size: 0.85rem;
   text-transform: lowercase;
@@ -1279,47 +1434,46 @@ section {
    BUTTONS — Wet Candy Liquid Glass
    ───────────────────────────────────────────────────────────────── */
 
-/* Primary button — glossy orange glass with sky reflection */
+/* Primary button — CLEAN GLOSSY ORANGE (no muddy sky overlay) */
 .btn-primary {
   display: inline-flex;
   align-items: center;
   gap: var(--space-xs);
-  padding: 14px 32px;
-  /* Layered background: sky reflection + orange gradient */
-  background:
-    var(--sky1-url),
-    linear-gradient(135deg, rgba(255,107,43,0.95) 0%, rgba(255,165,97,0.85) 100%);
-  background-size: 400% 400%, 100% 100%;
-  background-position: center, center;
-  background-blend-mode: soft-light, normal;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  padding: 16px 38px;  /* LARGER padding */
+  /* CLEAN glossy orange gradient — vivid, not muddy */
+  background: linear-gradient(180deg, 
+    #FF8844 0%,        /* bright orange highlight */
+    #FF6B2C 35%,       /* vivid orange */
+    #FF5511 70%,       /* deeper orange */
+    #EE4400 100%       /* rich orange base */
+  );
   color: #FFFFFF;
   font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-size: 0.85rem;  /* LARGER font */
   font-weight: 600;
   text-transform: lowercase;
   letter-spacing: 0.04em;
-  border: 1px solid rgba(255,165,97,0.6);
+  border: 1px solid rgba(255,200,150,0.5);
   border-radius: var(--radius-full);
   box-shadow: 
-    0 10px 35px rgba(255,107,43,0.35),
-    inset 0 1px 0 rgba(255,255,255,0.5),
-    inset 0 -2px 0 rgba(0,0,0,0.1);
+    0 10px 35px rgba(255,107,44,0.4),
+    0 4px 12px rgba(255,80,0,0.3),
+    inset 0 2px 0 rgba(255,255,255,0.4),
+    inset 0 -2px 0 rgba(0,0,0,0.15);
   transition: var(--transition-bounce);
   position: relative;
   overflow: hidden;
 }
 
-/* Specular sheen */
+/* Specular sheen — crisp glossy highlight */
 .btn-primary::before {
   content: '';
   position: absolute;
   top: 0;
-  left: 10%;
-  right: 10%;
-  height: 50%;
-  background: linear-gradient(180deg, rgba(255,255,255,0.6) 0%, transparent 100%);
+  left: 8%;
+  right: 8%;
+  height: 55%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.15) 50%, transparent 100%);
   border-radius: var(--radius-full) var(--radius-full) 50% 50%;
   pointer-events: none;
 }
@@ -1332,20 +1486,36 @@ section {
   left: -100%;
   width: 50%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
   transform: skewX(-20deg);
   transition: none;
 }
 
 .btn-primary:hover {
-  transform: translateY(-3px) scale(1.04);
+  transform: translateY(-4px) scale(1.05);  /* More lift */
+  background: linear-gradient(180deg, 
+    #FF9955 0%,        /* brighter highlight */
+    #FF7733 35%,
+    #FF6622 70%,
+    #FF5511 100%
+  );
   box-shadow: 
-    0 15px 45px rgba(255,107,43,0.45),
-    inset 0 1px 0 rgba(255,255,255,0.7);
+    0 16px 50px rgba(255,107,44,0.5),
+    0 6px 18px rgba(255,80,0,0.35),
+    inset 0 2px 0 rgba(255,255,255,0.5);
 }
 
 .btn-primary:hover::after {
   animation: shine-sweep 0.6s ease-out;
+}
+
+/* Strong focus state for accessibility */
+.btn-primary:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 3px;
+  box-shadow: 
+    0 0 0 6px rgba(255,107,44,0.25),
+    0 10px 35px rgba(255,107,44,0.4);
 }
 
 @keyframes shine-sweep {
@@ -1353,33 +1523,32 @@ section {
   100% { left: 150%; }
 }
 
-/* Secondary button — clear glass with sky reflection */
+/* Secondary button — GLOSSY slate, LARGER, matching polish */
 .btn-secondary {
   display: inline-flex;
   align-items: center;
   gap: var(--space-xs);
-  padding: 14px 32px;
-  /* Sky reflection + glass gradient */
-  background:
-    var(--sky1-url),
-    linear-gradient(180deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.35) 50%, rgba(255,255,255,0.5) 100%);
-  background-size: 400% 400%, 100% 100%;
-  background-position: center, center;
-  background-blend-mode: soft-light, normal;
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  color: var(--color-main);
+  padding: 16px 38px;  /* LARGER padding — matches primary */
+  /* Glossy slate gradient */
+  background: linear-gradient(180deg, 
+    #6A9ABF 0%, 
+    #5A8AAF 30%, 
+    #4A7A9F 70%, 
+    #3D6A8A 100%
+  );
+  color: #FFFFFF;
   font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-size: 0.85rem;  /* LARGER font — matches primary */
   font-weight: 600;
   text-transform: lowercase;
   letter-spacing: 0.04em;
-  border: 1px solid var(--glass-border-bright);
+  border: 1px solid rgba(255,255,255,0.35);
   border-radius: var(--radius-full);
   box-shadow: 
-    var(--glass-shadow),
-    inset 0 1px 0 rgba(255,255,255,0.95),
-    inset 0 -1px 0 rgba(30,58,82,0.05);
+    0 8px 28px rgba(30,58,82,0.3),
+    0 4px 12px rgba(30,58,82,0.2),
+    inset 0 2px 0 rgba(255,255,255,0.4),
+    inset 0 -2px 0 rgba(0,0,0,0.15);
   transition: var(--transition-bounce);
   position: relative;
   overflow: hidden;
@@ -1389,10 +1558,10 @@ section {
   content: '';
   position: absolute;
   top: 0;
-  left: 10%;
-  right: 10%;
-  height: 50%;
-  background: linear-gradient(180deg, rgba(255,255,255,0.7) 0%, transparent 100%);
+  left: 8%;
+  right: 8%;
+  height: 55%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.1) 50%, transparent 100%);
   border-radius: var(--radius-full) var(--radius-full) 50% 50%;
   pointer-events: none;
 }
@@ -1404,20 +1573,35 @@ section {
   left: -100%;
   width: 50%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
   transform: skewX(-20deg);
 }
 
 .btn-secondary:hover {
-  transform: translateY(-3px) scale(1.04);
-  border-color: var(--color-sky);
+  transform: translateY(-4px) scale(1.05);
+  background: linear-gradient(180deg, 
+    #7AAACF 0%, 
+    #6A9ABF 30%, 
+    #5A8AAF 70%, 
+    #4A7A9F 100%
+  );
   box-shadow: 
-    var(--glass-shadow-sky),
-    inset 0 1px 0 rgba(255,255,255,1);
+    0 14px 40px rgba(30,58,82,0.35),
+    0 6px 18px rgba(30,58,82,0.25),
+    inset 0 2px 0 rgba(255,255,255,0.5);
 }
 
 .btn-secondary:hover::after {
   animation: shine-sweep 0.6s ease-out;
+}
+
+/* Strong focus state */
+.btn-secondary:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 3px;
+  box-shadow: 
+    0 0 0 6px rgba(255,107,44,0.2),
+    0 8px 28px rgba(30,58,82,0.3);
 }
 
 /* ─────────────────────────────────────────────────────────────────
@@ -1432,28 +1616,49 @@ section {
   align-items: center;
 }
 
+/* About image — both photo and placeholder states */
 .about-image {
   width: 200px;
   height: 200px;
   border-radius: var(--radius-xl);
-  background: var(--gradient-orb);
-  box-shadow: 
-    inset -15px -15px 35px rgba(30,58,82,0.3),
-    inset 12px 12px 30px rgba(255,255,255,0.8),
-    0 20px 60px rgba(30,58,82,0.2);
   position: relative;
 }
 
-.about-image::before {
-  content: '';
-  position: absolute;
-  top: 12%;
-  left: 15%;
-  width: 40%;
-  height: 25%;
-  background: radial-gradient(ellipse, rgba(255,255,255,0.9) 0%, transparent 70%);
-  border-radius: 50%;
-  filter: blur(3px);
+/* Photo version */
+.about-image--photo {
+  object-fit: cover;
+  box-shadow: 
+    0 20px 60px rgba(30,58,82,0.25),
+    0 0 0 4px rgba(255,255,255,0.5);
+}
+
+/* Placeholder version — intentional "photo →" slot */
+.about-image--placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  background: linear-gradient(135deg, #3A6A8F 0%, #4A7A9F 50%, #5A8AAF 100%);
+  border: 3px dashed rgba(255,255,255,0.5);
+  box-shadow: 
+    inset 0 4px 20px rgba(0,0,0,0.15),
+    0 8px 32px rgba(30,58,82,0.2);
+}
+
+.about-image-icon {
+  font-size: 2.5rem;
+  filter: grayscale(1) brightness(1.3);
+  opacity: 0.7;
+}
+
+.about-image-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.8);
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
 }
 
 .about-content h3 {
@@ -1591,10 +1796,11 @@ section {
 }
 
 .skill-item:hover {
-  border-color: var(--color-sky);
-  background: rgba(91,192,248,0.2);
+  border-color: var(--color-accent);
+  background: rgba(254,119,67,0.12);
+  color: var(--color-accent);
   transform: translateY(-3px) scale(1.03);
-  box-shadow: var(--glass-shadow-sky);
+  box-shadow: var(--glass-shadow-accent);
 }
 
 /* ─────────────────────────────────────────────────────────────────
@@ -1917,8 +2123,8 @@ section {
 .form-group input:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: var(--color-sky);
-  box-shadow: var(--glass-shadow-sky);
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(254,119,67,0.25), var(--glass-shadow);
 }
 
 .form-group textarea {
@@ -1931,25 +2137,31 @@ section {
 }
 
 /* ─────────────────────────────────────────────────────────────────
-   FOOTER
+   FOOTER (Phase 6: frosted bar for readability over orbs)
    ───────────────────────────────────────────────────────────────── */
-footer {
+footer,
+footer.footer-bar {
   margin: var(--space-lg) var(--space-md) 0;
-  padding: var(--space-md);
-  /* Remove glass-panel styling for seamless background */
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
+  padding: var(--space-md) var(--space-lg);
+  /* Frosted bar for readability over orb field */
+  background: rgba(255,255,255,0.65);
+  backdrop-filter: blur(16px) saturate(120%);
+  -webkit-backdrop-filter: blur(16px) saturate(120%);
+  border: 1px solid rgba(255,255,255,0.6);
+  border-radius: var(--radius-xl);
+  box-shadow: 
+    0 -4px 24px rgba(30,58,82,0.08),
+    inset 0 1px 0 rgba(255,255,255,0.8);
 }
 
-footer.glass-panel {
-  background: transparent;
-  border: none;
-  box-shadow: none;
-}
-
-footer.glass-panel::before {
-  display: none;
+footer.footer-bar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 15%;
+  right: 15%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.9), transparent);
 }
 
 /* Ensure main content area has no background */
@@ -2097,7 +2309,7 @@ main .contact-info {
   transform: translateY(0);
 }
 
-/* Scrollbar — 3D Glossy Lime Green Pill Style */
+/* Scrollbar — 3D Glossy Slate-Blue Pill Style (Phase 6: on-palette) */
 ::-webkit-scrollbar { 
   width: 14px; 
 }
@@ -2111,43 +2323,43 @@ main .contact-info {
 }
 
 ::-webkit-scrollbar-thumb { 
-  /* 3D Glossy lime green gradient */
+  /* 3D Glossy slate-blue gradient — matches theme */
   background: linear-gradient(180deg, 
-    #D4FF88 0%,      /* bright lime highlight */
-    #AAFF33 15%,     /* neon lime */
-    #88DD22 50%,     /* mid lime */
-    #66BB11 85%,     /* darker lime */
-    #449900 100%     /* deep green base */
+    #A8DDFF 0%,      /* bright sky highlight */
+    #6AAFDD 15%,     /* steel-azure */
+    #4A7A9F 50%,     /* theme slate */
+    #2E5A7A 85%,     /* deeper slate */
+    #162D42 100%     /* dark slate base */
   );
   border-radius: 10px;
   border: 2px solid rgba(255, 255, 255, 0.5);
   box-shadow: 
     inset 0 2px 4px rgba(255, 255, 255, 0.6),  /* top specular */
     inset 0 -2px 4px rgba(0, 0, 0, 0.15),       /* bottom shadow */
-    0 2px 8px rgba(102, 187, 17, 0.4);          /* outer glow */
+    0 2px 8px rgba(74, 122, 159, 0.4);          /* outer glow */
 }
 
 ::-webkit-scrollbar-thumb:hover { 
   background: linear-gradient(180deg, 
-    #E0FF99 0%,      /* brighter highlight */
-    #BBFF44 15%,     /* brighter lime */
-    #99EE33 50%,     /* brighter mid */
-    #77CC22 85%,     /* brighter darker */
-    #55AA11 100%     /* brighter base */
+    #C8EEFF 0%,      /* brighter highlight */
+    #7CBBEE 15%,     /* brighter sky */
+    #5599CC 50%,     /* brighter slate */
+    #3D6A8A 85%,     /* brighter darker */
+    #1E3A52 100%     /* brighter base */
   );
   box-shadow: 
     inset 0 2px 4px rgba(255, 255, 255, 0.7),
     inset 0 -2px 4px rgba(0, 0, 0, 0.1),
-    0 2px 12px rgba(170, 255, 51, 0.6);         /* stronger glow */
+    0 2px 12px rgba(91, 192, 248, 0.5);         /* sky glow */
 }
 
 ::-webkit-scrollbar-thumb:active {
   background: linear-gradient(180deg, 
-    #CCFF77 0%,
-    #99EE22 15%,
-    #77CC11 50%,
-    #55AA00 85%,
-    #338800 100%
+    #8CCAFF 0%,
+    #5599CC 15%,
+    #3D6A8A 50%,
+    #2E5A7A 85%,
+    #162D42 100%
   );
 }
 

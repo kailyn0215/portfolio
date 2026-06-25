@@ -1,37 +1,38 @@
 # ═══════════════════════════════════════════════════════════════
-# skills.yml — skill categories and items
+# skills.yml — skill categories and items (Phase 7: clearer tags)
 # format: spec-sheet style with categories
 # ═══════════════════════════════════════════════════════════════
 
-- category: "development"
-  code: "DEV"
+- category: "frontend"
+  code: "FE"
   items:
     - "javascript"
-    - "swift"
-    - "java"
-    - "c++"
-    - "python"
     - "html/css"
+    - "swift"
+    - "animation"
+
+- category: "backend"
+  code: "BE"
+  items:
+    - "java"
+    - "python"
+    - "c++"
     - "node.js"
 
-- category: "tools"
-  code: "SYS"
+- category: "devops"
+  code: "OPS"
   items:
     - "git"
     - "docker"
     - "linux"
-    - "terminal"
-    - "postman"
     - "rancher"
-    - "vim"
-    - "intellij"
     - "akeyless"
     - "gcs"
+    - "terminal"
 
 - category: "creative"
-  code: "CRE"
+  code: "ART"
   items:
-    - "animation"
     - "blender"
     - "photoshop"
     - "photography"

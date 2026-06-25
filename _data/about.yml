@@ -1,0 +1,8 @@
+# ═══════════════════════════════════════════════════════════════
+# about.yml — About section data
+# ═══════════════════════════════════════════════════════════════
+
+# TODO: Add your photo path here (relative to /assets/images/)
+# Example: photo: "/assets/images/kb-portrait.jpg"
+# Leave empty or comment out to show the placeholder
+photo: "/assets/images/meowl.jpg"

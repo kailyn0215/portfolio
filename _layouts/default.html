@@ -56,6 +56,9 @@
     <span class="orb orb--xs orb--lavender orb--z-front fg-orb" style="left: 72%; top: 70%;" aria-hidden="true"></span>
   </div>
 
+  <!-- Quiet Zone Overlay — soft central fade so content reads clearly (Phase 2) -->
+  <div class="quiet-zone-overlay" aria-hidden="true"></div>
+
   <!-- ═══════════════════════════════════════════════════════════════
        THEMED MOTIFS — Frutiger Aero Tech/Nature Elements
        ═══════════════════════════════════════════════════════════════
@@ -150,10 +153,10 @@
   <!-- ═══════════════════════════════════════════════════════════════
        FOOTER
        ═══════════════════════════════════════════════════════════════ -->
-  <footer class="glass-panel">
+  <footer class="footer-bar">
     <div class="footer-content">
       <p class="footer-logo">KB</p>
-      <p>&copy; {{ 'now' | date: '%Y' }} kailyn brown — built with ✦ and optimism</p>
+      <p>&copy; {{ 'now' | date: '%Y' }} kailyn brown — built with ♥ and optimism</p>
       <div class="footer-links">
         <a href="#home">home</a>
         <a href="#about">about</a>
@@ -209,6 +212,33 @@
       }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
       document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
+
+      // ─────────────────────────────────────────────────────────────
+      // Nav Active State — Scroll-based section indicator (Phase 7)
+      // ─────────────────────────────────────────────────────────────
+      const navActiveObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const sectionId = entry.target.getAttribute('id');
+            if (sectionId) {
+              // Remove active from all nav links
+              document.querySelectorAll('.nav-links li a').forEach(link => {
+                link.classList.remove('active');
+              });
+              // Add active to matching nav link
+              const activeLink = document.querySelector(`.nav-links li a[href="#${sectionId}"]`);
+              if (activeLink) {
+                activeLink.classList.add('active');
+              }
+            }
+          }
+        });
+      }, { threshold: 0.3, rootMargin: '-20% 0px -50% 0px' });
+
+      // Observe all sections with IDs
+      document.querySelectorAll('section[id]').forEach(section => {
+        navActiveObserver.observe(section);
+      });
 
       // ─────────────────────────────────────────────────────────────
       // Mobile Nav Toggle
