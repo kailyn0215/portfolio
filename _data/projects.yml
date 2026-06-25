@@ -25,7 +25,7 @@
     - "node.js"
     - "javascript"
     - "openai api"
-  year: 2025
+  year: 2026
   version: "v1.1"
   status: "live"
   live_url: ""  # no live demo — local server
