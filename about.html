@@ -1,0 +1,210 @@
+---
+layout: page
+title: "about // kb"
+description: "Learn more about Kailyn Brown — background, journey, interests, and experience."
+nav_active: about
+orb_set: about
+---
+
+<!-- ═══════════════════════════════════════════════════════════════
+     ABOUT DETAIL PAGE — Extended bio, journey, resume
+     ═══════════════════════════════════════════════════════════════ -->
+
+<section class="detail-section">
+  <div class="detail-container">
+    
+    <!-- Page Header -->
+    <header class="detail-header fade-in">
+      <span class="section-tag">✦ about // in depth</span>
+      <h1 class="section-title">kailyn brown</h1>
+      <p class="section-subtitle">software developer — building interfaces and breaking conventions</p>
+    </header>
+
+    <!-- Profile Card -->
+    <div class="profile-card glass-card fade-in">
+      <div class="profile-photo-wrapper">
+        {% if site.data.about.photo and site.data.about.photo != "" %}
+        <img src="{{ site.data.about.photo | relative_url }}" alt="Kailyn Brown" class="profile-photo">
+        {% else %}
+        <div class="profile-photo-placeholder">
+          <span>📷</span>
+          <small>add photo</small>
+        </div>
+        {% endif %}
+      </div>
+      <div class="profile-info">
+        <h2 class="profile-name">kailyn brown</h2>
+        <p class="profile-tagline">{{ site.data.about.tagline }}</p>
+        <div class="profile-specs">
+          <div class="spec-row">
+            <span class="spec-label">location</span>
+            <span class="spec-dots">···</span>
+            <span class="spec-value">cincinnati, OH</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">focus</span>
+            <span class="spec-dots">···</span>
+            <span class="spec-value">backend software development</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">status</span>
+            <span class="spec-dots">···</span>
+            <span class="spec-value">currently interning @ kroger tech & digital</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Background Story -->
+    <div class="detail-block glass-card fade-in">
+      <h3 class="block-title"><span class="title-icon">📂</span> {{ site.data.about.background.title }}</h3>
+      <div class="block-content prose">
+        {{ site.data.about.background.content | markdownify }}
+      </div>
+    </div>
+
+    <!-- Journey Timeline -->
+    <div class="detail-block glass-card fade-in">
+      <h3 class="block-title"><span class="title-icon">📅</span> {{ site.data.about.journey.title }}</h3>
+      <div class="timeline">
+        {% for milestone in site.data.about.journey.milestones %}
+        <div class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <span class="timeline-year">{{ milestone.year }}</span>
+            <h4 class="timeline-event">{{ milestone.event }}</h4>
+            <p class="timeline-description">{{ milestone.description }}</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Interests -->
+    <div class="detail-block glass-card fade-in">
+      <h3 class="block-title"><span class="title-icon">🎯</span> {{ site.data.about.interests.title }}</h3>
+      <div class="interests-grid">
+        {% for interest in site.data.about.interests.items %}
+        <div class="interest-card">
+          <span class="interest-icon">{{ interest.icon }}</span>
+          <h4 class="interest-name">{{ interest.name }}</h4>
+          <p class="interest-description">{{ interest.description }}</p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Fun Facts -->
+    <div class="detail-block glass-card fade-in">
+      <h3 class="block-title"><span class="title-icon">✨</span> {{ site.data.about.fun_facts.title }}</h3>
+      <ul class="fun-facts-list">
+        {% for fact in site.data.about.fun_facts.items %}
+        <li class="fun-fact-item">{{ fact }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <!-- Values -->
+    <div class="detail-block glass-card fade-in">
+      <h3 class="block-title"><span class="title-icon">💎</span> {{ site.data.about.values.title }}</h3>
+      <div class="values-grid">
+        {% for value in site.data.about.values.items %}
+        <div class="value-card">
+          <h4 class="value-name">{{ value.name }}</h4>
+          <p class="value-description">{{ value.description }}</p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         RESUME / EXPERIENCE SECTION
+         ═══════════════════════════════════════════════════════════════ -->
+    
+    <div class="resume-divider fade-in">
+      <span class="divider-text">resume & experience</span>
+    </div>
+
+    <!-- Work Experience -->
+    <div class="detail-block glass-card fade-in">
+      <h3 class="block-title"><span class="title-icon">💼</span> {{ site.data.about.resume.title }}</h3>
+      
+      <div class="experience-section">
+        <h4 class="subsection-title">work experience</h4>
+        {% for job in site.data.about.resume.experience %}
+        <div class="experience-item">
+          <div class="experience-header">
+            <div class="experience-main">
+              <h5 class="experience-role">{{ job.role }}</h5>
+              <span class="experience-company">@ {{ job.company }}</span>
+            </div>
+            <span class="experience-period">{{ job.period }}</span>
+          </div>
+          <p class="experience-description">{{ job.description }}</p>
+          <ul class="experience-highlights">
+            {% for highlight in job.highlights %}
+            <li>{{ highlight }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endfor %}
+      </div>
+
+      <!-- Education -->
+      <div class="experience-section">
+        <h4 class="subsection-title">education</h4>
+        {% for edu in site.data.about.resume.education %}
+        <div class="experience-item">
+          <div class="experience-header">
+            <div class="experience-main">
+              <h5 class="experience-role">{{ edu.degree }}</h5>
+              <span class="experience-company">@ {{ edu.institution }}</span>
+            </div>
+            <span class="experience-period">{{ edu.period }}</span>
+          </div>
+          <ul class="experience-highlights">
+            {% for highlight in edu.highlights %}
+            <li>{{ highlight }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endfor %}
+      </div>
+
+      <!-- Certifications -->
+      {% if site.data.about.resume.certifications.size > 0 %}
+      <div class="experience-section">
+        <h4 class="subsection-title">certifications</h4>
+        <div class="certifications-grid">
+          {% for cert in site.data.about.resume.certifications %}
+          <div class="certification-item">
+            <span class="cert-name">{{ cert.name }}</span>
+            <span class="cert-meta">{{ cert.issuer }} · {{ cert.year }}</span>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- Resume Download -->
+      {% if site.data.about.resume.download_link and site.data.about.resume.download_link != "" %}
+      <div class="resume-download">
+        <a href="{{ site.data.about.resume.download_link | relative_url }}" class="btn-primary" download>
+          ↓ download resume (pdf)
+        </a>
+      </div>
+      {% else %}
+      <div class="resume-download">
+        <span class="placeholder-note">TODO: Add resume PDF link in _data/about.yml</span>
+      </div>
+      {% endif %}
+    </div>
+
+    <!-- Call to Action -->
+    <div class="detail-cta fade-in">
+      <p>want to work together?</p>
+      <a href="{{ '/' | relative_url }}#contact" class="btn-primary">→ get in touch</a>
+    </div>
+
+  </div>
+</section>

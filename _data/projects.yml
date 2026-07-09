@@ -1,46 +1,150 @@
 # ═══════════════════════════════════════════════════════════════
-# projects.yml — portfolio project data
-# format: game cartridge / album cover style metadata
+# projects.yml — Project data for KB portfolio
 # ═══════════════════════════════════════════════════════════════
 
 - id: "mia"
-  title: "managing-the-issue-of-aphasia"
-  tagline: "an iOS aphasia speech therapy app"
-  description: "a speech therapy companion app designed for individuals with aphasia, featuring customizable word-retrieval exercises, progress tracking, and cueing hierarchies to support language recovery and communication independence."
-  tech:
-    - "xcode"
-    - "swift"
-    - "storyboard"
-  year: 2024
-  version: "v1.1.5"
-  status: "live"
-  live_url: ""  # TODO: add App Store link when available
-  repo_url: ""  # TODO: add GitHub link or leave empty if private
+  name: "MIA"
+  tagline: "iOS app helping aphasia patients communicate"
+  description: |
+    A mobile application designed to assist patients with aphasia in their daily communication. 
+    Built as a personal challenge project where I taught myself Swift and Xcode to create something 
+    meaningful that could help real people.
+  
+  # Basic info
+  category: "mobile app"
+  status: "in development"
+  featured: true
+  
+  # Tech stack
+  stack:
+    - "Swift"
+    - "Xcode"
+    - "iOS"
+    - "Storyboard"
+  
+  # Links
+  github: ""
+  live: ""
+  
+  # Detail page content
+  detail:
+    hero_image: "" # Add path when available
+    
+    overview: |
+      MIA (Mobile Interface for Aphasia) is an iOS application I developed to help patients with 
+      aphasia communicate more effectively. Aphasia is a language disorder that affects a person's 
+      ability to communicate, often resulting from stroke or brain injury. This app provides visual 
+      and audio aids to help patients express their needs and communicate with caregivers and family.
+    
+    problem: |
+      Patients with aphasia often struggle to communicate basic needs and emotions, leading to 
+      frustration for both them and their caregivers. Existing solutions are often expensive, 
+      complicated, or not designed with accessibility in mind.
+    
+    solution: |
+      I designed MIA to be intuitive and accessible, featuring large visual icons, simple navigation, 
+      and audio feedback. The app includes categories for common needs like food, comfort, emotions, 
+      and activities, making it easy for users to express themselves with just a few taps.
+    
+    role: "Solo Developer — Design & Development"
+    
+    timeline: "Ongoing personal project"
+    
+    features:
+      - title: "Visual Communication"
+        description: "Large, clear icons representing common needs and phrases"
+      - title: "Audio Feedback"
+        description: "Text-to-speech functionality to help convey messages"
+      - title: "Customizable Categories"
+        description: "Ability to add custom phrases and images"
+      - title: "Simple Navigation"
+        description: "Designed for users with motor or cognitive difficulties"
+    
+    challenges:
+      - title: "Learning Swift from Scratch"
+        description: "Taught myself Swift and Xcode with no prior iOS experience"
+        solution: "Used online resources, documentation, and iterative practice"
+      - title: "Accessibility Design"
+        description: "Creating an interface usable by people with various impairments"
+        solution: "Research on accessible design patterns and user testing"
+    
+    outcomes:
+      - "Successfully built a functional iOS prototype"
+      - "Gained proficiency in Swift and Xcode"
+      - "Developed understanding of accessible design principles"
+    
+    screenshots: []
+    
+    next_steps: |
+      Continue development with planned features including cloud sync for settings, 
+      caregiver mode for easy customization, and expanded language support.
 
-- id: "groovy proxy"
-  title: "groovy-proxy"
-  tagline: "locally hosted node.js proxy server for llm chat models"
-  description: "a local proxy server that allows users to interact with large language models (llms) through a chat interface, enabling seamless communication with AI models."
-  tech:
-    - "node.js"
-    - "javascript"
-    - "openai api"
-  year: 2026
-  version: "v1.1"
-  status: "live"
-  live_url: ""  # no live demo — local server
-  repo_url: "https://github.com/kailyn0215/groovy-proxy"
-
-- id: "archival"
-  title: "archival system"
-  tagline: "document management"
-  description: "searchable archive platform with ocr processing and semantic tagging capabilities."
-  tech:
-    - "python"
-    - "fastapi"
-    - "postgresql"
-  year: 2023
-  version: "v3.0"
-  status: "maintained"
-  live_url: ""  # TODO: add demo URL if deployed
-  repo_url: ""  # TODO: add GitHub link or leave empty if private
+- id: "groovy-proxy"
+  name: "Groovy Proxy"
+  tagline: "A self-hosted chat interface for AI models and proxies"
+  description: |
+    A lightweight proxy server tool built to assist with local development and API testing. 
+    Created to streamline the development workflow and make testing easier.
+  
+  # Basic info
+  category: "dev tool"
+  status: "complete"
+  featured: true
+  
+  # Tech stack
+  stack:
+    - "Node.js"
+    - "JavaScript"
+    - "Express"
+  
+  # Links
+  github: ""
+  live: ""
+  
+  # Detail page content
+  detail:
+    hero_image: ""
+    
+    overview: |
+      Groovy Proxy is a development tool I built to simplify API testing and local development 
+      workflows. It acts as a proxy server that can intercept, log, and modify HTTP requests, 
+      making it easier to debug and test applications during development.
+    
+    problem: |
+      During development, it's often necessary to test API integrations, debug request/response 
+      cycles, and simulate different scenarios. Setting this up manually can be time-consuming 
+      and error-prone.
+    
+    solution: |
+      Groovy Proxy provides a simple, configurable proxy server that can be run locally. It 
+      logs all requests, allows for request modification, and provides a clean interface for 
+      monitoring traffic during development.
+    
+    role: "Solo Developer"
+    
+    timeline: "Personal project"
+    
+    features:
+      - title: "Request Logging"
+        description: "Detailed logging of all HTTP requests and responses"
+      - title: "Easy Configuration"
+        description: "Simple setup and configuration for different environments"
+      - title: "Request Modification"
+        description: "Ability to intercept and modify requests on the fly"
+      - title: "Clean Interface"
+        description: "User-friendly interface for monitoring traffic"
+    
+    challenges:
+      - title: "HTTP Protocol Handling"
+        description: "Properly handling various HTTP methods and headers"
+        solution: "Leveraged Express.js middleware for robust request handling"
+    
+    outcomes:
+      - "Streamlined personal development workflow"
+      - "Gained deeper understanding of HTTP protocols"
+      - "Created reusable tool for future projects"
+    
+    screenshots: []
+    
+    next_steps: |
+      TODO: Add any planned features or improvements

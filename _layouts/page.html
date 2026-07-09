@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ page.title | default: site.title }}</title>
+  <title>{{ page.title }} | {{ site.title }}</title>
   <meta name="description" content="{{ page.description | default: site.description }}">
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -31,7 +31,7 @@
   </div>
 
   <!-- ═══════════════════════════════════════════════════════════════
-       DRIFTING ORBS — Rendered from _data/orbs.yml
+       DRIFTING ORBS — Same as homepage (from _data/orbs.yml)
        ═══════════════════════════════════════════════════════════════ -->
   <div class="orbs-layer">
     {% assign sky_imgs = "sky1.jpg,sky2.jpg,sky3.jpg,sky4.jpg,sky5.jpg,sky6.jpg,sky7.jpg" | split: "," %}
@@ -47,91 +47,25 @@
   </div>
 
   <!-- ═══════════════════════════════════════════════════════════════
-       FOREGROUND ORBS — Percentage-based positioning (clamped to prevent overflow)
+       FOREGROUND ORBS — Percentage-based positioning
        ═══════════════════════════════════════════════════════════════ -->
   <div class="orbs-foreground" id="fg-orbs">
-    <span class="orb orb--sm orb--sky orb--z-front fg-orb" style="left: 15%; top: 25%;" aria-hidden="true"></span>
-    <span class="orb orb--xs orb--peach orb--z-front fg-orb" style="left: 75%; top: 35%;" aria-hidden="true"></span>
-    <span class="orb orb--sm orb--cobalt orb--z-front fg-orb" style="left: 8%; top: 55%;" aria-hidden="true"></span>
-    <span class="orb orb--xs orb--lavender orb--z-front fg-orb" style="left: 72%; top: 70%;" aria-hidden="true"></span>
+    <span class="orb orb--sm orb--sky orb--z-front fg-orb" style="left: 12%; top: 20%;" aria-hidden="true"></span>
+    <span class="orb orb--xs orb--peach orb--z-front fg-orb" style="left: 78%; top: 30%;" aria-hidden="true"></span>
+    <span class="orb orb--sm orb--lavender orb--z-front fg-orb" style="left: 6%; top: 60%;" aria-hidden="true"></span>
+    <span class="orb orb--xs orb--tangerine orb--z-front fg-orb" style="left: 85%; top: 75%;" aria-hidden="true"></span>
   </div>
 
-  <!-- Quiet Zone Overlay — soft central fade so content reads clearly (Phase 2) -->
+  <!-- Quiet Zone Overlay -->
   <div class="quiet-zone-overlay" aria-hidden="true"></div>
 
   <!-- ═══════════════════════════════════════════════════════════════
-       THEMED MOTIFS — Frutiger Aero Tech/Nature Elements
-       ═══════════════════════════════════════════════════════════════
-  <div class="motifs-layer">
-    <!-- Hero Section
-    <span class="motif motif--leaf" style="top: 8%; right: 16%; font-size: 3.5rem; animation-delay: -2s;">🌐</span>
-    <span class="motif motif--droplet" style="top: 12%; left: 6%; font-size: 2.9rem; animation-delay: -5s; animation-duration: 14s;">🫧</span>
-    <span class="motif motif--butterfly" style="top: 16%; right: 8%; font-size: 3.1rem; animation-delay: -8s; animation-duration: 10s;">🐬</span>
-    <!-- Hero center motifs
-    <span class="motif motif--leaf" style="top: 6%; left: 40%; font-size: 3.5rem; animation-delay: -1s; animation-duration: 15s;">🫧</span>
-    <span class="motif motif--droplet" style="top: 18%; left: 62%; font-size: 3.4rem; animation-delay: -3s; animation-duration: 13s;">🍏</span>
-    
-    <!-- About Section
-    <span class="motif motif--butterfly" style="top: 25%; left: 8%; font-size: 3.2rem; animation-delay: -1s; animation-duration: 13s;">🪼</span>
-    <span class="motif motif--leaf" style="top: 37%; right: 10%; font-size: 2.9rem; animation-delay: -4s; animation-duration: 12s;">🌱</span>
-    <!-- About center motifs
-    <span class="motif motif--droplet" style="top: 21%; left: 38%; font-size: 2.7rem; animation-delay: -6s; animation-duration: 14s;">🌀</span>
-    <span class="motif motif--leaf" style="top: 28%; right: 14%; font-size: 3.5rem; animation-delay: -2s; animation-duration: 12s;">🫧</span>
-    
-    <!-- Skills Section
-    <span class="motif motif--leaf" style="top: 42%; right: 17%; font-size: 2.9rem; animation-delay: -2s; animation-duration: 11s;">🖥️</span>
-    <span class="motif motif--droplet" style="top: 50%; left: 7%; font-size: 2.8rem; animation-delay: -5s; animation-duration: 15s;">🥏</span>
-    <!-- Skills center motifs
-    <span class="motif motif--butterfly" style="top: 38%; left: 38%; font-size: 3.6rem; animation-delay: -4s; animation-duration: 13s;">🍏</span>
-    <span class="motif motif--droplet" style="top: 44.5%; right: 32%; font-size: 3.2rem; animation-delay: -7s; animation-duration: 11s;">🌐</span>
-    <span class="motif motif--leaf" style="top: 53.5%; left: 50%; font-size: 3.4rem; animation-delay: -1s; animation-duration: 14s;">🧃</span>
-    
-    <!-- Projects Section
-    <span class="motif motif--leaf" style="top: 64%; left: 9%; font-size: 3.3rem; animation-delay: -3s; animation-duration: 12s;">🐬</span>
-    <span class="motif motif--butterfly" style="top: 68%; right: 6%; font-size: 3rem; animation-delay: -6s; animation-duration: 14s;">🍏</span>
-    <span class="motif motif--droplet" style="top: 75%; left: 14%; font-size: 2.7rem; animation-delay: -1s; animation-duration: 13s;">🌀</span>
-    <!-- Projects center motifs
-    <span class="motif motif--butterfly" style="top: 58%; left: 32%; font-size: 3.6rem; animation-delay: -5s; animation-duration: 12s;">🐠</span>
-    <span class="motif motif--leaf" style="top: 60.5%; right: 32%; font-size: 3.5rem; animation-delay: -2s; animation-duration: 15s;">🌱</span>
-    <span class="motif motif--droplet" style="top: 74%; left: 35%; font-size: 2.8rem; animation-delay: -8s; animation-duration: 13s;">📀</span>
-    <span class="motif motif--butterfly" style="top: 78%; right: 28%; font-size: 2.9rem; animation-delay: -3s; animation-duration: 11s;">🥏</span>
-    
-    <!-- Contact Section
-    <span class="motif motif--butterfly" style="top: 85%; right: 8%; font-size: 2.9rem; animation-delay: -7s; animation-duration: 14s;">🎶</span>
-    <span class="motif motif--leaf" style="top: 92%; left: 10%; font-size: 2.8rem; animation-delay: -2s; animation-duration: 15s;">🌍</span>
-    <!-- Contact center motifs
-    <span class="motif motif--droplet" style="top: 81.5%; left: 39%; font-size: 3.6rem; animation-delay: -4s; animation-duration: 12s;">🖥️</span>
-    <span class="motif motif--leaf" style="top: 89%; right: 21%; font-size: 3.5rem; animation-delay: -6s; animation-duration: 14s;">🐠</span>
-    <span class="motif motif--butterfly" style="top: 95%; left: 40%; font-size: 3.4rem; animation-delay: -1s; animation-duration: 13s;">🪼</span>
-    
-    <!-- Extra scattered motifs for more visual richness
-    <span class="motif motif--droplet" style="top: 5%; left: 25%; font-size: 3.7rem; animation-delay: -3s; animation-duration: 16s;">📀</span>
-    <span class="motif motif--leaf" style="top: 34.5%; left: 12%; font-size: 2.9rem; animation-delay: -7s; animation-duration: 13s;">🧃</span>
-    <span class="motif motif--butterfly" style="top: 55%; right: 4%; font-size: 2.9rem; animation-delay: -4s; animation-duration: 12s;">🍎</span>
-    <span class="motif motif--droplet" style="top: 80%; left: 20%; font-size: 3.5rem; animation-delay: -6s; animation-duration: 14s;">🍋‍🟩</span>
-  </div> -->
-
-  <!-- ═══════════════════════════════════════════════════════════════
-       GLASS PILL STICKERS — Rendered from _data/pills.yml
+       GLASS PILL STICKERS — Fewer for detail pages, positioned inward
        ═══════════════════════════════════════════════════════════════ -->
   <div class="decorations">
-    {% for pill in site.data.pills.pills %}
-    <span
-      class="glass-pill glass-pill--{{ pill.tint }}{% if pill.drift %} glass-pill--drift-{{ pill.drift }}{% endif %}"
-      style="position: absolute;
-             --pill-tilt: {{ pill.tilt }}deg;
-             {% if pill.top    %}top: {{ pill.top }};{% endif %}
-             {% if pill.right  %}right: {{ pill.right }};{% endif %}
-             {% if pill.bottom %}bottom: {{ pill.bottom }};{% endif %}
-             {% if pill.left   %}left: {{ pill.left }};{% endif %}"
-    >{{ pill.label }}</span>
-    {% endfor %}
-    
-    <!-- Retro UI Elements -->
-    <div class="retro-progress" style="top: 42%; left: 2%;"></div>
-    <div class="loading-dots" style="top: 72%; right: 3%;">
-      <span></span><span></span><span></span><span></span>
-    </div>
+    <span class="glass-pill glass-pill--sky glass-pill--drift-a" style="position: absolute; --pill-tilt: -3deg; top: 18%; right: 10%;">✦ detail</span>
+    <span class="glass-pill glass-pill--peach glass-pill--drift-b" style="position: absolute; --pill-tilt: 2deg; top: 50%; left: 8%;">→ explore</span>
+    <span class="glass-pill glass-pill--lavender glass-pill--drift-c" style="position: absolute; --pill-tilt: -1deg; bottom: 25%; right: 12%;">◈ kb</span>
   </div>
 
   <!-- Subtle Grid & Grain -->
@@ -139,14 +73,14 @@
   <div class="bg-grain"></div>
 
   <!-- ═══════════════════════════════════════════════════════════════
-       NAVIGATION
+       NAVIGATION — Sub-page variant with home links
        ═══════════════════════════════════════════════════════════════ -->
-  {% include nav.html %}
+  {% include nav-page.html %}
 
   <!-- ═══════════════════════════════════════════════════════════════
        MAIN CONTENT
        ═══════════════════════════════════════════════════════════════ -->
-  <main>
+  <main class="detail-main">
     {{ content }}
   </main>
 
@@ -156,12 +90,12 @@
   <footer class="footer-bar">
     <div class="footer-content">
       <p class="footer-logo">KB</p>
-      <p>&copy; {{ 'now' | date: '%Y' }} kailyn brown — built with joy & whimsy</p>
+      <p>&copy; {{ 'now' | date: '%Y' }} kailyn brown — built with joy and whimsy</p>
       <div class="footer-links">
-        <a href="#home">home</a>
-        <a href="#about">about</a>
-        <a href="#projects">projects</a>
-        <a href="#contact">contact</a>
+        <a href="{{ '/' | relative_url }}">home</a>
+        <a href="{{ '/' | relative_url }}#about">about</a>
+        <a href="{{ '/' | relative_url }}#projects">projects</a>
+        <a href="{{ '/' | relative_url }}#contact">contact</a>
       </div>
     </div>
   </footer>
@@ -172,23 +106,23 @@
   <div class="sparkle-container" id="sparkle-container" aria-hidden="true"></div>
 
   <!-- ═══════════════════════════════════════════════════════════════
-       SCRIPTS — Vanilla JS Only
+       SCRIPTS — Same as default layout
        ═══════════════════════════════════════════════════════════════ -->
   <script>
     (function() {
       'use strict';
 
       // ─────────────────────────────────────────────────────────────
-      // Page Visibility — change title when user leaves tab
+      // Page Visibility
       // ─────────────────────────────────────────────────────────────
-      const originalTitle = "KB's Portfolio";
+      const originalTitle = "{{ page.title }} | KB";
       document.title = originalTitle;
       document.addEventListener('visibilitychange', () => {
         document.title = document.hidden ? 'miss u :(' : originalTitle;
       });
 
       // ─────────────────────────────────────────────────────────────
-      // Smooth Scroll
+      // Smooth Scroll (for anchor links within page)
       // ─────────────────────────────────────────────────────────────
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
@@ -214,33 +148,6 @@
       document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
 
       // ─────────────────────────────────────────────────────────────
-      // Nav Active State — Scroll-based section indicator (Phase 7)
-      // ─────────────────────────────────────────────────────────────
-      const navActiveObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const sectionId = entry.target.getAttribute('id');
-            if (sectionId) {
-              // Remove active from all nav links
-              document.querySelectorAll('.nav-links li a').forEach(link => {
-                link.classList.remove('active');
-              });
-              // Add active to matching nav link
-              const activeLink = document.querySelector(`.nav-links li a[href="#${sectionId}"]`);
-              if (activeLink) {
-                activeLink.classList.add('active');
-              }
-            }
-          }
-        });
-      }, { threshold: 0.3, rootMargin: '-20% 0px -50% 0px' });
-
-      // Observe all sections with IDs
-      document.querySelectorAll('section[id]').forEach(section => {
-        navActiveObserver.observe(section);
-      });
-
-      // ─────────────────────────────────────────────────────────────
       // Mobile Nav Toggle
       // ─────────────────────────────────────────────────────────────
       const navToggle = document.querySelector('.nav-toggle');
@@ -264,92 +171,12 @@
       });
 
       // ─────────────────────────────────────────────────────────────
-      // Per-Section Accent Orbs — 3-6 per section (1-2 of each color)
-      // Colors: tangerine, peach, lavender only
-      // Uses percentage-based positioning to prevent overflow
-      // MOBILE: Reduced orb count for performance
+      // Performance: Pause off-screen animations
       // ─────────────────────────────────────────────────────────────
-      const orbsLayer = document.querySelector('.orbs-layer');
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const isMobile = window.innerWidth <= 768;
-      
-      if (!prefersReducedMotion && orbsLayer) {
-        // Wrap in requestAnimationFrame to ensure layout is ready
-        requestAnimationFrame(() => {
-          const colors = ['tangerine', 'peach', 'lavender'];
-          // On mobile: only xs/sm orbs, fewer of them
-          const sizes = isMobile ? ['xs', 'sm'] : ['xs', 'sm', 'md'];
-          const drifts = isMobile ? ['a', 'b'] : ['a', 'b', 'c', 'd']; // Fewer animation variants on mobile
-          const sections = document.querySelectorAll('section');
-          const pageWrapper = document.querySelector('.page-wrapper');
-          const totalHeight = pageWrapper ? pageWrapper.scrollHeight : document.body.scrollHeight;
-          
-          sections.forEach((section, sectionIndex) => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.offsetHeight;
-            
-            // MOBILE: Only spawn orbs in every other section, fewer colors
-            if (isMobile && sectionIndex % 2 === 1) return;
-            
-            // For each color, spawn 1-2 orbs (total 3-6 per section)
-            // MOBILE: Only 1 orb per color max (total 1-3 per section)
-            colors.forEach((color, colorIndex) => {
-              // Mobile: skip every other color too
-              if (isMobile && colorIndex % 2 === 1) return;
-              
-              const count = isMobile ? 1 : (1 + Math.floor(Math.random() * 2)); // 1 on mobile, 1-2 on desktop
-              
-              for (let i = 0; i < count; i++) {
-                const el = document.createElement('span');
-                el.setAttribute('aria-hidden', 'true');
-                
-                const size = sizes[Math.floor(Math.random() * sizes.length)];
-                const drift = drifts[Math.floor(Math.random() * drifts.length)];
-                const rotation = Math.floor(Math.random() * 360);
-                const skyNum = Math.floor(Math.random() * 6) + 1;
-                const bgPosX = Math.floor(Math.random() * 100);
-                const bgPosY = Math.floor(Math.random() * 100);
-                // Mobile: slower animations use less CPU
-                const animDuration = isMobile ? (18 + Math.random() * 8) : (12 + Math.random() * 12);
-                const animDelay = Math.random() * -20;
-                
-                // Clamp X to 5-75% to prevent horizontal overflow (leaves room for orb width + blur + drift)
-                const x = Math.random() * 70 + 5; // 5-75% width
-                
-                // Calculate Y as percentage of total page height
-                const yWithinSection = sectionTop + (Math.random() * 0.8 + 0.1) * sectionHeight;
-                const yPercent = (yWithinSection / totalHeight) * 100;
-                // No need to clamp - orbs-layer has overflow:hidden to clip any overflow
-                
-                el.className = `orb orb--${size} orb--${color} orb--glass orb--z-mid orb--drift-${drift} accent-orb`;
-                
-                el.style.cssText = `
-                  position: absolute;
-                  left: ${x}%;
-                  top: ${yPercent}%;
-                  --env-rotate: ${rotation}deg;
-                  --env-img: url('{{ "/assets/images/" | relative_url }}sky${skyNum}.jpg');
-                  --env-bg-pos: ${bgPosX}% ${bgPosY}%;
-                  --env-opacity: 0.5;
-                  animation-duration: ${animDuration}s;
-                  animation-delay: ${animDelay}s;
-                  z-index: 3;
-                `;
-                
-                orbsLayer.appendChild(el);
-              }
-            });
-          });
-        });
-      }
 
-      // ─────────────────────────────────────────────────────────────
-      // Performance: Pause off-screen animations via IntersectionObserver
-      // MOBILE: More aggressive pausing (0px margin vs 100px on desktop)
-      // ─────────────────────────────────────────────────────────────
       if (!prefersReducedMotion && 'IntersectionObserver' in window) {
-        // Mobile: only animate orbs actually in view (0px margin)
-        // Desktop: start animating 100px before entering viewport
         const orbRootMargin = isMobile ? '0px 0px' : '100px 0px';
         
         const orbObserver = new IntersectionObserver((entries) => {
@@ -365,37 +192,25 @@
           threshold: 0
         });
 
-        // Observe all orbs
         document.querySelectorAll('.orb').forEach(orb => {
           orbObserver.observe(orb);
-        });
-
-        // Observe motifs too
-        document.querySelectorAll('.motif').forEach(motif => {
-          orbObserver.observe(motif);
         });
       }
 
       // ─────────────────────────────────────────────────────────────
-      // Performance: Passive scroll listeners
-      // ─────────────────────────────────────────────────────────────
-      document.addEventListener('scroll', () => {}, { passive: true });
-
-      // ─────────────────────────────────────────────────────────────
-      // Mouse Sparkles — Cursor Trail Effect (DESKTOP ONLY)
+      // Mouse Sparkles (DESKTOP ONLY)
       // ─────────────────────────────────────────────────────────────
       if (!prefersReducedMotion && !isMobile) {
         const sparkleContainer = document.getElementById('sparkle-container');
         const sparkleChars = ['✦', '✧', '⋆', '✶', '❋', '✴'];
         const sparkleColors = ['sky', 'leaf', 'sunset', 'lavender', 'accent', 'gold'];
         let lastSparkleTime = 0;
-        const sparkleThrottle = 50; // ms between sparkles
-        const maxSparkles = 30; // Limit active sparkles for performance
+        const sparkleThrottle = 50;
+        const maxSparkles = 30;
 
         function createSparkle(x, y) {
           if (!sparkleContainer) return;
           
-          // Enforce max sparkles
           while (sparkleContainer.children.length >= maxSparkles) {
             sparkleContainer.removeChild(sparkleContainer.firstChild);
           }
@@ -409,7 +224,6 @@
           
           sparkleContainer.appendChild(sparkle);
           
-          // Remove after animation completes
           setTimeout(() => {
             if (sparkle.parentNode) {
               sparkle.parentNode.removeChild(sparkle);
@@ -424,11 +238,10 @@
             createSparkle(e.clientX, e.clientY);
           }
         }, { passive: true });
-
       }
 
       // ─────────────────────────────────────────────────────────────
-      // Pill Click Sparkle Burst (always active)
+      // Pill Click Sparkle Burst
       // ─────────────────────────────────────────────────────────────
       const burstChars = ['✦', '✧', '⋆', '✶', '★', '☆'];
       const burstColors = ['sky', 'leaf', 'sunset', 'lavender', 'accent', 'gold'];
@@ -463,7 +276,6 @@
         }, 700);
       }
 
-      // Attach click handlers to all pills
       document.querySelectorAll('.glass-pill').forEach(pill => {
         pill.addEventListener('click', (e) => {
           const rect = pill.getBoundingClientRect();

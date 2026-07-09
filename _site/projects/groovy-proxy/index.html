@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Groovy Proxy // project | Kailyn Brown | Portfolio</title>
+  <meta name="description" content="Local development proxy tool for testing">
+  <link rel="stylesheet" href="/portfolio/assets/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Begin Jekyll SEO tag v2.9.0 -->
+<title>Groovy Proxy | Kailyn Brown Portfolio</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Groovy Proxy" />
+<meta name="author" content="Kailyn Brown" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A lightweight proxy server tool built to assist with local development and API testing. Created to streamline the development workflow and make testing easier." />
+<meta name="twitter:description" property="og:description" content="A lightweight proxy server tool built to assist with local development and API testing. Created to streamline the development workflow and make testing easier." />
+<link rel="canonical" href="http://localhost:4000/portfolio/projects/groovy-proxy/" />
+<meta property="og:url" content="http://localhost:4000/portfolio/projects/groovy-proxy/" />
+<meta property="og:site_name" content="Kailyn Brown Portfolio" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-07-09T15:03:54-04:00" />
+<meta property="article:modified_time" content="2026-07-09T15:03:54-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Groovy Proxy" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Kailyn Brown"},"dateModified":"2026-07-09T15:03:54-04:00","datePublished":"2026-07-09T15:03:54-04:00","description":"A lightweight proxy server tool built to assist with local development and API testing. Created to streamline the development workflow and make testing easier.","headline":"Groovy Proxy","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/portfolio/projects/groovy-proxy/"},"url":"http://localhost:4000/portfolio/projects/groovy-proxy/"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+<body style="--sky1-url: url('/portfolio/assets/images/sky1.jpg'); --sky2-url: url('/portfolio/assets/images/sky2.jpg');">
+  <div class="page-wrapper">
+  
+  <!-- Background System -->
+  <div class="bg-aero"></div>
+  <div class="bg-clouds">
+    <div class="cloud cloud-1"></div>
+    <div class="cloud cloud-2"></div>
+    <div class="cloud cloud-3"></div>
+    <div class="cloud cloud-4"></div>
+  </div>
+
+  <!-- Orbs Layer — Same as homepage (from _data/orbs.yml) -->
+  <div class="orbs-layer">
+    
+    
+    
+    
+    <span class="orb orb--xl orb--sky orb--glass orb--z-back orb--drift-a" style="top: 8vh; left: 8%; animation-duration: 24s; animation-delay: -2s; --env-img: url('/portfolio/assets/images/sky2.jpg'); --env-rotate: 47deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--sm orb--lime orb--glass orb--z-front orb--drift-b" style="top: 12vh; left: 25%; animation-duration: 14s; animation-delay: -5s; --env-img: url('/portfolio/assets/images/sky3.jpg'); --env-rotate: 94deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--lg orb--electric orb--glass orb--z-mid orb--drift-c" style="top: 6vh; left: 42%; animation-duration: 20s; animation-delay: -3s; --env-img: url('/portfolio/assets/images/sky4.jpg'); --env-rotate: 141deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--md orb--peach orb--glass orb--z-back orb--drift-d" style="top: 15vh; left: 58%; animation-duration: 17s; animation-delay: -7s; --env-img: url('/portfolio/assets/images/sky5.jpg'); --env-rotate: 188deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--xl orb--chartreuse orb--glass orb--z-mid orb--drift-a" style="top: 10vh; left: 75%; animation-duration: 22s; animation-delay: -1s; --env-img: url('/portfolio/assets/images/sky6.jpg'); --env-rotate: 235deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--sm orb--lavender orb--glass orb--z-front orb--drift-b" style="top: 5vh; left: 92%; animation-duration: 13s; animation-delay: -4s; --env-img: url('/portfolio/assets/images/sky7.jpg'); --env-rotate: 282deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--lg orb--tangerine orb--glass orb--z-mid orb--drift-c" style="top: 22vh; left: 5%; animation-duration: 21s; animation-delay: -6s; --env-img: url('/portfolio/assets/images/sky1.jpg'); --env-rotate: 329deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--xl orb--grass orb--glass orb--z-back orb--drift-d" style="top: 28vh; left: 18%; animation-duration: 25s; animation-delay: -2s; --env-img: url('/portfolio/assets/images/sky2.jpg'); --env-rotate: 16deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--sm orb--cerulean orb--glass orb--z-front orb--drift-a" style="top: 32vh; left: 35%; animation-duration: 15s; animation-delay: -8s; --env-img: url('/portfolio/assets/images/sky3.jpg'); --env-rotate: 63deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--lg orb--lime orb--glass orb--z-mid orb--drift-b" style="top: 25vh; left: 52%; animation-duration: 19s; animation-delay: -4s; --env-img: url('/portfolio/assets/images/sky4.jpg'); --env-rotate: 110deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--md orb--cobalt orb--glass orb--z-back orb--drift-c" style="top: 30vh; left: 68%; animation-duration: 18s; animation-delay: -1s; --env-img: url('/portfolio/assets/images/sky5.jpg'); --env-rotate: 157deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--xl orb--electric orb--glass orb--z-mid orb--drift-d" style="top: 22vh; left: 85%; animation-duration: 23s; animation-delay: -5s; --env-img: url('/portfolio/assets/images/sky6.jpg'); --env-rotate: 204deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--md orb--lavender orb--glass orb--z-front orb--drift-a" style="top: 38vh; left: 3%; animation-duration: 16s; animation-delay: -3s; --env-img: url('/portfolio/assets/images/sky7.jpg'); --env-rotate: 251deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--sm orb--sky orb--glass orb--z-mid orb--drift-b" style="top: 45vh; left: 15%; animation-duration: 12s; animation-delay: -7s; --env-img: url('/portfolio/assets/images/sky1.jpg'); --env-rotate: 298deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--xl orb--peach orb--glass orb--z-back orb--drift-c" style="top: 42vh; left: 32%; animation-duration: 26s; animation-delay: -1s; --env-img: url('/portfolio/assets/images/sky2.jpg'); --env-rotate: 345deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--lg orb--chartreuse orb--glass orb--z-mid orb--drift-d" style="top: 48vh; left: 50%; animation-duration: 20s; animation-delay: -6s; --env-img: url('/portfolio/assets/images/sky3.jpg'); --env-rotate: 32deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--md orb--tangerine orb--glass orb--z-front orb--drift-a" style="top: 40vh; left: 65%; animation-duration: 17s; animation-delay: -4s; --env-img: url('/portfolio/assets/images/sky4.jpg'); --env-rotate: 79deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--xl orb--grass orb--glass orb--z-back orb--drift-b" style="top: 46vh; left: 82%; animation-duration: 24s; animation-delay: -2s; --env-img: url('/portfolio/assets/images/sky5.jpg'); --env-rotate: 126deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--sm orb--lime orb--glass orb--z-mid orb--drift-c" style="top: 38vh; left: 95%; animation-duration: 14s; animation-delay: -8s; --env-img: url('/portfolio/assets/images/sky6.jpg'); --env-rotate: 173deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--lg orb--cerulean orb--glass orb--z-mid orb--drift-d" style="top: 55vh; left: 8%; animation-duration: 21s; animation-delay: -5s; --env-img: url('/portfolio/assets/images/sky7.jpg'); --env-rotate: 220deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--xl orb--electric orb--glass orb--z-back orb--drift-a" style="top: 60vh; left: 25%; animation-duration: 25s; animation-delay: -1s; --env-img: url('/portfolio/assets/images/sky1.jpg'); --env-rotate: 267deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--md orb--lavender orb--glass orb--z-front orb--drift-b" style="top: 52vh; left: 40%; animation-duration: 18s; animation-delay: -7s; --env-img: url('/portfolio/assets/images/sky2.jpg'); --env-rotate: 314deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--sm orb--cobalt orb--glass orb--z-mid orb--drift-c" style="top: 58vh; left: 55%; animation-duration: 13s; animation-delay: -3s; --env-img: url('/portfolio/assets/images/sky3.jpg'); --env-rotate: 1deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--lg orb--peach orb--glass orb--z-back orb--drift-d" style="top: 62vh; left: 72%; animation-duration: 20s; animation-delay: -6s; --env-img: url('/portfolio/assets/images/sky4.jpg'); --env-rotate: 48deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--xl orb--sky orb--glass orb--z-mid orb--drift-a" style="top: 56vh; left: 88%; animation-duration: 23s; animation-delay: -2s; --env-img: url('/portfolio/assets/images/sky5.jpg'); --env-rotate: 95deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--md orb--chartreuse orb--glass orb--z-front orb--drift-b" style="top: 68vh; left: 5%; animation-duration: 17s; animation-delay: -4s; --env-img: url('/portfolio/assets/images/sky6.jpg'); --env-rotate: 142deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--sm orb--tangerine orb--glass orb--z-mid orb--drift-c" style="top: 75vh; left: 18%; animation-duration: 11s; animation-delay: -8s; --env-img: url('/portfolio/assets/images/sky7.jpg'); --env-rotate: 189deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--xl orb--lime orb--glass orb--z-back orb--drift-d" style="top: 72vh; left: 35%; animation-duration: 26s; animation-delay: -1s; --env-img: url('/portfolio/assets/images/sky1.jpg'); --env-rotate: 236deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--lg orb--grass orb--glass orb--z-mid orb--drift-a" style="top: 78vh; left: 52%; animation-duration: 22s; animation-delay: -5s; --env-img: url('/portfolio/assets/images/sky2.jpg'); --env-rotate: 283deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--md orb--cerulean orb--glass orb--z-front orb--drift-b" style="top: 70vh; left: 68%; animation-duration: 19s; animation-delay: -3s; --env-img: url('/portfolio/assets/images/sky3.jpg'); --env-rotate: 330deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--xl orb--electric orb--glass orb--z-back orb--drift-c" style="top: 76vh; left: 85%; animation-duration: 24s; animation-delay: -7s; --env-img: url('/portfolio/assets/images/sky4.jpg'); --env-rotate: 17deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--lg orb--lavender orb--glass orb--z-mid orb--drift-d" style="top: 85vh; left: 10%; animation-duration: 21s; animation-delay: -2s; --env-img: url('/portfolio/assets/images/sky5.jpg'); --env-rotate: 64deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--sm orb--peach orb--glass orb--z-front orb--drift-a" style="top: 92vh; left: 28%; animation-duration: 14s; animation-delay: -6s; --env-img: url('/portfolio/assets/images/sky6.jpg'); --env-rotate: 111deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--xl orb--cobalt orb--glass orb--z-back orb--drift-b" style="top: 88vh; left: 45%; animation-duration: 25s; animation-delay: -4s; --env-img: url('/portfolio/assets/images/sky7.jpg'); --env-rotate: 158deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--md orb--sky orb--glass orb--z-mid orb--drift-c" style="top: 95vh; left: 62%; animation-duration: 18s; animation-delay: -1s; --env-img: url('/portfolio/assets/images/sky1.jpg'); --env-rotate: 205deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--lg orb--chartreuse orb--glass orb--z-back orb--drift-d" style="top: 82vh; left: 78%; animation-duration: 20s; animation-delay: -8s; --env-img: url('/portfolio/assets/images/sky2.jpg'); --env-rotate: 252deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--xl orb--lime orb--glass orb--z-back orb--drift-a" style="top: 102vh; left: 6%; animation-duration: 24s; animation-delay: -2s; --env-img: url('/portfolio/assets/images/sky3.jpg'); --env-rotate: 299deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--sm orb--electric orb--glass orb--z-front orb--drift-b" style="top: 108vh; left: 22%; animation-duration: 14s; animation-delay: -5s; --env-img: url('/portfolio/assets/images/sky4.jpg'); --env-rotate: 346deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--lg orb--sky orb--glass orb--z-mid orb--drift-c" style="top: 105vh; left: 38%; animation-duration: 20s; animation-delay: -3s; --env-img: url('/portfolio/assets/images/sky5.jpg'); --env-rotate: 33deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--md orb--peach orb--glass orb--z-back orb--drift-d" style="top: 110vh; left: 55%; animation-duration: 17s; animation-delay: -7s; --env-img: url('/portfolio/assets/images/sky6.jpg'); --env-rotate: 80deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--xl orb--chartreuse orb--glass orb--z-mid orb--drift-a" style="top: 104vh; left: 72%; animation-duration: 22s; animation-delay: -1s; --env-img: url('/portfolio/assets/images/sky7.jpg'); --env-rotate: 127deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--lg orb--tangerine orb--glass orb--z-back orb--drift-b" style="top: 112vh; left: 88%; animation-duration: 21s; animation-delay: -6s; --env-img: url('/portfolio/assets/images/sky1.jpg'); --env-rotate: 174deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--md orb--lavender orb--glass orb--z-front orb--drift-c" style="top: 118vh; left: 5%; animation-duration: 18s; animation-delay: -4s; --env-img: url('/portfolio/assets/images/sky2.jpg'); --env-rotate: 221deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--xl orb--grass orb--glass orb--z-back orb--drift-d" style="top: 122vh; left: 20%; animation-duration: 25s; animation-delay: -2s; --env-img: url('/portfolio/assets/images/sky3.jpg'); --env-rotate: 268deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--sm orb--cerulean orb--glass orb--z-mid orb--drift-a" style="top: 126vh; left: 35%; animation-duration: 13s; animation-delay: -8s; --env-img: url('/portfolio/assets/images/sky4.jpg'); --env-rotate: 315deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--lg orb--cobalt orb--glass orb--z-front orb--drift-b" style="top: 120vh; left: 52%; animation-duration: 19s; animation-delay: -1s; --env-img: url('/portfolio/assets/images/sky5.jpg'); --env-rotate: 2deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--xl orb--lime orb--glass orb--z-back orb--drift-c" style="top: 124vh; left: 68%; animation-duration: 23s; animation-delay: -5s; --env-img: url('/portfolio/assets/images/sky6.jpg'); --env-rotate: 49deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--md orb--electric orb--glass orb--z-mid orb--drift-d" style="top: 128vh; left: 85%; animation-duration: 16s; animation-delay: -3s; --env-img: url('/portfolio/assets/images/sky7.jpg'); --env-rotate: 96deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--lg orb--peach orb--glass orb--z-mid orb--drift-a" style="top: 132vh; left: 8%; animation-duration: 22s; animation-delay: -6s; --env-img: url('/portfolio/assets/images/sky1.jpg'); --env-rotate: 143deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--sm orb--sky orb--glass orb--z-front orb--drift-b" style="top: 138vh; left: 25%; animation-duration: 12s; animation-delay: -2s; --env-img: url('/portfolio/assets/images/sky2.jpg'); --env-rotate: 190deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--xl orb--chartreuse orb--glass orb--z-back orb--drift-c" style="top: 135vh; left: 42%; animation-duration: 26s; animation-delay: -7s; --env-img: url('/portfolio/assets/images/sky3.jpg'); --env-rotate: 237deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--md orb--tangerine orb--glass orb--z-mid orb--drift-d" style="top: 140vh; left: 58%; animation-duration: 17s; animation-delay: -4s; --env-img: url('/portfolio/assets/images/sky4.jpg'); --env-rotate: 284deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--lg orb--lavender orb--glass orb--z-front orb--drift-a" style="top: 136vh; left: 75%; animation-duration: 20s; animation-delay: -1s; --env-img: url('/portfolio/assets/images/sky5.jpg'); --env-rotate: 331deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--xl orb--grass orb--glass orb--z-back orb--drift-b" style="top: 142vh; left: 92%; animation-duration: 24s; animation-delay: -8s; --env-img: url('/portfolio/assets/images/sky6.jpg'); --env-rotate: 18deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--sm orb--cerulean orb--glass orb--z-mid orb--drift-c" style="top: 148vh; left: 5%; animation-duration: 14s; animation-delay: -3s; --env-img: url('/portfolio/assets/images/sky7.jpg'); --env-rotate: 65deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--xl orb--cobalt orb--glass orb--z-back orb--drift-d" style="top: 152vh; left: 22%; animation-duration: 25s; animation-delay: -6s; --env-img: url('/portfolio/assets/images/sky1.jpg'); --env-rotate: 112deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--md orb--lime orb--glass orb--z-front orb--drift-a" style="top: 156vh; left: 38%; animation-duration: 18s; animation-delay: -2s; --env-img: url('/portfolio/assets/images/sky2.jpg'); --env-rotate: 159deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--lg orb--electric orb--glass orb--z-mid orb--drift-b" style="top: 150vh; left: 55%; animation-duration: 21s; animation-delay: -7s; --env-img: url('/portfolio/assets/images/sky3.jpg'); --env-rotate: 206deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--xl orb--peach orb--glass orb--z-back orb--drift-c" style="top: 154vh; left: 72%; animation-duration: 23s; animation-delay: -4s; --env-img: url('/portfolio/assets/images/sky4.jpg'); --env-rotate: 253deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--sm orb--sky orb--glass orb--z-front orb--drift-d" style="top: 158vh; left: 88%; animation-duration: 13s; animation-delay: -1s; --env-img: url('/portfolio/assets/images/sky5.jpg'); --env-rotate: 300deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--lg orb--chartreuse orb--glass orb--z-mid orb--drift-a" style="top: 162vh; left: 12%; animation-duration: 20s; animation-delay: -5s; --env-img: url('/portfolio/assets/images/sky6.jpg'); --env-rotate: 347deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--xl orb--tangerine orb--glass orb--z-back orb--drift-b" style="top: 168vh; left: 32%; animation-duration: 24s; animation-delay: -3s; --env-img: url('/portfolio/assets/images/sky7.jpg'); --env-rotate: 34deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--md orb--lavender orb--glass orb--z-front orb--drift-c" style="top: 172vh; left: 52%; animation-duration: 17s; animation-delay: -8s; --env-img: url('/portfolio/assets/images/sky1.jpg'); --env-rotate: 81deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--sm orb--grass orb--glass orb--z-mid orb--drift-d" style="top: 165vh; left: 72%; animation-duration: 15s; animation-delay: -2s; --env-img: url('/portfolio/assets/images/sky2.jpg'); --env-rotate: 128deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--lg orb--cerulean orb--glass orb--z-back orb--drift-a" style="top: 175vh; left: 88%; animation-duration: 21s; animation-delay: -6s; --env-img: url('/portfolio/assets/images/sky3.jpg'); --env-rotate: 175deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--xl orb--cobalt orb--glass orb--z-mid orb--drift-b" style="top: 178vh; left: 5%; animation-duration: 25s; animation-delay: -4s; --env-img: url('/portfolio/assets/images/sky4.jpg'); --env-rotate: 222deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--xl orb--electric orb--glass orb--z-back orb--drift-a" style="top: 202vh; left: 5%; animation-duration: 26s; animation-delay: -3s; --env-img: url('/portfolio/assets/images/sky5.jpg'); --env-rotate: 269deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--lg orb--lime orb--glass orb--z-mid orb--drift-b" style="top: 208vh; left: 22%; animation-duration: 20s; animation-delay: -7s; --env-img: url('/portfolio/assets/images/sky6.jpg'); --env-rotate: 316deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--md orb--peach orb--glass orb--z-front orb--drift-c" style="top: 212vh; left: 38%; animation-duration: 18s; animation-delay: -1s; --env-img: url('/portfolio/assets/images/sky7.jpg'); --env-rotate: 3deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--sm orb--sky orb--glass orb--z-mid orb--drift-d" style="top: 205vh; left: 55%; animation-duration: 15s; animation-delay: -5s; --env-img: url('/portfolio/assets/images/sky1.jpg'); --env-rotate: 50deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--xl orb--chartreuse orb--glass orb--z-back orb--drift-a" style="top: 210vh; left: 72%; animation-duration: 24s; animation-delay: -2s; --env-img: url('/portfolio/assets/images/sky2.jpg'); --env-rotate: 97deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--lg orb--tangerine orb--glass orb--z-mid orb--drift-b" style="top: 215vh; left: 88%; animation-duration: 21s; animation-delay: -6s; --env-img: url('/portfolio/assets/images/sky3.jpg'); --env-rotate: 144deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--md orb--lavender orb--glass orb--z-front orb--drift-c" style="top: 220vh; left: 8%; animation-duration: 17s; animation-delay: -4s; --env-img: url('/portfolio/assets/images/sky4.jpg'); --env-rotate: 191deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--xl orb--grass orb--glass orb--z-back orb--drift-d" style="top: 225vh; left: 25%; animation-duration: 25s; animation-delay: -8s; --env-img: url('/portfolio/assets/images/sky5.jpg'); --env-rotate: 238deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--sm orb--cerulean orb--glass orb--z-mid orb--drift-a" style="top: 228vh; left: 42%; animation-duration: 12s; animation-delay: -1s; --env-img: url('/portfolio/assets/images/sky6.jpg'); --env-rotate: 285deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--lg orb--cobalt orb--glass orb--z-front orb--drift-b" style="top: 222vh; left: 58%; animation-duration: 19s; animation-delay: -3s; --env-img: url('/portfolio/assets/images/sky7.jpg'); --env-rotate: 332deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--xl orb--lime orb--glass orb--z-back orb--drift-c" style="top: 230vh; left: 75%; animation-duration: 23s; animation-delay: -6s; --env-img: url('/portfolio/assets/images/sky1.jpg'); --env-rotate: 19deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--md orb--electric orb--glass orb--z-mid orb--drift-d" style="top: 232vh; left: 92%; animation-duration: 16s; animation-delay: -2s; --env-img: url('/portfolio/assets/images/sky2.jpg'); --env-rotate: 66deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--lg orb--peach orb--glass orb--z-mid orb--drift-a" style="top: 238vh; left: 5%; animation-duration: 22s; animation-delay: -5s; --env-img: url('/portfolio/assets/images/sky3.jpg'); --env-rotate: 113deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--sm orb--sky orb--glass orb--z-front orb--drift-b" style="top: 242vh; left: 22%; animation-duration: 14s; animation-delay: -7s; --env-img: url('/portfolio/assets/images/sky4.jpg'); --env-rotate: 160deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--xl orb--chartreuse orb--glass orb--z-back orb--drift-c" style="top: 245vh; left: 38%; animation-duration: 26s; animation-delay: -1s; --env-img: url('/portfolio/assets/images/sky5.jpg'); --env-rotate: 207deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--md orb--tangerine orb--glass orb--z-mid orb--drift-d" style="top: 248vh; left: 55%; animation-duration: 17s; animation-delay: -4s; --env-img: url('/portfolio/assets/images/sky6.jpg'); --env-rotate: 254deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--lg orb--lavender orb--glass orb--z-front orb--drift-a" style="top: 240vh; left: 72%; animation-duration: 20s; animation-delay: -8s; --env-img: url('/portfolio/assets/images/sky7.jpg'); --env-rotate: 301deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--xl orb--grass orb--glass orb--z-back orb--drift-b" style="top: 250vh; left: 88%; animation-duration: 24s; animation-delay: -3s; --env-img: url('/portfolio/assets/images/sky1.jpg'); --env-rotate: 348deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--sm orb--cerulean orb--glass orb--z-mid orb--drift-c" style="top: 255vh; left: 8%; animation-duration: 13s; animation-delay: -6s; --env-img: url('/portfolio/assets/images/sky2.jpg'); --env-rotate: 35deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--xl orb--cobalt orb--glass orb--z-back orb--drift-d" style="top: 258vh; left: 25%; animation-duration: 25s; animation-delay: -2s; --env-img: url('/portfolio/assets/images/sky3.jpg'); --env-rotate: 82deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--md orb--lime orb--glass orb--z-front orb--drift-a" style="top: 262vh; left: 42%; animation-duration: 18s; animation-delay: -5s; --env-img: url('/portfolio/assets/images/sky4.jpg'); --env-rotate: 129deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--lg orb--electric orb--glass orb--z-mid orb--drift-b" style="top: 265vh; left: 58%; animation-duration: 21s; animation-delay: -1s; --env-img: url('/portfolio/assets/images/sky5.jpg'); --env-rotate: 176deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--xl orb--peach orb--glass orb--z-back orb--drift-c" style="top: 260vh; left: 75%; animation-duration: 23s; animation-delay: -7s; --env-img: url('/portfolio/assets/images/sky6.jpg'); --env-rotate: 223deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--sm orb--sky orb--glass orb--z-front orb--drift-d" style="top: 268vh; left: 92%; animation-duration: 14s; animation-delay: -4s; --env-img: url('/portfolio/assets/images/sky7.jpg'); --env-rotate: 270deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--lg orb--chartreuse orb--glass orb--z-mid orb--drift-a" style="top: 272vh; left: 5%; animation-duration: 22s; animation-delay: -3s; --env-img: url('/portfolio/assets/images/sky1.jpg'); --env-rotate: 317deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--xl orb--tangerine orb--glass orb--z-back orb--drift-b" style="top: 278vh; left: 22%; animation-duration: 26s; animation-delay: -8s; --env-img: url('/portfolio/assets/images/sky2.jpg'); --env-rotate: 4deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--md orb--lavender orb--glass orb--z-front orb--drift-c" style="top: 282vh; left: 42%; animation-duration: 17s; animation-delay: -2s; --env-img: url('/portfolio/assets/images/sky3.jpg'); --env-rotate: 51deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--sm orb--grass orb--glass orb--z-mid orb--drift-d" style="top: 275vh; left: 58%; animation-duration: 15s; animation-delay: -6s; --env-img: url('/portfolio/assets/images/sky4.jpg'); --env-rotate: 98deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--lg orb--cerulean orb--glass orb--z-back orb--drift-a" style="top: 280vh; left: 75%; animation-duration: 20s; animation-delay: -1s; --env-img: url('/portfolio/assets/images/sky5.jpg'); --env-rotate: 145deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--xl orb--cobalt orb--glass orb--z-mid orb--drift-b" style="top: 285vh; left: 92%; animation-duration: 24s; animation-delay: -5s; --env-img: url('/portfolio/assets/images/sky6.jpg'); --env-rotate: 192deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--md orb--lime orb--glass orb--z-front orb--drift-c" style="top: 288vh; left: 12%; animation-duration: 18s; animation-delay: -3s; --env-img: url('/portfolio/assets/images/sky7.jpg'); --env-rotate: 239deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--xl orb--electric orb--glass orb--z-back orb--drift-d" style="top: 292vh; left: 32%; animation-duration: 25s; animation-delay: -7s; --env-img: url('/portfolio/assets/images/sky1.jpg'); --env-rotate: 286deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--sm orb--peach orb--glass orb--z-mid orb--drift-a" style="top: 295vh; left: 52%; animation-duration: 13s; animation-delay: -2s; --env-img: url('/portfolio/assets/images/sky2.jpg'); --env-rotate: 333deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--lg orb--sky orb--glass orb--z-front orb--drift-b" style="top: 290vh; left: 72%; animation-duration: 21s; animation-delay: -6s; --env-img: url('/portfolio/assets/images/sky3.jpg'); --env-rotate: 20deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--xl orb--chartreuse orb--glass orb--z-back orb--drift-c" style="top: 298vh; left: 88%; animation-duration: 23s; animation-delay: -4s; --env-img: url('/portfolio/assets/images/sky4.jpg'); --env-rotate: 67deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--md orb--tangerine orb--glass orb--z-mid orb--drift-d" style="top: 285vh; left: 5%; animation-duration: 16s; animation-delay: -1s; --env-img: url('/portfolio/assets/images/sky5.jpg'); --env-rotate: 114deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--xl orb--sky orb--glass orb--z-back orb--drift-a" style="top: 302vh; left: 6%; animation-duration: 24s; animation-delay: -4s; --env-img: url('/portfolio/assets/images/sky6.jpg'); --env-rotate: 161deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--lg orb--lime orb--glass orb--z-mid orb--drift-b" style="top: 308vh; left: 22%; animation-duration: 21s; animation-delay: -2s; --env-img: url('/portfolio/assets/images/sky7.jpg'); --env-rotate: 208deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--md orb--electric orb--glass orb--z-front orb--drift-c" style="top: 312vh; left: 38%; animation-duration: 17s; animation-delay: -6s; --env-img: url('/portfolio/assets/images/sky1.jpg'); --env-rotate: 255deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--sm orb--peach orb--glass orb--z-mid orb--drift-d" style="top: 305vh; left: 55%; animation-duration: 13s; animation-delay: -1s; --env-img: url('/portfolio/assets/images/sky2.jpg'); --env-rotate: 302deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--xl orb--chartreuse orb--glass orb--z-back orb--drift-a" style="top: 310vh; left: 72%; animation-duration: 25s; animation-delay: -5s; --env-img: url('/portfolio/assets/images/sky3.jpg'); --env-rotate: 349deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--lg orb--tangerine orb--glass orb--z-mid orb--drift-b" style="top: 318vh; left: 88%; animation-duration: 20s; animation-delay: -3s; --env-img: url('/portfolio/assets/images/sky4.jpg'); --env-rotate: 36deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--md orb--lavender orb--glass orb--z-front orb--drift-c" style="top: 322vh; left: 5%; animation-duration: 18s; animation-delay: -7s; --env-img: url('/portfolio/assets/images/sky5.jpg'); --env-rotate: 83deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--xl orb--grass orb--glass orb--z-back orb--drift-d" style="top: 328vh; left: 22%; animation-duration: 23s; animation-delay: -2s; --env-img: url('/portfolio/assets/images/sky6.jpg'); --env-rotate: 130deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--sm orb--cerulean orb--glass orb--z-mid orb--drift-a" style="top: 332vh; left: 38%; animation-duration: 14s; animation-delay: -4s; --env-img: url('/portfolio/assets/images/sky7.jpg'); --env-rotate: 177deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--lg orb--cobalt orb--glass orb--z-front orb--drift-b" style="top: 325vh; left: 55%; animation-duration: 19s; animation-delay: -8s; --env-img: url('/portfolio/assets/images/sky1.jpg'); --env-rotate: 224deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--xl orb--lime orb--glass orb--z-back orb--drift-c" style="top: 330vh; left: 72%; animation-duration: 24s; animation-delay: -1s; --env-img: url('/portfolio/assets/images/sky2.jpg'); --env-rotate: 271deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--md orb--electric orb--glass orb--z-mid orb--drift-d" style="top: 335vh; left: 88%; animation-duration: 16s; animation-delay: -5s; --env-img: url('/portfolio/assets/images/sky3.jpg'); --env-rotate: 318deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--lg orb--peach orb--glass orb--z-mid orb--drift-a" style="top: 342vh; left: 8%; animation-duration: 22s; animation-delay: -3s; --env-img: url('/portfolio/assets/images/sky4.jpg'); --env-rotate: 5deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--sm orb--sky orb--glass orb--z-front orb--drift-b" style="top: 348vh; left: 25%; animation-duration: 12s; animation-delay: -6s; --env-img: url('/portfolio/assets/images/sky5.jpg'); --env-rotate: 52deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--xl orb--chartreuse orb--glass orb--z-back orb--drift-c" style="top: 345vh; left: 42%; animation-duration: 26s; animation-delay: -2s; --env-img: url('/portfolio/assets/images/sky6.jpg'); --env-rotate: 99deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--md orb--tangerine orb--glass orb--z-mid orb--drift-d" style="top: 352vh; left: 58%; animation-duration: 17s; animation-delay: -7s; --env-img: url('/portfolio/assets/images/sky7.jpg'); --env-rotate: 146deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--lg orb--lavender orb--glass orb--z-front orb--drift-a" style="top: 350vh; left: 75%; animation-duration: 20s; animation-delay: -4s; --env-img: url('/portfolio/assets/images/sky1.jpg'); --env-rotate: 193deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--xl orb--grass orb--glass orb--z-back orb--drift-b" style="top: 355vh; left: 92%; animation-duration: 24s; animation-delay: -1s; --env-img: url('/portfolio/assets/images/sky2.jpg'); --env-rotate: 240deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--sm orb--cerulean orb--glass orb--z-mid orb--drift-c" style="top: 362vh; left: 5%; animation-duration: 13s; animation-delay: -5s; --env-img: url('/portfolio/assets/images/sky3.jpg'); --env-rotate: 287deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--xl orb--cobalt orb--glass orb--z-back orb--drift-d" style="top: 368vh; left: 22%; animation-duration: 25s; animation-delay: -8s; --env-img: url('/portfolio/assets/images/sky4.jpg'); --env-rotate: 334deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--md orb--lime orb--glass orb--z-front orb--drift-a" style="top: 372vh; left: 38%; animation-duration: 18s; animation-delay: -2s; --env-img: url('/portfolio/assets/images/sky5.jpg'); --env-rotate: 21deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--lg orb--electric orb--glass orb--z-mid orb--drift-b" style="top: 365vh; left: 55%; animation-duration: 21s; animation-delay: -6s; --env-img: url('/portfolio/assets/images/sky6.jpg'); --env-rotate: 68deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--xl orb--peach orb--glass orb--z-back orb--drift-c" style="top: 370vh; left: 72%; animation-duration: 23s; animation-delay: -3s; --env-img: url('/portfolio/assets/images/sky7.jpg'); --env-rotate: 115deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--sm orb--sky orb--glass orb--z-front orb--drift-d" style="top: 378vh; left: 88%; animation-duration: 14s; animation-delay: -7s; --env-img: url('/portfolio/assets/images/sky1.jpg'); --env-rotate: 162deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--lg orb--chartreuse orb--glass orb--z-mid orb--drift-a" style="top: 382vh; left: 8%; animation-duration: 22s; animation-delay: -1s; --env-img: url('/portfolio/assets/images/sky2.jpg'); --env-rotate: 209deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--xl orb--tangerine orb--glass orb--z-back orb--drift-b" style="top: 388vh; left: 25%; animation-duration: 26s; animation-delay: -4s; --env-img: url('/portfolio/assets/images/sky3.jpg'); --env-rotate: 256deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--md orb--lavender orb--glass orb--z-front orb--drift-c" style="top: 392vh; left: 42%; animation-duration: 17s; animation-delay: -8s; --env-img: url('/portfolio/assets/images/sky4.jpg'); --env-rotate: 303deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--sm orb--grass orb--glass orb--z-mid orb--drift-d" style="top: 385vh; left: 58%; animation-duration: 15s; animation-delay: -2s; --env-img: url('/portfolio/assets/images/sky5.jpg'); --env-rotate: 350deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--lg orb--cerulean orb--glass orb--z-back orb--drift-a" style="top: 390vh; left: 75%; animation-duration: 20s; animation-delay: -5s; --env-img: url('/portfolio/assets/images/sky6.jpg'); --env-rotate: 37deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--xl orb--cobalt orb--glass orb--z-mid orb--drift-b" style="top: 395vh; left: 92%; animation-duration: 24s; animation-delay: -3s; --env-img: url('/portfolio/assets/images/sky7.jpg'); --env-rotate: 84deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--md orb--lime orb--glass orb--z-front orb--drift-c" style="top: 402vh; left: 5%; animation-duration: 18s; animation-delay: -6s; --env-img: url('/portfolio/assets/images/sky1.jpg'); --env-rotate: 131deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--xl orb--electric orb--glass orb--z-back orb--drift-d" style="top: 408vh; left: 22%; animation-duration: 25s; animation-delay: -1s; --env-img: url('/portfolio/assets/images/sky2.jpg'); --env-rotate: 178deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--sm orb--peach orb--glass orb--z-mid orb--drift-a" style="top: 412vh; left: 38%; animation-duration: 13s; animation-delay: -7s; --env-img: url('/portfolio/assets/images/sky3.jpg'); --env-rotate: 225deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--lg orb--sky orb--glass orb--z-front orb--drift-b" style="top: 405vh; left: 55%; animation-duration: 21s; animation-delay: -4s; --env-img: url('/portfolio/assets/images/sky4.jpg'); --env-rotate: 272deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--xl orb--chartreuse orb--glass orb--z-back orb--drift-c" style="top: 415vh; left: 72%; animation-duration: 23s; animation-delay: -2s; --env-img: url('/portfolio/assets/images/sky5.jpg'); --env-rotate: 319deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--md orb--tangerine orb--glass orb--z-mid orb--drift-d" style="top: 418vh; left: 88%; animation-duration: 17s; animation-delay: -8s; --env-img: url('/portfolio/assets/images/sky6.jpg'); --env-rotate: 6deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--lg orb--lavender orb--glass orb--z-front orb--drift-a" style="top: 422vh; left: 8%; animation-duration: 20s; animation-delay: -3s; --env-img: url('/portfolio/assets/images/sky7.jpg'); --env-rotate: 53deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--sm orb--grass orb--glass orb--z-mid orb--drift-b" style="top: 428vh; left: 25%; animation-duration: 14s; animation-delay: -5s; --env-img: url('/portfolio/assets/images/sky1.jpg'); --env-rotate: 100deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--xl orb--cerulean orb--glass orb--z-back orb--drift-c" style="top: 425vh; left: 42%; animation-duration: 26s; animation-delay: -1s; --env-img: url('/portfolio/assets/images/sky2.jpg'); --env-rotate: 147deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--md orb--cobalt orb--glass orb--z-front orb--drift-d" style="top: 432vh; left: 58%; animation-duration: 18s; animation-delay: -6s; --env-img: url('/portfolio/assets/images/sky3.jpg'); --env-rotate: 194deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--lg orb--lime orb--glass orb--z-mid orb--drift-a" style="top: 430vh; left: 75%; animation-duration: 22s; animation-delay: -2s; --env-img: url('/portfolio/assets/images/sky4.jpg'); --env-rotate: 241deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--xl orb--electric orb--glass orb--z-back orb--drift-b" style="top: 438vh; left: 92%; animation-duration: 24s; animation-delay: -7s; --env-img: url('/portfolio/assets/images/sky5.jpg'); --env-rotate: 288deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--xl orb--lime orb--glass orb--z-back orb--drift-a" style="top: 452vh; left: 5%; animation-duration: 26s; animation-delay: -1s; --env-img: url('/portfolio/assets/images/sky6.jpg'); --env-rotate: 335deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--lg orb--electric orb--glass orb--z-mid orb--drift-b" style="top: 458vh; left: 22%; animation-duration: 22s; animation-delay: -5s; --env-img: url('/portfolio/assets/images/sky7.jpg'); --env-rotate: 22deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--md orb--peach orb--glass orb--z-front orb--drift-c" style="top: 462vh; left: 38%; animation-duration: 18s; animation-delay: -3s; --env-img: url('/portfolio/assets/images/sky1.jpg'); --env-rotate: 69deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--sm orb--sky orb--glass orb--z-mid orb--drift-d" style="top: 455vh; left: 55%; animation-duration: 15s; animation-delay: -7s; --env-img: url('/portfolio/assets/images/sky2.jpg'); --env-rotate: 116deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--xl orb--chartreuse orb--glass orb--z-back orb--drift-a" style="top: 460vh; left: 72%; animation-duration: 24s; animation-delay: -2s; --env-img: url('/portfolio/assets/images/sky3.jpg'); --env-rotate: 163deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--lg orb--tangerine orb--glass orb--z-mid orb--drift-b" style="top: 468vh; left: 88%; animation-duration: 20s; animation-delay: -6s; --env-img: url('/portfolio/assets/images/sky4.jpg'); --env-rotate: 210deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--md orb--lavender orb--glass orb--z-front orb--drift-c" style="top: 472vh; left: 8%; animation-duration: 17s; animation-delay: -4s; --env-img: url('/portfolio/assets/images/sky5.jpg'); --env-rotate: 257deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--xl orb--grass orb--glass orb--z-back orb--drift-d" style="top: 478vh; left: 25%; animation-duration: 25s; animation-delay: -1s; --env-img: url('/portfolio/assets/images/sky6.jpg'); --env-rotate: 304deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--sm orb--cerulean orb--glass orb--z-mid orb--drift-a" style="top: 482vh; left: 42%; animation-duration: 13s; animation-delay: -8s; --env-img: url('/portfolio/assets/images/sky7.jpg'); --env-rotate: 351deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--lg orb--cobalt orb--glass orb--z-front orb--drift-b" style="top: 475vh; left: 58%; animation-duration: 21s; animation-delay: -3s; --env-img: url('/portfolio/assets/images/sky1.jpg'); --env-rotate: 38deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--xl orb--lime orb--glass orb--z-back orb--drift-c" style="top: 480vh; left: 75%; animation-duration: 23s; animation-delay: -5s; --env-img: url('/portfolio/assets/images/sky2.jpg'); --env-rotate: 85deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--md orb--electric orb--glass orb--z-mid orb--drift-d" style="top: 485vh; left: 92%; animation-duration: 16s; animation-delay: -2s; --env-img: url('/portfolio/assets/images/sky3.jpg'); --env-rotate: 132deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--lg orb--peach orb--glass orb--z-mid orb--drift-a" style="top: 492vh; left: 5%; animation-duration: 22s; animation-delay: -6s; --env-img: url('/portfolio/assets/images/sky4.jpg'); --env-rotate: 179deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--sm orb--sky orb--glass orb--z-front orb--drift-b" style="top: 498vh; left: 22%; animation-duration: 14s; animation-delay: -1s; --env-img: url('/portfolio/assets/images/sky5.jpg'); --env-rotate: 226deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--xl orb--chartreuse orb--glass orb--z-back orb--drift-c" style="top: 495vh; left: 38%; animation-duration: 26s; animation-delay: -7s; --env-img: url('/portfolio/assets/images/sky6.jpg'); --env-rotate: 273deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--md orb--tangerine orb--glass orb--z-mid orb--drift-d" style="top: 502vh; left: 55%; animation-duration: 17s; animation-delay: -4s; --env-img: url('/portfolio/assets/images/sky7.jpg'); --env-rotate: 320deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--lg orb--lavender orb--glass orb--z-front orb--drift-a" style="top: 500vh; left: 72%; animation-duration: 20s; animation-delay: -2s; --env-img: url('/portfolio/assets/images/sky1.jpg'); --env-rotate: 7deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--xl orb--grass orb--glass orb--z-back orb--drift-b" style="top: 508vh; left: 88%; animation-duration: 24s; animation-delay: -8s; --env-img: url('/portfolio/assets/images/sky2.jpg'); --env-rotate: 54deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--sm orb--cerulean orb--glass orb--z-mid orb--drift-c" style="top: 512vh; left: 8%; animation-duration: 13s; animation-delay: -3s; --env-img: url('/portfolio/assets/images/sky3.jpg'); --env-rotate: 101deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--xl orb--cobalt orb--glass orb--z-back orb--drift-d" style="top: 518vh; left: 25%; animation-duration: 25s; animation-delay: -5s; --env-img: url('/portfolio/assets/images/sky4.jpg'); --env-rotate: 148deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--md orb--lime orb--glass orb--z-front orb--drift-a" style="top: 522vh; left: 42%; animation-duration: 18s; animation-delay: -1s; --env-img: url('/portfolio/assets/images/sky5.jpg'); --env-rotate: 195deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--lg orb--electric orb--glass orb--z-mid orb--drift-b" style="top: 515vh; left: 58%; animation-duration: 21s; animation-delay: -6s; --env-img: url('/portfolio/assets/images/sky6.jpg'); --env-rotate: 242deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--xl orb--peach orb--glass orb--z-back orb--drift-c" style="top: 525vh; left: 75%; animation-duration: 23s; animation-delay: -2s; --env-img: url('/portfolio/assets/images/sky7.jpg'); --env-rotate: 289deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--sm orb--sky orb--glass orb--z-front orb--drift-d" style="top: 528vh; left: 92%; animation-duration: 14s; animation-delay: -7s; --env-img: url('/portfolio/assets/images/sky1.jpg'); --env-rotate: 336deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--lg orb--chartreuse orb--glass orb--z-mid orb--drift-a" style="top: 532vh; left: 12%; animation-duration: 22s; animation-delay: -4s; --env-img: url('/portfolio/assets/images/sky2.jpg'); --env-rotate: 23deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--xl orb--tangerine orb--glass orb--z-back orb--drift-b" style="top: 538vh; left: 32%; animation-duration: 26s; animation-delay: -1s; --env-img: url('/portfolio/assets/images/sky3.jpg'); --env-rotate: 70deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--md orb--lavender orb--glass orb--z-front orb--drift-c" style="top: 542vh; left: 52%; animation-duration: 17s; animation-delay: -8s; --env-img: url('/portfolio/assets/images/sky4.jpg'); --env-rotate: 117deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--sm orb--grass orb--glass orb--z-mid orb--drift-d" style="top: 535vh; left: 72%; animation-duration: 15s; animation-delay: -3s; --env-img: url('/portfolio/assets/images/sky5.jpg'); --env-rotate: 164deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--lg orb--cerulean orb--glass orb--z-back orb--drift-a" style="top: 545vh; left: 88%; animation-duration: 20s; animation-delay: -5s; --env-img: url('/portfolio/assets/images/sky6.jpg'); --env-rotate: 211deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+    
+    
+    <span class="orb orb--xl orb--cobalt orb--glass orb--z-mid orb--drift-b" style="top: 548vh; left: 5%; animation-duration: 24s; animation-delay: -2s; --env-img: url('/portfolio/assets/images/sky7.jpg'); --env-rotate: 258deg; --env-opacity: 0.3;" aria-hidden="true"></span>
+    
+  </div>
+
+  <div class="orbs-foreground" id="fg-orbs">
+    <span class="orb orb--sm orb--sky orb--z-front fg-orb" style="left: 12%; top: 20%;" aria-hidden="true"></span>
+    <span class="orb orb--xs orb--peach orb--z-front fg-orb" style="left: 78%; top: 30%;" aria-hidden="true"></span>
+    <span class="orb orb--sm orb--lavender orb--z-front fg-orb" style="left: 6%; top: 60%;" aria-hidden="true"></span>
+    <span class="orb orb--xs orb--tangerine orb--z-front fg-orb" style="left: 85%; top: 75%;" aria-hidden="true"></span>
+  </div>
+
+  <div class="quiet-zone-overlay" aria-hidden="true"></div>
+
+  <div class="decorations">
+    <span class="glass-pill glass-pill--sky glass-pill--drift-a" style="position: absolute; --pill-tilt: -3deg; top: 15%; right: 5%;">✦ project</span>
+    <span class="glass-pill glass-pill--peach glass-pill--drift-b" style="position: absolute; --pill-tilt: 2deg; top: 45%; left: 3%;">→ case study</span>
+    <span class="glass-pill glass-pill--lavender glass-pill--drift-c" style="position: absolute; --pill-tilt: -1deg; bottom: 20%; right: 8%;">◈ kb</span>
+  </div>
+
+  <div class="bg-grid"></div>
+  <div class="bg-grain"></div>
+
+  <nav class="main-nav glass-panel">
+  <a href="/portfolio/" class="nav-logo">KB</a>
+  <ul class="nav-links">
+    <li><a href="/portfolio/">home</a></li>
+    <li><a href="/portfolio/#about" >about</a></li>
+    <li><a href="/portfolio/#skills" >skills</a></li>
+    <li><a href="/portfolio/#projects" class="active">projects</a></li>
+    <li><a href="/portfolio/#contact">contact</a></li>
+  </ul>
+  <button class="nav-toggle" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</nav>
+
+  <main class="detail-main">
+    <div class="back-link-wrapper">
+      <a href="/portfolio/projects/" class="back-link">← all projects</a>
+    </div>
+    
+    <section class="detail-section project-detail">
+      <div class="detail-container">
+        
+        <!-- Header -->
+        <header class="detail-header fade-in">
+          <span class="section-tag">✦ project // case study</span>
+          <h1 class="section-title">Groovy Proxy</h1>
+          <p class="section-subtitle">Local development proxy tool for testing</p>
+        </header>
+
+        <!-- Meta Card -->
+        <div class="project-meta-card glass-card fade-in">
+          <div class="meta-grid">
+            <div class="meta-item">
+              <span class="meta-label">category</span>
+              <span class="meta-value">dev tool</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">status</span>
+              <span class="meta-value status-complete">complete</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">role</span>
+              <span class="meta-value">Solo Developer</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">timeline</span>
+              <span class="meta-value">Personal project</span>
+            </div>
+          </div>
+          
+          <div class="tech-stack-section">
+            <span class="tech-label">tech stack:</span>
+            <div class="tech-tags">
+              
+              <span class="tech-tag">Node.js</span>
+              
+              <span class="tech-tag">JavaScript</span>
+              
+              <span class="tech-tag">Express</span>
+              
+            </div>
+          </div>
+
+          <div class="project-links">
+            
+            
+            
+            <span class="placeholder-note">Links coming soon</span>
+            
+          </div>
+        </div>
+
+        <!-- Hero Image -->
+        <div class="project-hero-image fade-in">
+          
+          <div class="screenshot-placeholder glass-card">
+            <span class="placeholder-icon">🖥️</span>
+            <span class="placeholder-text">TODO: Add hero screenshot</span>
+          </div>
+          
+        </div>
+
+        <!-- Overview -->
+        <div class="detail-block glass-card fade-in">
+          <h3 class="block-title"><span class="title-icon">📋</span> project_overview.md</h3>
+          <div class="block-content prose">
+            <p>Groovy Proxy is a development tool I built to simplify API testing and local development 
+workflows. It acts as a proxy server that can intercept, log, and modify HTTP requests, 
+making it easier to debug and test applications during development.</p>
+
+          </div>
+        </div>
+
+        <!-- Problem -->
+        <div class="detail-block glass-card fade-in">
+          <h3 class="block-title"><span class="title-icon">❓</span> the_problem.txt</h3>
+          <div class="block-content prose">
+            <p>During development, it’s often necessary to test API integrations, debug request/response 
+cycles, and simulate different scenarios. Setting this up manually can be time-consuming 
+and error-prone.</p>
+
+          </div>
+        </div>
+
+        <!-- Solution -->
+        <div class="detail-block glass-card fade-in">
+          <h3 class="block-title"><span class="title-icon">💡</span> the_solution.txt</h3>
+          <div class="block-content prose">
+            <p>Groovy Proxy provides a simple, configurable proxy server that can be run locally. It 
+logs all requests, allows for request modification, and provides a clean interface for 
+monitoring traffic during development.</p>
+
+          </div>
+        </div>
+
+        <!-- Features -->
+        
+        <div class="detail-block glass-card fade-in">
+          <h3 class="block-title"><span class="title-icon">✨</span> features.list</h3>
+          <div class="features-grid">
+            
+            <div class="feature-card">
+              <h4 class="feature-title">Request Logging</h4>
+              <p class="feature-description">Detailed logging of all HTTP requests and responses</p>
+            </div>
+            
+            <div class="feature-card">
+              <h4 class="feature-title">Easy Configuration</h4>
+              <p class="feature-description">Simple setup and configuration for different environments</p>
+            </div>
+            
+            <div class="feature-card">
+              <h4 class="feature-title">Request Modification</h4>
+              <p class="feature-description">Ability to intercept and modify requests on the fly</p>
+            </div>
+            
+            <div class="feature-card">
+              <h4 class="feature-title">Clean Interface</h4>
+              <p class="feature-description">User-friendly interface for monitoring traffic</p>
+            </div>
+            
+          </div>
+        </div>
+        
+
+        <!-- Gallery -->
+        <div class="detail-block glass-card fade-in">
+          <h3 class="block-title"><span class="title-icon">🖼️</span> gallery.screenshots</h3>
+          
+          <div class="gallery-placeholder">
+            <div class="screenshot-placeholder glass-card">
+              <span class="placeholder-icon">🖼️</span>
+              <span class="placeholder-text">TODO: Add gallery screenshots</span>
+            </div>
+          </div>
+          
+        </div>
+
+        <!-- Challenges -->
+        
+        <div class="detail-block glass-card fade-in">
+          <h3 class="block-title"><span class="title-icon">🧩</span> challenges.log</h3>
+          <div class="challenges-list">
+            
+            <div class="challenge-item">
+              <div class="challenge">
+                <span class="challenge-label">challenge:</span>
+                <h4>HTTP Protocol Handling</h4>
+                <p>Properly handling various HTTP methods and headers</p>
+              </div>
+              <div class="solution">
+                <span class="solution-label">solution:</span>
+                <p>Leveraged Express.js middleware for robust request handling</p>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+        
+
+        <!-- Outcomes -->
+        
+        <div class="detail-block glass-card fade-in">
+          <h3 class="block-title"><span class="title-icon">🎯</span> outcomes.results</h3>
+          <ul class="outcomes-list">
+            
+            <li class="outcome-item">Streamlined personal development workflow</li>
+            
+            <li class="outcome-item">Gained deeper understanding of HTTP protocols</li>
+            
+            <li class="outcome-item">Created reusable tool for future projects</li>
+            
+          </ul>
+        </div>
+        
+
+        <!-- Next Steps -->
+        
+        <div class="detail-block glass-card fade-in">
+          <h3 class="block-title"><span class="title-icon">🚀</span> next_steps.md</h3>
+          <div class="block-content prose"><p>TODO: Add any planned features or improvements for Groovy Proxy.</p>
+</div>
+        </div>
+        
+
+        <!-- Prev/Next Navigation -->
+        <nav class="project-nav fade-in" aria-label="Project navigation">
+          <div class="project-nav-links">
+            
+            
+            <a href="/portfolio/projects/pi-hole/" class="project-nav-link project-nav-prev">
+              <span class="nav-label">← previous</span>
+              <span class="nav-title">Pi-hole Setup</span>
+            </a>
+            
+            
+            <a href="/portfolio/projects/" class="project-nav-link project-nav-all">
+              <span class="nav-label">all projects</span>
+              <span class="nav-icon">⬡</span>
+            </a>
+            
+            
+            <a href="/portfolio/projects/mia/" class="project-nav-link project-nav-next">
+              <span class="nav-label">next →</span>
+              <span class="nav-title">MIA</span>
+            </a>
+            
+          </div>
+        </nav>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer-bar">
+    <div class="footer-content">
+      <p class="footer-logo">KB</p>
+      <p>&copy; 2026 kailyn brown — built with joy and whimsy</p>
+      <div class="footer-links">
+        <a href="/portfolio/">home</a>
+        <a href="/portfolio/#about">about</a>
+        <a href="/portfolio/projects/">projects</a>
+        <a href="/portfolio/#contact">contact</a>
+      </div>
+    </div>
+  </footer>
+
+  </div>
+
+  <div class="sparkle-container" id="sparkle-container" aria-hidden="true"></div>
+
+  <script>
+    (function() {
+      'use strict';
+      const originalTitle = "Groovy Proxy // project | KB";
+      document.title = originalTitle;
+      document.addEventListener('visibilitychange', () => {
+        document.title = document.hidden ? 'miss u :(' : originalTitle;
+      });
+
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      });
+
+      const fadeObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) entry.target.classList.add('visible');
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+      document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
+
+      const navToggle = document.querySelector('.nav-toggle');
+      const navLinks = document.querySelector('.nav-links');
+      if (navToggle && navLinks) {
+        navToggle.addEventListener('click', () => {
+          navLinks.classList.toggle('active');
+          navToggle.classList.toggle('active');
+        });
+      }
+
+      document.querySelectorAll('a[href^="http"]').forEach(link => {
+        if (!link.href.includes(window.location.hostname)) {
+          link.setAttribute('target', '_blank');
+          link.setAttribute('rel', 'noopener noreferrer');
+        }
+      });
+
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const isMobile = window.innerWidth <= 768;
+
+      if (!prefersReducedMotion && 'IntersectionObserver' in window) {
+        const orbObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            entry.target.classList.toggle('orb--paused', !entry.isIntersecting);
+          });
+        }, { rootMargin: isMobile ? '0px' : '100px 0px', threshold: 0 });
+        document.querySelectorAll('.orb').forEach(orb => orbObserver.observe(orb));
+      }
+    })();
+  </script>
+</body>
+</html>

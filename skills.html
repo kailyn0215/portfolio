@@ -1,0 +1,66 @@
+---
+layout: page
+title: "skills // kb"
+description: "A deep dive into Kailyn Brown's technical skills, tools, and expertise."
+nav_active: skills
+orb_set: skills
+---
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SKILLS DETAIL PAGE — Expanded skill breakdown
+     ═══════════════════════════════════════════════════════════════ -->
+
+<section class="detail-section">
+  <div class="detail-container">
+    
+    <!-- Page Header -->
+    <header class="detail-header fade-in">
+      <span class="section-tag">✦ skills // breakdown</span>
+      <h1 class="section-title">technical stack</h1>
+      <p class="section-subtitle">a deeper look at the tools and technologies i work with</p>
+    </header>
+
+    <!-- Skills Categories -->
+    {% for category in site.data.skills %}
+    <div class="skill-category-block glass-card fade-in">
+      <div class="category-header">
+        <span class="category-code">[{{ category.code }}]</span>
+        <h3 class="category-title">{{ category.category }}</h3>
+      </div>
+      <p class="category-description">{{ category.description }}</p>
+      
+      <div class="skills-detail-grid">
+        {% for skill in category.items %}
+        <div class="skill-detail-card">
+          <div class="skill-detail-header">
+            <h4 class="skill-name">{{ skill.name }}</h4>
+            <span class="skill-proficiency proficiency-{{ skill.proficiency }}">{{ skill.proficiency }}</span>
+          </div>
+          <p class="skill-use-case">{{ skill.use_case }}</p>
+          <div class="skill-meta">
+            <span class="skill-years">{{ skill.years }} experience</span>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+
+    <!-- Skill Visualization Placeholder -->
+    <div class="detail-block glass-card fade-in">
+      <h3 class="block-title"><span class="title-icon">📊</span> skill visualization</h3>
+      <div class="skill-viz-placeholder">
+        <span class="viz-icon">📈</span>
+        <p>TODO: Add interactive skill chart or visualization here</p>
+        <small class="placeholder-note">e.g., radar chart, skill bars, or proficiency breakdown</small>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="detail-cta fade-in">
+      <p>want to see these skills in action?</p>
+      <a href="{{ '/projects' | relative_url }}" class="btn-primary">view projects →</a>
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,264 @@
+---
+layout: page
+title: "projects // gallery"
+description: "Browse all projects by Kailyn Brown — iOS apps, dev tools, and more."
+nav_active: projects
+orb_set: project
+---
+
+<!-- ═══════════════════════════════════════════════════════════════
+     PROJECTS GALLERY — Browse all projects
+     ═══════════════════════════════════════════════════════════════ -->
+
+<section class="detail-section projects-gallery">
+  <div class="detail-container">
+    
+    <!-- Gallery Header -->
+    <header class="detail-header fade-in">
+      <span class="section-tag">✦ projects // gallery</span>
+      <h1 class="section-title">all projects</h1>
+      <p class="section-subtitle">browse my work — click any card for the full case study</p>
+    </header>
+
+    <!-- Project Grid -->
+    <div class="projects-grid fade-in">
+      {% for project in site.projects %}
+      <a href="{{ project.url | relative_url }}" class="project-gallery-card glass-card">
+        <!-- Cover Image -->
+        <div class="gallery-card-image">
+          {% if project.cover_image and project.cover_image != "" %}
+          <img src="{{ project.cover_image | relative_url }}" alt="{{ project.name }}" class="card-cover">
+          {% else %}
+          <div class="card-cover-placeholder">
+            <span class="placeholder-icon">{% if project.category == "mobile app" %}📱{% elsif project.category == "dev tool" %}🛠️{% else %}💻{% endif %}</span>
+          </div>
+          {% endif %}
+        </div>
+        
+        <!-- Card Content -->
+        <div class="gallery-card-content">
+          <div class="card-meta">
+            <span class="card-category">{{ project.category }}</span>
+            <span class="card-status status-{{ project.status | slugify }}">{{ project.status }}</span>
+          </div>
+          <h3 class="card-title">{{ project.name }}</h3>
+          <p class="card-tagline">{{ project.tagline }}</p>
+          
+          <!-- Tech Stack Pills -->
+          <div class="card-stack">
+            {% for tech in project.stack limit:3 %}
+            <span class="stack-pill">{{ tech }}</span>
+            {% endfor %}
+            {% if project.stack.size > 3 %}
+            <span class="stack-pill stack-more">+{{ project.stack.size | minus: 3 }}</span>
+            {% endif %}
+          </div>
+          
+          <span class="card-link">view case study →</span>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+
+    <!-- Empty State (if no projects) -->
+    {% if site.projects.size == 0 %}
+    <div class="empty-state glass-card fade-in">
+      <span class="empty-icon">🚧</span>
+      <p>Projects coming soon...</p>
+    </div>
+    {% endif %}
+
+
+  </div>
+</section>
+
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   PROJECTS GALLERY STYLES
+   ═══════════════════════════════════════════════════════════════ */
+
+.projects-gallery {
+  padding: 2rem 0 4rem;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* When exactly 2 items, center them nicely */
+.projects-grid:has(.project-gallery-card:nth-child(2):last-child) {
+  grid-template-columns: repeat(2, minmax(280px, 360px));
+  justify-content: center;
+}
+
+/* Gallery Card */
+.project-gallery-card {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.project-gallery-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+/* Card Image */
+.gallery-card-image {
+  height: 200px;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--clr-sky) 0%, var(--clr-lavender) 100%);
+}
+
+.card-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-cover-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+  opacity: 0.7;
+}
+
+/* Card Content */
+.gallery-card-content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex: 1;
+}
+
+.card-meta {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.card-category {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--clr-accent);
+  font-weight: 600;
+}
+
+.card-status {
+  font-size: 0.7rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.2);
+  color: var(--clr-text-muted);
+}
+
+.card-status.status-complete {
+  background: rgba(76, 175, 80, 0.2);
+  color: #4caf50;
+}
+
+.card-status.status-in-development {
+  background: rgba(255, 193, 7, 0.2);
+  color: #ffc107;
+}
+
+.card-title {
+  font-family: var(--ff-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--clr-text);
+}
+
+.card-tagline {
+  font-size: 0.95rem;
+  color: var(--clr-text-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Tech Stack Pills */
+.card-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: auto;
+}
+
+.stack-pill {
+  font-size: 0.7rem;
+  padding: 0.25rem 0.6rem;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 1rem;
+  color: var(--clr-text-muted);
+  font-family: var(--ff-mono, monospace);
+}
+
+.stack-more {
+  background: rgba(var(--clr-accent-rgb), 0.2);
+  color: var(--clr-accent);
+}
+
+.card-link {
+  font-size: 0.85rem;
+  color: var(--clr-accent);
+  font-weight: 500;
+  margin-top: 0.5rem;
+  transition: transform 0.2s ease;
+}
+
+.project-gallery-card:hover .card-link {
+  transform: translateX(4px);
+}
+
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  margin-top: 2rem;
+}
+
+.empty-icon {
+  font-size: 4rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    max-width: 100%;
+  }
+  
+  .projects-grid:has(.project-gallery-card:nth-child(2):last-child) {
+    grid-template-columns: 1fr;
+  }
+  
+  .gallery-card-image {
+    height: 160px;
+  }
+  
+  .gallery-card-content {
+    padding: 1.25rem;
+  }
+}
+</style>

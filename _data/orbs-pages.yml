@@ -1,0 +1,27 @@
+# ═══════════════════════════════════════════════════════════════
+# ORBS SETTINGS — Procedural generation config per page
+# Just set count and seed; orbs are generated in Liquid
+# 
+# To change density: edit count (80=light, 110=dense, 150=max)
+# Seed ensures each page has a unique but stable orb distribution
+# ═══════════════════════════════════════════════════════════════
+
+default:
+  count: 150
+  seed: 1
+
+about:
+  count: 150
+  seed: 2
+
+skills:
+  count: 150
+  seed: 3
+
+project:
+  count: 150
+  seed: 4
+
+projects:
+  count: 150
+  seed: 5

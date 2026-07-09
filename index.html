@@ -78,6 +78,8 @@ title: Home
           <div class="stat-label">projects</div>
         </div>
       </div>
+      
+      <a href="{{ '/about.html' | relative_url }}" class="section-detail-link">read more about me →</a>
     </div>
   </div>
 </section>
@@ -92,6 +94,7 @@ title: Home
   
   <div class="skills-grid">
     {% for skill in site.data.skills %}
+    {% if skill.homepage %}
     <div class="skill-card glass-card fade-in">
       <div class="skill-header">
         <span class="skill-code">{{ skill.code }}</span>
@@ -99,11 +102,16 @@ title: Home
       </div>
       <div class="skill-items">
         {% for item in skill.items %}
-        <span class="skill-item">{{ item }}</span>
+        <span class="skill-item">{{ item.name }}</span>
         {% endfor %}
       </div>
     </div>
+    {% endif %}
     {% endfor %}
+  </div>
+  
+  <div class="section-cta">
+    <a href="{{ '/skills.html' | relative_url }}" class="section-detail-link">explore all skills →</a>
   </div>
 </section>
 
@@ -116,35 +124,39 @@ title: Home
   </div>
   
   <div class="projects-grid">
-    {% for project in site.data.projects %}
-    <div class="project-card glass-card fade-in">
+    {% for project in site.projects limit:2 %}
+    <a href="{{ project.url | relative_url }}" class="project-card glass-card fade-in">
       <div class="project-image">
         <div class="project-meta">
-          <span>{{ project.version }}</span>
-          <span>{{ project.year }}</span>
+          <span>{{ project.category }}</span>
+          <span class="project-status status-{{ project.status | slugify }}">{{ project.status }}</span>
         </div>
-        ◈
+        {% if project.cover_image and project.cover_image != "" %}
+        <img src="{{ project.cover_image | relative_url }}" alt="{{ project.name }}" class="project-cover">
+        {% else %}
+        <span class="project-placeholder-icon">{% if project.category == "mobile app" %}📱{% elsif project.category == "dev tool" %}🛠️{% else %}💻{% endif %}</span>
+        {% endif %}
       </div>
       <div class="project-content">
-        <h3>{{ project.title }}</h3>
+        <h3>{{ project.name }}</h3>
         <p class="project-tagline">{{ project.tagline }}</p>
-        <p>{{ project.description }}</p>
+        <p>{{ project.description | strip_html | truncate: 150 }}</p>
         <div class="project-tech">
-          {% for tech in project.tech %}
+          {% for tech in project.stack limit:4 %}
           <span>{{ tech }}</span>
           {% endfor %}
-        </div>
-        <div class="project-links">
-          {% if project.live_url and project.live_url != "#" %}
-          <a href="{{ project.live_url }}">live →</a>
-          {% endif %}
-          {% if project.repo_url and project.repo_url != "#" %}
-          <a href="{{ project.repo_url }}">source</a>
+          {% if project.stack.size > 4 %}
+          <span class="tech-more">+{{ project.stack.size | minus: 4 }}</span>
           {% endif %}
         </div>
+        <span class="project-detail-link">view case study →</span>
       </div>
-    </div>
+    </a>
     {% endfor %}
+  </div>
+  
+  <div class="section-cta">
+    <a href="{{ '/projects/' | relative_url }}" class="section-detail-link">view all projects →</a>
   </div>
 </section>
 

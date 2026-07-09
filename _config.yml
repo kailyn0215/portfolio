@@ -1,7 +1,7 @@
 title: Kailyn Brown | Portfolio
 description: creative developer — building interfaces and breaking conventions
 author: Kailyn Brown
-email: your.email@example.com
+email: kailynmbrown15@gmail.com
 baseurl: "/portfolio"
 url: "https://kailyn0215.github.io"
 
@@ -10,6 +10,22 @@ markdown: kramdown
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
+
+# Collections
+collections:
+  projects:
+    output: true
+    permalink: /projects/:name/
+
+# Default front matter for collections
+defaults:
+  - scope:
+      path: ""
+      type: "projects"
+    values:
+      layout: "project"
+      nav_active: "projects"
+      orb_set: "project"
 
 # Exclude from processing
 exclude:

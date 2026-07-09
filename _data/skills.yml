@@ -1,41 +1,131 @@
 # ═══════════════════════════════════════════════════════════════
-# skills.yml — skill categories and items (Phase 7: clearer tags)
-# format: spec-sheet style with categories
+# skills.yml — skill categories and items
+# homepage: true = show on homepage (3 technical blocks)
+# homepage: false = show only on skills detail page
 # ═══════════════════════════════════════════════════════════════
 
-- category: "frontend"
-  code: "FE"
-  items:
-    - "javascript"
-    - "html/css"
-    - "swift"
-    - "animation"
+# ─────────────────────────────────────────────────────────────────
+# HOMEPAGE SKILLS (3 technically-focused blocks)
+# ─────────────────────────────────────────────────────────────────
 
-- category: "backend"
-  code: "BE"
+- category: "languages"
+  code: "LANG"
+  description: "Programming languages I work with daily"
+  homepage: true
   items:
-    - "java"
-    - "python"
-    - "c++"
-    - "node.js"
+    - name: "java"
+      proficiency: "strong"
+      use_case: "Backend development, APIs, data processing at scale"
+      years: "6+"
+    - name: "python"
+      proficiency: "familiar"
+      use_case: "Scripting, automation, and quick prototypes"
+      years: "2+"
+    - name: "swift"
+      proficiency: "familiar"
+      use_case: "iOS mobile app development (MIA app)"
+      years: "3+"
+    - name: "c"
+      proficiency: "familiar"
+      use_case: "Systems programming and algorithms"
+      years: "2+"
+    - name: "html/css"
+      proficiency: "familiar"
+      use_case: "Web development and styling"
+      years: "1+"
 
-- category: "devops"
-  code: "OPS"
+- category: "frameworks & tools"
+  code: "TOOLS"
+  description: "Development tools and platforms I rely on"
+  homepage: true
   items:
-    - "git"
-    - "docker"
-    - "linux"
-    - "rancher"
-    - "akeyless"
-    - "gcs"
-    - "terminal"
+    - name: "git/github"
+      proficiency: "strong"
+      use_case: "Version control, collaboration, and code review"
+      years: "5+"
+    - name: "vs code"
+      proficiency: "strong"
+      use_case: "Primary code editor for most projects"
+      years: "6+"
+    - name: "xcode"
+      proficiency: "familiar"
+      use_case: "iOS development environment and debugging"
+      years: "3+"
+    - name: "intellij"
+      proficiency: "familiar"
+      use_case: "Java development and enterprise projects"
+      years: "1+"
+    - name: "linux cli"
+      proficiency: "familiar"
+      use_case: "Terminal navigation, scripting, server management"
+      years: "4+"
 
-- category: "creative"
-  code: "ART"
+- category: "backend & infrastructure"
+  code: "INFRA"
+  description: "Server-side development and DevOps basics"
+  homepage: true
   items:
-    - "blender"
-    - "photoshop"
-    - "photography"
-    - "illustration"
-    - "premiere pro"
-    - "after effects"
+    - name: "rest apis"
+      proficiency: "familiar"
+      use_case: "Building and consuming web services"
+      years: "2+"
+    - name: "sql"
+      proficiency: "familiar"
+      use_case: "Database queries and data management"
+      years: "2+"
+    - name: "docker"
+      proficiency: "familiar"
+      use_case: "Containerization for consistent deployments"
+      years: "<1"
+    - name: "kafka"
+      proficiency: "learning"
+      use_case: "Message processing (@ Kroger)"
+      years: "<1"
+
+# ─────────────────────────────────────────────────────────────────
+# DETAIL PAGE ONLY (expanded categories)
+# ─────────────────────────────────────────────────────────────────
+
+- category: "core strengths"
+  code: "CORE"
+  description: "Problem solving and analytical abilities"
+  homepage: false
+  items:
+    - name: "problem solving"
+      proficiency: "strong"
+      use_case: "Breaking down complex challenges into manageable pieces"
+      years: ""
+    - name: "analytical thinking"
+      proficiency: "strong"
+      use_case: "Troubleshooting, debugging, and root cause analysis"
+      years: ""
+    - name: "fast learner"
+      proficiency: "strong"
+      use_case: "Quickly picking up new technologies and frameworks"
+      years: ""
+    - name: "detail-oriented"
+      proficiency: "strong"
+      use_case: "Writing clean, maintainable, well-documented code"
+      years: ""
+
+- category: "soft skills"
+  code: "SOFT"
+  description: "Communication and collaboration"
+  homepage: false
+  items:
+    - name: "team collaboration"
+      proficiency: "excellent"
+      use_case: "Working effectively in agile team environments"
+      years: ""
+    - name: "communication"
+      proficiency: "excellent"
+      use_case: "Clear technical and non-technical communication"
+      years: ""
+    - name: "dependability"
+      proficiency: "excellent"
+      use_case: "Consistent, reliable delivery on commitments"
+      years: ""
+    - name: "creative thinking"
+      proficiency: "strong"
+      use_case: "Finding innovative solutions to tricky problems"
+      years: ""

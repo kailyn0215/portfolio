@@ -1,8 +1,187 @@
 # ═══════════════════════════════════════════════════════════════
-# about.yml — About section data
+# about.yml — About section content for KB portfolio
 # ═══════════════════════════════════════════════════════════════
 
-# TODO: Add your photo path here (relative to /assets/images/)
-# Example: photo: "/assets/images/kb-portrait.jpg"
-# Leave empty or comment out to show the placeholder
-photo: "/assets/images/meowl.jpg"
+# Basic info
+name: "Kailyn Brown"
+nickname: "KB"
+location: "Cincinnati, OH"
+role: "Software Developer Intern"
+company: "Kroger — Search & Personalization"
+school: "University of Cincinnati"
+major: "Computer Science"
+class_year: "2028"
+
+# Photo (relative to assets/images or use placeholder)
+photo: "" # Leave blank for placeholder, or add path like "kb-profile.jpg"
+
+# Short tagline for homepage
+tagline: "aspiring engineer building intuitive solutions"
+
+# Longer bio for homepage about section
+bio: |
+  Computer Science student at the University of Cincinnati with hands-on experience in software development. 
+  Currently interning at Kroger in the Search & Personalization department, working on systems that help 
+  millions of customers find what they need. Passionate about using technology to solve real-world problems 
+  and create meaningful user experiences.
+
+# ═══════════════════════════════════════════════════════════════
+# BACKGROUND SECTION — Extended story
+# ═══════════════════════════════════════════════════════════════
+background:
+  title: "README.md"
+  content: |
+    Motivated and detail-oriented Computer Science major seeking opportunities to apply and expand 
+    programming, problem-solving, and technical skills in collaborative environments. Currently working 
+    as a Software Developer Intern at Kroger in the Search & Personalization department.
+    
+    My journey into tech started with a personal challenge project where I taught myself Swift/Xcode and created 
+    a mobile app to assist patients with aphasia—an experience that showed me the power of technology 
+    to help others. That project sparked my passion for building software that makes a real difference.
+    
+    When I'm not coding, you can find me exploring creative outlets like photography and video editing, 
+    modding older devices (Nintendo 3DS, Xbox 360, Wii U, iPhone 4), riding in my VW Beetle, or 
+    tinkering with my custom-built PC. I believe the best solutions come from collaboration, 
+    communication, and a willingness to learn quickly.
+
+# ═══════════════════════════════════════════════════════════════
+# JOURNEY TIMELINE
+# ═══════════════════════════════════════════════════════════════
+journey:
+  title: "changelog.md"
+  milestones:
+    - year: "2026"
+      event: "Transferred to University of Cincinnati"
+      description: "Pivoted towards IT studies closer to home."
+    - year: "2026"
+      event: "Kroger Software Dev Internship"
+      description: "Joined the Search & Personalization team, working on code with millions of queries a day."
+    - year: "2024"
+      event: "Started at Bryn Mawr College"
+      description: "Began working towards a Computer Science degree in Philadelphia, PA"
+    - year: "2024"
+      event: "Graduated from The Seven Hills School"
+      description: "Completed Honors and Advanced Placement curriculum in Cincinnati, OH."
+
+
+# ═══════════════════════════════════════════════════════════════
+# INTERESTS
+# ═══════════════════════════════════════════════════════════════
+interests:
+  title: "my_interests"
+  items:
+    - icon: "💻"
+      name: "software_dev"
+      description: "creating software and tools that solve problems"
+    - icon: "📱"
+      name: "iOS_dev"
+      description: "developing intuitive mobile experiences with swift"
+    - icon: "🎮"
+      name: "jailbreaking"
+      description: "nintendo 3ds, xbox 360, wii u, iphone 4, and more"
+    - icon: "🔧"
+      name: "pc_building"
+      description: "built my own custom computer from scratch"
+    - icon: "🎨"
+      name: "creative_outlet"
+      description: "photography, video editing, and visual design"
+    - icon: "🚗"
+      name: "transportation"
+      description: "cruising in my lil car"
+
+# ═══════════════════════════════════════════════════════════════
+# FUN FACTS
+# ═══════════════════════════════════════════════════════════════
+fun_facts:
+  title: "fun facts"
+  items:
+    - "Self-taught Swift/Xcode to build an app for aphasia patients"
+    - "Worked at the highest-volume Graeter's Ice Cream store in the franchise"
+    - "Built my own custom gaming/development PC"
+    - "Have an extensive collection of modded retro devices"
+    - "Participated in CISV international exchange programs"
+    - "Performed in multiple theatre productions"
+    - "Volunteered at a no-kill animal rescue, training other volunteers"
+
+# ═══════════════════════════════════════════════════════════════
+# VALUES
+# ═══════════════════════════════════════════════════════════════
+values:
+  title: "core values"
+  items:
+    - name: "Impact-Driven"
+      description: "Using technology to solve real-world problems and help people"
+    - name: "Continuous Learning"
+      description: "Comfortable learning new technologies quickly and adapting"
+    - name: "Collaboration"
+      description: "Team player with excellent communication skills"
+    - name: "Detail-Oriented"
+      description: "Strong analytical and troubleshooting abilities"
+    - name: "Creative Problem-Solving"
+      description: "Finding innovative solutions through creative thinking"
+
+# ═══════════════════════════════════════════════════════════════
+# RESUME / EXPERIENCE
+# ═══════════════════════════════════════════════════════════════
+resume:
+  title: "experience & education"
+  download_link: "" # TODO: Add resume PDF path when available
+  
+  experience:
+    - role: "Software Developer Intern"
+      company: "Kroger"
+      department: "Search & Personalization"
+      period: "Summer 2025 – Present"
+      description: "Working on search and personalization systems that help millions of customers find products and receive personalized recommendations."
+      highlights:
+        - "Contributing to search infrastructure used by millions of daily users"
+        - "Collaborating with cross-functional teams on personalization features"
+        - "Working with Kafka message processing systems"
+        - "Gaining hands-on experience in large-scale software development"
+    - role: "Kitchen Support"
+      company: "Bryn Mawr College Dining Services"
+      location: "Bryn Mawr, PA"
+      period: "Aug 2024 – May 2025"
+      description: "Supported daily food service operations including preparation, serving, and maintaining cleanliness."
+      highlights:
+        - "Collaborated with team members for efficient dining operations"
+        - "Managed multiple responsibilities in fast-paced environment"
+    - role: "Team Member"
+      company: "Graeter's Ice Cream"
+      location: "Kenwood, Cincinnati, OH"
+      period: "May 2022 – Aug 2024, May 2025 – Aug 2025"
+      description: "Provided excellent customer service at the highest volume store in the Graeter's franchise."
+      highlights:
+        - "Served customers at the busiest Graeter's location"
+        - "Operated register, took orders, and prepared desserts"
+        - "Maintained positive attitude while working as part of a team"
+    - role: "Volunteer"
+      company: "HEARTT Animal Rescue"
+      location: "Sharonville, OH"
+      period: "June 2021 – Aug 2021"
+      description: "Volunteered at local no-kill animal refuge and adoption center."
+      highlights:
+        - "Cleaned and sanitized animal habitats"
+        - "Trained newer volunteers on procedures"
+        - "Organized supplies and provided animal care"
+  
+  education:
+    - degree: "B.S. Computer Science"
+      institution: "University of Cincinnati"
+      period: "2025 – 2028"
+      highlights:
+        - "Transferred from Bryn Mawr College"
+        - "Expected graduation: 2028"
+    - degree: "High School Diploma"
+      institution: "The Seven Hills School"
+      period: "2020 – 2024"
+      highlights:
+        - "Honors and Advanced Placement Curriculum"
+        - "Theatre and performing arts involvement"
+  
+  certifications: []
+
+# Contact info
+contact:
+  email: "KailynMBrown15@gmail.com"
+  location: "Cincinnati, OH"
