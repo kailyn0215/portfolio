@@ -34,9 +34,9 @@
        DRIFTING ORBS — Same as homepage (from _data/orbs.yml)
        ═══════════════════════════════════════════════════════════════ -->
   <div class="orbs-layer">
-    {% assign sky_imgs = "sky1.jpg,sky2.jpg,sky3.jpg,sky4.jpg,sky5.jpg,sky6.jpg,sky7.jpg" | split: "," %}
+    {% assign sky_imgs = "sky1.jpg,sky2.jpg,sky3.jpg,sky4.jpg,sky5.jpg,sky6.jpg" | split: "," %}
     {% for orb in site.data.orbs.orbs %}
-    {% assign img_idx = forloop.index | modulo: 7 %}
+    {% assign img_idx = forloop.index | modulo: 6 %}
     {% assign rotation = forloop.index | times: 47 | modulo: 360 %}
     <span
       class="orb orb--{{ orb.size }} orb--{{ orb.color }} {% if orb.variant == 'glass' %}orb--glass{% endif %} orb--z-{{ orb.z }} orb--drift-{{ orb.drift }}"

@@ -12,7 +12,7 @@ description: |
 
 # Basic info
 category: "hardware"
-status: "completed"
+status: "complete"
 featured: false
 year: 2024
 

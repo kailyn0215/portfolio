@@ -18,22 +18,6 @@
   --mobile-orb-min-xs: 12px;       /* smallest xs orb on mobile         */
   --mobile-orb-edge-inset: 5%;     /* how much edge orbs pull inward    */
   
-  /* ═══════════════════════════════════════════════════════════════
-     MOBILE PERFORMANCE TUNING — Adjust these for mobile smoothness
-     These dramatically reduce GPU load on phones
-     ═══════════════════════════════════════════════════════════════ */
-  --mobile-blur-enabled: 0;        /* 0=no blur (perf), 1=keep blur      */
-  --mobile-backdrop-blur: none;    /* 'none' or 'blur(4px)' for light   */
-  --mobile-shadow-simple: 1;       /* 1=simple shadows, 0=full shadows  */
-  --mobile-orb-density: 0.5;       /* 0.5 = show 50% of orbs            */
-  
-  /* ═══════════════════════════════════════════════════════════════
-     VIBRANCY KNOBS — Tune these to dial in the exact vibrancy
-     ═══════════════════════════════════════════════════════════════ */
-  --vibrancy-boost: 1.15;          /* master saturation multiplier      */
-  --accent-intensity: 1.1;         /* orange punch (1.0=normal, 1.2=hot)*/
-  --gloss-strength: 0.75;          /* specular highlight intensity      */
-  
   /* Background Gradient Stops */
   --color-bg-top: #BEE3F7;
   --color-bg-mid: #E8F5E9;
@@ -54,11 +38,8 @@
   --color-leaf-light: #88FF88;
   --color-sunset: #FF8833;         /* vivid orange-sunset               */
   --color-sunset-light: #FFAA66;
-  --color-bubble: #99EEFF;
   --color-peach: #FFCCAA;
   --color-lavender: #CC88FF;       /* vivid lavender                    */
-  --color-mint: #66FFCC;           /* vivid mint                        */
-  --color-magenta: #FF4488;        /* vivid magenta                     */
   --color-gold: #FFCC00;           /* vivid gold                        */
   
   /* Liquid Glass System */
@@ -71,24 +52,6 @@
   --glass-shadow: 0 8px 32px rgba(30,58,82,0.18);
   --glass-shadow-accent: 0 8px 32px rgba(255,107,43,0.25);
   --glass-shadow-sky: 0 8px 32px rgba(91,192,248,0.3);
-  
-  /* Chrome Gradient — Wet/Glossy */
-  --gradient-chrome: linear-gradient(135deg, #FFFFFF 0%, #BEE3F7 25%, #5BC0F8 55%, #1E3A52 100%);
-  --gradient-chrome-vivid: linear-gradient(135deg, #FFFFFF 0%, #A8E0FF 20%, #5BC0F8 50%, #2A5A7A 80%, #1E3A52 100%);
-  
-  /* Iridescent */
-  --gradient-iris: linear-gradient(135deg, #FF6B9D 0%, #FFD93D 25%, #6FD46F 50%, #5BC0F8 75%, #D8B4F0 100%);
-  --gradient-iris-subtle: linear-gradient(135deg, rgba(255,107,157,0.15) 0%, rgba(255,217,61,0.1) 25%, rgba(111,212,111,0.1) 50%, rgba(91,192,248,0.15) 75%, rgba(216,180,240,0.1) 100%);
-  
-  /* Orb Gradient — Real Glass Marble */
-  --gradient-orb: radial-gradient(ellipse at 30% 25%, #FFFFFF 0%, #E0F4FF 15%, #5BC0F8 45%, #2A5A7A 75%, #1E3A52 100%);
-  --gradient-orb-teal: radial-gradient(ellipse at 30% 25%, #FFFFFF 0%, #A8F0DC 20%, #4ECDC4 50%, #1E3A52 100%);
-  --gradient-orb-peach: radial-gradient(ellipse at 30% 25%, #FFFFFF 0%, #FFD0A8 20%, #FFA561 50%, #8A4A20 100%);
-  --gradient-orb-lime: radial-gradient(ellipse at 30% 25%, #FFFFFF 0%, #D4F0B8 20%, #6FD46F 50%, #2A5A20 100%);
-  --gradient-orb-lavender: radial-gradient(ellipse at 30% 25%, #FFFFFF 0%, #E8D0F8 20%, #D8B4F0 50%, #6A3A8A 100%);
-  
-  /* Glass Bubble */
-  --gradient-glass-bubble: radial-gradient(ellipse at 30% 25%, rgba(255,255,255,0.98) 0%, rgba(200,238,255,0.6) 35%, rgba(91,192,248,0.25) 100%);
   
   /* Typography */
   --font-display: 'Space Grotesk', 'Outfit', sans-serif;
@@ -140,8 +103,9 @@
      ───────────────────────────────────────────────────────────── */
   --quiet-strength: 0.55;     /* how much the central column dims orbs (0–1) */
   --quiet-width: 760px;       /* width of the calm central column            */
-  --quiet-veil: 0.22;         /* opacity of the frosted backing behind modules */
-  --quiet-veil-blur: 6px;     /* softness of that frosted backing            */
+
+  /* Extended spacing scale (detail pages) */
+  --space-2xl: 6rem;
 }
 
 /* ─────────────────────────────────────────────────────────────────
@@ -193,8 +157,7 @@ html {
 }
 
 /* Make ALL background layers full-bleed with no edge gaps */
-.bg-aero, .bg-clouds, .orbs-layer, .orbs-foreground, .motifs-layer, 
-.light-effects, .decorations, .bg-grid, .bg-grain {
+.bg-aero, .bg-clouds, .orbs-layer, .orbs-foreground, .decorations, .bg-grid, .bg-grain {
   width: 100%;
   left: 0;
   right: 0;
@@ -396,7 +359,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 /* Size utilities — responsive via clamp() for mobile scaling
    Desktop gets full size, mobile scales down smoothly.
    Tune --mobile-orb-min-* vars at top of :root to adjust mobile sizes. */
-.orb--xxs { width: 8px;   height: 8px; }
 .orb--xs  { width: clamp(var(--mobile-orb-min-xs), 1.5vw, 16px);  height: clamp(var(--mobile-orb-min-xs), 1.5vw, 16px); }
 .orb--sm  { width: clamp(var(--mobile-orb-min-sm), 5vw, 45px);   height: clamp(var(--mobile-orb-min-sm), 5vw, 45px); }
 .orb--md  { width: clamp(var(--mobile-orb-min-md), 12vw, 110px); height: clamp(var(--mobile-orb-min-md), 12vw, 110px); }
@@ -411,37 +373,24 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
    All colors pushed toward glossy, saturated candy tones.
    ───────────────────────────────────────────────────────────── */
 /* Blues — rich, saturated, candy-glossy */
-.orb--slate      { --orb-color: #2266AA; } /* rich saturated slate */
-.orb--navy       { --orb-color: #1144AA; } /* deep vivid navy */
 .orb--cobalt     { --orb-color: #0066DD; } /* vivid cobalt */
-.orb--azure      { --orb-color: #0088EE; } /* vivid azure */
 .orb--sky        { --orb-color: #00AAFF; } /* electric sky */
 .orb--cerulean   { --orb-color: #22BBFF; } /* bright cerulean */
-.orb--skylight   { --orb-color: #55CCFF; } /* vivid light sky */
-.orb--ice        { --orb-color: #88DDFF; } /* vivid ice */
-.orb--paleblue   { --orb-color: #AAEEFF; } /* light vivid blue */
 .orb--electric   { --orb-color: #00CCFF; } /* SUPER electric blue */
 
 /* Greens — vivid, candy-like (not muted) */
 .orb--lime       { --orb-color: #66EE44; } /* vivid lime */
-.orb--forest     { --orb-color: #22AA44; } /* rich forest */
 .orb--grass      { --orb-color: #44CC55; } /* vivid grass */
 .orb--chartreuse { --orb-color: #88EE33; } /* electric chartreuse */
-.orb--olive      { --orb-color: #88CC44; } /* vivid olive-lime */
 
 /* ORANGE — Bold energy accent (PRIMARY POP COLOR) */
-.orb--orange     { --orb-color: #FF6600; } /* VIVID orange */
 .orb--tangerine  { --orb-color: #FF8822; } /* vivid tangerine */
-.orb--coral      { --orb-color: #FF5544; } /* coral-orange */
-.orb--amber      { --orb-color: #FFAA00; } /* amber-gold */
 
 /* Lavender/Purple — vivid accent */
 .orb--lavender   { --orb-color: #AA66FF; } /* vivid lavender */
-.orb--violet     { --orb-color: #8833FF; } /* vivid violet */
 
 /* Warm tones — pushed toward orange/coral family */
 .orb--peach      { --orb-color: #FFAA77; } /* warm peach-orange */
-.orb--yellow     { --orb-color: #FFDD22; } /* vivid yellow-gold */
 
 /* Foreground orbs spawned by JS */
 .fg-orb {
@@ -549,66 +498,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     black calc(50% + var(--quiet-width) / 2 + 100px),
     transparent 100%
   );
-}
-
-/* Frosted veil backing — apply to content modules for lift off the orb field.
-   Very subtle; no hard box edges. Apply via class or as section pseudo-element. */
-.quiet-veil {
-  position: relative;
-}
-.quiet-veil::before {
-  content: '';
-  position: absolute;
-  inset: -20px -30px;
-  background: rgba(255,255,255, var(--quiet-veil));
-  backdrop-filter: blur(var(--quiet-veil-blur));
-  -webkit-backdrop-filter: blur(var(--quiet-veil-blur));
-  border-radius: var(--radius-xl);
-  z-index: -1;
-  pointer-events: none;
-}
-
-/* ─────────────────────────────────────────────────────────────────
-   ORGANIC MOTIFS — Glossy Nature Elements
-   ───────────────────────────────────────────────────────────────── */
-.motifs-layer {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  pointer-events: none;
-  z-index: 3;
-  /* Ensure motifs don't extend past page wrapper */
-  overflow: hidden;
-}
-
-.motif {
-  position: absolute;
-  font-size: 2.2rem;
-  filter: drop-shadow(0 6px 12px rgba(30,58,82,0.2));
-  animation: float-motif 12s ease-in-out infinite;
-}
-
-.motif--leaf { color: var(--color-leaf); text-shadow: 0 0 25px rgba(111,212,111,0.6); }
-.motif--droplet { color: var(--color-sky); text-shadow: 0 0 25px rgba(91,192,248,0.7); }
-.motif--butterfly { color: var(--color-lavender); text-shadow: 0 0 20px rgba(216,180,240,0.6); }
-
-.motif-1 { top: 18%; right: 16%; font-size: 2rem; animation-delay: -2s; }
-.motif-2 { top: 42%; left: 6%; font-size: 1.8rem; animation-delay: -5s; animation-duration: 14s; }
-.motif-3 { top: 72%; right: 8%; font-size: 2.5rem; animation-delay: -8s; animation-duration: 10s; }
-.motif-4 { top: 28%; left: 18%; font-size: 1.5rem; animation-delay: -3s; animation-duration: 15s; }
-.motif-5 { top: 58%; right: 22%; font-size: 1.7rem; animation-delay: -6s; animation-duration: 11s; }
-
-@keyframes float-motif {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  33% { transform: translateY(-15px) rotate(6deg); }
-  66% { transform: translateY(-8px) rotate(-4deg); }
-}
-
-/* Pause motif animations when off-screen */
-.motif.orb--paused {
-  animation-play-state: paused !important;
 }
 
 /* ─────────────────────────────────────────────────────────────────
@@ -772,129 +661,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .glass-pill[data-tilt="2"] { transform: rotate(2deg); }
 .glass-pill[data-tilt="3"] { transform: rotate(-1.5deg); }
 .glass-pill[data-tilt="4"] { transform: rotate(4deg); }
-
-/* Legacy sticker base for compatibility */
-.sticker {
-  position: absolute;
-  padding: 10px 22px;
-  background: var(--glass-bg-strong);
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-  border: 1px solid var(--glass-border-bright);
-  border-radius: var(--radius-full);
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--color-main);
-  text-transform: lowercase;
-  letter-spacing: 0.04em;
-  box-shadow: 
-    var(--glass-shadow),
-    inset 0 1px 0 rgba(255,255,255,0.95),
-    inset 0 -1px 0 rgba(30,58,82,0.08);
-  transition: var(--transition-bounce);
-}
-
-/* Specular sheen on stickers */
-.sticker::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 10%;
-  right: 10%;
-  height: 50%;
-  background: linear-gradient(180deg, rgba(255,255,255,0.7) 0%, transparent 100%);
-  border-radius: var(--radius-full) var(--radius-full) 50% 50%;
-  pointer-events: none;
-}
-
-.sticker:hover {
-  transform: scale(1.08) rotate(0deg) !important;
-  box-shadow: 
-    0 12px 40px rgba(30,58,82,0.25),
-    inset 0 1px 0 rgba(255,255,255,1);
-}
-
-/* Colored sticker variants */
-.sticker--sky { 
-  background: linear-gradient(135deg, rgba(91,192,248,0.75) 0%, rgba(168,224,255,0.6) 100%);
-  color: #1E3A52;
-  border-color: rgba(91,192,248,0.7);
-  box-shadow: var(--glass-shadow-sky), inset 0 1px 0 rgba(255,255,255,0.9);
-}
-
-.sticker--leaf { 
-  background: linear-gradient(135deg, rgba(111,212,111,0.75) 0%, rgba(168,240,168,0.6) 100%);
-  color: #1E4A20;
-  border-color: rgba(111,212,111,0.7);
-  box-shadow: 0 8px 32px rgba(111,212,111,0.25), inset 0 1px 0 rgba(255,255,255,0.9);
-}
-
-.sticker--sunset { 
-  background: linear-gradient(135deg, rgba(255,165,97,0.8) 0%, rgba(255,208,168,0.65) 100%);
-  color: #6A3A10;
-  border-color: rgba(255,165,97,0.7);
-  box-shadow: 0 8px 32px rgba(255,165,97,0.25), inset 0 1px 0 rgba(255,255,255,0.9);
-}
-
-.sticker--accent { 
-  background: linear-gradient(135deg, rgba(255,107,43,0.85) 0%, rgba(255,165,97,0.7) 100%);
-  color: #FFFFFF;
-  border-color: rgba(255,107,43,0.7);
-  box-shadow: var(--glass-shadow-accent), inset 0 1px 0 rgba(255,255,255,0.7);
-}
-
-.sticker--lavender { 
-  background: linear-gradient(135deg, rgba(216,180,240,0.75) 0%, rgba(232,208,248,0.6) 100%);
-  color: #4A2A6A;
-  border-color: rgba(216,180,240,0.7);
-  box-shadow: 0 8px 32px rgba(216,180,240,0.25), inset 0 1px 0 rgba(255,255,255,0.9);
-}
-
-.sticker--iris {
-  background: var(--gradient-iris-subtle);
-  border-color: rgba(255,255,255,0.6);
-  box-shadow: 0 8px 32px rgba(91,192,248,0.2), inset 0 1px 0 rgba(255,255,255,0.9);
-}
-
-/* Sparkle decorations */
-.deco-sparkle {
-  position: absolute;
-  font-size: 1.5rem;
-  animation: twinkle 2s ease-in-out infinite;
-}
-
-.deco-sparkle--sky { color: var(--color-sky); text-shadow: 0 0 15px var(--color-sky); }
-.deco-sparkle--leaf { color: var(--color-leaf); text-shadow: 0 0 15px var(--color-leaf); }
-.deco-sparkle--sunset { color: var(--color-sunset); text-shadow: 0 0 15px var(--color-sunset); }
-.deco-sparkle--accent { color: var(--color-accent); text-shadow: 0 0 15px var(--color-accent); }
-.deco-sparkle--lavender { color: var(--color-lavender); text-shadow: 0 0 15px var(--color-lavender); }
-
-@keyframes twinkle {
-  0%, 100% { opacity: 0.6; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.2); }
-}
-
-/* Handwritten annotations */
-.annotation {
-  position: absolute;
-  font-family: 'Comic Sans MS', 'Marker Felt', cursive;
-  font-size: 0.85rem;
-  color: var(--color-main);
-  opacity: 0.85;
-}
-
-/* Positioned decorations */
-.deco-1 { top: 6%; left: 2%; transform: rotate(-4deg); }
-.deco-2 { top: 14%; right: 3%; transform: rotate(5deg); }
-.deco-3 { top: 32%; left: 1.5%; transform: rotate(-3deg); }
-.deco-4 { top: 48%; right: 2%; transform: rotate(4deg); }
-.deco-5 { top: 68%; left: 3%; transform: rotate(-5deg); }
-.deco-6 { top: 84%; right: 4%; transform: rotate(3deg); }
-.deco-7 { top: 22%; left: 5%; transform: rotate(5deg); }
-.deco-8 { top: 42%; right: 5%; transform: rotate(-4deg); }
-.deco-9 { top: 62%; left: 4%; transform: rotate(2deg); }
-.deco-10 { top: 10%; left: 52%; transform: rotate(-3deg); }
 
 /* Retro progress bar */
 .retro-progress {
@@ -1150,16 +916,39 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   overflow: hidden;
 }
 
-/* Top specular highlight */
+/* ─────────────────────────────────────────────────────────────────
+   GLASS CARD GLARE — soft, organic, curved light reflection
+   Replaces the old hard-edged linear-gradient stripe with a
+   diffused, feathered highlight that hugs the rounded corner,
+   plus a subtle rim-light along the top/left edge.
+   ───────────────────────────────────────────────────────────────── */
 .glass-card::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 10%;
-  right: 10%;
-  height: 45%;
-  background: linear-gradient(180deg, rgba(255,255,255,0.5) 0%, transparent 100%);
-  border-radius: 0 0 50% 50%;
+  top: -20%;
+  left: -15%;
+  width: 85%;
+  height: 75%;
+  background:
+    radial-gradient(ellipse 70% 55% at 30% 25%, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.22) 35%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at 55% 15%, rgba(255,255,255,0.3) 0%, transparent 65%);
+  transform: rotate(-12deg);
+  filter: blur(22px);
+  pointer-events: none;
+  mix-blend-mode: soft-light;
+}
+
+/* Thin rim-light — micro-reflection along top & left edges */
+.glass-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.15) 22%, transparent 45%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
   pointer-events: none;
 }
 
@@ -3347,94 +3136,6 @@ main .contact-info {
   opacity: 0.7;
 }
 
-/* Learning section */
-.learning-grid {
-  display: grid;
-  gap: var(--space-md);
-}
-
-.learning-item {
-  padding: var(--space-md);
-  background: rgba(255,255,255,0.15);
-  border-radius: var(--radius-md);
-}
-
-.learning-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: var(--space-xs);
-}
-
-.learning-name {
-  font-weight: 600;
-}
-
-.learning-progress {
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  color: var(--color-accent);
-}
-
-.learning-notes {
-  font-size: 0.85rem;
-  color: var(--color-tint);
-}
-
-/* Tools section */
-.tools-specs {
-  margin-bottom: var(--space-md);
-}
-
-.tool-spec-row {
-  display: flex;
-  align-items: center;
-  gap: var(--space-xs);
-  font-family: var(--font-mono);
-  font-size: 0.85rem;
-  padding: var(--space-xs) 0;
-}
-
-.tool-label {
-  color: var(--color-accent);
-  min-width: 80px;
-}
-
-.tool-dots {
-  color: var(--color-tint);
-  opacity: 0.5;
-}
-
-.tool-value {
-  color: var(--color-main);
-}
-
-.other-tools {
-  padding-top: var(--space-sm);
-  border-top: 1px solid rgba(0,0,0,0.05);
-}
-
-.other-tools-label {
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  color: var(--color-tint);
-  display: block;
-  margin-bottom: var(--space-xs);
-}
-
-.other-tools-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-xs);
-}
-
-.tool-tag {
-  padding: 4px 10px;
-  background: rgba(255,255,255,0.2);
-  border-radius: var(--radius-sm);
-  font-size: 0.8rem;
-}
-
 /* Skill visualization placeholder */
 .skill-viz-placeholder {
   text-align: center;
@@ -3485,18 +3186,6 @@ main .contact-info {
 .meta-value {
   font-weight: 600;
   font-size: 1rem;
-}
-
-.meta-value.status-live {
-  color: var(--color-leaf);
-}
-
-.meta-value.status-maintained {
-  color: var(--color-sky);
-}
-
-.meta-value.status-archived {
-  color: var(--color-tint);
 }
 
 /* Tech Stack Section */
@@ -3570,72 +3259,6 @@ main .contact-info {
   font-size: 0.75rem;
   opacity: 0.7;
   margin-top: var(--space-xs);
-}
-
-/* Project Summary */
-.project-summary {
-  font-size: 1.1rem;
-  line-height: 1.7;
-  margin-bottom: var(--space-md);
-  padding-bottom: var(--space-md);
-  border-bottom: 1px solid rgba(0,0,0,0.05);
-}
-
-/* Features List */
-.features-list {
-  list-style: none;
-  padding: 0;
-}
-
-.feature-item {
-  position: relative;
-  padding-left: var(--space-lg);
-  margin-bottom: var(--space-sm);
-  font-size: 1rem;
-}
-
-.feature-item::before {
-  content: '✓';
-  position: absolute;
-  left: 0;
-  color: var(--color-leaf);
-  font-weight: bold;
-}
-
-/* Screenshots Gallery */
-.screenshots-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: var(--space-md);
-  margin-bottom: var(--space-sm);
-}
-
-.screenshot-item {
-  aspect-ratio: 16/10;
-}
-
-.screenshot-placeholder-sm {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, rgba(91,192,248,0.3), rgba(111,212,111,0.3));
-  border-radius: var(--radius-md);
-  border: 2px dashed var(--glass-border);
-  color: var(--color-tint);
-}
-
-.screenshot-placeholder-sm .placeholder-icon {
-  font-size: 2rem;
-  margin-bottom: var(--space-xs);
-}
-
-.screenshot-placeholder-sm small {
-  font-size: 0.75rem;
-  text-align: center;
-  padding: 0 var(--space-sm);
 }
 
 /* Challenges Section */
@@ -3834,11 +3457,6 @@ main .contact-info {
     width: 10px;
     height: 10px;
   }
-}
-
-/* Add --space-2xl variable if missing */
-:root {
-  --space-2xl: 6rem;
 }
 
 /* ─────────────────────────────────────────────────────────────────

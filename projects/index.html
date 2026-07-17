@@ -78,7 +78,7 @@ orb_set: project
    ═══════════════════════════════════════════════════════════════ */
 
 .projects-gallery {
-  padding: 2rem 0 4rem;
+  padding: var(--space-2xl) 0 4rem;
 }
 
 .projects-grid {
@@ -243,6 +243,10 @@ orb_set: project
 
 /* Responsive */
 @media (max-width: 768px) {
+  .projects-gallery {
+    padding: var(--space-xl) 0 3rem;
+  }
+
   .projects-grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
