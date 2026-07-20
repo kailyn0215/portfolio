@@ -4,6 +4,17 @@
    ═══════════════════════════════════════════════════════════════ */
 
 /* ─────────────────────────────────────────────────────────────────
+   CUSTOM FONTS
+   ───────────────────────────────────────────────────────────────── */
+@font-face {
+  font-family: 'Reflective Bold';
+  src: url('../fonts/reflective-bold.otf') format('opentype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ─────────────────────────────────────────────────────────────────
    PALETTE — Saturated Vivid Aero + Liquid Glass
    ───────────────────────────────────────────────────────────────── */
 :root {
@@ -792,6 +803,12 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   gap: var(--space-xs);
 }
 
+.nav-logo-image {
+  height: 32px;
+  width: auto;
+  display: block;
+}
+
 .nav-logo::before {
   content: '';
   width: 10px;
@@ -929,39 +946,90 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 
 /* ─────────────────────────────────────────────────────────────────
-   GLASS CARD GLARE — soft, organic, curved light reflection
-   Replaces the old hard-edged linear-gradient stripe with a
-   diffused, feathered highlight that hugs the rounded corner,
-   plus a subtle rim-light along the top/left edge.
+   GLASS CARD GLARE — Premium 3D Glass Effect
+   Multi-layer organic glare with tunable CSS custom properties.
+   Creates realistic light-source simulation with soft organic falloff.
    ───────────────────────────────────────────────────────────────── */
+
+/* Tunable glare properties — adjust in devtools */
+.glass-card {
+  --glare-opacity: 0.85;
+  --glare-streak-opacity: 0.35;
+  --glare-angle: 135deg;
+  --glare-highlight-size: 90%;
+  --glare-blur: 0px;
+  --shadow-depth-opacity: 0.12;
+}
+
+/* Main glare layer — multi-radial organic highlight + diagonal streak */
 .glass-card::before {
   content: '';
   position: absolute;
-  top: -20%;
-  left: -15%;
-  width: 85%;
-  height: 75%;
+  inset: 0;
+  border-radius: inherit;
   background:
-    radial-gradient(ellipse 70% 55% at 30% 25%, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.22) 35%, transparent 70%),
-    radial-gradient(ellipse 50% 40% at 55% 15%, rgba(255,255,255,0.3) 0%, transparent 65%);
-  transform: rotate(-12deg);
-  filter: blur(22px);
-  pointer-events: none;
+    /* Layer 1: Primary soft radial highlight from top-left */
+    radial-gradient(
+      ellipse 130% var(--glare-highlight-size) at 12% 8%,
+      rgba(255, 255, 255, var(--glare-opacity)) 0%,
+      rgba(255, 255, 255, calc(var(--glare-opacity) * 0.5)) 20%,
+      rgba(255, 255, 255, calc(var(--glare-opacity) * 0.15)) 45%,
+      transparent 70%
+    ),
+    /* Layer 2: Diagonal light streak — authentic glass caustic */
+    linear-gradient(
+      var(--glare-angle),
+      transparent 0%,
+      transparent 15%,
+      rgba(255, 255, 255, var(--glare-streak-opacity)) 25%,
+      rgba(255, 255, 255, calc(var(--glare-streak-opacity) * 1.2)) 35%,
+      rgba(255, 255, 255, var(--glare-streak-opacity)) 45%,
+      transparent 55%,
+      transparent 100%
+    ),
+    /* Layer 3: Secondary color-shifted sheen for iridescence */
+    radial-gradient(
+      ellipse 100% 70% at 40% 25%,
+      rgba(200, 230, 255, 0.15) 0%,
+      rgba(255, 215, 235, 0.08) 35%,
+      rgba(210, 255, 235, 0.05) 55%,
+      transparent 75%
+    ),
+    /* Layer 4: Subtle bottom-right darkening for 3D convex depth */
+    radial-gradient(
+      ellipse 80% 60% at 90% 95%,
+      rgba(30, 58, 82, var(--shadow-depth-opacity)) 0%,
+      rgba(30, 58, 82, calc(var(--shadow-depth-opacity) * 0.4)) 40%,
+      transparent 70%
+    );
+  filter: blur(var(--glare-blur));
   mix-blend-mode: soft-light;
+  pointer-events: none;
+  z-index: 1;
 }
 
-/* Thin rim-light — micro-reflection along top & left edges */
+/* Rim-light + dark edge border — top-left bright, bottom-right shadow */
 .glass-card::after {
   content: '';
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(135deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.15) 22%, transparent 45%);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
+  /* Dual-tone border: bright top-left, shadowed bottom-right */
+  box-shadow:
+    /* Inner bright rim top-left */
+    inset 2px 2px 4px rgba(255, 255, 255, 0.6),
+    inset 1px 1px 0 rgba(255, 255, 255, 0.8),
+    /* Inner shadow bottom-right for depth */
+    inset -2px -2px 6px rgba(30, 58, 82, 0.08),
+    inset -1px -1px 0 rgba(30, 58, 82, 0.04);
   pointer-events: none;
+  z-index: 1;
+}
+
+/* Ensure card children sit above glare layers */
+.glass-card > * {
+  position: relative;
+  z-index: 2;
 }
 
 .glass-card:hover {
@@ -1189,20 +1257,48 @@ section {
   }
 }
 
-/* Hero title — plain solid color text */
+/* Hero title image replacement */
+.hero-title-image {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto 1.25rem auto;
+}
+
+/* Hero title — Solid 3D Chrome text (embracing font's decorative holes) */
 .hero-title {
-  font-family: var(--font-display);
+  font-family: 'Reflective Bold', var(--font-display);
   font-size: clamp(3.5rem, 14vw, 7rem);
   font-weight: 700;
   line-height: 1.15;
   padding-bottom: 0.1em;
-  margin-bottom: 1.25rem;  /* TIGHTENED from --space-md (2rem) */
+  margin-bottom: 1.25rem;
   letter-spacing: -0.04em;
-  /* Plain solid color — no glass/chrome effects */
-  color: var(--color-main);
+  position: relative;
+  /* Solid silver-blue chrome color */
+  color: #7a9ab5;
+  /* Strong 3D extrusion + chrome effect */
+  text-shadow:
+    /* Bright top highlight */
+    0 -2px 0 #d0e0f0,
+    -1px -1px 0 #ffffff,
+    /* 3D depth extrusion - stacked layers going down-right */
+    1px 1px 0 #6a8aa5,
+    2px 2px 0 #5a7a95,
+    3px 3px 0 #4a6a85,
+    4px 4px 0 #3a5a75,
+    5px 5px 0 #2a4a65,
+    6px 6px 0 #1a3a55,
+    7px 7px 0 #0a2a45,
+    /* Soft ambient shadow for depth */
+    10px 10px 15px rgba(20, 40, 60, 0.5),
+    14px 14px 25px rgba(10, 30, 50, 0.35);
+  /* Solid stroke to define edges */
+  -webkit-text-stroke: 1px #4a6a8a;
+  paint-order: stroke fill;
 }
 
-/* Removed: specular highlight, shimmer animation */
+/* No pseudo-elements needed - the solid approach works better */
 .hero-title::before,
 .hero-title::after {
   display: none;
@@ -2707,6 +2803,67 @@ main .contact-info {
   box-shadow: var(--glass-shadow);
 }
 
+/* ─────────────────────────────────────────────────────────────────
+   CIRCULAR AVATAR GLASS GLARE — Premium 3D Sphere Effect
+   Radial glare with tunable properties for circular containers.
+   ───────────────────────────────────────────────────────────────── */
+.profile-photo-wrapper {
+  --avatar-glare-opacity: 0.75;
+  --avatar-glare-size: 85%;
+  --avatar-shadow-opacity: 0.15;
+  position: relative;
+}
+
+/* Main circular glare overlay */
+.profile-photo-wrapper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background:
+    /* Primary top-left radial highlight */
+    radial-gradient(
+      ellipse 100% var(--avatar-glare-size) at 25% 15%,
+      rgba(255, 255, 255, var(--avatar-glare-opacity)) 0%,
+      rgba(255, 255, 255, calc(var(--avatar-glare-opacity) * 0.4)) 25%,
+      transparent 55%
+    ),
+    /* Secondary color-shifted iridescent sheen */
+    radial-gradient(
+      ellipse 80% 60% at 35% 30%,
+      rgba(200, 230, 255, 0.12) 0%,
+      rgba(255, 220, 240, 0.06) 40%,
+      transparent 70%
+    ),
+    /* Bottom-right depth shadow for sphere effect */
+    radial-gradient(
+      ellipse 70% 60% at 80% 85%,
+      rgba(30, 58, 82, var(--avatar-shadow-opacity)) 0%,
+      rgba(30, 58, 82, calc(var(--avatar-shadow-opacity) * 0.3)) 45%,
+      transparent 75%
+    );
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Rim light + inner shadow for spherical depth */
+.profile-photo-wrapper::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  box-shadow:
+    /* Inner bright rim top-left */
+    inset 3px 3px 8px rgba(255, 255, 255, 0.5),
+    inset 2px 2px 0 rgba(255, 255, 255, 0.6),
+    /* Inner shadow bottom-right */
+    inset -3px -3px 10px rgba(30, 58, 82, 0.1),
+    inset -2px -2px 0 rgba(30, 58, 82, 0.05);
+  pointer-events: none;
+  z-index: 2;
+}
+
 .profile-photo-placeholder {
   width: 180px;
   height: 180px;
@@ -3468,6 +3625,97 @@ main .contact-info {
     left: calc(-1 * var(--space-md) + 2px);
     width: 10px;
     height: 10px;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   AURORA TEXT EFFECT — Animated gradient clipped to text shape
+   Colors adapted to match website palette (sky, leaf, sunset, lavender)
+   Uses background-clip: text for proper masking
+   ───────────────────────────────────────────────────────────────── */
+
+/* Aurora text base — animated gradient background clipped to text */
+.aurora-text {
+  /* Multi-layer radial gradient simulating aurora blobs */
+  background: 
+    radial-gradient(ellipse 80% 50% at 20% 30%, var(--color-sky) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 70% at 70% 20%, var(--color-sunset) 0%, transparent 45%),
+    radial-gradient(ellipse 70% 60% at 40% 80%, var(--color-leaf) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 80% at 85% 70%, var(--color-lavender) 0%, transparent 45%),
+    linear-gradient(135deg, var(--color-sky) 0%, var(--color-leaf) 25%, var(--color-sunset) 50%, var(--color-lavender) 75%, var(--color-sky) 100%);
+  background-size: 300% 300%;
+  animation: aurora-flow 8s ease-in-out infinite;
+  /* CLIP background to text shape */
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* Hero title aurora styling */
+.hero-title.aurora-text {
+  font-family: 'Reflective Bold', var(--font-display);
+  font-size: clamp(3.5rem, 14vw, 7rem);
+  font-weight: 800;
+  letter-spacing: clamp(-1.75px, -0.25vw, -3.5px);
+  line-height: 1.15;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.1em;
+  -webkit-text-stroke: 0;
+  text-shadow: none;
+}
+
+/* Nav logo aurora styling */
+.aurora-text--nav {
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  /* Smaller, faster animation for nav */
+  background-size: 200% 200%;
+  animation: aurora-flow 4s ease-in-out infinite;
+}
+
+/* Hide the child aurora elements — not needed for background-clip approach */
+.aurora-text .aurora {
+  display: none;
+}
+
+/* Aurora flow animation — moves gradient position */
+@keyframes aurora-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  25% {
+    background-position: 50% 0%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  75% {
+    background-position: 50% 100%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .aurora-text {
+    animation: none !important;
+    background-position: 50% 50%;
+  }
+}
+
+/* Mobile: simpler gradient for performance */
+@media (max-width: 768px) {
+  .aurora-text {
+    background: linear-gradient(135deg, var(--color-sky) 0%, var(--color-leaf) 33%, var(--color-sunset) 66%, var(--color-lavender) 100%);
+    background-size: 200% 200%;
+    animation: aurora-flow 6s ease-in-out infinite;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 }
 

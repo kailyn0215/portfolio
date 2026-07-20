@@ -7,8 +7,8 @@ title: "MIA"
 tagline: "iOS app helping aphasia patients communicate"
 description: |
   A mobile application designed to assist patients with aphasia in their daily communication. 
-  Built as a personal challenge project where I taught myself Swift and Xcode to create something 
-  meaningful that could help real people.
+  Built as a personal challenge project where I taught myself Swift and Xcode from scratch to create
+  something meaningful that helps real people.
 
 # Basic info
 category: "mobile app"
@@ -36,10 +36,10 @@ gallery:         # TODO: Add gallery screenshots
 
 # Detail page content
 role: "Solo Developer — Design & Development"
-timeline: "Ongoing personal project"
+timeline: "Originally a High School project, now continuing development"
 
 overview: |
-  MIA (Mobile Interface for Aphasia) is an iOS application I developed to help patients with 
+  MIA (Managing the Issue of Aphasia) is an iOS application I developed to help patients with 
   aphasia communicate more effectively. Aphasia is a language disorder that affects a person's 
   ability to communicate, often resulting from stroke or brain injury. This app provides visual 
   and audio aids to help patients express their needs and communicate with caregivers and family.
@@ -52,7 +52,8 @@ problem: |
 solution: |
   I designed MIA to be intuitive and accessible, featuring large visual icons, simple navigation, 
   and audio feedback. The app includes categories for common needs like food, comfort, emotions, 
-  and activities, making it easy for users to express themselves with just a few taps.
+  activities, as well as the ability to make their own lists, making it easy for users to 
+  express themselves with just a few taps.
 
 features:
   - title: "Visual Communication"

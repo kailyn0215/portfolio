@@ -6,15 +6,16 @@ name: "Custom PC Build"
 title: "Custom PC Build"
 tagline: "Building my own gaming and development workstation from scratch"
 description: |
-  A hands-on hardware project where I researched, selected, and assembled a custom PC 
-  tailored for both gaming and software development. This project taught me about computer 
-  architecture, component compatibility, and system optimization.
+  A hands-on hardware and software project where I researched, selected, and assembled a 
+  custom PC tailored for both gaming and software development. I also did a custom windows
+  install to remove Microsoft bloatware. This project taught me about computer architecture,
+  component compatibility, and system optimization.
 
 # Basic info
 category: "hardware"
 status: "complete"
 featured: false
-year: 2024
+year: 2025
 
 # Tech stack
 stack:
@@ -23,7 +24,6 @@ stack:
   - "DDR5 RAM"
   - "NVMe SSD"
   - "Windows 11"
-  - "Linux Dual Boot"
 
 # Links (leave empty if not available)
 github: ""

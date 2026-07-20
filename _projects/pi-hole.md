@@ -7,12 +7,13 @@ title: "Pi-hole Setup"
 tagline: "Network-wide ad blocking using a Raspberry Pi"
 description: |
   A home networking project where I set up Pi-hole on a Raspberry Pi to block ads and 
-  trackers at the DNS level for all devices on my network. This project taught me about 
-  DNS, networking fundamentals, and Linux server administration.
+  trackers at the DNS level for all devices on my network. In addition to the Pi-hole, 
+  I also created a dashboard on an ESP32 with a touchscreen. This project taught me about 
+  DNS, networking fundamentals, Linux server administration, as well as Arduino.
 
 # Basic info
 category: "networking"
-status: "complete"
+status: "maintaining"
 featured: false
 year: 2024
 
@@ -24,6 +25,7 @@ stack:
   - "DNS"
   - "Docker"
   - "SSH"
+  - "Arduino IDE"
 
 # Links (leave empty if not available)
 github: ""
@@ -39,7 +41,7 @@ gallery:         # TODO: Add screenshots
 
 # Detail page content
 role: "Network Administrator"
-timeline: "Initial setup in a weekend, ongoing maintenance"
+timeline: "initial setup in a weekend, ongoing maintenance"
 
 overview: |
   Pi-hole is a network-level ad blocker that acts as a DNS sinkhole, blocking advertisements

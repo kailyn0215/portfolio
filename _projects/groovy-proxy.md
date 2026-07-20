@@ -10,8 +10,8 @@ description: |
   Created to streamline the development workflow and make testing easier.
 
 # Basic info
-category: "dev tool"
-status: "complete"
+category: "dev_tool"
+status: "maintaining"
 featured: true
 year: 2024
 
@@ -22,7 +22,7 @@ stack:
   - "Express"
 
 # Links (leave empty if not available)
-github: ""
+github: "https://github.com/kailyn0215/groovy-proxy"
 live: ""
 
 # Images
@@ -32,8 +32,8 @@ gallery:         # TODO: Add gallery screenshots
   # - /assets/images/projects/groovy-proxy/screenshot-1.png
 
 # Detail page content
-role: "Solo Developer"
-timeline: "Personal project"
+role: "solo_dev"
+timeline: "personal_proj"
 
 overview: |
   Groovy Proxy is a development tool I built to simplify API testing and local development 
