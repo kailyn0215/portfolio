@@ -20,9 +20,9 @@ year: 2025
 # Tech stack
 stack:
   - "AMD Ryzen"
-  - "NVIDIA GPU"
-  - "DDR5 RAM"
-  - "NVMe SSD"
+  - "NVIDIA RTX 5080"
+  - "64GB DDR5 RAM"
+  - "2 TB NVMe SSD"
   - "Windows 11"
 
 # Links (leave empty if not available)
@@ -44,8 +44,8 @@ timeline: "Research + Build completed over 2 months"
 overview: |
   I built a custom PC from the ground up to serve as both a gaming rig and a development workstation.
   This project involved extensive research into component compatibility, thermal management, and
-  performance optimization. The end result is a powerful system that handles everything from
-  compiling large codebases to running modern games at high settings.
+  performance optimization. The end result is a powerful future-proof system that handles everything
+  from compiling large codebases to running modern games at high settings.
 
 problem: |
   Pre-built computers often come with compromises — either overpriced for the specs, poor airflow,

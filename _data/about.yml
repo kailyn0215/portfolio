@@ -9,18 +9,18 @@ location: "Cincinnati, OH"
 role: "Software Developer Intern"
 company: "Kroger — Search & Personalization"
 school: "University of Cincinnati"
-major: "Computer Science"
+major: "Information Technology"
 class_year: "2028"
 
 # Photo (relative to assets/images or use placeholder)
-photo: "" # Leave blank for placeholder, or add path like "kb-profile.jpg"
+photo: "/assets/images/meowl.jpg"
 
 # Short tagline for homepage
 tagline: "aspiring engineer building intuitive solutions"
 
 # Longer bio for homepage about section
 bio: |
-  Computer Science student at the University of Cincinnati with hands-on experience in software development. 
+  Information Technology student @ the University of Cincinnati with hands-on experience in software development. 
   Currently interning at Kroger in the Search & Personalization department, working on systems that help 
   millions of customers find what they need. Passionate about using technology to solve real-world problems 
   and create meaningful user experiences.
@@ -31,7 +31,7 @@ bio: |
 background:
   title: "README.md"
   content: |
-    Motivated and detail-oriented Computer Science major seeking opportunities to apply and expand 
+    Motivated and detail-oriented IT major seeking opportunities to apply and expand 
     programming, problem-solving, and technical skills in collaborative environments. Currently working 
     as a Software Developer Intern at Kroger in the Search & Personalization department.
     
@@ -40,9 +40,8 @@ background:
     to help others. That project sparked my passion for building software that makes a real difference.
     
     When I'm not coding, you can find me exploring creative outlets like photography and video editing, 
-    modding older devices (Nintendo 3DS, Xbox 360, Wii U, iPhone 4), riding in my VW Beetle, or 
-    tinkering with my custom-built PC. I believe the best solutions come from collaboration, 
-    communication, and a willingness to learn quickly.
+    modding older devices (such as my Nintendo 3DS, PS Vita, Wii U, and iPhone 4), riding in my VW Beetle,
+    or tinkering with my custom-built PC.
 
 # ═══════════════════════════════════════════════════════════════
 # JOURNEY TIMELINE
@@ -55,7 +54,7 @@ journey:
       description: "Pivoted towards IT studies closer to home."
     - year: "2026"
       event: "Kroger Software Dev Internship"
-      description: "Joined the Search & Personalization team, working on code with millions of queries a day."
+      description: "Joined the Search & Personalization team, working on code that supports millions of queries a day."
     - year: "2024"
       event: "Started at Bryn Mawr College"
       description: "Began working towards a Computer Science degree in Philadelphia, PA"
@@ -135,7 +134,7 @@ resume:
       description: "Working on search and personalization systems that help millions of customers find products and receive personalized recommendations."
       highlights:
         - "Contributing to search infrastructure used by millions of daily users"
-        - "Collaborating with cross-functional teams on personalization features"
+        - "Deploying code to production and monitoring large-scale system performance"
         - "Working with Kafka message processing systems"
         - "Gaining hands-on experience in large-scale software development"
     - role: "Kitchen Support"
