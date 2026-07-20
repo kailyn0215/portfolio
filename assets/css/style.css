@@ -282,9 +282,11 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
       color-mix(in srgb, var(--orb-color, #BEE3F7) 35%, transparent) 0%,
       color-mix(in srgb, var(--orb-color, #BEE3F7) 55%, transparent) 100%
     );
-  /* Glass blur effect */
-  backdrop-filter: blur(8px) saturate(1.3);
-  -webkit-backdrop-filter: blur(8px) saturate(1.3);
+  /* Glass blur effect — PERF: backdrop-filter is the single most expensive
+     paint op for this many elements, so by default orbs DON'T use it.
+     It's re-enabled only for the (fewer) front-tier orbs below, where the
+     crisp glass look actually reads. Back/mid orbs already look "glassy"
+     via the layered radial-gradient background + blur(filter) tiers. */
   /* Consolidated shadow — single layer for performance */
   box-shadow:
     inset 0 0 0 1px rgba(255, 255, 255, 0.6),
@@ -292,7 +294,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   filter: saturate(1.1);
   animation: float-orb 10s ease-in-out infinite;
   overflow: hidden;
-  /* GPU acceleration — promote to compositor layer */
+  /* GPU acceleration — promote to compositor layer only while animating */
   will-change: transform;
   transform: translateZ(0);
   backface-visibility: hidden;
@@ -301,10 +303,10 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 /* Pause animations when off-screen (toggled via JS IntersectionObserver) */
 .orb--paused {
   animation-play-state: paused !important;
-}
-
-/* Disable backdrop-filter when off-screen (huge perf win) */
-.orb--paused {
+  /* Drop GPU layer promotion + backdrop-filter entirely when off-screen —
+     huge win for GPU memory/compositing on lower-end devices. Applies at
+     all breakpoints (not just mobile). */
+  will-change: auto !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
 }
@@ -420,6 +422,16 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   z-index: 2;
   opacity: var(--orb-front-opacity);
   filter: blur(var(--orb-front-blur)) saturate(var(--orb-front-saturate));
+  /* PERF: only the crisp "front" showpiece orbs get the expensive
+     backdrop-filter glass blur — back/mid orbs (majority of the field)
+     skip it entirely since it's barely perceptible on soft/blurred orbs
+     but costs the most of any property here. */
+  backdrop-filter: blur(8px) saturate(1.3);
+  -webkit-backdrop-filter: blur(8px) saturate(1.3);
+}
+.orb--z-front.orb--glass {
+  backdrop-filter: blur(10px) saturate(1.4);
+  -webkit-backdrop-filter: blur(10px) saturate(1.4);
 }
 
 /* Performance: drop the heavy tier blur when the orb is off-screen

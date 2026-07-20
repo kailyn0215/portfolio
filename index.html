@@ -45,7 +45,7 @@ title: Home
   <div class="about-grid">
     <div class="about-image-wrapper fade-in">
       {% if site.data.about.photo %}
-      <img src="{{ site.data.about.photo | relative_url }}" alt="Photo of Kailyn Brown" class="about-image about-image--photo">
+      <img src="{{ site.data.about.photo | relative_url }}" alt="Photo of Kailyn Brown" class="about-image about-image--photo" loading="lazy" decoding="async">
       {% else %}
       <div class="about-image about-image--placeholder">
         <span class="about-image-icon">📷</span>
@@ -132,7 +132,7 @@ title: Home
           <span class="project-status status-{{ project.status | slugify }}">{{ project.status }}</span>
         </div>
         {% if project.cover_image and project.cover_image != "" %}
-        <img src="{{ project.cover_image | relative_url }}" alt="{{ project.name }}" class="project-cover">
+        <img src="{{ project.cover_image | relative_url }}" alt="{{ project.name }}" class="project-cover" loading="lazy" decoding="async">
         {% else %}
         <span class="project-placeholder-icon">{% if project.category == "mobile app" %}📱{% elsif project.category == "dev tool" %}🛠️{% else %}💻{% endif %}</span>
         {% endif %}

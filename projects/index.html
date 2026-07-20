@@ -27,7 +27,7 @@ orb_set: project
         <!-- Cover Image -->
         <div class="gallery-card-image">
           {% if project.cover_image and project.cover_image != "" %}
-          <img src="{{ project.cover_image | relative_url }}" alt="{{ project.name }}" class="card-cover">
+          <img src="{{ project.cover_image | relative_url }}" alt="{{ project.name }}" class="card-cover" loading="lazy" decoding="async">
           {% else %}
           <div class="card-cover-placeholder">
             <span class="placeholder-icon">{% if project.category == "mobile app" %}📱{% elsif project.category == "dev tool" %}🛠️{% else %}💻{% endif %}</span>

@@ -24,7 +24,7 @@ orb_set: about
     <div class="profile-card glass-card fade-in">
       <div class="profile-photo-wrapper">
         {% if site.data.about.photo and site.data.about.photo != "" %}
-        <img src="{{ site.data.about.photo | relative_url }}" alt="Kailyn Brown" class="profile-photo">
+        <img src="{{ site.data.about.photo | relative_url }}" alt="Kailyn Brown" class="profile-photo" loading="lazy" decoding="async">
         {% else %}
         <div class="profile-photo-placeholder">
           <span>📷</span>
