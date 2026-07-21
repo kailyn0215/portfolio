@@ -13,6 +13,11 @@
   {% seo %}
 </head>
 <body style="--sky1-url: url('{{ '/assets/images/sky1.jpg' | relative_url }}'); --sky2-url: url('{{ '/assets/images/sky2.jpg' | relative_url }}');">
+  <!-- ═══════════════════════════════════════════════════════════════
+       NAVIGATION — Outside page-wrapper so position:fixed works
+       ═══════════════════════════════════════════════════════════════ -->
+  {% include nav-page.html %}
+
   <!-- Page wrapper to contain decorative overflow -->
   <div class="page-wrapper">
   <!-- ═══════════════════════════════════════════════════════════════
@@ -71,11 +76,6 @@
   <!-- Subtle Grid & Grain -->
   <div class="bg-grid"></div>
   <div class="bg-grain"></div>
-
-  <!-- ═══════════════════════════════════════════════════════════════
-       NAVIGATION — Sub-page variant with home links
-       ═══════════════════════════════════════════════════════════════ -->
-  {% include nav-page.html %}
 
   <!-- ═══════════════════════════════════════════════════════════════
        MAIN CONTENT
@@ -158,6 +158,30 @@
           navLinks.classList.toggle('active');
           navToggle.classList.toggle('active');
         });
+      }
+
+      // ─────────────────────────────────────────────────────────────
+      // Hide Nav on Scroll Down, Show on Scroll Up
+      // ─────────────────────────────────────────────────────────────
+      const mainNav = document.querySelector('.main-nav');
+      let lastScrollY = window.scrollY;
+      let scrollThreshold = 10;
+      
+      if (mainNav) {
+        window.addEventListener('scroll', () => {
+          const currentScrollY = window.scrollY;
+          const scrollDelta = currentScrollY - lastScrollY;
+          
+          if (Math.abs(scrollDelta) < scrollThreshold) return;
+          
+          if (scrollDelta > 0 && currentScrollY > 100) {
+            mainNav.classList.add('nav-hidden');
+          } else {
+            mainNav.classList.remove('nav-hidden');
+          }
+          
+          lastScrollY = currentScrollY;
+        }, { passive: true });
       }
 
       // ─────────────────────────────────────────────────────────────

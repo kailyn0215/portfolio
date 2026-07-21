@@ -13,6 +13,11 @@
   {% seo %}
 </head>
 <body style="--sky1-url: url('{{ '/assets/images/sky1.jpg' | relative_url }}'); --sky2-url: url('{{ '/assets/images/sky2.jpg' | relative_url }}');">
+  <!-- ═══════════════════════════════════════════════════════════════
+       NAVIGATION — Outside page-wrapper so position:fixed works
+       ═══════════════════════════════════════════════════════════════ -->
+  {% include nav.html %}
+
   <!-- Page wrapper to contain decorative overflow -->
   <div class="page-wrapper">
   <!-- ═══════════════════════════════════════════════════════════════
@@ -87,11 +92,6 @@
   <div class="bg-grain"></div>
 
   <!-- ═══════════════════════════════════════════════════════════════
-       NAVIGATION
-       ═══════════════════════════════════════════════════════════════ -->
-  {% include nav.html %}
-
-  <!-- ═══════════════════════════════════════════════════════════════
        MAIN CONTENT
        ═══════════════════════════════════════════════════════════════ -->
   <main>
@@ -163,30 +163,81 @@
 
       // ─────────────────────────────────────────────────────────────
       // Nav Active State — Scroll-based section indicator (Phase 7)
+      // Uses scroll position to determine which section is most visible
       // ─────────────────────────────────────────────────────────────
-      const navActiveObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const sectionId = entry.target.getAttribute('id');
-            if (sectionId) {
-              // Remove active from all nav links
-              document.querySelectorAll('.nav-links li a').forEach(link => {
-                link.classList.remove('active');
-              });
-              // Add active to matching nav link
-              const activeLink = document.querySelector(`.nav-links li a[href="#${sectionId}"]`);
-              if (activeLink) {
-                activeLink.classList.add('active');
-              }
+      let currentActiveSection = null;
+      
+      function updateActiveNavLink() {
+        const sections = document.querySelectorAll('section[id]');
+        const viewportHeight = window.innerHeight;
+        let activeSection = null;
+        let smallestPositiveTop = Infinity;
+        let largestNegativeTop = -Infinity;
+        let sectionWithSmallestPositive = null;
+        let sectionWithLargestNegative = null;
+        
+        // Find section that's most visible at the top of the viewport
+        // Strategy: prefer the section whose top is closest to 0 (viewport top)
+        sections.forEach(section => {
+          const rect = section.getBoundingClientRect();
+          // Only consider sections that are at least partially visible
+          if (rect.bottom > 0 && rect.top < viewportHeight) {
+            if (rect.top >= 0 && rect.top < smallestPositiveTop) {
+              // Section top is at or below viewport top (section just coming into view)
+              smallestPositiveTop = rect.top;
+              sectionWithSmallestPositive = section.id;
+            } else if (rect.top < 0 && rect.top > largestNegativeTop) {
+              // Section top is above viewport top (section scrolled into view)
+              largestNegativeTop = rect.top;
+              sectionWithLargestNegative = section.id;
             }
           }
         });
-      }, { threshold: 0.3, rootMargin: '-20% 0px -50% 0px' });
-
-      // Observe all sections with IDs
-      document.querySelectorAll('section[id]').forEach(section => {
-        navActiveObserver.observe(section);
+        
+        // Prefer section that has scrolled into view (top < 0) over one that's coming (top > 0)
+        // But only if it's not too far scrolled (still visible in top half)
+        if (sectionWithLargestNegative && largestNegativeTop > -viewportHeight * 0.5) {
+          activeSection = sectionWithLargestNegative;
+        } else if (sectionWithSmallestPositive && smallestPositiveTop < viewportHeight * 0.5) {
+          activeSection = sectionWithSmallestPositive;
+        } else if (sectionWithLargestNegative) {
+          activeSection = sectionWithLargestNegative;
+        }
+        
+        // Fallback to first section if at very top
+        if (!activeSection && window.scrollY < 100) {
+          activeSection = 'home';
+        }
+        
+        if (activeSection && activeSection !== currentActiveSection) {
+          currentActiveSection = activeSection;
+          // Remove active from all nav links
+          document.querySelectorAll('.nav-links li a').forEach(link => {
+            link.classList.remove('active');
+          });
+          // Add active to matching nav link
+          const activeLink = document.querySelector(`.nav-links li a[href="#${activeSection}"]`);
+          if (activeLink) {
+            activeLink.classList.add('active');
+          }
+        }
+      }
+      
+      // Run on scroll
+      window.addEventListener('scroll', updateActiveNavLink, { passive: true });
+      
+      // Run on hashchange (when clicking anchor links)
+      window.addEventListener('hashchange', () => {
+        setTimeout(updateActiveNavLink, 100);
       });
+      
+      // Run on initial load (with delay for anchor navigation)
+      if (window.location.hash) {
+        // If there's a hash, wait for browser to scroll to it
+        setTimeout(updateActiveNavLink, 200);
+      } else {
+        updateActiveNavLink();
+      }
 
       // ─────────────────────────────────────────────────────────────
       // Mobile Nav Toggle
@@ -199,6 +250,33 @@
           navLinks.classList.toggle('active');
           navToggle.classList.toggle('active');
         });
+      }
+
+      // ─────────────────────────────────────────────────────────────
+      // Hide Nav on Scroll Down, Show on Scroll Up
+      // ─────────────────────────────────────────────────────────────
+      const mainNav = document.querySelector('.main-nav');
+      let lastScrollY = window.scrollY;
+      let scrollThreshold = 10; // Minimum scroll before triggering
+      
+      if (mainNav) {
+        window.addEventListener('scroll', () => {
+          const currentScrollY = window.scrollY;
+          const scrollDelta = currentScrollY - lastScrollY;
+          
+          // Only trigger if scrolled more than threshold
+          if (Math.abs(scrollDelta) < scrollThreshold) return;
+          
+          if (scrollDelta > 0 && currentScrollY > 100) {
+            // Scrolling down & past initial viewport
+            mainNav.classList.add('nav-hidden');
+          } else {
+            // Scrolling up
+            mainNav.classList.remove('nav-hidden');
+          }
+          
+          lastScrollY = currentScrollY;
+        }, { passive: true });
       }
 
       // ─────────────────────────────────────────────────────────────

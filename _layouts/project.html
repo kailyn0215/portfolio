@@ -13,6 +13,9 @@
   {% seo %}
 </head>
 <body style="--sky1-url: url('{{ '/assets/images/sky1.jpg' | relative_url }}'); --sky2-url: url('{{ '/assets/images/sky2.jpg' | relative_url }}');">
+  <!-- Navigation — Outside page-wrapper so position:fixed works -->
+  {% include nav-page.html %}
+
   <div class="page-wrapper">
   
   <!-- Background System -->
@@ -51,8 +54,6 @@
 
   <div class="bg-grid"></div>
   <div class="bg-grain"></div>
-
-  {% include nav-page.html %}
 
   <main class="detail-main">
     <div class="back-link-wrapper">
@@ -315,6 +316,28 @@
           navLinks.classList.toggle('active');
           navToggle.classList.toggle('active');
         });
+      }
+
+      // Hide Nav on Scroll Down, Show on Scroll Up
+      const mainNav = document.querySelector('.main-nav');
+      let lastScrollY = window.scrollY;
+      let scrollThreshold = 10;
+      
+      if (mainNav) {
+        window.addEventListener('scroll', () => {
+          const currentScrollY = window.scrollY;
+          const scrollDelta = currentScrollY - lastScrollY;
+          
+          if (Math.abs(scrollDelta) < scrollThreshold) return;
+          
+          if (scrollDelta > 0 && currentScrollY > 100) {
+            mainNav.classList.add('nav-hidden');
+          } else {
+            mainNav.classList.remove('nav-hidden');
+          }
+          
+          lastScrollY = currentScrollY;
+        }, { passive: true });
       }
 
       document.querySelectorAll('a[href^="http"]').forEach(link => {

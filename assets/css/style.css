@@ -744,10 +744,11 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
    NAVIGATION — True Liquid Glass
    ───────────────────────────────────────────────────────────────── */
 .main-nav {
-  position: fixed;
+  position: fixed !important; /* Override .glass-panel's position: relative */
   top: var(--space-md);
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateY(0);
+  transition: transform 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -767,6 +768,11 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     inset 0 0 0 1px rgba(255,255,255,0.3);
   /* Isolation creates stacking context that blocks orbs behind */
   isolation: isolate;
+}
+
+/* Hide nav on scroll down */
+.main-nav.nav-hidden {
+  transform: translateX(-50%) translateY(calc(-100% - var(--space-md) - 10px));
 }
 
 /* Solid backing layer — blocks orb colors from bleeding through */

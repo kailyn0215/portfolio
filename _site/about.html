@@ -30,6 +30,25 @@
 
 </head>
 <body style="--sky1-url: url('/portfolio/assets/images/sky1.jpg'); --sky2-url: url('/portfolio/assets/images/sky2.jpg');">
+  <!-- ═══════════════════════════════════════════════════════════════
+       NAVIGATION — Outside page-wrapper so position:fixed works
+       ═══════════════════════════════════════════════════════════════ -->
+  <nav class="main-nav glass-panel">
+  <a href="/portfolio/" class="nav-logo aurora-text aurora-text--nav">KB</a>
+  <ul class="nav-links">
+    <li><a href="/portfolio/">home</a></li>
+    <li><a href="/portfolio/#about" class="active">about</a></li>
+    <li><a href="/portfolio/#skills" >skills</a></li>
+    <li><a href="/portfolio/#projects" >projects</a></li>
+    <li><a href="/portfolio/#contact">contact</a></li>
+  </ul>
+  <button class="nav-toggle" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</nav>
+
   <!-- Page wrapper to contain decorative overflow -->
   <div class="page-wrapper">
   <!-- ═══════════════════════════════════════════════════════════════
@@ -1474,25 +1493,6 @@
   <div class="bg-grain"></div>
 
   <!-- ═══════════════════════════════════════════════════════════════
-       NAVIGATION — Sub-page variant with home links
-       ═══════════════════════════════════════════════════════════════ -->
-  <nav class="main-nav glass-panel">
-  <a href="/portfolio/" class="nav-logo aurora-text aurora-text--nav">KB</a>
-  <ul class="nav-links">
-    <li><a href="/portfolio/">home</a></li>
-    <li><a href="/portfolio/#about" class="active">about</a></li>
-    <li><a href="/portfolio/#skills" >skills</a></li>
-    <li><a href="/portfolio/#projects" >projects</a></li>
-    <li><a href="/portfolio/#contact">contact</a></li>
-  </ul>
-  <button class="nav-toggle" aria-label="Toggle navigation">
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
-</nav>
-
-  <!-- ═══════════════════════════════════════════════════════════════
        MAIN CONTENT
        ═══════════════════════════════════════════════════════════════ -->
   <main class="detail-main">
@@ -1934,6 +1934,30 @@ or tinkering with my custom-built PC.</p>
           navLinks.classList.toggle('active');
           navToggle.classList.toggle('active');
         });
+      }
+
+      // ─────────────────────────────────────────────────────────────
+      // Hide Nav on Scroll Down, Show on Scroll Up
+      // ─────────────────────────────────────────────────────────────
+      const mainNav = document.querySelector('.main-nav');
+      let lastScrollY = window.scrollY;
+      let scrollThreshold = 10;
+      
+      if (mainNav) {
+        window.addEventListener('scroll', () => {
+          const currentScrollY = window.scrollY;
+          const scrollDelta = currentScrollY - lastScrollY;
+          
+          if (Math.abs(scrollDelta) < scrollThreshold) return;
+          
+          if (scrollDelta > 0 && currentScrollY > 100) {
+            mainNav.classList.add('nav-hidden');
+          } else {
+            mainNav.classList.remove('nav-hidden');
+          }
+          
+          lastScrollY = currentScrollY;
+        }, { passive: true });
       }
 
       // ─────────────────────────────────────────────────────────────
