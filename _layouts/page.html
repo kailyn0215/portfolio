@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="aero">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,11 +8,18 @@
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Outfit:wght@400;500;600;700&family=Michroma&family=Ubuntu+Mono:wght@400;700&display=swap" rel="stylesheet">
   {% if jekyll.environment == 'production' %}{% feed_meta %}{% endif %}
   {% seo %}
+  <!-- Blocking script to apply saved theme BEFORE render (prevents flash) -->
+  <script>
+    (function() {
+      var saved = localStorage.getItem('kb-portfolio-theme');
+      if (saved) document.documentElement.setAttribute('data-theme', saved);
+    })();
+  </script>
 </head>
-<body style="--sky1-url: url('{{ '/assets/images/sky1.jpg' | relative_url }}'); --sky2-url: url('{{ '/assets/images/sky2.jpg' | relative_url }}');">
+<body class="subpage-layout" style="--sky1-url: url('{{ '/assets/images/sky1.jpg' | relative_url }}'); --sky2-url: url('{{ '/assets/images/sky2.jpg' | relative_url }}');">
   <!-- ═══════════════════════════════════════════════════════════════
        NAVIGATION — Outside page-wrapper so position:fixed works
        ═══════════════════════════════════════════════════════════════ -->
@@ -39,13 +46,13 @@
        DRIFTING ORBS — Same as homepage (from _data/orbs.yml)
        ═══════════════════════════════════════════════════════════════ -->
   <div class="orbs-layer">
-    {% assign sky_imgs = "sky1.jpg,sky2.jpg,sky3.jpg,sky4.jpg,sky5.jpg,sky6.jpg" | split: "," %}
+    {% assign chrome_imgs = "chromeorb1.png,chromeorb3.png" | split: "," %}
     {% for orb in site.data.orbs.orbs %}
-    {% assign img_idx = forloop.index | modulo: 6 %}
+    {% assign img_idx = forloop.index | modulo: 2 %}
     {% assign rotation = forloop.index | times: 47 | modulo: 360 %}
     <span
       class="orb orb--{{ orb.size }} orb--{{ orb.color }} {% if orb.variant == 'glass' %}orb--glass{% endif %} orb--z-{{ orb.z }} orb--drift-{{ orb.drift }}"
-      style="top: {{ orb.top }}; left: {{ orb.left }}; animation-duration: {{ orb.duration }}s; animation-delay: {{ orb.delay }}s; --env-img: url('{{ '/assets/images/' | append: sky_imgs[img_idx] | relative_url }}'); --env-rotate: {{ rotation }}deg; --env-opacity: 0.3;"
+      style="top: {{ orb.top }}; left: {{ orb.left }}; animation-duration: {{ orb.duration }}s; animation-delay: {{ orb.delay }}s; --env-img: url('{{ '/assets/images/' | append: chrome_imgs[img_idx] | relative_url }}'); --env-rotate: {{ rotation }}deg; --env-opacity: 0.3;"
       aria-hidden="true"
     ></span>
     {% endfor %}
@@ -55,10 +62,10 @@
        FOREGROUND ORBS — Percentage-based positioning
        ═══════════════════════════════════════════════════════════════ -->
   <div class="orbs-foreground" id="fg-orbs">
-    <span class="orb orb--sm orb--sky orb--z-front fg-orb" style="left: 12%; top: 20%;" aria-hidden="true"></span>
-    <span class="orb orb--xs orb--peach orb--z-front fg-orb" style="left: 78%; top: 30%;" aria-hidden="true"></span>
-    <span class="orb orb--sm orb--lavender orb--z-front fg-orb" style="left: 6%; top: 60%;" aria-hidden="true"></span>
-    <span class="orb orb--xs orb--tangerine orb--z-front fg-orb" style="left: 85%; top: 75%;" aria-hidden="true"></span>
+    <span class="orb orb--sm orb--sky orb--z-front fg-orb" style="left: 12%; top: 20%; --env-img: url('{{ '/assets/images/chromeorb1.png' | relative_url }}');" aria-hidden="true"></span>
+    <span class="orb orb--xs orb--peach orb--z-front fg-orb" style="left: 78%; top: 30%; --env-img: url('{{ '/assets/images/chromeorb1.png' | relative_url }}');" aria-hidden="true"></span>
+    <span class="orb orb--sm orb--lavender orb--z-front fg-orb" style="left: 6%; top: 60%; --env-img: url('{{ '/assets/images/chromeorb1.png' | relative_url }}');" aria-hidden="true"></span>
+    <span class="orb orb--xs orb--tangerine orb--z-front fg-orb" style="left: 85%; top: 75%; --env-img: url('{{ '/assets/images/chromeorb1.png' | relative_url }}');" aria-hidden="true"></span>
   </div>
 
   <!-- Quiet Zone Overlay -->
@@ -308,6 +315,42 @@
           createSparkBurst(centerX, centerY);
         });
       });
+
+      // ─────────────────────────────────────────────────────────────
+      // Theme Toggle — Switch between Aero and Chrome themes
+      // ─────────────────────────────────────────────────────────────
+      const themeToggle = document.getElementById('theme-toggle');
+      const html = document.documentElement;
+      const THEME_KEY = 'kb-portfolio-theme';
+      
+      // Get saved theme or detect system preference
+      function getInitialTheme() {
+        const saved = localStorage.getItem(THEME_KEY);
+        if (saved) return saved;
+        // Default to aero (light theme)
+        return 'aero';
+      }
+      
+      // Apply theme to document
+      function applyTheme(theme) {
+        html.setAttribute('data-theme', theme);
+        localStorage.setItem(THEME_KEY, theme);
+      }
+      
+      // Toggle between themes
+      function toggleTheme() {
+        const current = html.getAttribute('data-theme') || 'aero';
+        const next = current === 'aero' ? 'chrome' : 'aero';
+        applyTheme(next);
+      }
+      
+      // Initialize theme on load
+      applyTheme(getInitialTheme());
+      
+      // Add click handler
+      if (themeToggle) {
+        themeToggle.addEventListener('click', toggleTheme);
+      }
 
     })();
   </script>

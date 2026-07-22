@@ -86,7 +86,17 @@ orb_set: about
       <div class="interests-grid">
         {% for interest in site.data.about.interests.items %}
         <div class="interest-card">
+          {% if interest.icon contains '.png' %}
+          <img
+            src="{{ '/assets/images/' | append: interest.icon | relative_url }}"
+            alt="{{ interest.name }} icon"
+            class="interest-icon interest-icon-image"
+            loading="lazy"
+            decoding="async"
+          >
+          {% else %}
           <span class="interest-icon">{{ interest.icon }}</span>
+          {% endif %}
           <h4 class="interest-name">{{ interest.name }}</h4>
           <p class="interest-description">{{ interest.description }}</p>
         </div>

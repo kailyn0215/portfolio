@@ -32,14 +32,9 @@ orb_set: skills
       <div class="skills-detail-grid">
         {% for skill in category.items %}
         <div class="skill-detail-card">
-          <div class="skill-detail-header">
-            <h4 class="skill-name">{{ skill.name }}</h4>
-            <span class="skill-proficiency proficiency-{{ skill.proficiency }}">{{ skill.proficiency }}</span>
-          </div>
+          <h4 class="skill-name">{{ skill.name }}</h4>
           <p class="skill-use-case">{{ skill.use_case }}</p>
-          <div class="skill-meta">
-            <span class="skill-years">{{ skill.years }} experience</span>
-          </div>
+          <span class="skill-proficiency proficiency-{{ skill.proficiency }}">{{ skill.proficiency }}</span>
         </div>
         {% endfor %}
       </div>

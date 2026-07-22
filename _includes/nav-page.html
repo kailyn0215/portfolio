@@ -1,5 +1,12 @@
 <nav class="main-nav glass-panel">
-  <a href="{{ '/' | relative_url }}" class="nav-logo aurora-text aurora-text--nav">KB</a>
+  <!-- Aero: Image logo -->
+  <a href="{{ '/' | relative_url }}" class="nav-logo nav-logo--text">
+    <img src="{{ '/assets/images/KB-aero.png' | relative_url }}" alt="KB" class="nav-logo-img">
+  </a>
+  <!-- Chrome: Image logo -->
+  <a href="{{ '/' | relative_url }}" class="nav-logo nav-logo--chrome">
+    <img src="{{ '/assets/images/KB.png' | relative_url }}" alt="KB" class="nav-logo-img">
+  </a>
   <ul class="nav-links">
     <li><a href="{{ '/' | relative_url }}">home</a></li>
     <li><a href="{{ '/' | relative_url }}#about" {% if page.nav_active == 'about' %}class="active"{% endif %}>about</a></li>
@@ -7,6 +14,11 @@
     <li><a href="{{ '/' | relative_url }}#projects" {% if page.nav_active == 'projects' %}class="active"{% endif %}>projects</a></li>
     <li><a href="{{ '/' | relative_url }}#contact">contact</a></li>
   </ul>
+  <!-- Theme Toggle -->
+  <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Switch theme">
+    <span class="theme-icon theme-icon--sun">☀️</span>
+    <span class="theme-icon theme-icon--moon">🌙</span>
+  </button>
   <button class="nav-toggle" aria-label="Toggle navigation">
     <span></span>
     <span></span>

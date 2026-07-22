@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="aero">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,9 +8,16 @@
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Outfit:wght@400;500;600;700&family=Michroma&family=Ubuntu+Mono:wght@400;700&display=swap" rel="stylesheet">
   {% if jekyll.environment == 'production' %}{% feed_meta %}{% endif %}
   {% seo %}
+  <!-- Blocking script to apply saved theme BEFORE render (prevents flash) -->
+  <script>
+    (function() {
+      var saved = localStorage.getItem('kb-portfolio-theme');
+      if (saved) document.documentElement.setAttribute('data-theme', saved);
+    })();
+  </script>
 </head>
 <body style="--sky1-url: url('{{ '/assets/images/sky1.jpg' | relative_url }}'); --sky2-url: url('{{ '/assets/images/sky2.jpg' | relative_url }}');">
   <!-- ═══════════════════════════════════════════════════════════════
@@ -39,13 +46,13 @@
        DRIFTING ORBS — Rendered from _data/orbs.yml
        ═══════════════════════════════════════════════════════════════ -->
   <div class="orbs-layer">
-    {% assign sky_imgs = "sky1.jpg,sky2.jpg,sky3.jpg,sky4.jpg,sky5.jpg,sky6.jpg" | split: "," %}
+    {% assign chrome_imgs = "chromeorb1.png,chromeorb3.png" | split: "," %}
     {% for orb in site.data.orbs.orbs %}
-    {% assign img_idx = forloop.index | modulo: 6 %}
+    {% assign img_idx = forloop.index | modulo: 2 %}
     {% assign rotation = forloop.index | times: 47 | modulo: 360 %}
     <span
       class="orb orb--{{ orb.size }} orb--{{ orb.color }} {% if orb.variant == 'glass' %}orb--glass{% endif %} orb--z-{{ orb.z }} orb--drift-{{ orb.drift }}"
-      style="top: {{ orb.top }}; left: {{ orb.left }}; animation-duration: {{ orb.duration }}s; animation-delay: {{ orb.delay }}s; --env-img: url('{{ '/assets/images/' | append: sky_imgs[img_idx] | relative_url }}'); --env-rotate: {{ rotation }}deg; --env-opacity: 0.3;"
+      style="top: {{ orb.top }}; left: {{ orb.left }}; animation-duration: {{ orb.duration }}s; animation-delay: {{ orb.delay }}s; --env-img: url('{{ '/assets/images/' | append: chrome_imgs[img_idx] | relative_url }}'); --env-rotate: {{ rotation }}deg; --env-opacity: 0.3;"
       aria-hidden="true"
     ></span>
     {% endfor %}
@@ -55,10 +62,16 @@
        FOREGROUND ORBS — Percentage-based positioning (clamped to prevent overflow)
        ═══════════════════════════════════════════════════════════════ -->
   <div class="orbs-foreground" id="fg-orbs">
-    <span class="orb orb--sm orb--sky orb--z-front fg-orb" style="left: 15%; top: 25%;" aria-hidden="true"></span>
-    <span class="orb orb--xs orb--peach orb--z-front fg-orb" style="left: 75%; top: 35%;" aria-hidden="true"></span>
-    <span class="orb orb--sm orb--cobalt orb--z-front fg-orb" style="left: 8%; top: 55%;" aria-hidden="true"></span>
-    <span class="orb orb--xs orb--lavender orb--z-front fg-orb" style="left: 72%; top: 70%;" aria-hidden="true"></span>
+    <!-- All foreground orbs use chromeorb1 for consistency -->
+    <span class="orb orb--md orb--sky orb--z-front fg-orb" style="left: 15%; top: 25%; --env-img: url('{{ '/assets/images/chromeorb1.png' | relative_url }}');" aria-hidden="true"></span>
+    <span class="orb orb--sm orb--peach orb--z-front fg-orb" style="left: 75%; top: 35%; --env-img: url('{{ '/assets/images/chromeorb1.png' | relative_url }}');" aria-hidden="true"></span>
+    <span class="orb orb--md orb--cobalt orb--z-front fg-orb" style="left: 8%; top: 55%; --env-img: url('{{ '/assets/images/chromeorb1.png' | relative_url }}');" aria-hidden="true"></span>
+    <span class="orb orb--sm orb--lavender orb--z-front fg-orb" style="left: 72%; top: 70%; --env-img: url('{{ '/assets/images/chromeorb1.png' | relative_url }}');" aria-hidden="true"></span>
+    <span class="orb orb--lg orb--electric orb--z-front fg-orb" style="left: 85%; top: 18%; --env-img: url('{{ '/assets/images/chromeorb1.png' | relative_url }}');" aria-hidden="true"></span>
+    <span class="orb orb--md orb--cerulean orb--z-front fg-orb" style="left: 5%; top: 78%; --env-img: url('{{ '/assets/images/chromeorb1.png' | relative_url }}');" aria-hidden="true"></span>
+    <span class="orb orb--lg orb--tangerine orb--z-front fg-orb" style="left: 45%; top: 85%; --env-img: url('{{ '/assets/images/chromeorb1.png' | relative_url }}');" aria-hidden="true"></span>
+    <span class="orb orb--sm orb--lime orb--z-front fg-orb" style="left: 92%; top: 60%; --env-img: url('{{ '/assets/images/chromeorb1.png' | relative_url }}');" aria-hidden="true"></span>
+    <span class="orb orb--xl orb--grass orb--z-front fg-orb" style="left: 25%; top: 92%; --env-img: url('{{ '/assets/images/chromeorb1.png' | relative_url }}');" aria-hidden="true"></span>
   </div>
 
   <!-- Quiet Zone Overlay — soft central fade so content reads clearly (Phase 2) -->
@@ -223,22 +236,6 @@
           }
         }
       }
-      
-      // Run on scroll
-      window.addEventListener('scroll', updateActiveNavLink, { passive: true });
-      
-      // Run on hashchange (when clicking anchor links)
-      window.addEventListener('hashchange', () => {
-        setTimeout(updateActiveNavLink, 100);
-      });
-      
-      // Run on initial load (with delay for anchor navigation)
-      if (window.location.hash) {
-        // If there's a hash, wait for browser to scroll to it
-        setTimeout(updateActiveNavLink, 200);
-      } else {
-        updateActiveNavLink();
-      }
 
       // ─────────────────────────────────────────────────────────────
       // Mobile Nav Toggle
@@ -255,19 +252,22 @@
 
       // ─────────────────────────────────────────────────────────────
       // Hide Nav on Scroll Down, Show on Scroll Up
+      // Direct scroll listener — cheap (reads scrollY, writes classList).
+      // Does NOT use RAF gating: per-event tracking keeps lastScrollY tight
+      // against currentScrollY so direction changes are detected immediately.
       // ─────────────────────────────────────────────────────────────
       const mainNav = document.querySelector('.main-nav');
       let lastScrollY = window.scrollY;
-      let scrollThreshold = 10; // Minimum scroll before triggering
-      
+      const scrollThreshold = 10; // Minimum scroll before triggering
+
       if (mainNav) {
         window.addEventListener('scroll', () => {
           const currentScrollY = window.scrollY;
           const scrollDelta = currentScrollY - lastScrollY;
-          
+
           // Only trigger if scrolled more than threshold
           if (Math.abs(scrollDelta) < scrollThreshold) return;
-          
+
           if (scrollDelta > 0 && currentScrollY > 100) {
             // Scrolling down & past initial viewport
             mainNav.classList.add('nav-hidden');
@@ -275,9 +275,38 @@
             // Scrolling up
             mainNav.classList.remove('nav-hidden');
           }
-          
+
           lastScrollY = currentScrollY;
         }, { passive: true });
+      }
+
+      // ─────────────────────────────────────────────────────────────
+      // PERF: RAF-gated handler for the expensive updateActiveNavLink
+      // (calls getBoundingClientRect on every section — benefits from
+      //  being capped to one execution per animation frame).
+      // ─────────────────────────────────────────────────────────────
+      let scrollRafId = null;
+
+      window.addEventListener('scroll', () => {
+        if (!scrollRafId) {
+          scrollRafId = requestAnimationFrame(() => {
+            scrollRafId = null;
+            updateActiveNavLink();
+          });
+        }
+      }, { passive: true });
+
+      // Run on hashchange (when clicking anchor links)
+      window.addEventListener('hashchange', () => {
+        setTimeout(updateActiveNavLink, 100);
+      });
+
+      // Run on initial load (with delay for anchor navigation)
+      if (window.location.hash) {
+        // If there's a hash, wait for browser to scroll to it
+        setTimeout(updateActiveNavLink, 200);
+      } else {
+        updateActiveNavLink();
       }
 
       // ─────────────────────────────────────────────────────────────
@@ -333,7 +362,7 @@
                 const size = sizes[Math.floor(Math.random() * sizes.length)];
                 const drift = drifts[Math.floor(Math.random() * drifts.length)];
                 const rotation = Math.floor(Math.random() * 360);
-                const skyNum = Math.floor(Math.random() * 6) + 1;
+                const chromeOrbNum = Math.random() < 0.5 ? 1 : 3;
                 const bgPosX = Math.floor(Math.random() * 100);
                 const bgPosY = Math.floor(Math.random() * 100);
                 // Mobile: slower animations use less CPU
@@ -355,7 +384,7 @@
                   left: ${x}%;
                   top: ${yPercent}%;
                   --env-rotate: ${rotation}deg;
-                  --env-img: url('{{ "/assets/images/" | relative_url }}sky${skyNum}.jpg');
+                  --env-img: url('{{ "/assets/images/" | relative_url }}chromeorb${chromeOrbNum}.png');
                   --env-bg-pos: ${bgPosX}% ${bgPosY}%;
                   --env-opacity: 0.5;
                   animation-duration: ${animDuration}s;
@@ -375,10 +404,10 @@
       // MOBILE: More aggressive pausing (0px margin vs 100px on desktop)
       // ─────────────────────────────────────────────────────────────
       if (!prefersReducedMotion && 'IntersectionObserver' in window) {
-        // Mobile: only animate orbs actually in view (0px margin)
-        // Desktop: start animating 100px before entering viewport
-        const orbRootMargin = isMobile ? '0px 0px' : '100px 0px';
-        
+        // Mobile: orbs pre-warm 200px before entering viewport (was 0px — caused visible pop-in)
+        // Desktop: pre-warm 400px ahead so orbs are always mid-animation before visible
+        const orbRootMargin = isMobile ? '200px 0px' : '400px 0px';
+
         const orbObserver = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -404,12 +433,7 @@
       }
 
       // ─────────────────────────────────────────────────────────────
-      // Performance: Passive scroll listeners
-      // ─────────────────────────────────────────────────────────────
-      document.addEventListener('scroll', () => {}, { passive: true });
-
-      // ─────────────────────────────────────────────────────────────
-      // Mouse Sparkles — Cursor Trail Effect (DESKTOP ONLY)
+      // Per-Section Accent Orbs — 3-6 per section (1-2 of each color)
       // ─────────────────────────────────────────────────────────────
       if (!prefersReducedMotion && !isMobile) {
         const sparkleContainer = document.getElementById('sparkle-container');
@@ -499,6 +523,42 @@
           createSparkBurst(centerX, centerY);
         });
       });
+
+      // ─────────────────────────────────────────────────────────────
+      // Theme Toggle — Switch between Aero and Chrome themes
+      // ─────────────────────────────────────────────────────────────
+      const themeToggle = document.getElementById('theme-toggle');
+      const html = document.documentElement;
+      const THEME_KEY = 'kb-portfolio-theme';
+      
+      // Get saved theme or detect system preference
+      function getInitialTheme() {
+        const saved = localStorage.getItem(THEME_KEY);
+        if (saved) return saved;
+        // Default to aero (light theme)
+        return 'aero';
+      }
+      
+      // Apply theme to document
+      function applyTheme(theme) {
+        html.setAttribute('data-theme', theme);
+        localStorage.setItem(THEME_KEY, theme);
+      }
+      
+      // Toggle between themes
+      function toggleTheme() {
+        const current = html.getAttribute('data-theme') || 'aero';
+        const next = current === 'aero' ? 'chrome' : 'aero';
+        applyTheme(next);
+      }
+      
+      // Initialize theme on load
+      applyTheme(getInitialTheme());
+      
+      // Add click handler
+      if (themeToggle) {
+        themeToggle.addEventListener('click', toggleTheme);
+      }
 
     })();
   </script>

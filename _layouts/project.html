@@ -8,11 +8,20 @@
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Outfit:wght@400;500;600;700&family=Michroma&family=Ubuntu+Mono:wght@400;700&display=swap" rel="stylesheet">
   {% if jekyll.environment == 'production' %}{% feed_meta %}{% endif %}
   {% seo %}
+  <!-- Blocking script: Apply saved theme BEFORE first paint to prevent flash -->
+  <script>
+    (function() {
+      var theme = localStorage.getItem('kb-portfolio-theme');
+      if (theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+      }
+    })();
+  </script>
 </head>
-<body style="--sky1-url: url('{{ '/assets/images/sky1.jpg' | relative_url }}'); --sky2-url: url('{{ '/assets/images/sky2.jpg' | relative_url }}');">
+<body class="subpage-layout" style="--sky1-url: url('{{ '/assets/images/sky1.jpg' | relative_url }}'); --sky2-url: url('{{ '/assets/images/sky2.jpg' | relative_url }}');">
   <!-- Navigation — Outside page-wrapper so position:fixed works -->
   {% include nav-page.html %}
 
@@ -56,10 +65,7 @@
   <div class="bg-grain"></div>
 
   <main class="detail-main">
-    <div class="back-link-wrapper">
-      <a href="{{ '/projects/' | relative_url }}" class="back-link">← all projects</a>
-    </div>
-    
+
     <section class="detail-section project-detail">
       <div class="detail-container">
         
@@ -176,11 +182,9 @@
             {% endfor %}
           </div>
           {% else %}
-          <div class="gallery-placeholder">
-            <div class="screenshot-placeholder glass-card">
-              <span class="placeholder-icon">🖼️</span>
-              <span class="placeholder-text">TODO: Add gallery screenshots</span>
-            </div>
+          <div class="gallery-placeholder screenshot-placeholder">
+            <span class="placeholder-icon">🖼️</span>
+            <span class="placeholder-text">TODO: Add gallery screenshots</span>
           </div>
           {% endif %}
         </div>
@@ -357,6 +361,31 @@
           });
         }, { rootMargin: isMobile ? '0px' : '100px 0px', threshold: 0 });
         document.querySelectorAll('.orb').forEach(orb => orbObserver.observe(orb));
+      }
+
+      // ═══════════════════════════════════════════════════════════════
+      // THEME TOGGLE — Aero ↔ Chrome
+      // ═══════════════════════════════════════════════════════════════
+      const themeToggle = document.querySelector('.theme-toggle');
+      if (themeToggle) {
+        // Apply saved theme on load
+        const savedTheme = localStorage.getItem('portfolio-theme');
+        if (savedTheme) {
+          document.documentElement.setAttribute('data-theme', savedTheme);
+        }
+
+        themeToggle.addEventListener('click', () => {
+          const currentTheme = document.documentElement.getAttribute('data-theme');
+          const newTheme = currentTheme === 'chrome' ? 'aero' : 'chrome';
+          
+          if (newTheme === 'aero') {
+            document.documentElement.removeAttribute('data-theme');
+            localStorage.removeItem('portfolio-theme');
+          } else {
+            document.documentElement.setAttribute('data-theme', 'chrome');
+            localStorage.setItem('portfolio-theme', 'chrome');
+          }
+        });
       }
     })();
   </script>

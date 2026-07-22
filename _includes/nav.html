@@ -1,5 +1,12 @@
 <nav class="main-nav glass-panel">
-  <a href="#home" class="nav-logo aurora-text aurora-text--nav">KB</a>
+  <!-- Logo: Aero image for Aero theme, Image logo for Chrome theme -->
+  <a href="#home" class="nav-logo nav-logo--text">
+    <img src="{{ '/assets/images/KB-aero.png' | relative_url }}" alt="KB" class="nav-logo-img">
+  </a>
+  <a href="#home" class="nav-logo nav-logo--chrome">
+    <img src="{{ '/assets/images/KB.png' | relative_url }}" alt="KB" class="nav-logo-img">
+  </a>
+  
   <ul class="nav-links">
     <li><a href="#home">home</a></li>
     <li><a href="#about">about</a></li>
@@ -7,6 +14,13 @@
     <li><a href="#projects">projects</a></li>
     <li><a href="#contact">contact</a></li>
   </ul>
+  
+  <!-- Theme Toggle Button -->
+  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme" title="Switch theme">
+    <span class="theme-toggle-icon theme-toggle-icon--aero">☀️</span>
+    <span class="theme-toggle-icon theme-toggle-icon--chrome">🌙</span>
+  </button>
+  
   <button class="nav-toggle" aria-label="Toggle navigation">
     <span></span>
     <span></span>

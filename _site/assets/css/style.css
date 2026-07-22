@@ -35,9 +35,9 @@
   --color-bg-bot: #FFD9B8;
   
   /* Core — High Contrast (VIVID: deepened slate-blue, punchy orange) */
-  --color-main: #0F2436;           /* deeper, richer slate              */
-  --color-tint: #2D5A7A;           /* more saturated tint               */
-  --color-ink: #081018;            /* near-black for headings           */
+  --color-main: #0B2A44;           /* stronger Aero body text           */
+  --color-tint: #2B638A;           /* higher saturation for secondaries */
+  --color-ink: #04111D;            /* stronger heading contrast         */
   --color-accent: #FF6B2C;         /* VIVID orange pop — more saturated */
   --color-accent-hover: #FF4500;   /* hot orange for hover states       */
   --color-accent-glow: rgba(255,107,44,0.5); /* orange glow color       */
@@ -64,10 +64,10 @@
   --glass-shadow-accent: 0 8px 32px rgba(255,107,43,0.25);
   --glass-shadow-sky: 0 8px 32px rgba(91,192,248,0.3);
   
-  /* Typography */
-  --font-display: 'Space Grotesk', 'Outfit', sans-serif;
-  --font-body: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-mono: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+  /* Typography — Michroma for headers, Ubuntu Mono for body (GLOBAL) */
+  --font-display: 'Michroma', 'Space Grotesk', sans-serif;
+  --font-body: 'Ubuntu Mono', 'SF Mono', monospace;
+  --font-mono: 'Ubuntu Mono', 'SF Mono', 'Fira Code', monospace;
   
   /* Spacing */
   --space-xs: 0.5rem;
@@ -117,6 +117,77 @@
 
   /* Extended spacing scale (detail pages) */
   --space-2xl: 6rem;
+
+  /* Hero logo sizing (Aero default) */
+  --hero-logo-max-width: 250%;
+  --hero-logo-max-height: 260px;
+
+   /* ─────────────────────────────────────────────────────────────
+      CARD TEXTURE SYSTEM — hidden in Aero mode, shown in Chrome mode only
+      All texture URLs are empty by default (Aero). Chrome theme overrides them.
+      ───────────────────────────────────────────────────────────── */
+   --texture-interest-url: '';
+   --texture-interest-opacity: 0;
+
+   --texture-skill-url: '';
+   --texture-skill-opacity: 0;
+
+   --texture-project-url: '';
+   --texture-project-opacity: 0;
+
+   --texture-value-url: '';
+   --texture-value-opacity: 0;
+
+   --texture-profile-url: '';
+   --texture-profile-opacity: 0;
+
+   --texture-glass-url: '';
+   --texture-glass-opacity: 0;
+
+   --texture-feature-url: '';
+   --texture-feature-opacity: 0;
+
+   --texture-meta-url: '';
+   --texture-meta-opacity: 0;
+
+   --texture-detail-url: '';
+   --texture-detail-opacity: 0;
+
+   --texture-challenge-url: '';
+   --texture-challenge-opacity: 0;
+
+   --texture-screenshot-url: '';
+   --texture-screenshot-opacity: 0;
+
+   --texture-gallery-url: '';
+   --texture-gallery-opacity: 0;
+}
+
+/* Aero guardrails: keep base UI at full opacity and disable texture overlays */
+html:not([data-theme="chrome"]) .glass-panel,
+html:not([data-theme="chrome"]) .glass-card,
+html:not([data-theme="chrome"]) .skill-card,
+html:not([data-theme="chrome"]) .project-card,
+html:not([data-theme="chrome"]) .skill-detail-card,
+html:not([data-theme="chrome"]) .interest-card,
+html:not([data-theme="chrome"]) .value-card,
+html:not([data-theme="chrome"]) .feature-card,
+html:not([data-theme="chrome"]) .challenge-item,
+html:not([data-theme="chrome"]) .project-meta-card,
+html:not([data-theme="chrome"]) .detail-block {
+  opacity: 1 !important;
+}
+
+html:not([data-theme="chrome"]) .skill-card::after,
+html:not([data-theme="chrome"]) .project-card::after,
+html:not([data-theme="chrome"]) .interest-card::before,
+html:not([data-theme="chrome"]) .value-card::after,
+html:not([data-theme="chrome"]) .feature-card::after,
+html:not([data-theme="chrome"]) .challenge-item::before,
+html:not([data-theme="chrome"]) .project-meta-card::before,
+html:not([data-theme="chrome"]) .skill-detail-card::after {
+  opacity: 0 !important;
+  background: none !important;
 }
 
 /* ─────────────────────────────────────────────────────────────────
@@ -126,9 +197,10 @@
 html { 
   scroll-behavior: smooth; 
   font-size: 16px;
-  /* Ensure no edge stripes — html matches body gradient */
-  background: linear-gradient(180deg, #DCEEF7 0%, #F3F5EE 45%, #FCE6D4 100%);
-  background-attachment: fixed;
+  /* PERF: Solid fallback only. The actual gradient is rendered by .bg-aero
+     (position:fixed), which is a GPU-composited layer and does NOT force a
+     repaint on every scroll frame like background-attachment:fixed does. */
+  background: #DCEEF7;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -142,9 +214,10 @@ html {
 
 body {
   font-family: var(--font-body);
-  /* UNIFORM background — single gradient, no edge effects */
-  background: linear-gradient(180deg, #DCEEF7 0%, #F3F5EE 45%, #FCE6D4 100%);
-  background-attachment: fixed;
+  /* PERF: Transparent — .bg-aero (position:fixed) carries the gradient.
+     Removing background-attachment:fixed was the #1 scroll lag source:
+     it disabled GPU-composited scroll, forcing full repaints every frame. */
+  background: transparent;
   color: var(--color-main);
   line-height: 1.6;
   min-height: 100vh;
@@ -159,10 +232,9 @@ body {
   /* Orbs-layer has overflow:hidden to clip decorative elements */
 }
 
-/* Ensure html matches exactly */
+/* Solid fallback color — bg-aero carries the visual gradient */
 html {
-  background: linear-gradient(180deg, #DCEEF7 0%, #F3F5EE 45%, #FCE6D4 100%);
-  background-attachment: fixed;
+  background: #DCEEF7;
   margin: 0;
   padding: 0;
 }
@@ -188,6 +260,9 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   inset: 0;
   pointer-events: none;
   z-index: -2;
+  /* PERF: Gradient lives here (position:fixed = own GPU layer, no scroll repaint).
+     html/body use solid fallback colors; bg-aero provides the visual gradient. */
+  background: linear-gradient(180deg, #DCEEF7 0%, #F3F5EE 45%, #FCE6D4 100%);
 }
 
 /* Bokeh — DISABLED to eliminate edge color differences */
@@ -233,6 +308,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   z-index: 9998;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   opacity: 0.015;
+  /* PERF: Promote to own GPU layer so it doesn't trigger repaint of layers beneath */
+  will-change: transform;
 }
 
 /* ─────────────────────────────────────────────────────────────────
@@ -523,6 +600,11 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   );
 }
 
+/* Subpages: remove quiet-zone wash that lightens content panels */
+body.subpage-layout .quiet-zone-overlay {
+  display: none;
+}
+
 /* ─────────────────────────────────────────────────────────────────
    GLASS PILLS — Crisp Stickers with Tilt Variants
    ───────────────────────────────────────────────────────────────── */
@@ -758,8 +840,10 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   z-index: 1000;
   /* Frosted glass with solid backing to block orbs */
   background: rgba(255,255,255,0.75);
-  backdrop-filter: blur(24px) saturate(120%);
-  -webkit-backdrop-filter: blur(24px) saturate(120%);
+  /* PERF: Reduced blur from 24px→16px — barely visible difference on opaque nav,
+     saves significant GPU compositing cost on every scroll frame. */
+  backdrop-filter: blur(16px) saturate(120%);
+  -webkit-backdrop-filter: blur(16px) saturate(120%);
   border: 1px solid var(--glass-border-bright);
   border-radius: var(--radius-xl);
   box-shadow: 
@@ -830,7 +914,11 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   50% { opacity: 0.8; transform: scale(0.92); box-shadow: 0 0 18px rgba(255,107,43,0.8); } 
 }
 
-.nav-links { display: flex; gap: var(--space-xs); }
+.nav-links { 
+  display: flex; 
+  gap: var(--space-xs); 
+  margin-left: auto; /* Push nav links to the right */
+}
 
 .nav-links li a {
   font-family: var(--font-mono);
@@ -1135,10 +1223,12 @@ section {
 }
 
 .section-subtitle {
+  font-family: var(--font-display);
   font-size: 1.05rem;
   color: var(--color-tint);
   max-width: 520px;
   margin: 0 auto;
+  letter-spacing: 0.02em;
 }
 
 /* Section tints — REMOVED for seamless background */
@@ -1652,6 +1742,7 @@ section {
 }
 
 .skill-card {
+  position: relative;
   padding: var(--space-md);
   /* Liquid glass styling (override 3D glossy) */
   background: var(--glass-bg-strong) !important;
@@ -1661,6 +1752,24 @@ section {
   box-shadow: 
     var(--glass-shadow),
     inset 0 1px 0 rgba(255,255,255,0.85) !important;
+  overflow: hidden;
+}
+
+/* Skill card texture overlay */
+.skill-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--texture-skill-url) center / cover no-repeat;
+  opacity: var(--texture-skill-opacity);
+  z-index: 0;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.skill-card > * {
+  position: relative;
+  z-index: 1;
 }
 
 .skill-card::before {
@@ -1674,8 +1783,9 @@ section {
 }
 
 .skill-header {
-  display: flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: start;
   gap: var(--space-sm);
   margin-bottom: var(--space-sm);
 }
@@ -1698,6 +1808,10 @@ section {
   font-weight: 700;
   color: var(--color-ink);
   text-transform: lowercase;
+  margin: 0;
+  min-width: 0;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
 }
 
 .skill-items {
@@ -1740,6 +1854,7 @@ section {
 }
 
 .project-card {
+  position: relative;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -1751,6 +1866,23 @@ section {
   box-shadow: 
     var(--glass-shadow),
     inset 0 1px 0 rgba(255,255,255,0.85) !important;
+}
+
+/* Project card texture overlay */
+.project-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--texture-project-url) center / cover no-repeat;
+  opacity: var(--texture-project-opacity);
+  z-index: 0;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.project-card > * {
+  position: relative;
+  z-index: 1;
 }
 
 .project-card::before {
@@ -1812,6 +1944,7 @@ section {
   display: flex;
   flex-direction: column;
   background: var(--glass-bg);
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
 
 .project-content h3 {
@@ -2425,10 +2558,10 @@ main .contact-info {
     will-change: auto !important;
   }
   
-  /* Paused orbs have no GPU promotion at all */
+  /* Paused orbs have no GPU promotion at all — do NOT reset transform
+     as that causes orbs to snap back to their resting position visibly */
   .orb--paused {
     will-change: auto !important;
-    transform: none !important;
   }
   
   /* ─── 5. SIMPLIFY SHADOWS ─── */
@@ -3004,22 +3137,47 @@ main .contact-info {
 }
 
 .interest-card {
+  position: relative;
   text-align: center;
   padding: var(--space-md);
-  background: rgba(255,255,255,0.2);
   border-radius: var(--radius-md);
-  transition: transform 0.2s ease, background 0.2s ease;
+  border: 1px solid rgba(255,255,255,0.15);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden;
+}
+
+.interest-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--texture-interest-url) center / cover no-repeat;
+  opacity: var(--texture-interest-opacity);
+  z-index: 0;
+  border-radius: inherit;
+}
+
+.interest-card > * {
+  position: relative;
+  z-index: 1;
 }
 
 .interest-card:hover {
   transform: translateY(-4px);
-  background: rgba(255,255,255,0.3);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.15);
 }
 
 .interest-icon {
   font-size: 2rem;
   display: block;
   margin-bottom: var(--space-xs);
+}
+
+.interest-icon-image {
+  width: 2rem;
+  height: 2rem;
+  margin: 0 auto var(--space-xs);
+  object-fit: contain;
 }
 
 .interest-name {
@@ -3067,10 +3225,29 @@ main .contact-info {
 }
 
 .value-card {
+  position: relative;
   padding: var(--space-md);
   background: rgba(255,255,255,0.15);
   border-radius: var(--radius-md);
   border-left: 3px solid var(--color-accent);
+  overflow: hidden;
+}
+
+/* Value card texture overlay */
+.value-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--texture-value-url) center / cover no-repeat;
+  opacity: var(--texture-value-opacity);
+  z-index: 0;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.value-card > * {
+  position: relative;
+  z-index: 1;
 }
 
 .value-name {
@@ -3265,50 +3442,88 @@ main .contact-info {
 }
 
 .skill-detail-card {
+  display: flex;
+  flex-direction: column;
   padding: var(--space-md);
-  background: rgba(255,255,255,0.2);
+  position: relative;
+  overflow: hidden;
+  /* Aero mode (default): light glassy appearance */
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
   border-radius: var(--radius-md);
-  transition: transform 0.2s ease;
+  border: 1px solid var(--glass-border-bright);
+  box-shadow: var(--glass-shadow), inset 0 1px 0 rgba(255,255,255,0.85);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  min-height: 140px;
+}
+
+/* Skill detail card texture overlay */
+.skill-detail-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--texture-detail-url) center / cover no-repeat;
+  opacity: var(--texture-detail-opacity);
+  z-index: 0;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.skill-detail-card > * {
+  position: relative;
+  z-index: 1;
 }
 
 .skill-detail-card:hover {
   transform: translateY(-3px);
+  box-shadow: var(--glass-shadow-accent);
+  border-color: var(--color-accent);
 }
 
-.skill-detail-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: var(--space-xs);
+/* Chrome mode: dark steel texture cards */
+[data-theme="chrome"] .skill-detail-card {
+  background: rgba(40,40,45,0.85);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: none;
+}
+
+[data-theme="chrome"] .skill-detail-card:hover {
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  border-color: rgba(255,255,255,0.15);
 }
 
 .skill-detail-card .skill-name {
   font-weight: 600;
   text-transform: capitalize;
-}
-
-.skill-proficiency {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  padding: 2px 6px;
-  border-radius: 4px;
-  background: rgba(0,0,0,0.1);
+  margin-bottom: var(--space-xs);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 .skill-use-case {
   font-size: 0.85rem;
   color: var(--color-tint);
-  margin-bottom: var(--space-xs);
+  margin-bottom: auto;
+  flex: 1;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  line-height: 1.4;
 }
 
-.skill-meta {
+.skill-proficiency {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--color-tint);
-}
-
-.skill-years {
-  opacity: 0.7;
+  font-size: 0.7rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: rgba(0,0,0,0.25);
+  align-self: flex-start;
+  margin-top: var(--space-sm);
+  text-transform: lowercase;
 }
 
 /* Skill visualization placeholder */
@@ -3407,16 +3622,29 @@ main .contact-info {
   margin-bottom: var(--space-xl);
 }
 
+/* Screenshot placeholder - transparent, parent .glass-card handles texture */
 .screenshot-placeholder {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 300px;
-  background: linear-gradient(135deg, var(--color-sky) 0%, var(--color-leaf) 50%, var(--color-sunset) 100%);
+  background: transparent;
   border-radius: var(--radius-lg);
-  color: white;
+  color: var(--color-tint);
   text-align: center;
+}
+
+.screenshot-placeholder .placeholder-icon {
+  font-size: 3rem;
+  margin-bottom: var(--space-sm);
+  opacity: 1;
+}
+
+.screenshot-placeholder .placeholder-text {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  opacity: 0.7;
 }
 
 .placeholder-icon {
@@ -3896,11 +4124,32 @@ a.project-card:hover .project-detail-link {
 }
 
 .outcome-item {
-  padding: var(--space-sm) 0;
-  padding-left: var(--space-md);
-  border-left: 3px solid var(--color-accent);
+  position: relative;
+  padding: var(--space-sm) 0 var(--space-sm) calc(var(--space-lg) + 2px);
   font-size: 0.95rem;
   color: var(--color-main);
+  border-left: none;
+}
+
+.outcome-item::before {
+  content: '🎯';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.outcome-item::after {
+  content: '';
+  position: absolute;
+  left: 28px;
+  top: 18%;
+  bottom: 18%;
+  width: 2px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(255,107,44,0.9) 0%, rgba(255,107,44,0.45) 100%);
 }
 
 .outcome-item + .outcome-item {
@@ -3915,9 +4164,111 @@ a.project-card:hover .project-detail-link {
 }
 
 .feature-card {
+  position: relative;
   padding: var(--space-md);
   background: rgba(255, 255, 255, 0.1);
   border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+/* Feature card texture overlay */
+.feature-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--texture-feature-url) center / cover no-repeat;
+  opacity: var(--texture-feature-opacity);
+  z-index: 0;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.feature-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Challenge items texture overlay */
+.challenge-item {
+  position: relative;
+  overflow: hidden;
+}
+
+.challenge-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--texture-challenge-url) center / cover no-repeat;
+  opacity: var(--texture-challenge-opacity);
+  z-index: 0;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.challenge-item > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Screenshot placeholder - simple, no texture, parent detail-block handles glass/texture */
+.screenshot-placeholder,
+.screenshot-placeholder.gallery-placeholder {
+  position: relative;
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+.screenshot-placeholder::before,
+.screenshot-placeholder::after,
+.gallery-placeholder::before,
+.gallery-placeholder::after {
+  display: none !important;
+}
+
+/* Gallery placeholder - just layout, no texture */
+.gallery-placeholder {
+  position: relative;
+  background: transparent !important;
+}
+
+/* Glass card (detail page) texture overlay */
+.glass-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-card > .texture-overlay {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--texture-detail-url) center / cover no-repeat;
+  opacity: var(--texture-detail-opacity);
+  z-index: 0;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+/* Meta card texture overlay */
+.project-meta-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.project-meta-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--texture-meta-url) center / cover no-repeat;
+  opacity: var(--texture-meta-opacity);
+  z-index: 0;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.project-meta-card > * {
+  position: relative;
+  z-index: 1;
 }
 
 .feature-title {
@@ -3989,3 +4340,1243 @@ a.project-card:hover .project-detail-link {
     grid-template-columns: 1fr;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   CHROME THEME — Dark Metallic Theme
+   Toggle between Aero and Chrome with data-theme attribute
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ─────────────────────────────────────────────────────────────────
+   THEME TOGGLE BUTTON
+   ───────────────────────────────────────────────────────────────── */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: var(--radius-full);
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  cursor: pointer;
+  transition: all var(--transition-smooth);
+  margin-left: auto;
+  margin-right: var(--space-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+.theme-toggle-icon {
+  position: absolute;
+  font-size: 1.2rem;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Aero theme: show sun, hide moon */
+.theme-toggle-icon--aero {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+.theme-toggle-icon--chrome {
+  opacity: 0;
+  transform: rotate(-180deg) scale(0.5);
+}
+
+/* Chrome theme: show moon, hide sun */
+[data-theme="chrome"] .theme-toggle-icon--aero {
+  opacity: 0;
+  transform: rotate(180deg) scale(0.5);
+}
+
+[data-theme="chrome"] .theme-toggle-icon--chrome {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+[data-theme="chrome"] .theme-toggle {
+  background: rgba(40, 40, 40, 0.8);
+  border: 1px solid rgba(160, 160, 160, 0.3);
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   LOGO VISIBILITY TOGGLES
+   ───────────────────────────────────────────────────────────────── */
+/* Aero: show text logos, hide chrome logos */
+.nav-logo--chrome,
+.hero-title--chrome {
+  display: none;
+}
+
+.nav-logo--text,
+.hero-title--text {
+  display: block;
+}
+
+/* Chrome: show chrome logos, hide text logos */
+[data-theme="chrome"] .nav-logo--chrome,
+[data-theme="chrome"] .hero-title--chrome {
+  display: block;
+}
+
+[data-theme="chrome"] .nav-logo--text,
+[data-theme="chrome"] .hero-title--text {
+  display: none;
+}
+
+/* Nav logo image styling */
+.nav-logo-img {
+  height: 32px;
+  width: auto;
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.4));
+  transition: filter var(--transition-smooth);
+}
+
+.nav-logo--chrome:hover .nav-logo-img {
+  filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.6));
+}
+
+/* Hero logo image styling */
+.hero-title--chrome {
+  text-align: center;
+  margin-bottom: var(--space-md);
+}
+
+/* Theme-scoped centering so visibility toggles still work */
+html:not([data-theme="chrome"]) .hero-title--text,
+[data-theme="chrome"] .hero-title--chrome {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Guardrails: never show both hero logos at once */
+html:not([data-theme="chrome"]) .hero-title--chrome {
+  display: none !important;
+}
+
+[data-theme="chrome"] .hero-title--text {
+  display: none !important;
+}
+
+.hero-logo-img {
+  display: block;
+  margin: 0 auto;
+  max-width: var(--hero-logo-max-width);
+  width: auto;
+  max-height: var(--hero-logo-max-height);
+  filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.3));
+  animation: chrome-hero-glow 4s ease-in-out infinite;
+}
+
+@keyframes chrome-hero-glow {
+  0%, 100% { filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.25)); }
+  50% { filter: drop-shadow(0 0 45px rgba(255, 255, 255, 0.5)); }
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   CHROME THEME VARIABLES
+   ───────────────────────────────────────────────────────────────── */
+[data-theme="chrome"] {
+  /* Background */
+  --color-bg-top: #0a0a0a;
+  --color-bg-mid: #0f0f0f;
+  --color-bg-bot: #121212;
+  
+  /* Core colors */
+  --color-main: #e8e8e8;
+  --color-tint: #a0a0a0;
+  --color-ink: #ffffff;
+  --color-accent: #c0c0c0;
+  --color-accent-hover: #ffffff;
+  --color-accent-glow: rgba(200, 200, 200, 0.4);
+  
+  /* Chrome metallic colors */
+  --chrome-light: #ffffff;
+  --chrome-mid: #c0c0c0;
+  --chrome-dark: #6b6b6b;
+  --chrome-gradient: linear-gradient(135deg, #e8e8e8 0%, #a0a0a0 25%, #ffffff 50%, #a0a0a0 75%, #6b6b6b 100%);
+  --chrome-gradient-vertical: linear-gradient(180deg, #ffffff 0%, #e8e8e8 10%, #c0c0c0 50%, #a0a0a0 90%, #6b6b6b 100%);
+  
+  /* Glass system - dark glass */
+  --glass-bg: rgba(20, 20, 20, 0.7);
+  --glass-bg-strong: rgba(25, 25, 25, 0.85);
+  --glass-tint: rgba(40, 40, 40, 0.6);
+  --glass-border: rgba(100, 100, 100, 0.3);
+  --glass-border-bright: rgba(160, 160, 160, 0.5);
+  --glass-specular: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  --glass-shadow-accent: 0 8px 32px rgba(200, 200, 200, 0.15);
+
+   /* Orb colors - chrome metallic */
+   --color-sky: #a0c0d0;
+   --color-sky-light: #c0d8e8;
+   --color-leaf: #a8b8a8;
+   --color-leaf-light: #c8d8c8;
+   --color-sunset: #d0c0b0;
+   --color-sunset-light: #e0d0c0;
+   --color-peach: #c8c0b8;
+   --color-lavender: #b8b0c8;
+   --color-gold: #d0c890;
+   --color-tangerine: #c8b8a8;
+
+   /* TEXTURE SYSTEM — Show steel.png in Chrome mode */
+   --texture-interest-url: url('../images/steel.png');
+   --texture-interest-opacity: 0.25;
+
+   --texture-skill-url: url('../images/steel.png');
+   --texture-skill-opacity: 0.25;
+
+   --texture-project-url: url('../images/steel.png');
+   --texture-project-opacity: 0.25;
+
+   --texture-value-url: url('../images/steel.png');
+   --texture-value-opacity: 0.25;
+
+   --texture-profile-url: '';
+   --texture-profile-opacity: 0;
+
+   --texture-glass-url: '';
+   --texture-glass-opacity: 0;
+
+   --texture-feature-url: url('../images/steel.png');
+   --texture-feature-opacity: 0.25;
+
+   --texture-meta-url: url('../images/steel.png');
+   --texture-meta-opacity: 0.25;
+
+   --texture-detail-url: url('../images/steel.png');
+   --texture-detail-opacity: 0.25;
+
+   --texture-challenge-url: url('../images/steel.png');
+   --texture-challenge-opacity: 0.25;
+
+   --texture-screenshot-url: url('../images/steel.png');
+   --texture-screenshot-opacity: 0.25;
+
+   --texture-gallery-url: url('../images/steel.png');
+   --texture-gallery-opacity: 0.25;
+
+    /* Hero logo sizing (Chrome) */
+  --hero-logo-max-width: 250%;
+  --hero-logo-max-height: 260px;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   CHROME THEME — BACKGROUND
+   ───────────────────────────────────────────────────────────────── */
+/* CRITICAL FIX: html always retains the Aero light gradient unless
+   overridden here. On slow machines during scroll, the html layer can
+   flash through, causing the "Aero briefly visible in Chrome mode" bug. */
+[data-theme="chrome"] html {
+  background: #0a0a0a;
+}
+
+[data-theme="chrome"] body {
+  /* bg-aero carries the Chrome gradient, same as Aero mode */
+  background: transparent;
+}
+
+[data-theme="chrome"] .bg-aero {
+  /* Full Chrome dark gradient on the fixed GPU layer */
+  background:
+    radial-gradient(ellipse at 50% 30%, rgba(40, 40, 40, 0.15) 0%, transparent 60%),
+    radial-gradient(ellipse at center, #151515 0%, #0a0a0a 70%, #050505 100%);
+  opacity: 1;
+}
+
+[data-theme="chrome"] .bg-clouds {
+  display: none;
+}
+
+[data-theme="chrome"] .bg-grid {
+  background-image: 
+    linear-gradient(rgba(80, 80, 80, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(80, 80, 80, 0.03) 1px, transparent 1px);
+}
+
+[data-theme="chrome"] .bg-grain {
+  opacity: 0.02;
+}
+
+/* Hide pastel decorations in chrome theme */
+[data-theme="chrome"] .decorations,
+[data-theme="chrome"] .glass-pill,
+[data-theme="chrome"] .retro-progress,
+[data-theme="chrome"] .loading-dots {
+  display: none;
+}
+
+/* CRITICAL: Remove the gray overlay washing out the page */
+[data-theme="chrome"] .quiet-zone-overlay {
+  display: none !important;
+}
+
+/* Remove page-wrapper ambient glows - keep background pure black */
+[data-theme="chrome"] .page-wrapper::before,
+[data-theme="chrome"] .page-wrapper::after {
+  display: none !important;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   CHROME THEME — ORBS (Chrome Sphere Image)
+   Uses chromeorb1-3.png for realistic metallic sphere appearance
+   3-layer depth-of-field hierarchy for spatial depth:
+   - Background: chromeorb1, blurred, dim
+   - Midground: chromeorb3, slight blur, medium brightness
+   - Foreground: sharp, brightest
+   ───────────────────────────────────────────────────────────────── */
+[data-theme="chrome"] .orb,
+[data-theme="chrome"] .orb--sky,
+[data-theme="chrome"] .orb--cobalt,
+[data-theme="chrome"] .orb--cerulean,
+[data-theme="chrome"] .orb--electric,
+[data-theme="chrome"] .orb--lavender,
+[data-theme="chrome"] .orb--peach,
+[data-theme="chrome"] .orb--tangerine,
+[data-theme="chrome"] .orb--sunset,
+[data-theme="chrome"] .orb--lime,
+[data-theme="chrome"] .orb--grass,
+[data-theme="chrome"] .orb--chartreuse {
+  /* Direct chrome orb image - do NOT use var(--env-img) as inline styles override it */
+  background: url('../images/chromeorb1.png') center/contain no-repeat !important;
+  /* Removed black ring shadow — only soft white glow */
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.2) !important;
+  border: none !important;
+  filter: brightness(1.2) contrast(1.05) !important;
+}
+
+/* Remove the ::before pseudo-element reflection in chrome mode */
+[data-theme="chrome"] .orb::before,
+[data-theme="chrome"] .orb--sky::before,
+[data-theme="chrome"] .orb--cobalt::before,
+[data-theme="chrome"] .orb--cerulean::before,
+[data-theme="chrome"] .orb--electric::before,
+[data-theme="chrome"] .orb--lavender::before,
+[data-theme="chrome"] .orb--peach::before,
+[data-theme="chrome"] .orb--tangerine::before,
+[data-theme="chrome"] .orb--sunset::before,
+[data-theme="chrome"] .orb--lime::before,
+[data-theme="chrome"] .orb--grass::before,
+[data-theme="chrome"] .orb--chartreuse::before {
+  display: none !important;
+}
+
+/* Chrome orb size variants - FOREGROUND SIZED UP */
+[data-theme="chrome"] .orb--xl { width: 180px; height: 180px; }
+[data-theme="chrome"] .orb--lg { width: 140px; height: 140px; }
+[data-theme="chrome"] .orb--md { width: 100px; height: 100px; }
+[data-theme="chrome"] .orb--sm { width: 70px; height: 70px; }
+[data-theme="chrome"] .orb--xs { width: 45px; height: 45px; }
+
+/* Foreground orbs sized up */
+[data-theme="chrome"] .orbs-foreground .orb--xl { width: 220px; height: 220px; }
+[data-theme="chrome"] .orbs-foreground .orb--lg { width: 170px; height: 170px; }
+[data-theme="chrome"] .orbs-foreground .orb--md { width: 130px; height: 130px; }
+[data-theme="chrome"] .orbs-foreground .orb--sm { width: 90px; height: 90px; }
+[data-theme="chrome"] .orbs-foreground .orb--xs { width: 55px; height: 55px; }
+
+/* ─── DEPTH LAYER: BACKGROUND (z-back) — chromeorb1, blurred, dim ─── */
+[data-theme="chrome"] .orb--z-back,
+[data-theme="chrome"] .orbs-layer .orb--z-back {
+  background: url('../images/chromeorb1.png') center/contain no-repeat !important;
+  filter: blur(5px) brightness(0.7) contrast(0.95) !important;
+  opacity: 0.55 !important;
+  animation-duration: 20s !important; /* Slow drift */
+}
+
+/* ─── DEPTH LAYER: MIDGROUND (z-mid) — chromeorb3, slight blur ─── */
+[data-theme="chrome"] .orb--z-mid,
+[data-theme="chrome"] .orbs-layer .orb--z-mid,
+[data-theme="chrome"] .orbs-foreground .orb--z-mid {
+  background: url('../images/chromeorb3.png') center/contain no-repeat !important;
+  filter: blur(1.5px) brightness(1.0) contrast(1.0) !important;
+  opacity: 0.75 !important;
+  animation-duration: 14s !important; /* Medium drift */
+}
+
+/* ─── DEPTH LAYER: FOREGROUND (z-front) — chromeorb1, sharp, bright ─── */
+[data-theme="chrome"] .orb--z-front,
+[data-theme="chrome"] .orbs-foreground .orb--z-front {
+  background: url('../images/chromeorb1.png') center/contain no-repeat !important;
+  filter: brightness(1.5) contrast(1.15) !important;
+  opacity: 1 !important;
+  animation-duration: 10s !important; /* Slower for parallax effect */
+  box-shadow: 0 0 40px rgba(255, 255, 255, 0.35) !important;
+}
+
+/* Background orbs container - base styles */
+[data-theme="chrome"] .orbs-layer .orb {
+  filter: blur(4px) brightness(0.8) !important;
+  opacity: 0.6;
+}
+
+/* Foreground orbs container - base styles */
+[data-theme="chrome"] .orbs-foreground .orb {
+  filter: brightness(1.3) contrast(1.1) !important;
+  opacity: 0.9;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   CHROME THEME — NAVBAR (Fixed broken bar artifact)
+   ───────────────────────────────────────────────────────────────── */
+[data-theme="chrome"] .main-nav {
+  background: rgba(12, 12, 14, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(120, 125, 130, 0.25);
+  box-shadow: 
+    0 4px 30px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+/* Remove the broken specular bar - replace with thin chrome line */
+[data-theme="chrome"] .main-nav::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 15%;
+  right: 15%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.4) 50%, transparent 100%);
+  border-radius: 0;
+}
+
+/* Chrome gradient bottom border */
+[data-theme="chrome"] .main-nav::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(180, 185, 190, 0.4) 50%, transparent 100%);
+}
+
+/* Nav links - brighter for contrast */
+[data-theme="chrome"] .nav-links li a {
+  color: #b8bcc0;
+  font-family: var(--font-mono);
+  text-transform: lowercase;
+}
+
+[data-theme="chrome"] .nav-links li a:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Active link - bright chrome pill with glow */
+[data-theme="chrome"] .nav-links li a.active {
+  background: linear-gradient(180deg, #ffffff 0%, #e0e0e0 20%, #c0c0c0 80%, #a0a0a0 100%);
+  color: #0a0a0a;
+  font-weight: 600;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.25);
+}
+
+/* Nav link underline effect */
+[data-theme="chrome"] .nav-links li a::after {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.7), transparent);
+}
+
+/* Nav logo - hide orange dot, show chrome style */
+[data-theme="chrome"] .nav-logo::before {
+  background: radial-gradient(circle at 30% 30%, #ffffff 0%, #c0c0c0 50%, #808080 100%);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  animation: chrome-pulse 2s ease-in-out infinite;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   CHROME THEME — VIGNETTE (Subtle dark edges for studio lighting)
+   ───────────────────────────────────────────────────────────────── */
+[data-theme="chrome"]::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9990;
+  background: radial-gradient(
+    ellipse 85% 85% at 50% 50%,
+    transparent 0%,
+    transparent 60%,
+    rgba(0, 0, 0, 0.15) 85%,
+    rgba(0, 0, 0, 0.35) 100%
+  );
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   CHROME THEME — HERO SPOTLIGHT (Center glow behind content)
+   ───────────────────────────────────────────────────────────────── */
+[data-theme="chrome"] .hero-content {
+  position: relative;
+  z-index: 10;
+}
+
+[data-theme="chrome"] .hero-content::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 140%;
+  height: 160%;
+  background: radial-gradient(
+    ellipse 50% 45% at 50% 50%,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(255, 255, 255, 0.04) 35%,
+    rgba(200, 200, 200, 0.02) 55%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   CHROME THEME — HERO
+   ───────────────────────────────────────────────────────────────── */
+/* Status badge - ENHANCED with larger padding, brighter border, visible glow */
+[data-theme="chrome"] .hero-badge {
+  background: linear-gradient(180deg, 
+    rgba(45, 45, 45, 0.95) 0%,
+    rgba(30, 30, 30, 0.95) 100%
+  );
+  border: 1.5px solid;
+  border-image: linear-gradient(135deg, #e8e8e8 0%, #a0a0a0 50%, #c0c0c0 100%) 1;
+  border-radius: 9999px;
+  border-image: none;
+  border-color: rgba(200, 200, 200, 0.6);
+  color: #e0e0e0;
+  padding: 12px 26px;
+  font-size: 0.82rem;
+  box-shadow: 
+    0 0 20px rgba(255, 255, 255, 0.1),
+    0 4px 20px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+/* Chrome pulsing status dot - BRIGHTER with visible glow */
+[data-theme="chrome"] .hero-badge::before {
+  background: radial-gradient(circle at 35% 35%, #ffffff 0%, #e0e0e0 40%, #c0c0c0 100%);
+  width: 12px;
+  height: 12px;
+  box-shadow: 
+    0 0 12px rgba(255, 255, 255, 1),
+    0 0 24px rgba(255, 255, 255, 0.7),
+    0 0 40px rgba(255, 255, 255, 0.4);
+  animation: chrome-pulse-bright 1.8s ease-in-out infinite;
+}
+
+@keyframes chrome-pulse-bright {
+  0%, 100% { 
+    opacity: 0.85;
+    box-shadow: 
+      0 0 10px rgba(255, 255, 255, 0.9),
+      0 0 20px rgba(255, 255, 255, 0.5),
+      0 0 35px rgba(255, 255, 255, 0.3);
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 1;
+    box-shadow: 
+      0 0 15px rgba(255, 255, 255, 1),
+      0 0 30px rgba(255, 255, 255, 0.8),
+      0 0 50px rgba(255, 255, 255, 0.5);
+    transform: scale(1.1);
+  }
+}
+
+@keyframes chrome-pulse {
+  0%, 100% { 
+    opacity: 0.7;
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.6);
+  }
+  50% { 
+    opacity: 1;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 1);
+  }
+}
+
+/* Hero specs (Terminal box) - ENHANCED with gradient bg, brighter border, larger text */
+[data-theme="chrome"] .hero-specs {
+  background: linear-gradient(180deg, 
+    rgba(30, 30, 30, 0.85) 0%,
+    rgba(20, 20, 20, 0.9) 50%,
+    rgba(25, 25, 25, 0.88) 100%
+  );
+  border: 1px solid rgba(140, 140, 140, 0.35);
+  border-radius: 12px;
+  padding: 20px 28px;
+  font-size: 0.95rem;
+  box-shadow: 
+    0 0 25px rgba(255, 255, 255, 0.06),
+    0 8px 32px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="chrome"] .hero-spec-label {
+  color: #909090;
+  font-size: 0.88rem;
+}
+
+[data-theme="chrome"] .hero-spec-dots {
+  color: #505050;
+}
+
+[data-theme="chrome"] .hero-spec-value {
+  color: #f0f0f0;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   CHROME THEME — BUTTONS
+   ───────────────────────────────────────────────────────────────── */
+/* Primary button - chrome gradient fill */
+[data-theme="chrome"] .btn-primary {
+  background: var(--chrome-gradient-vertical);
+  color: #0a0a0a;
+  border: none;
+  font-weight: 600;
+  box-shadow: 
+    0 4px 15px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+[data-theme="chrome"] .btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transform: skewX(-25deg);
+  animation: chrome-shine-sweep 4s ease-in-out infinite;
+}
+
+@keyframes chrome-shine-sweep {
+  0%, 80% { left: -100%; }
+  100% { left: 200%; }
+}
+
+[data-theme="chrome"] .btn-primary:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 
+    0 8px 25px rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(255, 255, 255, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+/* Secondary button - dark glass with chrome border */
+[data-theme="chrome"] .btn-secondary {
+  background: rgba(20, 20, 20, 0.8);
+  color: #e8e8e8;
+  border: 2px solid transparent;
+  background-image: 
+    linear-gradient(rgba(20, 20, 20, 0.8), rgba(20, 20, 20, 0.8)),
+    linear-gradient(135deg, #e8e8e8, #a0a0a0, #ffffff, #6b6b6b);
+  background-origin: padding-box, border-box;
+  background-clip: padding-box, border-box;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="chrome"] .btn-secondary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+  transform: skewX(-25deg);
+  animation: chrome-shine-sweep 5s ease-in-out infinite;
+  animation-delay: 2s;
+}
+
+[data-theme="chrome"] .btn-secondary:hover {
+  transform: translateY(-4px) scale(1.05);
+  background-image: 
+    var(--chrome-gradient-vertical),
+    linear-gradient(135deg, #ffffff, #e8e8e8, #a0a0a0);
+  color: #0a0a0a;
+  box-shadow: 
+    0 8px 25px rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   CHROME THEME — SECTIONS & CARDS
+   ───────────────────────────────────────────────────────────────── */
+[data-theme="chrome"] .section-tag {
+  background: rgba(30, 30, 30, 0.8);
+  border: 1px solid rgba(120, 120, 120, 0.3);
+  color: #c0c0c0;
+}
+
+[data-theme="chrome"] .section-tag::before {
+  color: #c0c0c0;
+}
+
+[data-theme="chrome"] .section-title {
+  color: #ffffff;
+}
+
+[data-theme="chrome"] .section-subtitle {
+  color: #808080;
+}
+
+/* Glass cards - dark glass */
+[data-theme="chrome"] .glass-card,
+[data-theme="chrome"] .skill-card,
+[data-theme="chrome"] .project-card {
+  background: rgba(25, 25, 25, 0.85) !important;
+  border: 1px solid rgba(100, 100, 100, 0.25) !important;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+}
+
+[data-theme="chrome"] .glass-card::before,
+[data-theme="chrome"] .skill-card::before,
+[data-theme="chrome"] .project-card::before {
+  background: linear-gradient(90deg, transparent, rgba(120, 120, 120, 0.3), transparent);
+}
+
+[data-theme="chrome"] .glass-card:hover,
+[data-theme="chrome"] .skill-card:hover,
+[data-theme="chrome"] .project-card:hover {
+  border-color: rgba(180, 180, 180, 0.4) !important;
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.6),
+    0 0 20px rgba(255, 255, 255, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Glass panels - dark glass */
+[data-theme="chrome"] .glass-panel,
+[data-theme="chrome"] .contact-info,
+[data-theme="chrome"] .contact-form {
+  background: rgba(25, 25, 25, 0.85) !important;
+  border: 1px solid rgba(100, 100, 100, 0.25) !important;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   CHROME THEME — ABOUT SECTION
+   ───────────────────────────────────────────────────────────────── */
+[data-theme="chrome"] .about-content h3 {
+  color: #ffffff;
+}
+
+[data-theme="chrome"] .about-content p {
+  color: #c0c0c0;
+}
+
+[data-theme="chrome"] .stat {
+  background: rgba(30, 30, 30, 0.8);
+  border: 1px solid rgba(100, 100, 100, 0.25);
+}
+
+[data-theme="chrome"] .stat-number {
+  background: var(--chrome-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+[data-theme="chrome"] .stat-label {
+  color: #808080;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   CHROME THEME — SKILLS SECTION
+   ───────────────────────────────────────────────────────────────── */
+[data-theme="chrome"] .skill-code {
+  background: var(--chrome-gradient);
+  color: #0a0a0a;
+}
+
+[data-theme="chrome"] .skill-card h3 {
+  color: #ffffff;
+}
+
+[data-theme="chrome"] .skill-item {
+  background: rgba(40, 40, 40, 0.6);
+  border: 1px solid rgba(100, 100, 100, 0.2);
+  color: #c0c0c0;
+}
+
+[data-theme="chrome"] .skill-item:hover {
+  border-color: rgba(200, 200, 200, 0.5);
+  background: rgba(60, 60, 60, 0.6);
+  color: #ffffff;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   CHROME THEME — PROJECTS SECTION
+   ───────────────────────────────────────────────────────────────── */
+[data-theme="chrome"] .project-image {
+  background: linear-gradient(135deg, #3a3a3a 0%, #2a2a2a 50%, #1a1a1a 100%);
+}
+
+[data-theme="chrome"] .project-meta span {
+  background: rgba(30, 30, 30, 0.9);
+  color: #c0c0c0;
+}
+
+[data-theme="chrome"] .project-content {
+  background: rgba(20, 20, 20, 0.6);
+}
+
+[data-theme="chrome"] .project-content h3 {
+  color: #ffffff;
+}
+
+[data-theme="chrome"] .project-tagline {
+  color: #c0c0c0;
+}
+
+[data-theme="chrome"] .project-content p {
+  color: #a0a0a0;
+}
+
+[data-theme="chrome"] .project-tech span {
+  border-color: rgba(100, 100, 100, 0.3);
+  color: #808080;
+}
+
+[data-theme="chrome"] .project-tech span:hover {
+  border-color: rgba(200, 200, 200, 0.5);
+  color: #c0c0c0;
+}
+
+[data-theme="chrome"] .project-detail-link {
+  color: #c0c0c0;
+}
+
+/* Section detail link - chrome metallic style */
+[data-theme="chrome"] .section-detail-link {
+  background: linear-gradient(135deg, 
+    rgba(200, 200, 200, 0.15) 0%, 
+    rgba(160, 160, 160, 0.1) 50%, 
+    rgba(200, 200, 200, 0.15) 100%
+  );
+  border: 1px solid rgba(200, 200, 200, 0.3);
+  color: #e8e8e8;
+  box-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="chrome"] .section-detail-link:hover {
+  background: linear-gradient(135deg, 
+    #f0f0f0 0%, 
+    #c8c8c8 20%, 
+    #e8e8e8 50%, 
+    #a0a0a0 80%, 
+    #c8c8c8 100%
+  );
+  color: #1a1a1a;
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 
+    0 4px 16px rgba(255, 255, 255, 0.15),
+    0 2px 8px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Section CTA container */
+[data-theme="chrome"] .section-cta {
+  margin-top: var(--space-lg);
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   CHROME THEME — CONTACT SECTION
+   ───────────────────────────────────────────────────────────────── */
+[data-theme="chrome"] .contact-info h3 {
+  color: #ffffff;
+}
+
+[data-theme="chrome"] .contact-item {
+  background: rgba(30, 30, 30, 0.6);
+  border: 1px solid rgba(100, 100, 100, 0.2);
+}
+
+[data-theme="chrome"] .contact-item:hover {
+  border-color: rgba(200, 200, 200, 0.4);
+}
+
+[data-theme="chrome"] .contact-item span:first-child {
+  color: #c0c0c0;
+}
+
+[data-theme="chrome"] .contact-item span:last-child {
+  color: #e8e8e8;
+}
+
+[data-theme="chrome"] .social-link {
+  background: rgba(30, 30, 30, 0.6);
+  border: 1px solid rgba(100, 100, 100, 0.3);
+  color: #c0c0c0;
+}
+
+[data-theme="chrome"] .social-link:hover {
+  border-color: rgba(200, 200, 200, 0.5);
+  color: #ffffff;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+}
+
+/* Form inputs */
+[data-theme="chrome"] .form-group label {
+  color: #a0a0a0;
+}
+
+[data-theme="chrome"] .form-group input,
+[data-theme="chrome"] .form-group textarea {
+  background: rgba(20, 20, 20, 0.8);
+  border: 1px solid rgba(100, 100, 100, 0.3);
+  color: #e8e8e8;
+}
+
+[data-theme="chrome"] .form-group input::placeholder,
+[data-theme="chrome"] .form-group textarea::placeholder {
+  color: #606060;
+}
+
+[data-theme="chrome"] .form-group input:focus,
+[data-theme="chrome"] .form-group textarea:focus {
+  border-color: transparent;
+  background-image: 
+    linear-gradient(rgba(20, 20, 20, 0.9), rgba(20, 20, 20, 0.9)),
+    linear-gradient(135deg, #a0a0a0, #e8e8e8, #a0a0a0);
+  background-origin: padding-box, border-box;
+  background-clip: padding-box, border-box;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   CHROME THEME — FOOTER
+   ───────────────────────────────────────────────────────────────── */
+[data-theme="chrome"] footer,
+[data-theme="chrome"] footer.footer-bar {
+  background: rgba(20, 20, 20, 0.85);
+  border: 1px solid rgba(100, 100, 100, 0.2);
+}
+
+[data-theme="chrome"] .footer-logo {
+  color: #e8e8e8;
+}
+
+[data-theme="chrome"] .footer-logo::before {
+  background: radial-gradient(circle at 30% 30%, #ffffff 0%, #c0c0c0 50%, #808080 100%);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+}
+
+[data-theme="chrome"] .footer-content p {
+  color: #808080;
+}
+
+[data-theme="chrome"] .footer-links a {
+  color: #a0a0a0;
+}
+
+[data-theme="chrome"] .footer-links a:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   CHROME THEME — SCROLLBAR
+   ───────────────────────────────────────────────────────────────── */
+[data-theme="chrome"]::-webkit-scrollbar-track {
+  background: rgba(20, 20, 20, 0.8);
+}
+
+[data-theme="chrome"]::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, 
+    #e8e8e8 0%,
+    #c0c0c0 15%,
+    #808080 50%,
+    #606060 85%,
+    #404040 100%
+  );
+  border: 2px solid rgba(60, 60, 60, 0.5);
+}
+
+[data-theme="chrome"]::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, 
+    #ffffff 0%,
+    #e8e8e8 15%,
+    #a0a0a0 50%,
+    #808080 85%,
+    #606060 100%
+  );
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   CHROME THEME — REDUCED MOTION
+   ───────────────────────────────────────────────────────────────── */
+/* Chrome theme hero logo - HUGE SIZE (200% scale) */
+[data-theme="chrome"] .hero-logo-img {
+  display: block;
+  margin: 0 auto;
+  max-width: var(--hero-logo-max-width);
+  width: auto;
+  max-height: var(--hero-logo-max-height);
+  filter: drop-shadow(0 0 70px rgba(255, 255, 255, 0.6));
+  animation: chrome-hero-glow 4s ease-in-out infinite;
+}
+
+/* Chrome theme: Hide foreground (z-front) orbs - keep only back and mid layers */
+[data-theme="chrome"] .orb--z-front,
+[data-theme="chrome"] .orbs-foreground .orb--z-front {
+  display: none !important;
+}
+
+/* Chrome orb random tilts ~5 degrees via nth-child pattern */
+[data-theme="chrome"] .orb:nth-child(7n+1) { transform: rotate(-5deg); }
+[data-theme="chrome"] .orb:nth-child(7n+2) { transform: rotate(3deg); }
+[data-theme="chrome"] .orb:nth-child(7n+3) { transform: rotate(-2deg); }
+[data-theme="chrome"] .orb:nth-child(7n+4) { transform: rotate(5deg); }
+[data-theme="chrome"] .orb:nth-child(7n+5) { transform: rotate(-4deg); }
+[data-theme="chrome"] .orb:nth-child(7n+6) { transform: rotate(1deg); }
+[data-theme="chrome"] .orb:nth-child(7n)   { transform: rotate(-3deg); }
+
+@media (prefers-reduced-motion: reduce) {
+  [data-theme="chrome"] .orb {
+    animation: none !important;
+  }
+  
+  [data-theme="chrome"] .btn-primary::before,
+  [data-theme="chrome"] .btn-secondary::before {
+    animation: none !important;
+  }
+  
+  [data-theme="chrome"] .hero-logo-img {
+    animation: none !important;
+  }
+  
+  [data-theme="chrome"] .hero-badge::before {
+    animation: none !important;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   CHROME THEME — MOBILE OVERRIDES
+   ───────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  [data-theme="chrome"] .main-nav {
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+  }
+  
+  [data-theme="chrome"] .nav-links {
+    background: rgba(20, 20, 20, 0.97) !important;
+  }
+  
+  [data-theme="chrome"] .glass-card,
+  [data-theme="chrome"] .skill-card,
+  [data-theme="chrome"] .project-card,
+  [data-theme="chrome"] .contact-info,
+  [data-theme="chrome"] .contact-form {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   THEME TRANSITION — Smooth transition between themes
+   ───────────────────────────────────────────────────────────────── */
+html {
+  transition: background-color 0.5s ease;
+}
+
+body {
+  transition: background 0.5s ease, color 0.3s ease;
+}
+
+/* bg-aero transitions the main background gradient on theme toggle */
+.bg-aero {
+  transition: background 0.5s ease;
+}
+
+.main-nav,
+.glass-card,
+.glass-panel,
+.skill-card,
+.project-card,
+.contact-info,
+.contact-form,
+footer,
+.btn-primary,
+.btn-secondary,
+.orb {
+  transition: background 0.5s ease, 
+              border-color 0.3s ease, 
+              box-shadow 0.3s ease,
+              color 0.3s ease;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   DETAIL PAGE LAYOUT — Spacer for fixed navbar
+   ───────────────────────────────────────────────────────────────── */
+.detail-main {
+  position: relative;
+  z-index: 1;
+  padding-top: 130px; /* fixed spacing below nav */
+  padding-bottom: var(--space-xl);
+}
+
+/* Subpages: tighten end-of-page whitespace before footer */
+body.subpage-layout .detail-section {
+  min-height: auto;
+  padding-bottom: var(--space-lg);
+}
+
+body.subpage-layout .detail-main {
+  padding-bottom: var(--space-md);
+}
+
+body.subpage-layout .detail-cta {
+  padding: var(--space-md) 0 var(--space-sm);
+}
+
+body.subpage-layout footer,
+body.subpage-layout footer.footer-bar {
+  margin-top: var(--space-md);
+}
+
+@media (max-width: 768px) {
+  .detail-main {
+    padding-top: 110px;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   CHROME THEME — TYPOGRAPHY (Michroma for headers, Ubuntu Mono for body)
+   ───────────────────────────────────────────────────────────────── */
+[data-theme="chrome"] {
+  --font-display: 'Michroma', 'Space Grotesk', sans-serif;
+  --font-body: 'Ubuntu Mono', 'SF Mono', monospace;
+}
+
+[data-theme="chrome"] body {
+  font-family: var(--font-body);
+}
+
+[data-theme="chrome"] h1,
+[data-theme="chrome"] h2,
+[data-theme="chrome"] h3,
+[data-theme="chrome"] h4,
+[data-theme="chrome"] h5,
+[data-theme="chrome"] h6,
+[data-theme="chrome"] .section-title,
+[data-theme="chrome"] .section-tag,
+[data-theme="chrome"] .hero-tagline,
+[data-theme="chrome"] .nav-logo,
+[data-theme="chrome"] .footer-logo {
+  font-family: var(--font-display);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+[data-theme="chrome"] .nav-links li a {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+}
+
+[data-theme="chrome"] .btn-primary,
+[data-theme="chrome"] .btn-secondary {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+}
+
+[data-theme="chrome"] .skill-card h3,
+[data-theme="chrome"] .project-content h3,
+[data-theme="chrome"] .block-title {
+  font-family: var(--font-display);
+}
+
+[data-theme="chrome"] .section-subtitle,
+[data-theme="chrome"] p,
+[data-theme="chrome"] .skill-item,
+[data-theme="chrome"] .project-tagline,
+[data-theme="chrome"] .tech-tag,
+[data-theme="chrome"] .contact-item {
+  font-family: var(--font-body);
+}
+
+[data-theme="chrome"] .hero-specs,
+[data-theme="chrome"] .hero-spec-label,
+[data-theme="chrome"] .hero-spec-value {
+  font-family: var(--font-body);
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   AERO TYPOGRAPHY PARITY — Match Chrome font families/sizing/spacing
+   on all pages (including detail/project pages)
+   ───────────────────────────────────────────────────────────────── */
+html:not([data-theme="chrome"]) body {
+  font-family: var(--font-body);
+}
+
+html:not([data-theme="chrome"]) h1,
+html:not([data-theme="chrome"]) h2,
+html:not([data-theme="chrome"]) h3,
+html:not([data-theme="chrome"]) h4,
+html:not([data-theme="chrome"]) h5,
+html:not([data-theme="chrome"]) h6,
+html:not([data-theme="chrome"]) .section-title,
+html:not([data-theme="chrome"]) .section-tag,
+html:not([data-theme="chrome"]) .hero-tagline,
+html:not([data-theme="chrome"]) .nav-logo,
+html:not([data-theme="chrome"]) .footer-logo,
+html:not([data-theme="chrome"]) .nav-links li a,
+html:not([data-theme="chrome"]) .btn-primary,
+html:not([data-theme="chrome"]) .btn-secondary,
+html:not([data-theme="chrome"]) .skill-card h3,
+html:not([data-theme="chrome"]) .project-content h3,
+html:not([data-theme="chrome"]) .block-title {
+  font-family: var(--font-display);
+  letter-spacing: 0.05em;
+}
+
+html:not([data-theme="chrome"]) .nav-links li a {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+}
+
+html:not([data-theme="chrome"]) .btn-primary,
+html:not([data-theme="chrome"]) .btn-secondary {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+}
+
+html:not([data-theme="chrome"]) .section-subtitle,
+html:not([data-theme="chrome"]) p,
+html:not([data-theme="chrome"]) .skill-item,
+html:not([data-theme="chrome"]) .project-tagline,
+html:not([data-theme="chrome"]) .tech-tag,
+html:not([data-theme="chrome"]) .contact-item,
+html:not([data-theme="chrome"]) .hero-specs,
+html:not([data-theme="chrome"]) .hero-spec-label,
+html:not([data-theme="chrome"]) .hero-spec-value {
+  font-family: var(--font-body);
+}
+

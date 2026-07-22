@@ -82,10 +82,10 @@ interests:
       name: "pc_building"
       description: "built my own custom computer from scratch"
     - icon: "🎨"
-      name: "creative_outlet"
+      name: "creativity"
       description: "photography, video editing, and visual design"
-    - icon: "🚗"
-      name: "transportation"
+    - icon: "car.png"
+      name: "transport"
       description: "cruising in my lil car"
 
 # ═══════════════════════════════════════════════════════════════
