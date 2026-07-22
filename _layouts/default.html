@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ page.title | default: site.title }}</title>
   <meta name="description" content="{{ page.description | default: site.description }}">
+  <link id="theme-favicon" rel="icon" type="image/png" href="{{ '/assets/images/KB-aero.png' | relative_url }}">
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,8 +15,15 @@
   <!-- Blocking script to apply saved theme BEFORE render (prevents flash) -->
   <script>
     (function() {
+      var THEME_KEY = 'kb-portfolio-theme';
+      var aeroIcon = "{{ '/assets/images/KB-aero.png' | relative_url }}";
+      var chromeIcon = "{{ '/assets/images/KB.png' | relative_url }}";
       var saved = localStorage.getItem('kb-portfolio-theme');
       if (saved) document.documentElement.setAttribute('data-theme', saved);
+
+      var theme = document.documentElement.getAttribute('data-theme') || 'aero';
+      var favicon = document.getElementById('theme-favicon');
+      if (favicon) favicon.href = theme === 'chrome' ? chromeIcon : aeroIcon;
     })();
   </script>
 </head>
@@ -530,7 +538,15 @@
       const themeToggle = document.getElementById('theme-toggle');
       const html = document.documentElement;
       const THEME_KEY = 'kb-portfolio-theme';
-      
+      const FAVICON_AERO = "{{ '/assets/images/KB-aero.png' | relative_url }}";
+      const FAVICON_CHROME = "{{ '/assets/images/KB.png' | relative_url }}";
+
+      function applyFavicon(theme) {
+        const favicon = document.getElementById('theme-favicon');
+        if (!favicon) return;
+        favicon.href = theme === 'chrome' ? FAVICON_CHROME : FAVICON_AERO;
+      }
+
       // Get saved theme or detect system preference
       function getInitialTheme() {
         const saved = localStorage.getItem(THEME_KEY);
@@ -543,6 +559,7 @@
       function applyTheme(theme) {
         html.setAttribute('data-theme', theme);
         localStorage.setItem(THEME_KEY, theme);
+        applyFavicon(theme);
       }
       
       // Toggle between themes

@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ page.name }} // project | {{ site.title }}</title>
   <meta name="description" content="{{ page.tagline | default: page.description | truncate: 160 }}">
+  <link id="theme-favicon" rel="icon" type="image/png" href="{{ '/assets/images/KB-aero.png' | relative_url }}">
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,10 +15,16 @@
   <!-- Blocking script: Apply saved theme BEFORE first paint to prevent flash -->
   <script>
     (function() {
-      var theme = localStorage.getItem('kb-portfolio-theme');
+      var aeroIcon = "{{ '/assets/images/KB-aero.png' | relative_url }}";
+      var chromeIcon = "{{ '/assets/images/KB.png' | relative_url }}";
+      var theme = localStorage.getItem('kb-portfolio-theme') || localStorage.getItem('portfolio-theme');
       if (theme) {
         document.documentElement.setAttribute('data-theme', theme);
       }
+
+      var activeTheme = document.documentElement.getAttribute('data-theme') || 'aero';
+      var favicon = document.getElementById('theme-favicon');
+      if (favicon) favicon.href = activeTheme === 'chrome' ? chromeIcon : aeroIcon;
     })();
   </script>
 </head>
@@ -367,24 +374,37 @@
       // THEME TOGGLE — Aero ↔ Chrome
       // ═══════════════════════════════════════════════════════════════
       const themeToggle = document.querySelector('.theme-toggle');
+      const THEME_KEY = 'kb-portfolio-theme';
+      const LEGACY_THEME_KEY = 'portfolio-theme';
+      const FAVICON_AERO = "{{ '/assets/images/KB-aero.png' | relative_url }}";
+      const FAVICON_CHROME = "{{ '/assets/images/KB.png' | relative_url }}";
+
+      function applyFavicon(theme) {
+        const favicon = document.getElementById('theme-favicon');
+        if (!favicon) return;
+        favicon.href = theme === 'chrome' ? FAVICON_CHROME : FAVICON_AERO;
+      }
+
+      function applyTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem(THEME_KEY, theme);
+        localStorage.setItem(LEGACY_THEME_KEY, theme);
+        applyFavicon(theme);
+      }
+
       if (themeToggle) {
         // Apply saved theme on load
-        const savedTheme = localStorage.getItem('portfolio-theme');
+        const savedTheme = localStorage.getItem(THEME_KEY) || localStorage.getItem(LEGACY_THEME_KEY);
         if (savedTheme) {
-          document.documentElement.setAttribute('data-theme', savedTheme);
+          applyTheme(savedTheme);
+        } else {
+          applyFavicon(document.documentElement.getAttribute('data-theme') || 'aero');
         }
 
         themeToggle.addEventListener('click', () => {
           const currentTheme = document.documentElement.getAttribute('data-theme');
           const newTheme = currentTheme === 'chrome' ? 'aero' : 'chrome';
-          
-          if (newTheme === 'aero') {
-            document.documentElement.removeAttribute('data-theme');
-            localStorage.removeItem('portfolio-theme');
-          } else {
-            document.documentElement.setAttribute('data-theme', 'chrome');
-            localStorage.setItem('portfolio-theme', 'chrome');
-          }
+          applyTheme(newTheme);
         });
       }
     })();

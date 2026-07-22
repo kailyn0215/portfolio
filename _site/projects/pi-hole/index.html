@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pi-hole Setup // project | Kailyn Brown | Portfolio</title>
   <meta name="description" content="Network-wide ad blocking using a Raspberry Pi">
+  <link id="theme-favicon" rel="icon" type="image/png" href="/portfolio/assets/images/KB-aero.png">
   <link rel="stylesheet" href="/portfolio/assets/css/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,25 +19,31 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="A home networking project where I set up Pi-hole on a Raspberry Pi to block ads and trackers at the DNS level for all devices on my network. In addition to the Pi-hole, I also created a dashboard on an ESP32 with a touchscreen. This project taught me about DNS, networking fundamentals, Linux server administration, as well as Arduino." />
 <meta name="twitter:description" property="og:description" content="A home networking project where I set up Pi-hole on a Raspberry Pi to block ads and trackers at the DNS level for all devices on my network. In addition to the Pi-hole, I also created a dashboard on an ESP32 with a touchscreen. This project taught me about DNS, networking fundamentals, Linux server administration, as well as Arduino." />
-<link rel="canonical" href="https://kailyn0215.github.io/portfolio/projects/pi-hole/" />
-<meta property="og:url" content="https://kailyn0215.github.io/portfolio/projects/pi-hole/" />
+<link rel="canonical" href="http://localhost:4000/portfolio/projects/pi-hole/" />
+<meta property="og:url" content="http://localhost:4000/portfolio/projects/pi-hole/" />
 <meta property="og:site_name" content="Kailyn Brown Portfolio" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2026-07-22T13:46:58-04:00" />
-<meta property="article:modified_time" content="2026-07-22T13:46:58-04:00" />
+<meta property="article:published_time" content="2026-07-22T14:35:55-04:00" />
+<meta property="article:modified_time" content="2026-07-22T14:35:55-04:00" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="Pi-hole Setup" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Kailyn Brown"},"dateModified":"2026-07-22T13:46:58-04:00","datePublished":"2026-07-22T13:46:58-04:00","description":"A home networking project where I set up Pi-hole on a Raspberry Pi to block ads and trackers at the DNS level for all devices on my network. In addition to the Pi-hole, I also created a dashboard on an ESP32 with a touchscreen. This project taught me about DNS, networking fundamentals, Linux server administration, as well as Arduino.","headline":"Pi-hole Setup","mainEntityOfPage":{"@type":"WebPage","@id":"https://kailyn0215.github.io/portfolio/projects/pi-hole/"},"url":"https://kailyn0215.github.io/portfolio/projects/pi-hole/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Kailyn Brown"},"dateModified":"2026-07-22T14:35:55-04:00","datePublished":"2026-07-22T14:35:55-04:00","description":"A home networking project where I set up Pi-hole on a Raspberry Pi to block ads and trackers at the DNS level for all devices on my network. In addition to the Pi-hole, I also created a dashboard on an ESP32 with a touchscreen. This project taught me about DNS, networking fundamentals, Linux server administration, as well as Arduino.","headline":"Pi-hole Setup","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/portfolio/projects/pi-hole/"},"url":"http://localhost:4000/portfolio/projects/pi-hole/"}</script>
 <!-- End Jekyll SEO tag -->
 
   <!-- Blocking script: Apply saved theme BEFORE first paint to prevent flash -->
   <script>
     (function() {
-      var theme = localStorage.getItem('kb-portfolio-theme');
+      var aeroIcon = "/portfolio/assets/images/KB-aero.png";
+      var chromeIcon = "/portfolio/assets/images/KB.png";
+      var theme = localStorage.getItem('kb-portfolio-theme') || localStorage.getItem('portfolio-theme');
       if (theme) {
         document.documentElement.setAttribute('data-theme', theme);
       }
+
+      var activeTheme = document.documentElement.getAttribute('data-theme') || 'aero';
+      var favicon = document.getElementById('theme-favicon');
+      if (favicon) favicon.href = activeTheme === 'chrome' ? chromeIcon : aeroIcon;
     })();
   </script>
 </head>
@@ -1152,24 +1159,37 @@ adding WireGuard VPN to use Pi-hole protection when away from home.</p>
       // THEME TOGGLE — Aero ↔ Chrome
       // ═══════════════════════════════════════════════════════════════
       const themeToggle = document.querySelector('.theme-toggle');
+      const THEME_KEY = 'kb-portfolio-theme';
+      const LEGACY_THEME_KEY = 'portfolio-theme';
+      const FAVICON_AERO = "/portfolio/assets/images/KB-aero.png";
+      const FAVICON_CHROME = "/portfolio/assets/images/KB.png";
+
+      function applyFavicon(theme) {
+        const favicon = document.getElementById('theme-favicon');
+        if (!favicon) return;
+        favicon.href = theme === 'chrome' ? FAVICON_CHROME : FAVICON_AERO;
+      }
+
+      function applyTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem(THEME_KEY, theme);
+        localStorage.setItem(LEGACY_THEME_KEY, theme);
+        applyFavicon(theme);
+      }
+
       if (themeToggle) {
         // Apply saved theme on load
-        const savedTheme = localStorage.getItem('portfolio-theme');
+        const savedTheme = localStorage.getItem(THEME_KEY) || localStorage.getItem(LEGACY_THEME_KEY);
         if (savedTheme) {
-          document.documentElement.setAttribute('data-theme', savedTheme);
+          applyTheme(savedTheme);
+        } else {
+          applyFavicon(document.documentElement.getAttribute('data-theme') || 'aero');
         }
 
         themeToggle.addEventListener('click', () => {
           const currentTheme = document.documentElement.getAttribute('data-theme');
           const newTheme = currentTheme === 'chrome' ? 'aero' : 'chrome';
-          
-          if (newTheme === 'aero') {
-            document.documentElement.removeAttribute('data-theme');
-            localStorage.removeItem('portfolio-theme');
-          } else {
-            document.documentElement.setAttribute('data-theme', 'chrome');
-            localStorage.setItem('portfolio-theme', 'chrome');
-          }
+          applyTheme(newTheme);
         });
       }
     })();

@@ -1735,9 +1735,9 @@ section {
    ───────────────────────────────────────────────────────────────── */
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: var(--space-md);
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -1783,10 +1783,7 @@ section {
 }
 
 .skill-header {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  align-items: start;
-  gap: var(--space-sm);
+  display: block;
   margin-bottom: var(--space-sm);
 }
 
@@ -1804,14 +1801,20 @@ section {
 
 .skill-card h3 {
   font-family: var(--font-display);
-  font-size: 1.2rem;
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
   font-weight: 700;
   color: var(--color-ink);
   text-transform: lowercase;
+  letter-spacing: 0.01em;
   margin: 0;
   min-width: 0;
+  max-width: 100%;
   line-height: 1.2;
-  overflow-wrap: anywhere;
+  white-space: normal;
+  overflow-wrap: normal;
+  word-break: keep-all;
+  hyphens: none;
+  text-wrap: balance;
 }
 
 .skill-items {
@@ -3174,8 +3177,8 @@ main .contact-info {
 }
 
 .interest-icon-image {
-  width: 2rem;
-  height: 2rem;
+  width: 3.25rem;
+  height: 3.25rem;
   margin: 0 auto var(--space-xs);
   object-fit: contain;
 }

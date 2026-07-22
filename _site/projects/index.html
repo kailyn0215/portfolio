@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>projects // gallery | Kailyn Brown | Portfolio</title>
   <meta name="description" content="Browse all projects by Kailyn Brown — iOS apps, dev tools, and more.">
+  <link id="theme-favicon" rel="icon" type="image/png" href="/portfolio/assets/images/KB-aero.png">
   <link rel="stylesheet" href="/portfolio/assets/css/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,21 +19,27 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="Browse all projects by Kailyn Brown — iOS apps, dev tools, and more." />
 <meta name="twitter:description" property="og:description" content="Browse all projects by Kailyn Brown — iOS apps, dev tools, and more." />
-<link rel="canonical" href="https://kailyn0215.github.io/portfolio/projects/" />
-<meta property="og:url" content="https://kailyn0215.github.io/portfolio/projects/" />
+<link rel="canonical" href="http://localhost:4000/portfolio/projects/" />
+<meta property="og:url" content="http://localhost:4000/portfolio/projects/" />
 <meta property="og:site_name" content="Kailyn Brown Portfolio" />
 <meta property="og:type" content="website" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="projects // gallery" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"Kailyn Brown"},"description":"Browse all projects by Kailyn Brown — iOS apps, dev tools, and more.","headline":"projects // gallery","url":"https://kailyn0215.github.io/portfolio/projects/"}</script>
+{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"Kailyn Brown"},"description":"Browse all projects by Kailyn Brown — iOS apps, dev tools, and more.","headline":"projects // gallery","url":"http://localhost:4000/portfolio/projects/"}</script>
 <!-- End Jekyll SEO tag -->
 
   <!-- Blocking script to apply saved theme BEFORE render (prevents flash) -->
   <script>
     (function() {
+      var aeroIcon = "/portfolio/assets/images/KB-aero.png";
+      var chromeIcon = "/portfolio/assets/images/KB.png";
       var saved = localStorage.getItem('kb-portfolio-theme');
       if (saved) document.documentElement.setAttribute('data-theme', saved);
+
+      var theme = document.documentElement.getAttribute('data-theme') || 'aero';
+      var favicon = document.getElementById('theme-favicon');
+      if (favicon) favicon.href = theme === 'chrome' ? chromeIcon : aeroIcon;
     })();
   </script>
 </head>
@@ -2115,7 +2122,15 @@
       const themeToggle = document.getElementById('theme-toggle');
       const html = document.documentElement;
       const THEME_KEY = 'kb-portfolio-theme';
-      
+      const FAVICON_AERO = "/portfolio/assets/images/KB-aero.png";
+      const FAVICON_CHROME = "/portfolio/assets/images/KB.png";
+
+      function applyFavicon(theme) {
+        const favicon = document.getElementById('theme-favicon');
+        if (!favicon) return;
+        favicon.href = theme === 'chrome' ? FAVICON_CHROME : FAVICON_AERO;
+      }
+
       // Get saved theme or detect system preference
       function getInitialTheme() {
         const saved = localStorage.getItem(THEME_KEY);
@@ -2128,6 +2143,7 @@
       function applyTheme(theme) {
         html.setAttribute('data-theme', theme);
         localStorage.setItem(THEME_KEY, theme);
+        applyFavicon(theme);
       }
       
       // Toggle between themes
